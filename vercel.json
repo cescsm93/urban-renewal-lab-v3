@@ -4,6 +4,10 @@
   "functions": {
     "api/*.js": {
       "maxDuration": 90
+    },
+    "api/gis-inspect.py": {
+      "maxDuration": 90,
+      "excludeFiles": "{tests/**,vendor/**,*.png,*.md,server.cjs,density-worker.js,index.html}"
     }
   }
 }

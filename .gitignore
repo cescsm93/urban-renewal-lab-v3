@@ -2,3 +2,7 @@
 *.local.env
 node_modules/
 .vercel/
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
