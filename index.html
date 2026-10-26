@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Urban Renewal Lab</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.css">
+<style>
+*{box-sizing:border-box}html,body,#map{margin:0;width:100%;height:100%;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}body{overflow:hidden;background:#eef2f3;color:#10232b}#map{position:absolute;inset:0}.glass{background:rgba(250,252,252,.95);border:1px solid #10232b16;backdrop-filter:blur(16px);box-shadow:0 8px 30px #10232b12}.top{position:absolute;z-index:20;left:12px;right:12px;top:max(12px,env(safe-area-inset-top));display:flex;justify-content:space-between;pointer-events:none}.brand{padding:11px 14px;border-radius:16px;pointer-events:auto}.brand b{font-size:16px}.brand small{display:block;color:#69818a;font-size:10px;margin-top:2px}.theme{pointer-events:auto;display:flex;gap:5px;padding:5px;border-radius:13px;height:45px}.theme button,.tabs button{border:0;background:transparent;color:#536c75;border-radius:9px;padding:8px 11px;font-weight:750}.theme button.on,.tabs button.on{background:#17343d;color:white}.summary{position:absolute;z-index:18;left:12px;top:87px;display:flex;gap:5px;padding:6px;border-radius:14px}.metric{padding:7px 9px;min-width:78px}.metric span{display:block;font-size:9px;color:#789099}.metric b{font-size:13px}.projects{position:absolute;z-index:18;left:12px;top:155px;width:225px;border-radius:16px;padding:10px;max-height:52%;overflow:auto}.projects-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}.projects-head b{font-size:12px}.add{border:0;background:#17343d;color:white;border-radius:9px;padding:7px 9px;font-weight:750}.card{padding:9px;border-radius:11px;margin-top:5px;cursor:pointer;border:1px solid transparent}.card:hover,.card.sel{background:#e8edef;border-color:#cbd6da}.card b{font-size:11px;display:block}.card small{font-size:9px;color:#718991}.legend{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.lg{font-size:8px;color:#667f88}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:3px}.panel{position:absolute;z-index:30;right:10px;top:70px;bottom:10px;width:430px;border-radius:19px;padding:16px;overflow:auto;transition:.25s}.panel.closed{transform:translateX(calc(100% + 30px));pointer-events:none}.close{position:absolute;right:11px;top:9px;width:38px;height:38px;border:0;border-radius:50%;background:#e5ebed;font-size:22px}.tabs{display:flex;gap:4px;margin:12px 0 4px}.tabs button{font-size:10px;padding:7px 12px}.pane{display:none}.pane.on{display:block}h2{font-size:17px;margin:0;padding-right:44px}h3{font-size:12px;margin:15px 0 8px;padding-top:11px;border-top:1px solid #10232b12;color:#2d5863}.grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.field label{display:block;font-size:9px;color:#718891;margin-bottom:3px}input,select{width:100%;min-height:38px;border:1px solid #bdcbd0;border-radius:9px;background:white;padding:7px;color:#183039;font-size:14px}input[readonly]{background:#eef2f3;color:#536c75}.primary{width:100%;min-height:43px;border:0;border-radius:10px;background:#17343d;color:white;font-weight:800;margin-top:11px}.secondary{background:#40646d}.danger{background:#8d3b43}.results{display:none}.kpis{display:grid;grid-template-columns:1fr 1fr;gap:7px}.kpi{padding:10px;background:#edf1f2;border-radius:10px}.kpi span{font-size:9px;color:#718891;display:block}.kpi b{font-size:15px}.note{font-size:10px;line-height:1.55;padding:9px;background:#edf1f2;border-radius:9px;margin-top:8px}.drawbar{display:none;position:absolute;z-index:29;left:50%;transform:translateX(-50%);bottom:max(18px,env(safe-area-inset-bottom));padding:7px;border-radius:13px;gap:6px}.drawbar.show{display:flex}.drawbar button{border:0;border-radius:9px;padding:10px 12px;font-weight:750}.finish{background:#17343d;color:white}.cancel{background:#e5ebed;color:#17343d}.openpanel{display:none;position:absolute;z-index:29;right:12px;bottom:18px;border:0;border-radius:11px;padding:11px 13px;background:#17343d;color:white;font-weight:800}.section-title{font-size:11px;font-weight:800;margin:12px 0 7px;color:#17343d}.sens{border-collapse:separate;border-spacing:3px;font-size:9px;width:100%;min-width:350px}.sens th{font-weight:700;color:#6d858e;padding:5px}.sens td{text-align:center;padding:7px 4px;border-radius:6px;font-weight:750}.good{background:#cfe8d7;color:#245d39}.mid{background:#f1e4bb;color:#715b1d}.bad{background:#efd0d0;color:#7b3030}
+.cluster-tools{margin-top:8px;padding-top:8px;border-top:1px solid #10232b12}.cluster-tools .row{display:grid;grid-template-columns:1fr 1fr;gap:5px}.cluster-tools label{display:block;font-size:8px;color:#718991;margin-bottom:3px}.cluster-tools input{min-height:32px;font-size:12px}.cluster-btn{width:100%;border:0;background:#e49b45;color:#fff;border-radius:9px;padding:9px 8px;font-weight:800;margin-top:6px}.area-list{margin-top:7px}.area-card{padding:8px;border:1px dashed #d29a43;border-radius:10px;margin-top:5px;background:#fffaf0}.area-card b{font-size:10px}.area-card small{display:block;font-size:8px;color:#7a6a4b;margin-top:2px}.area-card{cursor:pointer}.area-card.sel{border-style:solid;background:#fff4df}
+
+.area-card .area-top{display:flex;align-items:center;justify-content:space-between;gap:6px}.priority-badge{display:inline-flex;align-items:center;border-radius:999px;padding:3px 6px;font-size:7px;font-weight:850;white-space:nowrap}.priority-high{background:#f7ddd7;color:#a63f2d}.priority-mid{background:#f7e9c9;color:#8a621b}.priority-low{background:#dce8f0;color:#3b6888}.area-score{font-weight:850;color:#17343d}.area-assessment{display:none;margin-top:8px;padding:9px;border-radius:12px;background:#fff;border:1px solid #10232b14}.area-assessment.show{display:block}.assess-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}.assess-head b{font-size:11px}.assess-total{display:flex;align-items:baseline;gap:3px;margin-top:6px}.assess-total strong{font-size:25px;line-height:1}.assess-total span{font-size:8px;color:#718991}.score-row{display:grid;grid-template-columns:60px 1fr 26px;align-items:center;gap:5px;margin-top:6px}.score-row span{font-size:8px;color:#536c75}.score-track{height:5px;border-radius:999px;background:#edf1f2;overflow:hidden}.score-fill{height:100%;border-radius:999px;background:#315e68}.score-row b{text-align:right;font-size:8px}.assess-facts{margin-top:8px;padding-top:7px;border-top:1px solid #10232b10;display:grid;grid-template-columns:1fr 1fr;gap:5px}.fact{padding:6px;background:#f3f6f6;border-radius:8px}.fact span{display:block;font-size:7px;color:#789099}.fact b{font-size:9px}.assess-summary{font-size:8px;line-height:1.5;color:#425e67;margin-top:7px}.rank-title{font-size:8px;color:#718991;margin:8px 0 2px;font-weight:750}.rank-no{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;background:#17343d;color:#fff;font-size:8px;margin-right:5px}.method-note{font-size:7px;color:#8a9ba1;margin-top:7px;line-height:1.4}
+.project-map-label{pointer-events:none;white-space:nowrap;padding:5px 9px;border-radius:8px;background:rgba(255,255,255,.94);border:1px solid rgba(16,35,43,.16);box-shadow:0 3px 12px rgba(16,35,43,.14);color:#17343d;font-size:12px;font-weight:800;line-height:1.1;transform:translateY(-2px)}
+body.satellite-mode .project-map-label{background:rgba(16,35,43,.84);border-color:rgba(255,255,255,.28);color:#fff;box-shadow:0 3px 14px rgba(0,0,0,.28)}
+@media(max-width:720px){.brand{max-width:66%}.theme{height:42px}.summary{top:82px;right:12px;overflow:auto}.metric{min-width:67px}.projects{top:145px;width:178px;max-height:36%}.panel{left:7px;right:7px;top:auto;bottom:7px;width:auto;height:72%;transform:none}.panel.closed{transform:translateY(calc(100% + 20px))}.openpanel{bottom:16px}.grid{gap:6px}.drawbar{width:max-content;max-width:95%}}
+
+/* Resource manager */
+.projects{width:304px;top:150px;bottom:14px;max-height:none;overflow:hidden;padding:0;display:flex;flex-direction:column}
+.rm-head{padding:11px 11px 8px;border-bottom:1px solid #10232b10;flex:0 0 auto}
+.rm-title{display:flex;align-items:center;justify-content:space-between;gap:8px}.rm-title b{font-size:12px}.rm-count{font-size:9px;color:#6f8790;font-weight:750}
+.rm-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:9px;padding:3px;background:#edf1f2;border-radius:10px}.rm-tab{border:0;background:transparent;border-radius:8px;padding:7px 6px;font-size:10px;font-weight:800;color:#687f88}.rm-tab.on{background:#fff;color:#17343d;box-shadow:0 1px 5px #10232b12}
+.rm-pane{display:none;min-height:0;flex:1;flex-direction:column}.rm-pane.on{display:flex}
+.rm-controls{padding:8px 10px 7px;border-bottom:1px solid #10232b0d;flex:0 0 auto}.rm-search{position:relative}.rm-search input{min-height:34px;border-radius:9px;padding:6px 9px 6px 29px;font-size:11px;background:#f6f8f8;border-color:#d8e0e3}.rm-search:before{content:'⌕';position:absolute;left:10px;top:7px;color:#7b9097;font-size:16px;z-index:1}.rm-filterrow{display:flex;gap:4px;margin-top:6px;overflow:auto;scrollbar-width:none}.rm-filterrow::-webkit-scrollbar{display:none}.rm-chip{border:0;background:#eef2f3;color:#6b8189;border-radius:999px;padding:5px 8px;font-size:8px;font-weight:800;white-space:nowrap}.rm-chip.on{background:#17343d;color:#fff}.rm-sort{display:flex;align-items:center;justify-content:space-between;margin-top:6px}.rm-sort span{font-size:8px;color:#82959b}.rm-sort select{width:auto;min-height:27px;padding:3px 24px 3px 7px;border-radius:7px;font-size:9px;background:#fff}
+.current-resource{margin:7px 9px 3px;padding:8px 9px;border-radius:10px;background:#e9f0f1;border:1px solid #cbd9dc;display:none;flex:0 0 auto}.current-resource.show{display:block}.current-resource .eyebrow{font-size:7px;color:#778d94;font-weight:800;letter-spacing:.04em}.current-resource .curline{display:flex;align-items:center;justify-content:space-between;gap:7px;margin-top:3px}.current-resource b{font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.current-resource small{font-size:8px;color:#6e858d;white-space:nowrap}
+.resource-scroll,.area-scroll{overflow:auto;min-height:0;flex:1;padding:3px 7px 9px;scrollbar-width:thin}.resource-row{display:grid;grid-template-columns:1fr auto;gap:5px;align-items:center;padding:7px 7px;border-radius:9px;margin-top:2px;cursor:pointer;border:1px solid transparent}.resource-row:hover,.resource-row.sel{background:#edf2f3;border-color:#d4dfe2}.resource-main{min-width:0}.resource-name{display:flex;align-items:center;gap:5px;min-width:0}.resource-name b{font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.resource-sub{font-size:8px;color:#71878f;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.resource-area{font-size:9px;font-weight:800;color:#49626b;white-space:nowrap}.empty-list{font-size:9px;line-height:1.55;color:#7d9197;padding:12px 8px;text-align:center}
+.rm-footer{flex:0 0 auto;border-top:1px solid #10232b10;padding:8px 9px 9px;background:rgba(250,252,252,.98)}.rm-add{width:100%;border:0;border-radius:10px;background:#17343d;color:#fff;padding:10px 8px;font-weight:850;font-size:10px}.rm-tools{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px}.rm-tool{border:0;border-radius:8px;background:#e8edef;color:#48626b;padding:7px;font-size:8px;font-weight:800}
+.area-pane-head{padding:8px 10px 0}.area-pane-head .cluster-tools{margin:0;padding:0;border:0}.area-scroll .area-card{margin-top:4px}.area-scroll .area-assessment{margin:7px 2px 8px}
+
+
+
+.import-status{display:none;margin-top:5px;padding:6px 7px;border-radius:7px;background:#eef3f4;color:#58717a;font-size:7px;line-height:1.35}.import-status.show{display:block}.import-status b{color:#17343d}
+@media(max-width:720px){.projects{top:142px;left:7px;bottom:auto;width:208px;height:43%;max-height:43%;}.rm-head{padding:8px}.rm-title b{font-size:10px}.rm-count{font-size:7px}.rm-controls{padding:6px}.rm-search input{min-height:31px}.resource-row{padding:6px 5px}.rm-footer{padding:6px}.rm-add{padding:8px}.summary{left:7px}.panel{z-index:40}}
+.vertex-handle{width:20px;height:20px;border:3px solid #fff;background:#176d82;border-radius:50%;box-shadow:0 1px 5px #17343d;cursor:move}.vertex-mid{width:16px;height:16px;background:#dc9630}.drawbar{align-items:center;flex-wrap:wrap;justify-content:center}#drawHint{font-size:12px;max-width:280px}.copilot{position:absolute;z-index:25;right:12px;top:12px;width:300px;padding:10px;border-radius:12px}.copilot summary{cursor:pointer;font-weight:800}.copilot p{font-size:12px;line-height:1.6;white-space:pre-wrap}.copilot button{margin-top:6px;padding:8px;border:0;border-radius:7px;background:#17343d;color:#fff}.theme{margin-right:320px}@media(max-width:720px){.copilot{top:65px;width:185px}.theme{margin-right:0}.drawbar{bottom:10px}#drawHint{width:100%;text-align:center}}
+.creation label,.module-panel>label{display:block;font-size:12px;font-weight:700;margin:8px 0 5px;color:#325762}.category-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.category-grid button{border:1px solid #c5d4d8;border-radius:8px;padding:8px 2px;background:#f5f8f9;color:#294d59;font-size:12px;cursor:pointer}.category-grid .on{background:#176d82;color:white;border-color:#176d82}.creation select{font-size:12px;min-height:34px}.module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:9px}.module-grid button{border:1px solid #b5c9ce;border-radius:9px;min-height:40px;background:#e6eff2;color:#153d4b;font-size:12px;font-weight:800;cursor:pointer}.module-panel{z-index:35}.module-panel label{font-size:12px}.module-intro{font-size:13px;color:#4d6872;line-height:1.6}.module-panel .note{font-size:12px;line-height:1.7}.module-panel h3{font-size:14px}.module-panel .field label{font-size:12px}.module-panel .module-grid{grid-template-columns:1fr 1fr}.density-ramp{height:12px;border-radius:6px;background:linear-gradient(to right,#377eb8,#8fd3ad,#fee08b,#fdae61,#d73027)}.ramp-labels{display:flex;justify-content:space-between;font-size:11px;margin-top:4px}.rm-footer{max-height:45%;overflow:auto}button:disabled{opacity:.5;cursor:wait}#densityPanel[hidden]{display:none}#eco input{font-size:14px}.projects .rm-chip{font-size:10px}#economicsPanel .pane{margin-top:14px}
+@media(max-width:720px){.projects{width:218px;height:57%;max-height:57%}.rm-footer{max-height:59%}.module-grid button{font-size:11px}.creation label{font-size:11px}.category-grid button{font-size:11px;padding:6px 1px}.module-panel{height:76%;z-index:45}.copilot{width:150px}.module-panel input,.module-panel select{font-size:16px}.rm-add{font-size:11px}}
+
+.workspace-nav{pointer-events:auto;display:flex;padding:5px;gap:4px;border-radius:13px;height:45px}.workspace-nav button{border:0;background:transparent;color:#375e6c;padding:8px 17px;border-radius:9px;font-weight:800;cursor:pointer}.workspace-nav button.on{background:#17343d;color:white}.theme{margin-right:0;max-width:none}.theme button{white-space:nowrap}.copilot{top:auto;bottom:16px;right:65px;width:250px}.planning-tools{display:grid;gap:10px;margin-top:16px}.planning-tools button{display:flex;flex-direction:column;gap:6px;text-align:left;border:1px solid #bcd0d6;border-radius:12px;background:#edf5f7;padding:16px;color:#173e4c;cursor:pointer}.planning-tools b{font-size:16px}.planning-tools span{font-size:12px;color:#57747f}.snap-control{display:flex;align-items:center;gap:4px;font-size:12px;white-space:nowrap}.snap-control input{width:17px;min-height:17px}#snapTolerance{width:97px;min-height:32px;font-size:11px}#snapStatus{font-size:11px;color:#166f59;max-width:140px}.snap-indicator{width:18px;height:18px;background:#ee4ac733;border:2px solid #bd2c9c;border-radius:50%;pointer-events:none}.attribute-table{position:absolute;z-index:27;left:330px;right:12px;bottom:12px;height:265px;border-radius:15px;display:flex;flex-direction:column;padding:10px}.attribute-table[hidden]{display:none}.table-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex:none;font-size:12px}.table-toolbar label{display:flex;align-items:center;gap:4px;white-space:nowrap}.table-toolbar input{min-height:16px;width:16px}.table-toolbar select{width:135px;min-height:30px;font-size:12px}.table-toolbar button,.table-scroll button{border:0;border-radius:7px;background:#e3edf0;color:#244e5f;padding:7px;cursor:pointer;font-size:12px}.table-scroll{overflow:auto;flex:1;margin-top:7px}.table-scroll table{border-collapse:collapse;width:100%;white-space:nowrap;font-size:12px}.table-scroll th,.table-scroll td{padding:8px;text-align:left;border-bottom:1px solid #cedee4}.table-scroll th{position:sticky;top:0;background:#e7f0f3;z-index:1}.table-scroll tr.is-selected{background:#d4edf5}.table-scroll input{width:16px;min-height:16px}.table-tip{font-size:11px;color:#4e707e;padding-top:7px}.table-open .copilot{bottom:290px}.table-open .panel{bottom:290px}.walk-result{border:1px solid #c7d9dd;padding:12px;border-radius:10px;margin-top:9px;background:#fff}.walk-result b{display:block;font-size:14px}.walk-result small{display:block;font-size:12px;line-height:1.6;margin-top:4px}.walk-result button{border:0;border-radius:7px;padding:8px;background:#e5f0f3;color:#245466;margin-top:6px;cursor:pointer}.walk-legend{display:flex;flex-wrap:wrap;gap:9px;font-size:11px;margin-top:10px}.walk-legend span:nth-child(1){color:#2e9f66}.walk-legend span:nth-child(2){color:#3786c6}.walk-legend span:nth-child(3){color:#e79b27}.walk-legend span:nth-child(4){color:#b36672}.walk-origin{width:20px;height:20px;border-radius:50%;border:3px solid white;background:#173e4c;box-shadow:0 1px 6px #173e4c80}
+@media(max-width:720px){.top{flex-wrap:wrap;gap:6px;align-items:center}.brand{order:0;max-width:52%;padding:10px}.brand b{font-size:14px}.theme{order:1;height:38px;gap:0;padding:3px}.theme button{padding:6px;font-size:11px}.workspace-nav{order:2;width:100%;height:39px;justify-content:center}.workspace-nav button{flex:1;padding:6px 8px;font-size:12px}.summary{top:105px}.projects{top:165px;height:55%;max-height:55%}.panel{height:72%;z-index:45}.copilot{width:145px;right:48px;bottom:15px}.attribute-table{left:7px;right:7px;bottom:7px;height:39%;z-index:36;padding:8px}.table-toolbar{gap:5px;font-size:11px}.table-toolbar select{width:115px}.table-open .panel{bottom:7px;height:72%}.table-open .copilot{bottom:42%}.table-tip{font-size:10px}.drawbar{z-index:48;width:96%}#drawHint{font-size:11px;max-width:none}.snap-control{font-size:11px}.table-toolbar b{font-size:12px}}
+
+</style>
+</head>
+<body>
+<div id="map"></div><details class="copilot glass"><summary>地图 Copilot</summary><p>本地数据问答：数量、分类、最大面积。支持“当前视野”或“筛选结果”范围。</p><form id="copilotForm"><input id="copilotQuestion" aria-label="地图问题" placeholder="最大的居住更新资源在哪里？"><button>查询</button></form><p id="copilotAnswer" role="status"></p><button id="copilotLocate" hidden>定位结果</button></details>
+<div class="top">
+  <div class="brand glass"><b>Urban Renewal Lab</b></div>
+  <nav class="workspace-nav glass" aria-label="工作模块"><button id="openPanel">资源档案</button><button id="openPlanning">规划工具</button><button id="toggleTable" aria-expanded="false">属性表</button></nav><div class="theme glass"><button id="light" class="on">浅色</button><button id="satellite">影像</button><button id="openRoads">高德道路</button></div>
+</div>
+<div class="summary glass">
+  <div class="metric"><span>资源</span><b id="mCount">0</b></div>
+  <div class="metric"><span>资源面积</span><b id="mArea">0 ha</b></div>
+  <div class="metric"><span>企业投资</span><b id="mInv">—</b></div>
+  <div class="metric"><span>规划建面</span><b id="mGfa">—</b></div>
+</div>
+<div class="projects glass" id="resourceManager">
+  <div class="rm-head">
+    <div class="rm-title"><b>更新资源管理器</b><span class="rm-count" id="rmSummary">0 处资源 · 0 个片区</span></div>
+    <div class="rm-tabs"><button class="rm-tab on" data-rm-tab="resources">更新资源</button><button class="rm-tab" data-rm-tab="areas">候选片区</button></div>
+  </div>
+
+  <div class="rm-pane on" id="rm-resources">
+    <div class="rm-controls">
+      <div class="rm-search"><input id="resourceSearch" placeholder="搜索项目名称"></div>
+      <div class="rm-filterrow" id="resourceFilters">
+        <button class="rm-chip on" data-filter="all">全部</button>
+        <button class="rm-chip" data-filter="industrial">产业</button>
+        <button class="rm-chip" data-filter="residential">居住</button>
+        <button class="rm-chip" data-filter="commercial">商业</button>
+        <button class="rm-chip" data-filter="public">公服</button><button class="rm-chip" data-filter="other">其他</button>
+      </div>
+      <div class="rm-sort"><span id="resourceVisibleCount">0 / 0</span><select id="resourceSort"><option value="recent">最近录入</option><option value="name">名称</option><option value="areaDesc">面积从大到小</option><option value="areaAsc">面积从小到大</option></select></div>
+    </div>
+    <div class="current-resource" id="currentResource"></div>
+    <div class="resource-scroll" id="projectList"></div>
+  </div>
+
+  <div class="rm-pane" id="rm-areas">
+    <div class="area-pane-head">
+      <div class="cluster-tools">
+        <div class="row"><div><label>集聚半径</label><input id="clusterRadius" type="number" value="500" min="100" step="50"></div><div><label>最少资源数</label><input id="clusterMin" type="number" value="3" min="2" max="20"></div></div>
+        <button class="cluster-btn" id="generateAreas">识别候选片区 + 综合研判</button>
+      </div>
+    </div>
+    <div class="area-scroll">
+      <div class="note">建议边界仅供前期研究。选择片区后可编辑并审查；修改资源后应重新生成。</div><button class="primary" id="editArea">编辑所选片区节点</button><button class="primary secondary" id="reviewArea">标记所选片区已审查</button><div class="area-list" id="areaList"></div>
+      <div class="area-assessment" id="areaAssessment"></div>
+    </div>
+  </div>
+
+  <div class="rm-footer">
+    <div class="creation"><label>① 选择资源分类</label><div id="createCategories" class="category-grid"><button data-create="industrial" class="on">产业</button><button data-create="residential">居住</button><button data-create="public">公服</button><button data-create="commercial">商业</button><button data-create="other">其他</button></div><label for="createSubtype">② 选择具体类型</label><select id="createSubtype"></select><button class="rm-add" id="newProject">＋ 在产业分类下绘制资源</button></div>
+    <div class="rm-tools"><button class="rm-tool" id="exportData">导出数据</button><button class="rm-tool" id="importData">导入数据</button></div>
+    <div id="importStatus" class="import-status"></div>
+    <input type="file" id="importFile" multiple accept=".json,.geojson,.csv,.zip,.shp,.dbf,.prj,.cpg,application/json,text/csv,application/zip" style="display:none">
+  </div>
+</div>
+<div class="drawbar glass" id="drawbar"><label class="snap-control"><input type="checkbox" id="roadSnap">道路吸附</label><select id="snapTolerance" aria-label="吸附容差"><option value="10">10 像素</option><option value="20">20 像素</option><option value="30">30 像素</option></select><span id="snapStatus" role="status"></span><span id="drawHint" role="status">单击添加节点，双击结束；Esc 取消</span><button class="cancel" id="undo">撤销一点</button><button class="finish" id="finish">完成圈选</button><button class="cancel" id="cancel">取消</button></div>
+
+<section class="panel glass closed" id="panel">
+  <button class="close" id="close">×</button><h2 id="panelTitle">更新资源</h2>
+  <div class="tabs"><button class="on" data-tab="base">资源档案</button></div>
+
+  <div id="archiveEmpty" class="note" hidden>请选择左侧资源，或先按分类绘制新资源，再查看档案。</div><div class="pane on" id="base">
+    <h3>资源识别</h3>
+    <div class="grid">
+      <div class="field"><label>项目名称</label><input id="name" placeholder="例如：更新项目1"></div>
+      <div class="field"><label>更新资源类型</label><select id="type"><option>老旧小区</option><option>危旧住宅</option><option>老旧厂区</option><option>低效产业用地</option><option>老旧商业</option><option>城中村</option><option>闲置低效用地</option><option>历史文化资源</option><option>公共设施短板</option><option>交通市政设施</option><option>公共空间</option><option>其他资源</option></select></div>
+      <div class="field"><label>当前阶段</label><select id="stage"><option>前期研究</option><option>策划方案</option><option>实施方案</option><option>建设实施</option></select></div>
+      <div class="field"><label>更新方式</label><select id="mode"><option>拆除重建</option><option>保留改造</option><option>拆改结合</option></select></div>
+    </div>
+
+    <h3>现状</h3>
+    <div class="grid">
+      <div class="field"><label>现状地块面积（ha）</label><input id="currentLandArea" readonly></div>
+      <div class="field"><label>现状建筑面积（㎡）</label><input id="existingGfa" type="number" value="80000"></div>
+      <div class="field"><label>现状容积率</label><input id="existingFar" type="number" value="0.8" step="0.01"></div>
+      <div class="field"><label>土地权属</label><select id="owner"><option>国有企业</option><option>政府/事业单位</option><option>民营企业</option><option>集体</option><option>多主体</option><option>个人/其他</option></select></div>
+      <div class="field"><label>土地性质</label><select id="landNature"><option>出让</option><option>划拨</option><option>集体所有</option><option>租赁/授权经营</option><option>其他</option></select></div>
+      <div class="field"><label>现状用途</label><select id="currentUse"><option>居住</option><option>工业</option><option>商业</option><option>办公/研发</option><option>仓储物流</option><option>公共管理与公共服务</option><option>交通设施</option><option>绿地与开敞空间</option><option>混合用途</option><option>其他</option></select></div>
+    </div>
+
+    <h3>规划</h3>
+    <div class="grid">
+      <div class="field"><label>规划用地用途</label><select id="plannedUse"><option>居住</option><option>工业</option><option>商业</option><option>办公/研发</option><option>仓储物流</option><option>公共管理与公共服务</option><option>交通设施</option><option>绿地与开敞空间</option><option>混合用途</option><option>其他</option></select></div>
+      <div class="field"><label>规划容积率</label><input id="plannedFar" type="number" value="2.5" step="0.01"></div>
+      <div class="field"><label>规划建筑面积（㎡）</label><input id="plannedGfa" type="number" readonly></div>
+      <div class="field"><label>规划地块面积（ha）</label><input id="plannedLandArea" type="number" step="0.01"></div>
+    </div>
+    <button class="primary" id="saveBase">保存资源档案</button>
+    <button class="primary secondary" id="editBoundary" style="display:none">编辑资源边界节点</button>
+    <button class="primary danger" id="deleteProject" style="display:none">删除这个更新资源</button>
+  </div>
+
+</section>
+<section class="panel glass closed module-panel" id="economicsPanel"><button class="close" data-close-module>×</button><h2>经济测算</h2><p class="module-intro">选择更新资源，分别测算政府收支与企业收益。</p><label for="economicsProject">测算对象</label><select id="economicsProject"></select><div id="economicsEmpty" class="note">请先添加更新资源。</div>  <div class="pane on" id="eco">
+    <h3>政府层面</h3>
+    <div class="grid">
+      <div class="field"><label>土地出让收入（万元）</label><input id="govLandGrant" type="number" value="8000"></div>
+      <div class="field"><label>拆迁安置费（万元）</label><input id="govRelocation" type="number" value="12000"></div>
+      <div class="field"><label>资产收购成本（万元）</label><input id="govAssetAcq" type="number" value="0"></div>
+      <div class="field"><label>土地整理 / 前期成本（万元）</label><input id="govSitePrep" type="number" value="1500"></div>
+      <div class="field"><label>其他政府支出（万元）</label><input id="govOther" type="number" value="0"></div>
+    </div>
+    <button class="primary" id="calcGov">计算政府收支</button>
+    <div class="results" id="govResults"><div class="kpis">
+      <div class="kpi"><span>政府总投入</span><b id="gCost">—</b></div>
+      <div class="kpi"><span>土地出让收入</span><b id="gRevenue">—</b></div>
+      <div class="kpi"><span>政府净收支</span><b id="gNet">—</b></div>
+      <div class="kpi"><span>成本覆盖倍数</span><b id="gCoverage">—</b></div>
+    </div></div>
+
+    <h3>企业层面</h3>
+    <div class="grid">
+      <div class="field"><label>土地取得成本（万元，联动政府端）</label><input id="entLandCost" type="number" readonly></div>
+      <div class="field"><label>建安成本（元/㎡）</label><input id="buildCost" type="number" value="5500"></div>
+      <div class="field"><label>其他开发成本率（%）</label><input id="otherRate" type="number" value="18"></div>
+      <div class="field"><label>建设期（年）</label><input id="buildYears" type="number" value="3" min="1" max="10"></div>
+      <div class="field"><label>贷款比例（%）</label><input id="loanRatio" type="number" value="55"></div>
+      <div class="field"><label>贷款利率（%）</label><input id="loanRate" type="number" value="4.2" step="0.1"></div>
+      <div class="field"><label>可经营比例（%）</label><input id="rentable" type="number" value="82"></div>
+      <div class="field"><label>稳定出租率（%）</label><input id="occ" type="number" value="90"></div>
+      <div class="field"><label>月租金（元/㎡·月）</label><input id="monthlyRent" type="number" value="75"></div>
+      <div class="field"><label>租金年增长（%）</label><input id="rentGrowth" type="number" value="2" step="0.1"></div>
+      <div class="field"><label>运营成本率（%）</label><input id="opexRate" type="number" value="22"></div>
+      <div class="field"><label>资本化率（%）</label><input id="capRate" type="number" value="5.5" step="0.1"></div>
+      <div class="field"><label>折现率（%）</label><input id="discountRate" type="number" value="7" step="0.1"></div>
+      <div class="field"><label>测算周期（年）</label><input id="holdYears" type="number" value="15"></div>
+    </div>
+    <button class="primary" id="calcEnt">计算企业收益</button>
+    <div class="results" id="entResults">
+      <div class="kpis">
+        <div class="kpi"><span>企业总投资</span><b id="eInvestment">—</b></div>
+        <div class="kpi"><span>稳定期 NOI</span><b id="eNoi">—</b></div>
+        <div class="kpi"><span>资产价值</span><b id="eValue">—</b></div>
+        <div class="kpi"><span>静态投资收益率</span><b id="eYield">—</b></div>
+        <div class="kpi"><span>项目 IRR</span><b id="eIrr">—</b></div>
+        <div class="kpi"><span>资本金 IRR</span><b id="eEquityIrr">—</b></div>
+        <div class="kpi"><span>NPV</span><b id="eNpv">—</b></div>
+        <div class="kpi"><span>回收期</span><b id="ePayback">—</b></div>
+      </div>
+      <div class="note" id="eNote"></div>
+      <div class="section-title">敏感性 · 月租金 × 建安成本（项目 IRR）</div>
+      <div id="sensitivity" style="overflow:auto"></div>
+    </div>
+  </div>
+</section>
+<section class="panel glass closed module-panel" id="densityPanel"><button class="close" data-close-module>×</button><h2>资源分布密度</h2><p class="module-intro">从资源分布到热点识别</p><label for="densityCategory">资源分类</label><select id="densityCategory"><option value="all">全部资源</option><option value="industrial">产业</option><option value="residential">居住</option><option value="public">公服</option><option value="commercial">商业</option><option value="other">其他</option></select><label for="densityScope">计算范围</label><select id="densityScope"><option value="view">当前地图视野</option><option value="resources">所选分类资源范围</option></select><label for="densityRadius">密度统计半径</label><select id="densityRadius"><option value="100">100 米</option><option value="250" selected>250 米</option><option value="500">500 米</option></select><div class="module-grid"><button id="showHeat">一键生成热力图</button><button id="showGrid">生成 5 米栅格</button></div><button class="primary secondary" id="clearDensity">关闭密度图</button><button class="primary secondary" id="cancelDensity" hidden>取消栅格计算</button><div id="densityLegend" class="note" hidden><div class="density-ramp"></div><div class="ramp-labels"><span>低</span><span>资源密集 · 高</span></div></div><p id="densityStatus" class="note" role="status">5 米是栅格采样间距；密度为所设半径内资源中心点数量。零值透明。最多生成 100 万个栅格，超出时请缩小视野。</p><button class="primary secondary" id="exportDensity" hidden>导出栅格 PNG＋空间元数据</button></section>
+<section class="panel glass closed module-panel" id="roadsPanel"><button class="close" data-close-module>×</button><h2>高德道路</h2><p class="module-intro">当前视野内的高德路况覆盖道路</p><p class="note">道路以灰蓝线显示，点击查看名称。道路返回范围受高德路况覆盖限制，并非完整路网。地图仍采用 WGS84；高德道路会转换后叠加。</p><button id="loadAmapRoads" class="primary">加载当前视野道路</button><button id="hideAmapRoads" class="primary secondary">隐藏道路图层</button><p id="roadsStatus" class="note" role="status">需服务端配置高德 Web 服务 Key。请将视野缩小至对角线 9 公里以内。</p><p class="note">道路来源：© 高德地图。仅用于当前分析会话，未加入项目导出。</p></section>
+<section class="panel glass closed module-panel" id="planningPanel"><button class="close" data-close-module>×</button><h2>规划工具</h2><p class="module-intro">从资源整理到空间分析与实施研判</p><div class="planning-tools"><button id="openEconomics"><b>经济测算</b><span>政府收支 · 企业收益</span></button><button id="openDensity"><b>资源密度</b><span>热力图 · 5 米栅格</span></button><button id="openWalk"><b>公服步行可达性</b><span>真实路线 · 5 / 10 / 15 分钟</span></button><button id="planningTable"><b>地图与属性表</b><span>筛选 · 多选 · 批量分类</span></button><button id="planningSnap"><b>道路吸附编辑</b><span>加载道路后微调资源边界</span></button></div><p class="note">候选片区仍在左侧管理器中生成和审查。</p></section>
+<section class="attribute-table glass" id="attributeTable" hidden aria-label="资源属性表"><div class="table-toolbar"><b>资源属性表</b><span id="tableSummary"></span><label><input type="checkbox" id="tableSelectedOnly">仅选中</label><button id="zoomTableSelection">定位选中</button><button id="clearTableSelection">清除选择</button><select id="batchType" aria-label="批量资源类型"></select><button id="applyBatchType">应用分类</button><button id="closeTable" aria-label="关闭属性表">×</button></div><div class="table-scroll"><table><thead><tr><th><input type="checkbox" id="tableSelectAll" aria-label="选择当前表格全部资源"></th><th><button data-sort="name">资源名称 ↕</button></th><th>资源类型</th><th><button data-sort="area">面积 ha ↕</button></th><th>权属</th><th>阶段</th><th>操作</th></tr></thead><tbody id="attributeRows"></tbody></table></div><div class="table-tip">与左侧搜索和分类筛选同步；点击名称定位，勾选可多选；地图 Shift＋单击可增减选择。</div></section>
+<section class="panel glass closed module-panel" id="walkPanel"><button class="close" data-close-module>×</button><h2>公服步行可达性</h2><p class="module-intro">查看从一个起点到公服设施的实际步行时间</p><label for="walkOrigin">起点</label><select id="walkOrigin"><option value="map">地图选点</option></select><button id="pickWalkOrigin" class="primary secondary">在地图上选择起点</button><label for="walkTargets">目标公服来源</label><select id="walkTargets"><option value="resources">已录入公服资源</option><option value="hospital">高德 · 医院</option><option value="school">高德 · 学校</option><option value="park">高德 · 公园</option></select><p class="note">每次分析最多查询周边 2 公里内最近的 5 个候选设施；资源默认用中心点，可在地图上另选实际出入口作为起点。</p><button id="runWalk" class="primary">计算步行可达性</button><button id="clearWalk" class="primary secondary">清除路线</button><p id="walkStatus" class="note" role="status">按高德步行路线估算时间，不生成完整等时圈。</p><div class="walk-legend"><span>● ≤5 分钟</span><span>● ≤10 分钟</span><span>● ≤15 分钟</span><span>● 超过15分钟</span></div><div id="walkSummary" class="note" hidden></div><div id="walkResults"></div><p class="note">结果仅涵盖所查询候选点，不代表全部公服覆盖率。时间为高德估算，开放状态与通行限制需现场核查。来源：© 高德地图。</p></section>
+
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@7/turf.min.js"></script>
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const colors={"工业更新":"#e85a64","商业更新":"#497fd1","片区更新":"#e49b45","居住更新":"#7a69c7","老旧小区":"#7a69c7","危旧住宅":"#9c67b8","老旧厂区":"#e85a64","低效产业用地":"#d96652","老旧商业":"#497fd1","城中村":"#a86db1","闲置低效用地":"#d98b32","历史文化资源":"#3e9c86","公共设施短板":"#4b9a9d","交通市政设施":"#567b9e","公共空间":"#62a36f","其他资源":"#75858b","历史街区":"#3e9c86"};
+const STORAGE_KEY="urban-renewal-lab-state-v3";
+let vertexMarkers=[],vertexMode=false,areaEditing=null;
+let map,mapReady=false,projects=[],renewalAreas=[],drawing=false,pts=[],editing=null,basemap="light",redrawing=false,activeArea=null,projectMarkers=[];
+let importedReferenceGeoJSON={type:"FeatureCollection",features:[]};
+const fc=f=>({type:"FeatureCollection",features:f});
+const deepCopy=x=>JSON.parse(JSON.stringify(x));
+const escapeHTML=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function areaHa(c){if(c.length<3)return 0;const R=6378137,lat=c.reduce((a,p)=>a+p[1],0)/c.length*Math.PI/180,xy=c.map(p=>[R*p[0]*Math.PI/180*Math.cos(lat),R*p[1]*Math.PI/180]);let a=0;for(let i=0,j=xy.length-1;i<xy.length;j=i++)a+=xy[j][0]*xy[i][1]-xy[i][0]*xy[j][1];return Math.abs(a/2)/10000}
+function centroid(c){return [c.reduce((a,p)=>a+p[0],0)/c.length,c.reduce((a,p)=>a+p[1],0)/c.length]}
+function pointInPolygon(pt,ring){
+ let x=pt[0],y=pt[1],inside=false;
+ for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+  const xi=ring[i][0],yi=ring[i][1],xj=ring[j][0],yj=ring[j][1];
+  const hit=((yi>y)!==(yj>y))&&(x<(xj-xi)*(y-yi)/((yj-yi)||1e-12)+xi);
+  if(hit)inside=!inside;
+ }
+ return inside;
+}
+function projectAtLngLat(ll){
+ for(let i=projects.length-1;i>=0;i--){const r=projects[i]?.pts;if(Array.isArray(r)&&r.length>=3&&pointInPolygon(ll,r))return i}
+ return -1;
+}
+function money(n){if(!isFinite(n))return"—";return Math.abs(n)>=10000?(n/10000).toFixed(2)+"亿":Math.round(n)+"万"}
+function pct(n){return n==null||!isFinite(n)?"—":(n*100).toFixed(1)+"%"}
+function nextProjectName(){let m=0;projects.forEach(p=>{const x=String(p.name||"").match(/^更新(?:项目|资源)\s*(\d+)$/);if(x)m=Math.max(m,+x[1])});return"更新资源"+(m+1)}
+function inferUse(type){if(type==="公共设施短板")return "公共管理与公共服务";if(type==="交通市政设施")return "交通设施";if(type==="公共空间")return "绿地与开敞空间";if(["工业更新","老旧厂区","低效产业用地"].includes(type))return"工业";if(["商业更新","老旧商业"].includes(type))return"商业";if(["居住更新","老旧小区","危旧住宅","城中村"].includes(type))return"居住";return"混合用途"}
+
+function normalizeProject(raw){
+ const p=deepCopy(raw||{});const a=+(p.currentLandArea??p.area??0)||0;
+ const currentUse=p.currentUse||inferUse(p.type);
+ const plannedFar=+(p.plannedFar??p.newFar??2.5)||2.5;
+ const plannedLandArea=+(p.plannedLandArea??a)||a;
+ const oldF=p.finance||{};
+ let oldRent=+(oldF.rent??900)||900;if(oldRent>250)oldRent=oldRent/12;
+ return {
+  source:p.source,sourceAttributes:p.sourceAttributes,name:p.name||nextProjectName(),type:p.type||"老旧厂区",stage:p.stage||"前期研究",mode:p.mode||"拆改结合",pts:Array.isArray(p.pts)?p.pts:[],
+  currentLandArea:a,existingGfa:+(p.existingGfa??p.oldGfa??0)||0,existingFar:+(p.existingFar??p.oldFar??0)||0,owner:p.owner||"国有企业",landNature:p.landNature||"出让",currentUse,
+  plannedUse:p.plannedUse||currentUse,plannedFar,plannedLandArea,plannedGfa:+(p.plannedGfa??plannedLandArea*10000*plannedFar)||0,
+  government:p.government||{landGrant:+(oldF.landCost??8000)||0,relocation:+(oldF.reloc??12000)||0,assetAcq:0,sitePrep:1500,other:0},
+  enterprise:p.enterprise||{buildCost:+(oldF.buildCost??5500)||5500,otherRate:+(oldF.otherRate??18)||18,buildYears:+(oldF.buildYears??3)||3,loanRatio:+(oldF.loanRatio??55)||55,loanRate:+(oldF.loanRate??4.2)||4.2,rentable:+(oldF.rentable??82)||82,occ:+(oldF.occ??90)||90,monthlyRent:oldRent,rentGrowth:+(oldF.rentGrowth??2)||2,opexRate:22,capRate:+(oldF.cap??5.5)||5.5,discountRate:+(oldF.discountRate??7)||7,holdYears:+(oldF.holdYears??15)||15},
+  govCalc:p.govCalc||null,entCalc:p.entCalc||p.calc||null
+ }
+}
+function loadState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return;const st=JSON.parse(raw);if(Array.isArray(st.projects))projects=st.projects.filter(x=>Array.isArray(x.pts)&&x.pts.length>=3).map(normalizeProject);if(Array.isArray(st.renewalAreas))renewalAreas=st.renewalAreas;if(st.importedReferenceGeoJSON?.type==="FeatureCollection")importedReferenceGeoJSON=st.importedReferenceGeoJSON;basemap=st.basemap||st.theme||"light";if(!["light","satellite"].includes(basemap))basemap="light"}catch(e){}}
+function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({version:7,basemap,projects,renewalAreas,importedReferenceGeoJSON,updatedAt:new Date().toISOString()}))}catch(e){}}
+
+function projectMatchesManager(p){
+ const q=(resourceManagerState?.query||"").trim().toLowerCase();
+ const hitQ=!q||(p.name||"").toLowerCase().includes(q)||(p.type||"").toLowerCase().includes(q);
+ const hitF=(resourceManagerState?.filter||"all")==="all"||resourceCategory(p.type)===resourceManagerState.filter;
+ return hitQ&&hitF;
+}
+function visibleProjectPairs(){
+ return projects.map((p,i)=>({p,i})).filter(({p})=>Array.isArray(p.pts)&&p.pts.length>=3&&(resourceManagerState?.tab!=="resources"||projectMatchesManager(p)));
+}
+function mapData(){return fc(visibleProjectPairs().map(({p,i})=>({type:"Feature",properties:{id:i,name:p.name,type:p.type,color:colors[p.type]||"#547782",selected:selectedRows.has(i)?1:0,height:Math.max(8,Math.min(60,((+p.existingFar||1)*12)))},geometry:{type:"Polygon",coordinates:[[...p.pts,p.pts[0]]]}})))}
+function labelData(){return fc(visibleProjectPairs().map(({p,i})=>({type:"Feature",properties:{id:i,label:p.name},geometry:{type:"Point",coordinates:centroid(p.pts)}})))}
+function syncProjectMarkers(){
+ if(!mapReady||!map)return;
+ projectMarkers.forEach(m=>m.remove());projectMarkers=[];
+ visibleProjectPairs().forEach(({p,i})=>{
+  const el=document.createElement("div");el.className="project-map-label";el.textContent=(p.name||("更新项目"+(i+1))).trim();
+  const marker=new maplibregl.Marker({element:el,anchor:"center"}).setLngLat(centroid(p.pts)).addTo(map);
+  projectMarkers.push(marker);
+ });
+}
+function centerData(){return fc(visibleProjectPairs().map(({p,i})=>({type:"Feature",properties:{id:i,weight:Math.max(.2,Math.min(1,(+p.currentLandArea||1)/5))},geometry:{type:"Point",coordinates:centroid(p.pts)}})))}
+function clamp(v,min=0,max=100){return Math.max(min,Math.min(max,v))}
+function avg(arr){return arr.length?arr.reduce((a,b)=>a+b,0)/arr.length:0}
+function assessRenewalArea(a){
+ const ids=(a.resourceIds||[]).filter(i=>projects[i]), ps=ids.map(i=>projects[i]);
+ if(!ps.length)return{overall:0,priority:"长期培育",priorityClass:"priority-low",color:"#4f7fa8",rank:0,scores:{cluster:0,urgency:0,potential:0,implementation:0,economic:0},facts:{},summary:"暂无有效更新资源"};
+ const centers=ps.map(p=>centroid(p.pts));let pairs=[];for(let i=0;i<centers.length;i++)for(let j=i+1;j<centers.length;j++)pairs.push(haversine(centers[i],centers[j]));
+ const avgDist=avg(pairs)||0, radius=+a.radius||500, areaPer=Math.max(.1,(+a.areaHa||1)/ps.length);
+ const densityScore=clamp(108-areaPer*7.5,25,100), distanceScore=clamp(100-(avgDist/Math.max(150,radius))*55,20,100);const cluster=clamp(densityScore*.6+distanceScore*.4);
+ const urgencyWeight={"危旧住宅":100,"城中村":92,"老旧小区":86,"公共设施短板":84,"交通市政设施":80,"低效产业用地":78,"老旧厂区":76,"闲置低效用地":74,"老旧商业":70,"历史文化资源":68,"公共空间":58,"其他资源":60};
+ const urgency=clamp(avg(ps.map(p=>urgencyWeight[p.type]??62)));
+ const potentialVals=ps.map(p=>{const oldFar=Math.max(0,+p.existingFar||0),newFar=Math.max(0,+p.plannedFar||0),delta=newFar-oldFar;const farScore=clamp(45+delta*20,20,100);const oldGfa=Math.max(0,+p.existingGfa||0),newGfa=Math.max(0,+p.plannedGfa||0);const growth=oldGfa>0?(newGfa-oldGfa)/oldGfa:(delta>0?delta:0);const gfaScore=clamp(48+growth*22,20,100);return farScore*.65+gfaScore*.35});
+ const potential=clamp(avg(potentialVals));
+ const ownerWeight={"政府/事业单位":95,"国有企业":90,"民营企业":70,"集体":52,"多主体":38,"个人/其他":45};const natureWeight={"出让":82,"划拨":72,"集体所有":48,"租赁/授权经营":58,"其他":52};
+ const implementation=clamp(avg(ps.map(p=>{let v=(ownerWeight[p.owner]??58)*.65+(natureWeight[p.landNature]??58)*.35;if(p.type==="历史文化资源")v-=10;if(p.mode==="拆除重建"&&p.owner==="多主体")v-=8;return clamp(v)})));
+ const econVals=[],econDirect=[];ps.forEach(p=>{if(p.entCalc){const disc=(+p.enterprise?.discountRate||7)/100,irr=p.entCalc.projectIrr,npv=+p.entCalc.npv||0,inv=Math.max(1,+p.entCalc.investment||1);let irrScore=irr==null?45:clamp(55+(irr-disc)*420,20,100);let npvScore=clamp(55+(npv/inv)*80,20,100);econVals.push(irrScore*.6+npvScore*.4);econDirect.push(true)}else if(p.govCalc){const c=p.govCalc,cost=Math.max(1,+c.cost||1),ratio=(+c.net||0)/cost;econVals.push(clamp(55+ratio*35,20,100));econDirect.push(true)}else{const oldFar=Math.max(.2,+p.existingFar||.8),newFar=Math.max(.2,+p.plannedFar||2);const proxy=clamp(48+(newFar-oldFar)*12+(implementation-50)*.18,25,90);econVals.push(proxy);econDirect.push(false)}});
+ const economic=clamp(avg(econVals));
+ const overall=clamp(cluster*.25+urgency*.20+potential*.20+implementation*.15+economic*.20);
+ let priority,priorityClass,color;if(overall>=75){priority="优先更新";priorityClass="priority-high";color="#d95f45"}else if(overall>=60){priority="重点储备";priorityClass="priority-mid";color="#d99a32"}else{priority="长期培育";priorityClass="priority-low";color="#4f7fa8"}
+ const totalExisting=ps.reduce((x,p)=>x+(+p.existingGfa||0),0),totalPlanned=ps.reduce((x,p)=>x+(+p.plannedGfa||0),0),land=ps.reduce((x,p)=>x+(+p.currentLandArea||0),0);const existingFar=land?totalExisting/(land*10000):avg(ps.map(p=>+p.existingFar||0)),plannedFar=land?totalPlanned/(land*10000):avg(ps.map(p=>+p.plannedFar||0));
+ const typeCounts={};ps.forEach(p=>typeCounts[p.type]=(typeCounts[p.type]||0)+1);const topTypes=Object.entries(typeCounts).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]+" "+x[1]+"处").join(" · ");
+ const multiCount=ps.filter(p=>p.owner==="多主体"||p.owner==="集体"||p.owner==="个人/其他").length;const calcCount=econDirect.filter(Boolean).length;
+ let summary="";if(cluster>=75)summary+="资源集聚明显；";if(urgency>=80)summary+="高紧迫度资源占比较高；";if(potential>=75)summary+="规划增量空间较大；";if(implementation<55)summary+="权属与实施协调难度偏高；";if(economic>=70)summary+="经济可行性较好；";if(!summary)summary="片区各项指标总体均衡，建议结合规划边界与实施条件继续校核。";
+ return{overall,priority,priorityClass,color,rank:0,scores:{cluster,urgency,potential,implementation,economic},facts:{count:ps.length,area:+a.areaHa||0,existingFar,plannedFar,totalExisting,totalPlanned,topTypes,multiCount,calcCount},summary:summary.replace(/；$/,"。"),economicDirect:calcCount>0};
+}
+function evaluateAllAreas(){renewalAreas.forEach(a=>a.assessment=assessRenewalArea(a));[...renewalAreas].sort((a,b)=>(b.assessment?.overall||0)-(a.assessment?.overall||0)).forEach((a,i)=>a.assessment.rank=i+1)}
+function renderAreaAssessment(i){const box=$("areaAssessment"),a=renewalAreas[i];if(!a||!a.assessment){box.classList.remove("show");box.innerHTML="";return}const x=a.assessment,s=x.scores,f=x.facts;const row=(n,v)=>`<div class="score-row"><span>${n}</span><div class="score-track"><div class="score-fill" style="width:${Math.round(v)}%"></div></div><b>${Math.round(v)}</b></div>`;box.innerHTML=`<div class="assess-head"><div><b><span class="rank-no">${x.rank}</span>${escapeHTML(a.name)}</b><div class="assess-total"><strong>${Math.round(x.overall)}</strong><span>综合分</span></div></div><span class="priority-badge ${x.priorityClass}">${x.priority}</span></div>${row("资源集聚度",s.cluster)}${row("更新紧迫度",s.urgency)}${row("开发潜力",s.potential)}${row("实施可行度",s.implementation)}${row("经济可行性",s.economic)}<div class="assess-facts"><div class="fact"><span>现状 → 规划 FAR</span><b>${f.existingFar.toFixed(2)} → ${f.plannedFar.toFixed(2)}</b></div><div class="fact"><span>建筑增量</span><b>${((f.totalPlanned-f.totalExisting)/10000).toFixed(1)} 万㎡</b></div><div class="fact"><span>资源构成</span><b>${f.topTypes||"—"}</b></div><div class="fact"><span>复杂权属</span><b>${f.multiCount} / ${f.count} 处</b></div></div><div class="assess-summary">${x.summary}</div><div class="method-note">综合分：集聚25% · 紧迫20% · 潜力20% · 实施15% · 经济20%${x.economicDirect?" · 已纳入已测算经济结果":" · 经济项为参数估算"}</div>`;box.classList.add("show")}
+function areaData(){return fc(renewalAreas.map((a,i)=>({type:"Feature",properties:{id:i,name:a.name,count:a.resourceIds.length,area:a.areaHa,color:a.assessment?.color||"#d99a32",score:Math.round(a.assessment?.overall||0),priority:a.assessment?.priority||"待研判"},geometry:{type:"Polygon",coordinates:[a.pts]}})))}
+function areaLabelData(){return fc(renewalAreas.map((a,i)=>({type:"Feature",properties:{id:i,label:a.name+" · "+(a.assessment?.priority||"待研判")+" · "+Math.round(a.assessment?.overall||0)},geometry:{type:"Point",coordinates:a.center}})))}
+function refreshMap(){if(!mapReady)return;const ps=map.getSource("projects"),ls=map.getSource("labels"),cs=map.getSource("resource-centers"),as=map.getSource("renewal-areas"),als=map.getSource("renewal-area-labels"),irs=map.getSource("imported-reference"),ds=map.getSource("draft"),df=map.getSource("draftFill"),dps=map.getSource("draftPts");if(ps)ps.setData(mapData());if(ls)ls.setData(labelData());if(cs)cs.setData(centerData());if(as)as.setData(areaData());if(als)als.setData(areaLabelData());if(irs)irs.setData(importedReferenceGeoJSON);const line=pts.length>1?[{type:"Feature",geometry:{type:"LineString",coordinates:pts},properties:{}}]:[];const poly=pts.length>=3?[{type:"Feature",geometry:{type:"Polygon",coordinates:[[...pts,pts[0]]]},properties:{}}]:[];if(ds)ds.setData(fc(line));if(df)df.setData(fc(poly));if(dps)dps.setData(fc(pts.map(p=>({type:"Feature",geometry:{type:"Point",coordinates:p},properties:{}}))));syncProjectMarkers()}
+function fitAllProjects(){if(!mapReady||!projects.length)return;const all=projects.flatMap(p=>p.pts||[]);if(!all.length)return;let minX=all[0][0],maxX=all[0][0],minY=all[0][1],maxY=all[0][1];all.forEach(([x,y])=>{minX=Math.min(minX,x);maxX=Math.max(maxX,x);minY=Math.min(minY,y);maxY=Math.max(maxY,y)});map.fitBounds([[minX,minY],[maxX,maxY]],{padding:{top:110,bottom:80,left:300,right:80},maxZoom:14,duration:0})}
+
+function zoomRenewalArea(i){if(!renewalAreas[i])return;setResourceManagerTab("areas");activeArea=i;updateAreaSelection();renderAreaAssessment(i);if(mapReady){const r=renewalAreas[i].pts;if(!r||!r.length)return;let minX=r[0][0],maxX=r[0][0],minY=r[0][1],maxY=r[0][1];r.forEach(([x,y])=>{minX=Math.min(minX,x);maxX=Math.max(maxX,x);minY=Math.min(minY,y);maxY=Math.max(maxY,y)});map.fitBounds([[minX,minY],[maxX,maxY]],{padding:{top:120,bottom:90,left:280,right:90},maxZoom:15,duration:600})}}
+function updateAreaSelection(){document.querySelectorAll(".area-card").forEach(c=>c.classList.toggle("sel",+c.dataset.area===activeArea));renderAreaAssessment(activeArea)}
+
+let resourceManagerState={tab:"resources",query:"",filter:"all",sort:"recent"};
+function resourceCategory(type){
+ if(["老旧厂区","低效产业用地","工业更新"].includes(type))return "industrial";
+ if(["老旧小区","危旧住宅","城中村","居住更新"].includes(type))return "residential";
+ if(["公共设施短板","交通市政设施","公共空间"].includes(type))return "public";
+ if(["老旧商业","商业更新"].includes(type))return "commercial";
+ return "other";
+}
+function setResourceManagerTab(tab){
+ resourceManagerState.tab=tab;
+ document.querySelectorAll(".rm-tab").forEach(b=>b.classList.toggle("on",b.dataset.rmTab===tab));
+ $("rm-resources").classList.toggle("on",tab==="resources");
+ $("rm-areas").classList.toggle("on",tab==="areas");
+ refreshMap();
+}
+function renderCurrentResource(){
+ const box=$("currentResource");
+ if(editing===null||!projects[editing]){box.classList.remove("show");box.innerHTML="";return}
+ const p=projects[editing];box.innerHTML=`<div class="eyebrow">当前选中</div><div class="curline"><b><i class="dot" style="background:${colors[p.type]||"#547782"}"></i>${escapeHTML(p.name)}</b><small>${(+p.currentLandArea||0).toFixed(2)} ha</small></div>`;box.classList.add("show");
+}
+function renderResourceList(){
+ refreshAttributeTable();
+ const q=(resourceManagerState.query||"").trim().toLowerCase();
+ let rows=projects.map((p,i)=>({p,i})).filter(({p})=>{
+  const hitQ=!q||(p.name||"").toLowerCase().includes(q)||(p.type||"").toLowerCase().includes(q);
+  const hitF=resourceManagerState.filter==="all"||resourceCategory(p.type)===resourceManagerState.filter;
+  return hitQ&&hitF;
+ });
+ if(resourceManagerState.sort==="name")rows.sort((a,b)=>(a.p.name||"").localeCompare(b.p.name||"","zh-CN"));
+ if(resourceManagerState.sort==="areaDesc")rows.sort((a,b)=>(+b.p.currentLandArea||0)-(+a.p.currentLandArea||0));
+ if(resourceManagerState.sort==="areaAsc")rows.sort((a,b)=>(+a.p.currentLandArea||0)-(+b.p.currentLandArea||0));
+ if(resourceManagerState.sort==="recent")rows.sort((a,b)=>b.i-a.i);
+ $("resourceVisibleCount").textContent=`${rows.length} / ${projects.length}`;
+ $("projectList").innerHTML=rows.length?rows.map(({p,i})=>`<div class="resource-row ${editing===i?"sel":""}" data-i="${i}"><div class="resource-main"><div class="resource-name"><i class="dot" style="background:${colors[p.type]||"#547782"}"></i><b>${escapeHTML(p.name)}</b></div><div class="resource-sub">${escapeHTML(p.type)} · FAR ${(+p.existingFar||0).toFixed(2)} · ${p.stage||"前期研究"}</div></div><div class="resource-area">${(+p.currentLandArea||0).toFixed(2)} ha</div></div>`).join(""):`<div class="empty-list">${projects.length?"没有匹配的更新资源":"点击下方“新建更新资源”，在地图上圈选更新资源。"}</div>`;
+ document.querySelectorAll(".resource-row").forEach(c=>c.onclick=()=>selectProject(+c.dataset.i));
+ renderCurrentResource();
+}
+function initResourceManager(){
+ document.querySelectorAll(".rm-tab").forEach(b=>b.onclick=()=>setResourceManagerTab(b.dataset.rmTab));
+ $("resourceSearch").addEventListener("input",e=>{resourceManagerState.query=e.target.value;renderResourceList();refreshMap()});
+ document.querySelectorAll(".rm-chip").forEach(b=>b.onclick=()=>{resourceManagerState.filter=b.dataset.filter;document.querySelectorAll(".rm-chip").forEach(x=>x.classList.toggle("on",x===b));renderResourceList();refreshMap()});
+ $("resourceSort").addEventListener("change",e=>{resourceManagerState.sort=e.target.value;renderResourceList()});
+}
+function updateUI(){
+ refreshAttributeTable();syncWalkOrigin();
+ syncArchiveEmpty();syncEconomicsOptions();invalidateDensity();
+ evaluateAllAreas();
+ renderResourceList();
+ $("mCount").textContent=projects.length;
+ $("rmSummary").textContent=projects.length+" 处资源 · "+renewalAreas.length+" 个片区";
+ const ranked=renewalAreas.map((a,i)=>({a,i})).sort((x,y)=>(y.a.assessment?.overall||0)-(x.a.assessment?.overall||0));
+ $("areaList").innerHTML=ranked.map(({a,i})=>`<div class="area-card ${activeArea===i?"sel":""}" data-area="${i}"><div class="area-top"><b><span class="rank-no">${a.assessment?.rank||"-"}</span>${escapeHTML(a.name)} · ${a.reviewed?"已审查":"待审查"}</b><span class="priority-badge ${a.assessment?.priorityClass||"priority-low"}">${a.assessment?.priority||"待研判"}</span></div><small>${a.resourceIds.length}处资源 · ${a.areaHa.toFixed(1)} ha · ${a.dominantType} · <span class="area-score">${Math.round(a.assessment?.overall||0)}分</span></small></div>`).join("");
+ document.querySelectorAll(".area-card").forEach(c=>c.onclick=()=>zoomRenewalArea(+c.dataset.area));
+ $("mArea").textContent=projects.reduce((a,p)=>a+(+p.currentLandArea||0),0).toFixed(1)+" ha";updateAreaSelection();
+ const inv=projects.reduce((a,p)=>a+(p.entCalc?.investment||0),0),gfa=projects.reduce((a,p)=>a+(+p.plannedGfa||0),0);$("mInv").textContent=inv?money(inv):"—";$("mGfa").textContent=gfa?(gfa/10000).toFixed(1)+"万㎡":"—";
+ saveState();refreshMap();
+}
+function openPanel(){$("panel").classList.remove("closed");$("openPanel").classList.add("on");document.body.classList.add("panel-open")}function closePanel(){$("panel").classList.add("closed");$("openPanel").classList.remove("on");document.body.classList.remove("panel-open")}
+function updateActionButtons(){syncArchiveEmpty();const d=editing===null?"none":"block";$("deleteProject").style.display=d;$("editBoundary").style.display=d}
+function recalcPlannedGfa(){const a=+$('plannedLandArea').value||0,f=+$('plannedFar').value||0;$('plannedGfa').value=Math.round(a*10000*f)}
+
+function projectFromForm(p){
+ p.name=$("name").value.trim()||p.name||nextProjectName();p.type=$("type").value;p.stage=$("stage").value;p.mode=$("mode").value;
+ p.currentLandArea=+$('currentLandArea').value||p.currentLandArea||0;p.existingGfa=+$('existingGfa').value||0;p.existingFar=+$('existingFar').value||0;p.owner=$("owner").value;p.landNature=$("landNature").value;p.currentUse=$("currentUse").value;
+ p.plannedUse=$("plannedUse").value;p.plannedFar=+$('plannedFar').value||0;p.plannedLandArea=+$('plannedLandArea').value||0;p.plannedGfa=+$('plannedGfa').value||0;
+ p.government={landGrant:+$('govLandGrant').value||0,relocation:+$('govRelocation').value||0,assetAcq:+$('govAssetAcq').value||0,sitePrep:+$('govSitePrep').value||0,other:+$('govOther').value||0};
+ p.enterprise={buildCost:+$('buildCost').value||0,otherRate:+$('otherRate').value||0,buildYears:+$('buildYears').value||0,loanRatio:+$('loanRatio').value||0,loanRate:+$('loanRate').value||0,rentable:+$('rentable').value||0,occ:+$('occ').value||0,monthlyRent:+$('monthlyRent').value||0,rentGrowth:+$('rentGrowth').value||0,opexRate:+$('opexRate').value||0,capRate:+$('capRate').value||0,discountRate:+$('discountRate').value||0,holdYears:+$('holdYears').value||0};
+ $('entLandCost').value=p.government.landGrant;
+ return p;
+}
+function applyProject(p){
+ $("name").value=p.name;$("type").value=p.type;$("stage").value=p.stage;$("mode").value=p.mode;$("currentLandArea").value=(+p.currentLandArea||0).toFixed(2);$("existingGfa").value=p.existingGfa;$("existingFar").value=p.existingFar;$("owner").value=p.owner;$("landNature").value=p.landNature;$("currentUse").value=p.currentUse;
+ $("plannedUse").value=p.plannedUse;$("plannedFar").value=p.plannedFar;$("plannedLandArea").value=p.plannedLandArea;$("plannedGfa").value=Math.round(p.plannedGfa||p.plannedLandArea*10000*p.plannedFar);
+ const g=p.government||{};$("govLandGrant").value=g.landGrant??8000;$("govRelocation").value=g.relocation??12000;$("govAssetAcq").value=g.assetAcq??0;$("govSitePrep").value=g.sitePrep??1500;$("govOther").value=g.other??0;$("entLandCost").value=g.landGrant??0;
+ const e=p.enterprise||{};const defs={buildCost:5500,otherRate:18,buildYears:3,loanRatio:55,loanRate:4.2,rentable:82,occ:90,monthlyRent:75,rentGrowth:2,opexRate:22,capRate:5.5,discountRate:7,holdYears:15};Object.keys(defs).forEach(k=>$(k).value=e[k]??defs[k]);
+ if(p.govCalc)showGov(p.govCalc);else $("govResults").style.display="none";if(p.entCalc)showEnt(p.entCalc,p);else $("entResults").style.display="none";
+}
+function selectProject(i){if(!projects[i])return;selectedRows.clear();selectedRows.add(i);closeModulePanels();$("base").classList.add("on");editing=i;setResourceManagerTab("resources");const p=projects[i];applyProject(p);$("panelTitle").textContent=p.name;updateActionButtons();openPanel();updateUI();if(mapReady)map.flyTo({center:centroid(p.pts),zoom:Math.max(map.getZoom(),14),duration:550})}
+
+function newDefaultProject(a,poly){const name=nextProjectName();const plannedFar=2.5;return normalizeProject({name,type:"老旧厂区",stage:"前期研究",mode:"拆改结合",pts:poly,currentLandArea:a,existingGfa:0,existingFar:0,owner:"国有企业",landNature:"出让",currentUse:"工业",plannedUse:"工业",plannedFar,plannedLandArea:a,plannedGfa:a*10000*plannedFar})}
+function startDrawing(isRedraw=false){closeModulePanels();
+ if(drawing)return;if(!mapReady)return alert("地图还在加载");redrawing=isRedraw;pts=isRedraw&&editing!==null?[...projects[editing].pts]:[];drawing=true;map.doubleClickZoom.disable();$("drawHint").textContent="单击添加节点，双击结束；Esc 取消";closePanel();$("drawbar").classList.add("show");$("finish").textContent=isRedraw?"保存新边界":"完成圈选";map.getCanvas().style.cursor="crosshair";refreshMap()}
+$("newProject").onclick=()=>{if(drawing)return;editing=null;updateActionButtons();pendingResourceType=$("createSubtype").value;startDrawing(false)};
+$("undo").onclick=()=>{if(pts.length>3||!vertexMode)pts.pop();refreshMap();if(vertexMode)showVertices()};
+$("cancel").onclick=()=>{clearVertices();areaEditing=null;drawing=false;map?.doubleClickZoom.enable();pts=[];redrawing=false;$("drawbar").classList.remove("show");if(mapReady)map.getCanvas().style.cursor="";refreshMap();if(editing!==null)openPanel()};
+$("finish").onclick=()=>{if(!validBoundary(pts))return alert("边界需至少三个不同节点，且不能自相交或面积为零");if(pts.length<3)return alert("至少圈选 3 个边界点");const poly=deepCopy(pts),a=areaHa(poly);clearVertices();map.doubleClickZoom.enable();drawing=false;$("drawbar").classList.remove("show");if(mapReady)map.getCanvas().style.cursor="";
+ if(areaEditing!==null){const a=renewalAreas[areaEditing];a.pts=[...poly,poly[0]];a.center=centroid(poly);a.areaHa=areaHa(poly);a.reviewed=false;areaEditing=null;pts=[];evaluateAllAreas();updateUI();return}
+ if(redrawing&&editing!==null){const p=projects[editing];p.pts=poly;p.currentLandArea=a;if(Math.abs((p.plannedLandArea||0)-(+$('currentLandArea').value||0))<.02)p.plannedLandArea=a;p.plannedGfa=p.plannedLandArea*10000*p.plannedFar;p.govCalc=null;p.entCalc=null;renewalAreas=[];activeArea=null;redrawing=false;pts=[];updateUI();selectProject(editing);return}
+ const p=newDefaultProject(a,poly);p.type=pendingResourceType;p.currentUse=inferUse(p.type);p.plannedUse=p.currentUse;projects.push(p);editing=projects.length-1;pts=[];updateUI();selectProject(editing);
+};
+$("editBoundary").onclick=()=>{if(editing!==null){startDrawing(true);vertexMode=true;showVertices()}};
+$("deleteProject").onclick=()=>{if(editing===null)return;selectedRows.clear();projects.splice(editing,1);renewalAreas=[];activeArea=null;editing=null;updateActionButtons();closePanel();setResourceManagerTab("resources");updateUI()};
+$("saveBase").onclick=()=>{if(editing===null)return;recalcPlannedGfa();projectFromForm(projects[editing]);projects[editing].govCalc=null;projects[editing].entCalc=null;$("panelTitle").textContent=projects[editing].name;updateUI();alert("更新资源已保存")};
+
+function govModel(p){const g=p.government,total=(g.relocation||0)+(g.assetAcq||0)+(g.sitePrep||0)+(g.other||0),revenue=g.landGrant||0,net=revenue-total,coverage=total?revenue/total:null;return{cost:total,revenue,net,coverage}}
+function showGov(c){$("govResults").style.display="block";$("gCost").textContent=money(c.cost);$("gRevenue").textContent=money(c.revenue);$("gNet").textContent=(c.net>=0?"+":"")+money(c.net);$("gCoverage").textContent=c.coverage==null?"—":c.coverage.toFixed(2)+"×"}
+$("calcGov").onclick=()=>{if(editing===null)return alert("请先新建项目");projectFromForm(projects[editing]);const c=govModel(projects[editing]);projects[editing].govCalc=c;showGov(c);updateUI()};
+
+function irr(cash){let lo=-.95,hi=3;const f=r=>cash.reduce((a,v,i)=>a+v/Math.pow(1+r,i),0);let flo=f(lo),fhi=f(hi);if(!isFinite(flo)||!isFinite(fhi)||flo*fhi>0)return null;for(let k=0;k<100;k++){const m=(lo+hi)/2,fm=f(m);if(flo*fm<=0){hi=m;fhi=fm}else{lo=m;flo=fm}}return(lo+hi)/2}
+function enterpriseModel(p,mods={}){
+ const e={...p.enterprise,...mods};const gfa=+p.plannedGfa||(+p.plannedLandArea||0)*10000*(+p.plannedFar||0),land=+p.government.landGrant||0,construction=gfa*(+e.buildCost||0)/10000,other=construction*(+e.otherRate||0)/100,investment=land+construction+other;
+ const rentable=gfa*(+e.rentable||0)/100,annualGross=rentable*(+e.monthlyRent||0)*12*(+e.occ||0)/100/10000,noi=annualGross*(1-(+e.opexRate||0)/100),cap=(+e.capRate||0)/100,value=cap?noi/cap:0,yieldRate=investment?noi/investment:0;
+ const by=Math.max(1,Math.round(+e.buildYears||3)),hold=Math.max(by+3,Math.round(+e.holdYears||15)),growth=(+e.rentGrowth||0)/100,disc=(+e.discountRate||0)/100,loanRatio=Math.max(0,Math.min(1,(+e.loanRatio||0)/100)),loanRate=(+e.loanRate||0)/100;
+ let cash=Array(hold+1).fill(0),equity=Array(hold+1).fill(0),debt=0,debtTotal=investment*loanRatio,annualDebtDraw=debtTotal/by;
+ for(let y=0;y<by;y++){cash[y]-=investment/by;debt+=annualDebtDraw;equity[y]-=investment*(1-loanRatio)/by;equity[y]-=debt*loanRate}
+ let payback=null,cum=0;
+ for(let y=0;y<=hold;y++){if(y>=by){const opIndex=y-by,ramp=Math.min(1,.7+opIndex*.15),noiY=noi*ramp*Math.pow(1+growth,opIndex);cash[y]+=noiY;equity[y]+=noiY-debt*loanRate;if(y===hold){const nextNoi=noi*Math.pow(1+growth,opIndex+1),terminal=cap?nextNoi/cap:0;cash[y]+=terminal;equity[y]+=terminal-debt}}
+  cum+=cash[y];if(cum>=0&&payback===null&&y>=by)payback=y;
+ }
+ const projectIrr=irr(cash),equityIrr=irr(equity),npv=cash.reduce((a,v,i)=>a+v/Math.pow(1+disc,i),0);return{gfa,construction,other,investment,rentable,annualGross,noi,value,yieldRate,projectIrr,equityIrr,npv,payback,cash,equity}
+}
+function showEnt(c,p){$("entResults").style.display="block";$("eInvestment").textContent=money(c.investment);$("eNoi").textContent=money(c.noi)+"/年";$("eValue").textContent=money(c.value);$("eYield").textContent=pct(c.yieldRate);$("eIrr").textContent=pct(c.projectIrr);$("eEquityIrr").textContent=pct(c.equityIrr);$("eNpv").textContent=money(c.npv);$("ePayback").textContent=c.payback==null?"周期内未回收":c.payback+" 年";const d=(p.enterprise.discountRate||7)/100;$("eNote").textContent=c.projectIrr!=null&&c.projectIrr>=d&&c.npv>=0?"当前参数下项目收益高于折现基准，可继续深化融资、税费和分期开发测算。":c.npv>=0?"当前处于可行边界，建议重点检验租金、建安成本和建设时序。":"当前 NPV 为负，建议优先优化成本、规划强度或运营收益。";renderSensitivity(p)}
+function renderSensitivity(p){const e=p.enterprise,baseRent=+e.monthlyRent||75,baseCost=+e.buildCost||5500,rents=[.8,.9,1,1.1,1.2].map(x=>baseRent*x),costs=[.8,.9,1,1.1,1.2].map(x=>baseCost*x);let h='<table class="sens"><tr><th>租金↓ / 建安→</th>'+costs.map(x=>'<th>'+Math.round(x)+'</th>').join('')+'</tr>';rents.forEach(r=>{h+='<tr><th>'+Math.round(r)+'</th>';costs.forEach(c=>{const m=enterpriseModel(p,{monthlyRent:r,buildCost:c}),v=m.projectIrr==null?-99:m.projectIrr*100,cl=v>=8?'good':v>=5?'mid':'bad';h+='<td class="'+cl+'">'+(v<-90?'—':v.toFixed(1)+'%')+'</td>'});h+='</tr>'});h+='</table>';$("sensitivity").innerHTML=h}
+$("calcEnt").onclick=()=>{if(editing===null)return alert("请先新建项目");recalcPlannedGfa();projectFromForm(projects[editing]);const c=enterpriseModel(projects[editing]);projects[editing].entCalc=c;showEnt(c,projects[editing]);updateUI()};
+
+const liveIds=["name","type","stage","mode","existingGfa","existingFar","owner","landNature","currentUse","plannedUse","plannedFar","plannedLandArea","govLandGrant","govRelocation","govAssetAcq","govSitePrep","govOther","buildCost","otherRate","buildYears","loanRatio","loanRate","rentable","occ","monthlyRent","rentGrowth","opexRate","capRate","discountRate","holdYears"];
+liveIds.forEach(id=>{const el=$(id);const fn=()=>{if(editing===null||!projects[editing])return;if(id==="plannedFar"||id==="plannedLandArea")recalcPlannedGfa();projectFromForm(projects[editing]);projects[editing].govCalc=null;projects[editing].entCalc=null;$("govResults").style.display="none";$("entResults").style.display="none";$("panelTitle").textContent=projects[editing].name;updateUI()};el.addEventListener(el.tagName==="SELECT"?"change":"input",fn)});
+
+$("close").onclick=closePanel;$("openPanel").onclick=openPanel;
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tabs button,.pane").forEach(x=>x.classList.remove("on"));b.classList.add("on");$(b.dataset.tab).classList.add("on")});
+
+
+function haversine(a,b){const R=6371000,toRad=x=>x*Math.PI/180,dLat=toRad(b[1]-a[1]),dLon=toRad(b[0]-a[0]),la1=toRad(a[1]),la2=toRad(b[1]);const h=Math.sin(dLat/2)**2+Math.cos(la1)*Math.cos(la2)*Math.sin(dLon/2)**2;return 2*R*Math.asin(Math.sqrt(h))}
+function convexHull(points){if(points.length<3)return points;const pts2=[...points].sort((a,b)=>a[0]===b[0]?a[1]-b[1]:a[0]-b[0]);const cross=(o,a,b)=>(a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0]);const lower=[];for(const p of pts2){while(lower.length>=2&&cross(lower[lower.length-2],lower[lower.length-1],p)<=0)lower.pop();lower.push(p)}const upper=[];for(let i=pts2.length-1;i>=0;i--){const p=pts2[i];while(upper.length>=2&&cross(upper[upper.length-2],upper[upper.length-1],p)<=0)upper.pop();upper.push(p)}upper.pop();lower.pop();return lower.concat(upper)}
+function makeAreaBoundary(indices,radius){const verts=indices.flatMap(i=>projects[i].pts||[]);try{if(window.turf&&verts.length>=3){const points=turf.featureCollection(verts.map(p=>turf.point(p)));let hull=turf.convex(points);if(hull){const b=turf.buffer(hull,Math.min(100,Math.max(35,radius*.15)),{units:"meters"});if(b&&b.geometry&&b.geometry.type==="Polygon")return b.geometry.coordinates[0]}}}catch(e){}const h=convexHull(verts);return h.length?[...h,h[0]]:[]}
+function generateRenewalAreas(){if(projects.length<2)return alert("至少需要录入 2 处更新资源");const radius=Math.max(100,+$("clusterRadius").value||500),minN=Math.max(2,Math.round(+$("clusterMin").value||3)),centers=projects.map(p=>centroid(p.pts));const neighbors=centers.map((c,i)=>centers.map((d,j)=>haversine(c,d)<=radius?j:-1).filter(j=>j>=0));const visited=new Set(),clusters=[];
+ for(let i=0;i<projects.length;i++){if(visited.has(i)||neighbors[i].length<minN)continue;const q=[i],cluster=new Set();visited.add(i);while(q.length){const k=q.shift();cluster.add(k);if(neighbors[k].length>=minN){for(const n of neighbors[k]){if(!visited.has(n)){visited.add(n);q.push(n)}cluster.add(n)}}}if(cluster.size>=minN)clusters.push([...cluster])}
+ setResourceManagerTab("areas");renewalAreas=clusters.map((ids,idx)=>{const ring=makeAreaBoundary(ids,radius);const counts={};ids.forEach(i=>counts[projects[i].type]=(counts[projects[i].type]||0)+1);const dominantType=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0]?.[0]||"综合更新";const c=ring.length?centroid(ring.slice(0,-1)):centers[ids[0]];return{id:idx,name:"候选更新片区"+(idx+1),resourceIds:ids,pts:ring,center:c,areaHa:ring.length?areaHa(ring.slice(0,-1)):0,dominantType,radius,minN}});
+ if(!renewalAreas.length){activeArea=null;alert("当前参数下没有形成集聚片区。可以适当增大集聚半径，或降低最少资源数。 ")}else{evaluateAllAreas();activeArea=renewalAreas.map((a,i)=>({i,s:a.assessment?.overall||0})).sort((a,b)=>b.s-a.s)[0].i}updateUI();}
+$("generateAreas").onclick=generateRenewalAreas;
+
+$("exportData").onclick=()=>{const payload={app:"Urban Renewal Lab",version:7,exportedAt:new Date().toISOString(),projects,renewalAreas,importedReferenceGeoJSON};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="urban-renewal-projects.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+function showImportStatus(html){const el=$("importStatus");el.innerHTML=html;el.classList.add("show");clearTimeout(showImportStatus._t);showImportStatus._t=setTimeout(()=>el.classList.remove("show"),7000)}
+function loadScriptOnce(src,test){return new Promise((resolve,reject)=>{if(test())return resolve();const sc=document.createElement("script");sc.src=src;sc.onload=()=>resolve();sc.onerror=reject;document.head.appendChild(sc)})}
+async function ensureShpJs(){await loadScriptOnce("https://unpkg.com/shpjs@6.2.0/dist/shp.js",()=>typeof window.shp==="function");return window.shp}
+function propFirst(props,keys){for(const k of keys){if(props&&props[k]!=null&&String(props[k]).trim()!=="")return props[k]}return null}
+function normalizeImportedType(v){const t=String(v||"").trim();if(colors[t])return t;if(/工业|产业|厂/.test(t))return"低效产业用地";if(/住宅|居住|小区/.test(t))return"老旧小区";if(/商业|商贸/.test(t))return"老旧商业";if(/城中村/.test(t))return"城中村";if(/历史|文化|文保/.test(t))return"历史文化资源";if(/闲置|低效/.test(t))return"闲置低效用地";if(/公共|设施/.test(t))return"公共设施短板";return"其他资源"}
+function closeRing(r){if(!Array.isArray(r))return[];const a=r.filter(p=>Array.isArray(p)&&p.length>=2&&isFinite(+p[0])&&isFinite(+p[1])).map(p=>[+p[0],+p[1]]);if(a.length>1&&(a[0][0]===a[a.length-1][0]&&a[0][1]===a[a.length-1][1]))a.pop();return a}
+function geometryToProjectRings(g){if(!g)return[];if(g.type==="Polygon")return g.coordinates?.[0]?[closeRing(g.coordinates[0])]:[];if(g.type==="MultiPolygon")return (g.coordinates||[]).map(x=>closeRing(x?.[0]||[]));return[]}
+function isLngLatRing(r){return r.length>=3&&r.every(p=>Math.abs(p[0])<=180&&Math.abs(p[1])<=90)}
+function importGeoJSONData(data,sourceName="导入数据"){
+ const collections=Array.isArray(data)?data:[data];let addedProjects=0,addedRefs=0,invalid=0;
+ collections.forEach(col=>{if(!col)return;let features=[];if(col.type==="FeatureCollection")features=col.features||[];else if(col.type==="Feature")features=[col];else if(col.type&&col.coordinates)features=[{type:"Feature",properties:{},geometry:col}];
+  features.forEach((f,fi)=>{if(!f||!f.geometry)return;const props=f.properties||{};if((f.geometry.type==="Polygon"&&f.geometry.coordinates.length>1)||(f.geometry.type==="MultiPolygon"&&f.geometry.coordinates.some(p=>p.length>1))){invalid++;return}const rings=geometryToProjectRings(f.geometry);
+   if(rings.length){rings.forEach((ring,ri)=>{if(!isLngLatRing(ring)||!validBoundary(ring)){invalid++;return}const a=areaHa(ring);const rawName=propFirst(props,["项目名称","名称","name","NAME","Name","项目","地块名称","地块编号","id","ID"]);const rawType=propFirst(props,["更新类型","资源类型","类型","类别","type","TYPE","landuse","用途","现状用途"]);const p=newDefaultProject(a,ring);p.name=String(rawName||nextProjectName())+(rings.length>1?"-"+(ri+1):"");p.type=normalizeImportedType(rawType);p.currentUse=String(propFirst(props,["现状用途","currentUse","landuse","用途"])||inferUse(p.type));p.plannedUse=String(propFirst(props,["规划用途","plannedUse"])||p.currentUse);p.source="GIS导入";p.sourceAttributes=props;projects.push(normalizeProject(p));addedProjects++})
+   }else{const c=JSON.parse(JSON.stringify(f));c.properties={...props,_source:sourceName};importedReferenceGeoJSON.features.push(c);addedRefs++}
+  })
+ });renewalAreas=[];activeArea=null;editing=null;updateActionButtons();updateUI();refreshMap();fitImportedOrProjects();return{addedProjects,addedRefs,invalid}
+}
+function parseCSV(text){const rows=[];let row=[],cell="",q=false;for(let i=0;i<text.length;i++){const ch=text[i];if(ch==='"'){if(q&&text[i+1]==='"'){cell+='"';i++}else q=!q}else if(ch===','&&!q){row.push(cell);cell=""}else if((ch==='\n'||ch==='\r')&&!q){if(ch==='\r'&&text[i+1]==='\n')i++;row.push(cell);if(row.some(x=>String(x).trim()!==""))rows.push(row);row=[];cell=""}else cell+=ch}row.push(cell);if(row.some(x=>String(x).trim()!==""))rows.push(row);if(!rows.length)return[];const headers=rows.shift().map(x=>String(x).trim());return rows.map(r=>Object.fromEntries(headers.map((h,i)=>[h,(r[i]??"").trim()]))) }
+function getAny(o,keys){const m=Object.keys(o||{});for(const k of keys){const hit=m.find(x=>x.toLowerCase()===k.toLowerCase());if(hit&&o[hit]!=="")return o[hit]}return null}
+function csvToGeoJSON(text){const rows=parseCSV(text),fs=[];for(const r of rows){let lon=getAny(r,["经度","lng","lon","longitude","x"]),lat=getAny(r,["纬度","lat","latitude","y"]);if(lon==null||lat==null){const pair=getAny(r,["坐标","coordinate","coordinates","经纬度"]);if(pair){const m=String(pair).match(/(-?\d+(?:\.\d+)?)\s*[,，\s]\s*(-?\d+(?:\.\d+)?)/);if(m){lon=m[1];lat=m[2]}}}lon=+lon;lat=+lat;if(!isFinite(lon)||!isFinite(lat)||Math.abs(lon)>180||Math.abs(lat)>90)continue;fs.push({type:"Feature",properties:r,geometry:{type:"Point",coordinates:[lon,lat]}})}return{type:"FeatureCollection",features:fs}}
+function fitImportedOrProjects(){if(!mapReady)return;const coords=[];const walk=g=>{if(!g)return;if(g.type==="Point")coords.push(g.coordinates);else if(g.type==="LineString"||g.type==="MultiPoint")coords.push(...g.coordinates);else if(g.type==="Polygon"||g.type==="MultiLineString")g.coordinates.forEach(r=>coords.push(...r));else if(g.type==="MultiPolygon")g.coordinates.forEach(p=>p.forEach(r=>coords.push(...r)))};importedReferenceGeoJSON.features.forEach(f=>walk(f.geometry));projects.forEach(p=>coords.push(...(p.pts||[])));const good=coords.filter(p=>Array.isArray(p)&&isFinite(+p[0])&&isFinite(+p[1])&&Math.abs(+p[0])<=180&&Math.abs(+p[1])<=90);if(!good.length)return;let minX=good[0][0],maxX=good[0][0],minY=good[0][1],maxY=good[0][1];good.forEach(([x,y])=>{minX=Math.min(minX,x);maxX=Math.max(maxX,x);minY=Math.min(minY,y);maxY=Math.max(maxY,y)});map.fitBounds([[minX,minY],[maxX,maxY]],{padding:{top:110,bottom:70,left:320,right:70},maxZoom:16,duration:650})}
+async function handleImportFiles(files){const arr=[...files];if(!arr.length)return;let totalP=0,totalR=0,totalBad=0,handled=0;
+ // First: app JSON / GeoJSON / CSV
+ for(const f of arr){const ext=(f.name.split('.').pop()||"").toLowerCase();try{
+  if(ext==="csv"){const gj=csvToGeoJSON(await f.text());const r=importGeoJSONData(gj,f.name);totalP+=r.addedProjects;totalR+=r.addedRefs;totalBad+=r.invalid;handled++;}
+  else if(ext==="json"||ext==="geojson"){const data=JSON.parse(await f.text());if(data&&Array.isArray(data.projects)){selectedRows.clear();projects=data.projects.filter(x=>Array.isArray(x.pts)&&x.pts.length>=3).map(normalizeProject);renewalAreas=Array.isArray(data.renewalAreas)?data.renewalAreas:[];editing=null;updateActionButtons();updateUI();handled++;totalP+=projects.length;}else{const r=importGeoJSONData(data,f.name);totalP+=r.addedProjects;totalR+=r.addedRefs;totalBad+=r.invalid;handled++;}}
+ }catch(err){console.warn('import text failed',f.name,err);alert(f.name+' 导入失败：'+err.message)}}
+ // ZIP shapefiles
+ const zips=arr.filter(f=>/\.zip$/i.test(f.name));if(zips.length){try{const shp=await ensureShpJs();for(const f of zips){const data=await shp(await f.arrayBuffer());const r=importGeoJSONData(data,f.name);totalP+=r.addedProjects;totalR+=r.addedRefs;totalBad+=r.invalid;handled++;}}catch(err){console.error(err);alert("SHP ZIP 解析失败。请确认 ZIP 内包含同名 .shp / .shx / .dbf / .prj，投影必须可识别。")}}
+ // Loose shapefile pieces, grouped by basename
+ const loose=arr.filter(f=>/\.(shp|dbf|prj|cpg)$/i.test(f.name));if(loose.some(f=>/\.shp$/i.test(f.name))){try{const shp=await ensureShpJs();const groups={};for(const f of loose){const m=f.name.match(/^(.*)\.(shp|dbf|prj|cpg)$/i);if(!m)continue;const base=m[1],ext=m[2].toLowerCase();groups[base]??={};groups[base][ext]=f}for(const [base,g] of Object.entries(groups)){if(!g.shp)continue;const obj={shp:await g.shp.arrayBuffer()};if(g.dbf)obj.dbf=await g.dbf.arrayBuffer();if(g.prj)obj.prj=await g.prj.arrayBuffer();if(g.cpg)obj.cpg=await g.cpg.arrayBuffer();const data=await shp(obj);const r=importGeoJSONData(data,base);totalP+=r.addedProjects;totalR+=r.addedRefs;totalBad+=r.invalid;handled++;}}catch(err){console.error(err);alert("SHP 解析失败。建议同时选择同名的 .shp / .dbf / .prj 文件，或直接导入 ZIP。")}}
+ if(!handled)return alert("暂不支持该文件格式。可导入 SHP（ZIP 或同名 shp/dbf/prj）、GeoJSON、CSV 经纬度数据，或本工具 JSON。 ");
+ fitImportedOrProjects();showImportStatus(`<b>已导入</b> ${totalP} 个面资源${totalR?` · ${totalR} 个点/线参考要素`:''}${totalBad?` · ${totalBad} 个几何异常或含内洞的要素未载入`:''}`);saveState();
+}
+$("importData").onclick=()=>$("importFile").click();$("importFile").onchange=async e=>{try{await handleImportFiles(e.target.files||[])}finally{e.target.value=""}};
+
+function addMapLayers(){
+ if(!map.getSource("satellite"))map.addSource("satellite",{type:"raster",tiles:["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],tileSize:256,attribution:"Tiles © Esri"});
+ if(!map.getLayer("satellite-base"))map.addLayer({id:"satellite-base",type:"raster",source:"satellite",layout:{visibility:basemap==="satellite"?"visible":"none"},paint:{"raster-opacity":1,"raster-saturation":-.05,"raster-contrast":.04}});
+ if(!map.getSource("resource-centers"))map.addSource("resource-centers",{type:"geojson",data:centerData()});
+ if(!map.getLayer("resource-heat"))map.addLayer({id:"resource-heat",type:"heatmap",source:"resource-centers",layout:{visibility:"none"},paint:{"heatmap-weight":["get","weight"],"heatmap-intensity":["interpolate",["linear"],["zoom"],10,.7,15,1.4],"heatmap-radius":["interpolate",["linear"],["zoom"],10,22,15,48],"heatmap-opacity":.38}});
+ if(!map.getSource("renewal-areas"))map.addSource("renewal-areas",{type:"geojson",data:areaData()});
+ if(!map.getLayer("renewal-area-fill"))map.addLayer({id:"renewal-area-fill",type:"fill",source:"renewal-areas",paint:{"fill-color":["get","color"],"fill-opacity":.12}});
+ if(!map.getLayer("renewal-area-line"))map.addLayer({id:"renewal-area-line",type:"line",source:"renewal-areas",paint:{"line-color":["get","color"],"line-width":4,"line-dasharray":[2,1]}});
+ if(!map.getSource("renewal-area-labels"))map.addSource("renewal-area-labels",{type:"geojson",data:areaLabelData()});
+ if(!map.getLayer("renewal-area-label"))map.addLayer({id:"renewal-area-label",type:"symbol",source:"renewal-area-labels",layout:{"text-field":["get","label"],"text-size":14,"text-allow-overlap":true},paint:{"text-color":"#8a5b0d","text-halo-color":"#fff6df","text-halo-width":3}});
+ if(!map.getSource("projects"))map.addSource("projects",{type:"geojson",data:mapData()});
+ if(!map.getLayer("project-fill"))map.addLayer({id:"project-fill",type:"fill",source:"projects",paint:{"fill-color":["get","color"],"fill-opacity":.30}});
+ if(!map.getLayer("resource-extrusion"))map.addLayer({id:"resource-extrusion",type:"fill-extrusion",source:"projects",layout:{visibility:"none"},paint:{"fill-extrusion-color":["get","color"],"fill-extrusion-height":["get","height"],"fill-extrusion-base":0,"fill-extrusion-opacity":.42}});
+ if(!map.getLayer("project-line"))map.addLayer({id:"project-line",type:"line",source:"projects",paint:{"line-color":["get","color"],"line-width":["case",["==",["get","selected"],1],5,3],"line-opacity":["case",["==",["get","selected"],1],1,.9]}});
+ if(!map.getSource("labels"))map.addSource("labels",{type:"geojson",data:labelData()});
+ if(!map.getLayer("project-label"))map.addLayer({id:"project-label",type:"symbol",source:"labels",layout:{visibility:"none"},paint:{}});
+ if(!map.getSource("imported-reference"))map.addSource("imported-reference",{type:"geojson",data:importedReferenceGeoJSON});
+ if(!map.getLayer("imported-ref-line"))map.addLayer({id:"imported-ref-line",type:"line",source:"imported-reference",filter:["==",["geometry-type"],"LineString"],paint:{"line-color":"#1b8397","line-width":2.5,"line-opacity":.8}});
+ if(!map.getLayer("imported-ref-point"))map.addLayer({id:"imported-ref-point",type:"circle",source:"imported-reference",filter:["==",["geometry-type"],"Point"],paint:{"circle-radius":5,"circle-color":"#16a7b5","circle-stroke-color":"#fff","circle-stroke-width":1.5,"circle-opacity":.9}});
+ if(!map.getSource("draftFill"))map.addSource("draftFill",{type:"geojson",data:fc([])});if(!map.getLayer("draft-fill"))map.addLayer({id:"draft-fill",type:"fill",source:"draftFill",paint:{"fill-color":"#16a7b5","fill-opacity":.30}});
+ if(!map.getSource("draft"))map.addSource("draft",{type:"geojson",data:fc([])});if(!map.getLayer("draft-line"))map.addLayer({id:"draft-line",type:"line",source:"draft",paint:{"line-color":"#16a7b5","line-width":3}});
+ if(!map.getSource("draftPts"))map.addSource("draftPts",{type:"geojson",data:fc([])});if(!map.getLayer("draft-points"))map.addLayer({id:"draft-points",type:"circle",source:"draftPts",paint:{"circle-radius":6,"circle-color":"#fff","circle-stroke-color":"#16a7b5","circle-stroke-width":3}});
+ refreshMap();
+}
+function setBasemap(t){basemap=t==="satellite"?"satellite":"light";$("light").classList.toggle("on",basemap==="light");$("satellite").classList.toggle("on",basemap==="satellite");document.body.classList.toggle("satellite-mode",basemap==="satellite");if(mapReady&&map.getLayer("satellite-base"))map.setLayoutProperty("satellite-base","visibility",basemap==="satellite"?"visible":"none");saveState();syncProjectMarkers()}
+$("light").onclick=()=>setBasemap("light");$("satellite").onclick=()=>setBasemap("satellite");
+
+
+function init(){
+ map=new maplibregl.Map({container:"map",style:"https://tiles.openfreemap.org/styles/positron",center:[118.76,32],zoom:11.5});
+ map.addControl(new maplibregl.NavigationControl(),"bottom-right");
+ let lastResourceClick=0;
+ map.on("load",()=>{
+  mapReady=true;addMapLayers();addAnalysisLayers();addPlanningLayers();map.on("zoom",()=>{if(densityMode==="heat")map.setPaintProperty("analysis-heat","heatmap-radius",heatRadiusPixels())});setBasemap(basemap);fitAllProjects();
+  map.on("click","project-fill",e=>{
+   if(drawing||pickingWalkOrigin||!e.features||!e.features.length)return;
+   lastResourceClick=Date.now();
+   const i=Number(e.features[0].properties.id);
+   if(Number.isInteger(i)&&projects[i]){if(e.originalEvent?.shiftKey){toggleRowSelection(i);return}selectProject(i)}
+  });
+  map.on("mouseenter","project-fill",()=>{if(!drawing)map.getCanvas().style.cursor="pointer"});
+  map.on("mouseleave","project-fill",()=>{if(!drawing)map.getCanvas().style.cursor=""});
+ });
+ map.on("dblclick",e=>{if(drawing&&!vertexMode){e.preventDefault();$("finish").click()}});
+ map.on("click",e=>{
+  if(pickingWalkOrigin){pickingWalkOrigin=false;map.getCanvas().style.cursor="";walkOrigin=[e.lngLat.lng,e.lngLat.lat];$("walkOrigin").value="map";setWalkOriginMarker();openModule("walkPanel");$("walkStatus").textContent="地图起点已设置，可以计算步行可达性。";return}
+ if(drawing){if(vertexMode)return;if(e.originalEvent?.detail===2)return;pts.push(snapToRoad([e.lngLat.lng,e.lngLat.lat]));refreshMap();return}
+  if(Date.now()-lastResourceClick<120)return;
+ if(map.getLayer("amap-roads-line")){const roads=map.queryRenderedFeatures(e.point,{layers:["amap-roads-line"]});if(roads.length){new maplibregl.Popup().setLngLat(e.lngLat).setText((roads[0].properties.name||"未命名道路")+" · 高德地图").addTo(map);return}}
+  // 几何兜底：即使渲染图层查询失败，也可按经纬度命中用户录入的更新资源。
+  const idx=projectAtLngLat([e.lngLat.lng,e.lngLat.lat]);
+  if(idx>=0){selectProject(idx);return}
+  if(map.getLayer("renewal-area-fill")){const af=map.queryRenderedFeatures(e.point,{layers:["renewal-area-fill"]});if(af.length)zoomRenewalArea(+af[0].properties.id)}
+ });
+}
+
+
+function clearVertices(){vertexMarkers.forEach(m=>m.remove());vertexMarkers=[];vertexMode=false}
+function validBoundary(r){if(r.length<3||new Set(r.map(p=>p.join(','))).size!==r.length||areaHa(r)<.000001)return false;const cross=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]);for(let i=0;i<r.length;i++)for(let j=i+1;j<r.length;j++){if(j===i+1||(i===0&&j===r.length-1))continue;const a=r[i],b=r[(i+1)%r.length],c=r[j],d=r[(j+1)%r.length];if(cross(a,b,c)*cross(a,b,d)<=0&&cross(c,d,a)*cross(c,d,b)<=0&&Math.max(a[0],b[0])>=Math.min(c[0],d[0])&&Math.max(c[0],d[0])>=Math.min(a[0],b[0])&&Math.max(a[1],b[1])>=Math.min(c[1],d[1])&&Math.max(c[1],d[1])>=Math.min(a[1],b[1]))return false}return true}
+function showVertices(){vertexMarkers.forEach(m=>m.remove());vertexMarkers=[];vertexMode=true;$("drawHint").textContent="拖动蓝色节点；点击黄色中点加点；右键节点删除；保存或取消";pts.forEach((p,i)=>{const el=document.createElement('button');el.className='vertex-handle';el.title='拖动节点；右键删除';el.setAttribute('aria-label','边界节点'+(i+1));const m=new maplibregl.Marker({element:el,draggable:true}).setLngLat(p).addTo(map);m.on('drag',()=>{const ll=m.getLngLat(),snapped=snapToRoad([ll.lng,ll.lat]);pts[i]=snapped;refreshMap()});m.on('dragend',()=>{m.setLngLat(pts[i])});m.on('dragend',showVertices);el.oncontextmenu=e=>{e.preventDefault();e.stopPropagation();if(pts.length<=3)return;pts.splice(i,1);refreshMap();showVertices()};vertexMarkers.push(m);const q=pts[(i+1)%pts.length],mid=[(p[0]+q[0])/2,(p[1]+q[1])/2];const edge=document.createElement('button');edge.className='vertex-handle vertex-mid';edge.title='点击增加节点';edge.onclick=e=>{e.stopPropagation();pts.splice(i+1,0,snapToRoad(mid));refreshMap();showVertices()};vertexMarkers.push(new maplibregl.Marker({element:edge}).setLngLat(mid).addTo(map))})}
+$("editArea").onclick=()=>{if(activeArea===null||!renewalAreas[activeArea])return alert('请先选择候选片区');if(drawing)return;startDrawing(false);if(!drawing)return;areaEditing=activeArea;pts=closeRing(renewalAreas[activeArea].pts);$("finish").textContent='保存片区边界';showVertices();refreshMap()};
+$("reviewArea").onclick=()=>{if(activeArea===null||!renewalAreas[activeArea])return alert('请先选择候选片区');renewalAreas[activeArea].reviewed=true;updateUI()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawing)$("cancel").click()});
+let copilotResult=null;
+function queryMap(q){let rows=projects.map((p,i)=>({p,i}));let scope='全部资源';if(/筛选/.test(q)){rows=rows.filter(({p})=>projectMatchesManager(p));scope='当前筛选结果'}if(/视野|屏幕/.test(q)){if(!mapReady)return {text:'地图尚未加载，无法读取当前视野。'};const b=map.getBounds();rows=rows.filter(({p})=>b.contains(centroid(p.pts)));scope+='（中心点位于当前视野）'}const cats=[[/产业|工业|厂/,'industrial'],[/居住|住宅|小区/,'residential'],[/商业/,'commercial'],[/公服|公共服务|公共设施/,'public'],[/其他/,'other']];const cat=cats.find(([re])=>re.test(q));if(cat)rows=rows.filter(({p})=>resourceCategory(p.type)===cat[1]);if(!rows.length)return{text:scope+'：没有匹配的更新资源。'};if(/最大|最多面积/.test(q)){const max=Math.max(...rows.map(({p})=>areaHa(p.pts))),hits=rows.filter(({p})=>Math.abs(areaHa(p.pts)-max)<1e-8);return{text:scope+'：最大面积资源为 '+hits.map(({p})=>p.name).join('、')+'，面积 '+max.toFixed(3)+' ha。按边界重算，点击定位首个结果。',index:hits[0].i}}if(/分类|类型|分布/.test(q)){const counts={};rows.forEach(({p})=>counts[p.type]=(counts[p.type]||0)+1);return{text:scope+'，共 '+rows.length+' 处：\n'+Object.entries(counts).map(([k,v])=>k+'：'+v+' 处').join('\n')}}if(/多少|数量|几[个处]|面积/.test(q))return{text:scope+'：'+rows.length+' 处，资源面积合计 '+rows.reduce((a,{p})=>a+areaHa(p.pts),0).toFixed(3)+' ha（重叠部分重复计入）。'};return{text:'目前支持资源数量、分类统计、面积合计和最大面积项目。例：图上有多少个产业更新资源？最大的居住更新资源在哪里？'}}
+$("copilotForm").onsubmit=e=>{e.preventDefault();copilotResult=queryMap($("copilotQuestion").value);$("copilotAnswer").textContent=copilotResult.text;$("copilotLocate").hidden=copilotResult.index==null};$("copilotLocate").onclick=()=>{if(copilotResult?.index!=null)selectProject(copilotResult.index)};
+let pendingResourceType='老旧厂区',densityWorker=null,densityImage=null,densityMode='none',densityFingerprint='',densityMeta=null;
+let amapRoadData=fc([]),amapRoadVisible=false;
+const creationTypes={industrial:['老旧厂区','低效产业用地'],residential:['老旧小区','危旧住宅','城中村'],public:['公共设施短板','交通市政设施','公共空间'],commercial:['老旧商业'],other:['闲置低效用地','历史文化资源','其他资源']};
+const categoryNames={industrial:'产业',residential:'居住',public:'公服',commercial:'商业',other:'其他'};
+function closeModulePanels(){$("openPlanning").classList.remove("on");$("openRoads").classList.remove("on");document.querySelectorAll('.module-panel').forEach(p=>p.classList.add('closed'))}
+function openModule(id){if(drawing)return alert('请先保存或取消当前边界编辑');closePanel();closeModulePanels();$(id).classList.remove('closed');$("openPlanning").classList.toggle("on",id!=="roadsPanel");$("openRoads").classList.toggle("on",id==="roadsPanel")}
+function chooseCreation(cat){if(drawing)return;document.querySelectorAll('[data-create]').forEach(b=>b.classList.toggle('on',b.dataset.create===cat));$('createSubtype').replaceChildren(...creationTypes[cat].map(t=>{const o=document.createElement('option');o.value=o.textContent=t;return o}));$('newProject').textContent='＋ 在'+categoryNames[cat]+'分类下绘制资源';pendingResourceType=$('createSubtype').value;resourceManagerState.filter=cat;document.querySelectorAll('.rm-chip').forEach(b=>b.classList.toggle('on',b.dataset.filter===cat));setResourceManagerTab('resources');renderResourceList()}
+function syncEconomicsOptions(){const box=$('economicsProject');if(!box)return;const selected=box.value;box.replaceChildren(...projects.map((p,i)=>{const o=document.createElement('option');o.value=i;o.textContent=p.name+' · '+p.type;return o}));if(projects[+selected])box.value=selected;else if(editing!==null&&projects[editing])box.value=editing;$('economicsEmpty').hidden=projects.length>0;$('eco').style.display=projects.length?'block':'none'}
+function selectEconomicsProject(i){if(!projects[i])return;selectedRows.clear();selectedRows.add(i);editing=i;applyProject(projects[i]);$('economicsProject').value=i;renderCurrentResource()}
+function analysisProjects(){const cat=$('densityCategory').value;return projects.filter(p=>cat==='all'||resourceCategory(p.type)===cat)}
+function analysisFingerprint(){return JSON.stringify({data:analysisProjects().map(p=>[p.type,p.pts]),category:$('densityCategory').value,scope:$('densityScope').value,radius:$('densityRadius').value})}
+function invalidateDensity(){if(densityMode==='none')return;const fp=analysisFingerprint();if(fp!==densityFingerprint){stopDensityWorker();hideDensityLayers();densityMode='none';$('densityStatus').textContent='资源或分析参数已变化，请重新生成密度图。';$('exportDensity').hidden=true;$('densityLegend').hidden=true}}
+function stopDensityWorker(){if(densityWorker){densityWorker.terminate();densityWorker=null}$('cancelDensity').hidden=true;$('showGrid').disabled=false}
+function hideDensityLayers(){if(!mapReady)return;for(const id of ['analysis-heat','analysis-grid'])if(map.getLayer(id))map.setLayoutProperty(id,'visibility','none')}
+function addAnalysisLayers(){
+ if(!map.getSource('analysis-points'))map.addSource('analysis-points',{type:'geojson',data:fc([])});
+ const ramp=['interpolate',['linear'],['heatmap-density'],0,'rgba(55,126,184,0)',.15,'#377eb8',.35,'#8fd3ad',.55,'#fee08b',.75,'#fdae61',1,'#d73027'];
+ if(!map.getLayer('analysis-heat'))map.addLayer({id:'analysis-heat',type:'heatmap',source:'analysis-points',layout:{visibility:'none'},paint:{'heatmap-weight':1,'heatmap-radius':40,'heatmap-intensity':1,'heatmap-opacity':.78,'heatmap-color':ramp}},'project-line');
+ if(densityImage&&densityMeta){map.addSource('analysis-grid-image',{type:'image',url:densityImage,coordinates:densityMeta.corners});map.addLayer({id:'analysis-grid',type:'raster',source:'analysis-grid-image',layout:{visibility:densityMode==='grid'?'visible':'none'},paint:{'raster-resampling':'nearest','raster-opacity':.8,'raster-fade-duration':0}},'project-line')}
+ if(!map.getSource('amap-roads'))map.addSource('amap-roads',{type:'geojson',data:amapRoadData,attribution:'© 高德地图'});
+ if(!map.getLayer('amap-roads-line'))map.addLayer({id:'amap-roads-line',type:'line',source:'amap-roads',layout:{visibility:amapRoadVisible?'visible':'none','line-join':'round','line-cap':'round'},paint:{'line-color':'#385d70','line-width':['interpolate',['linear'],['zoom'],11,1.5,17,4],'line-opacity':.85}});
+}
+function densityBounds(ps){if($('densityScope').value==='view'){const b=map.getBounds();return[b.getWest(),b.getSouth(),b.getEast(),b.getNorth()]}const r=+$('densityRadius').value,all=ps.flatMap(p=>p.pts),lat=all.reduce((a,p)=>a+p[1],0)/all.length,dx=r/(111320*Math.cos(lat*Math.PI/180)),dy=r/111320;return[Math.min(...all.map(p=>p[0]))-dx,Math.min(...all.map(p=>p[1]))-dy,Math.max(...all.map(p=>p[0]))+dx,Math.max(...all.map(p=>p[1]))+dy]}
+function heatRadiusPixels(){const metersPerPixel=40075016.686*Math.cos(map.getCenter().lat*Math.PI/180)/(512*Math.pow(2,map.getZoom()));return Math.max(1,+$('densityRadius').value/metersPerPixel)}
+function createHeat(){if(!mapReady)return alert('地图尚未加载');const ps=analysisProjects();if(!ps.length)return alert('该分类没有资源');stopDensityWorker();hideDensityLayers();densityMode='heat';densityFingerprint=analysisFingerprint();const bounds=densityBounds(ps);const centers=ps.map(p=>centroid(p.pts));map.getSource('analysis-points').setData(fc(centers.filter(p=>p[0]>=bounds[0]&&p[0]<=bounds[2]&&p[1]>=bounds[1]&&p[1]<=bounds[3]).map(c=>({type:'Feature',properties:{},geometry:{type:'Point',coordinates:c}}))));map.setPaintProperty('analysis-heat','heatmap-radius',heatRadiusPixels());map.setLayoutProperty('analysis-heat','visibility','visible');$('densityLegend').hidden=false;$('exportDensity').hidden=true;$('densityStatus').textContent='已生成连续热力图：每处资源等权；核半径约 '+$('densityRadius').value+' 米。颜色为本图相对密度，不同参数生成的图不宜直接比较。缩放保持半径随比例尺变化；移动视野后如需更换样本请重新生成。'}
+function createGrid(){if(!mapReady)return alert('地图尚未加载');const ps=analysisProjects();if(!ps.length)return alert('该分类没有资源');stopDensityWorker();hideDensityLayers();densityMode='grid';densityFingerprint=analysisFingerprint();$('exportDensity').hidden=true;$('densityLegend').hidden=true;const bounds=densityBounds(ps);densityWorker=new Worker('density-worker.js');$('cancelDensity').hidden=false;$('showGrid').disabled=true;$('densityStatus').textContent='正在计算 5 米栅格，可取消…';densityWorker.onerror=()=>{stopDensityWorker();densityMode='none';$('densityStatus').textContent='栅格计算失败，请通过本地服务打开页面后重试。'};densityWorker.onmessage=e=>{const d=e.data;if(d.error){stopDensityWorker();densityMode='none';$('densityStatus').textContent=d.error;return}if(d.progress!=null){$('densityStatus').textContent='正在计算 5 米栅格：'+d.progress+'%';return}stopDensityWorker();const canvas=document.createElement('canvas');canvas.width=d.width;canvas.height=d.height;canvas.getContext('2d').putImageData(new ImageData(new Uint8ClampedArray(d.pixels),d.width,d.height),0,0);densityImage=canvas.toDataURL('image/png');densityMeta={...d,pixels:undefined,category:$('densityCategory').value,resourceCount:ps.length,createdAt:new Date().toISOString(),method:'count of resource centroids within radius at cell center',projection:'local equirectangular; approximate ground metres',crs:'EPSG:4326',zero:'transparent'};if(map.getSource('analysis-grid-image'))map.getSource('analysis-grid-image').updateImage({url:densityImage,coordinates:d.corners});else{map.addSource('analysis-grid-image',{type:'image',url:densityImage,coordinates:d.corners});map.addLayer({id:'analysis-grid',type:'raster',source:'analysis-grid-image',paint:{'raster-resampling':'nearest','raster-opacity':.8,'raster-fade-duration':0}},'project-line')}map.setLayoutProperty('analysis-grid','visibility','visible');$('densityLegend').hidden=false;$('exportDensity').hidden=false;$('densityStatus').textContent='已生成 '+d.width+' × '+d.height+' 个 5 米栅格。每格统计 '+d.radius+' 米内资源中心点数量；本图最大 '+d.max+' 处，零值透明，越红越密集。范围及资源变化后请重新生成。';};densityWorker.postMessage({centers:ps.map(p=>centroid(p.pts)),bounds,cellSize:5,radius:+$('densityRadius').value})}
+function downloadAsset(url,name){const a=document.createElement('a');a.href=url;a.download=name;a.click()}
+async function loadAmapRoads(){if(!mapReady)return alert('地图尚未加载');const b=map.getBounds(),bbox=[b.getWest(),b.getSouth(),b.getEast(),b.getNorth()];if(haversine([bbox[0],bbox[1]],[bbox[2],bbox[3]])>9000){$('roadsStatus').textContent='当前视野过大，请放大至对角线 9 公里以内再加载。';return}const btn=$('loadAmapRoads');btn.disabled=true;$('roadsStatus').textContent='正在向高德查询道路…';try{const res=await fetch('/api/amap-roads?bbox='+bbox.join(','),{signal:AbortSignal.timeout(25000)});const data=await res.json();if(!res.ok)throw Error(data.error||'道路查询失败');amapRoadData=data;amapRoadVisible=true;map.getSource('amap-roads').setData(data);map.setLayoutProperty('amap-roads-line','visibility','visible');$('roadsStatus').textContent=data.features.length?'已载入 '+data.features.length+' 段道路。点击灰蓝线查看路名。高德 GCJ-02 已近似转换至 WGS84；数据时间 '+new Date().toLocaleTimeString():'高德请求成功，当前范围没有返回路况道路；可以移动视野后重试。';}catch(e){$('roadsStatus').textContent='加载失败：'+e.message+'。若为静态文件，请使用随包本地服务启动。'}finally{btn.disabled=false}}
+function initFeatureModules(){
+ document.querySelectorAll('[data-create]').forEach(b=>b.onclick=()=>chooseCreation(b.dataset.create));
+ $('createSubtype').innerHTML=creationTypes.industrial.map(t=>'<option>'+t+'</option>').join('');
+ $('openEconomics').onclick=()=>{syncEconomicsOptions();selectEconomicsProject(editing??+$('economicsProject').value);openModule('economicsPanel')};
+ $('economicsProject').onchange=e=>selectEconomicsProject(+e.target.value);
+ $('openDensity').onclick=()=>openModule('densityPanel');$('openRoads').onclick=()=>openModule('roadsPanel');document.querySelectorAll('[data-close-module]').forEach(b=>b.onclick=closeModulePanels);
+ $('openPanel').onclick=()=>{closeModulePanels();openPanel()};
+ $('showHeat').onclick=createHeat;$('showGrid').onclick=createGrid;
+ ['densityCategory','densityScope','densityRadius'].forEach(id=>$(id).onchange=invalidateDensity);
+ $('cancelDensity').onclick=()=>{stopDensityWorker();densityMode='none';$('densityStatus').textContent='已取消栅格计算。'};
+ $('clearDensity').onclick=()=>{stopDensityWorker();hideDensityLayers();densityMode='none';$('densityLegend').hidden=true;$('exportDensity').hidden=true;$('densityStatus').textContent='已关闭密度图。'};
+ $('exportDensity').onclick=()=>{if(!densityImage||!densityMeta)return;downloadAsset(densityImage,'resource-density-5m.png');const u=URL.createObjectURL(new Blob([JSON.stringify(densityMeta,null,2)],{type:'application/json'}));downloadAsset(u,'resource-density-5m.json');setTimeout(()=>URL.revokeObjectURL(u),1000)};
+ $('loadAmapRoads').onclick=loadAmapRoads;$('hideAmapRoads').onclick=()=>{amapRoadVisible=false;if(mapReady)map.setLayoutProperty('amap-roads-line','visibility','none')};
+}
+
+const selectedRows=new Set();let tableSort={key:'name',asc:true},snapMarker=null,pickingWalkOrigin=false,walkOrigin=null,walkOriginMarker=null,walkAnalysis=null,walkRoutes=fc([]),walkRunId=0,walkFingerprint='';
+function syncArchiveEmpty(){const missing=editing===null||!projects[editing];$('archiveEmpty').hidden=!missing;$('base').style.display=missing?'none':'block'}
+function planningMapPadding(route){if(window.innerWidth<=720){if(route)closeModulePanels();return{top:180,left:20,right:20,bottom:route?80:Math.round(window.innerHeight*.39)+20}}return{top:120,left:340,right:route?450:100,bottom:route?100:310}}
+function attributePairs(){let rows=projects.map((p,i)=>({p,i})).filter(({p,i})=>projectMatchesManager(p)&&(!$('tableSelectedOnly').checked||selectedRows.has(i)));const {key,asc}=tableSort;rows.sort((a,b)=>(key==='area'?areaHa(a.p.pts)-areaHa(b.p.pts):String(a.p.name).localeCompare(String(b.p.name),'zh-CN'))*(asc?1:-1));return rows}
+function refreshAttributeTable(){if(!$('attributeRows'))return;for(const i of selectedRows)if(!projects[i])selectedRows.delete(i);const rows=attributePairs();$('tableSummary').textContent=rows.length+' 条 · 已选 '+selectedRows.size+' 条';$('attributeRows').innerHTML=rows.map(({p,i})=>`<tr data-row="${i}" class="${selectedRows.has(i)?'is-selected':''}"><td><input type="checkbox" data-select-row="${i}" ${selectedRows.has(i)?'checked':''} aria-label="选择${escapeHTML(p.name)}"></td><td><button data-locate-row="${i}">${escapeHTML(p.name)}</button></td><td>${escapeHTML(p.type)}</td><td>${areaHa(p.pts).toFixed(3)}</td><td>${escapeHTML(p.owner)}</td><td>${escapeHTML(p.stage)}</td><td><button data-edit-row="${i}">编辑档案</button></td></tr>`).join('')||'<tr><td colspan="7">当前条件下没有资源</td></tr>';$('tableSelectAll').checked=rows.length>0&&rows.every(({i})=>selectedRows.has(i));$('tableSelectAll').indeterminate=rows.some(({i})=>selectedRows.has(i))&&!$('tableSelectAll').checked;document.querySelectorAll('[data-select-row]').forEach(b=>b.onchange=()=>toggleRowSelection(+b.dataset.selectRow));document.querySelectorAll('[data-locate-row]').forEach(b=>b.onclick=()=>selectProject(+b.dataset.locateRow));document.querySelectorAll('[data-edit-row]').forEach(b=>b.onclick=()=>selectProject(+b.dataset.editRow))}
+function toggleRowSelection(i){if(drawing)return;selectedRows.has(i)?selectedRows.delete(i):selectedRows.add(i);refreshAttributeTable();refreshMap()}
+function toggleAttributeTable(show=!$('attributeTable').hidden){$('attributeTable').hidden=!show;document.body.classList.toggle('table-open',show);$('toggleTable').classList.toggle('on',show);$('toggleTable').setAttribute('aria-expanded',String(show));refreshAttributeTable()}
+function fitSelectedRows(){if(!mapReady||!selectedRows.size)return;const coords=[...selectedRows].filter(i=>projects[i]).flatMap(i=>projects[i].pts);const b=new maplibregl.LngLatBounds();coords.forEach(p=>b.extend(p));map.fitBounds(b,{padding:planningMapPadding(false),maxZoom:17})}
+function nearestOnSegments(point,segments,tolerance){let best=null,bestDistance=tolerance;for(const [a,b] of segments){const dx=b[0]-a[0],dy=b[1]-a[1],length=dx*dx+dy*dy;const t=length?Math.max(0,Math.min(1,((point[0]-a[0])*dx+(point[1]-a[1])*dy)/length)):0;const candidate=[a[0]+t*dx,a[1]+t*dy],d=Math.hypot(point[0]-candidate[0],point[1]-candidate[1]);if(d<=bestDistance){best=candidate;bestDistance=d}}return best}
+function clearSnapIndicator(){snapMarker?.remove();snapMarker=null}
+function snapToRoad(ll){if(!$('roadSnap').checked||!mapReady){clearSnapIndicator();return ll}if(!amapRoadVisible||!amapRoadData.features.length){$('snapStatus').textContent='请先加载并显示道路';clearSnapIndicator();return ll}const segments=[];for(const feature of amapRoadData.features){const lines=feature.geometry.type==='LineString'?[feature.geometry.coordinates]:feature.geometry.type==='MultiLineString'?feature.geometry.coordinates:[];for(const line of lines){for(let i=1;i<line.length;i++){const a=map.project(line[i-1]),b=map.project(line[i]);segments.push([[a.x,a.y],[b.x,b.y]])}}}const p=map.project(ll),best=nearestOnSegments([p.x,p.y],segments,+$('snapTolerance').value);if(!best){$('snapStatus').textContent='容差内无道路';clearSnapIndicator();return ll}const q=map.unproject(best),snapped=[q.lng,q.lat];if(!snapMarker){const el=document.createElement('div');el.className='snap-indicator';snapMarker=new maplibregl.Marker({element:el}).setLngLat(snapped).addTo(map)}else snapMarker.setLngLat(snapped);$('snapStatus').textContent='已吸附道路中心线';return snapped}
+function addPlanningLayers(){if(!map.getSource('walk-routes'))map.addSource('walk-routes',{type:'geojson',data:walkRoutes,attribution:'© 高德地图'});if(!map.getLayer('walk-routes-line'))map.addLayer({id:'walk-routes-line',type:'line',source:'walk-routes',layout:{'line-cap':'round','line-join':'round'},paint:{'line-color':['get','color'],'line-width':5,'line-opacity':.85}})}
+function walkColor(seconds){return seconds<=300?'#2e9f66':seconds<=600?'#3786c6':seconds<=900?'#e79b27':'#b36672'}
+function syncWalkOrigin(){const el=$('walkOrigin');if(!el)return;const value=el.value;el.replaceChildren();const first=document.createElement('option');first.value='map';first.textContent=walkOrigin?'地图起点（已设置）':'地图选点';el.append(first);projects.forEach((p,i)=>{const o=document.createElement('option');o.value=i;o.textContent=p.name+' · 中心点';el.append(o)});el.value=value==='map'||projects[+value]?value:editing!==null?String(editing):'map';if(el.value==='map'&&!walkOrigin&&editing!==null&&projects[editing])el.value=String(editing);if(walkAnalysis&&walkFingerprint!==currentWalkFingerprint())clearWalkResults('起点或公服资源已变化，请重新计算。')}
+function currentWalkOrigin(){const val=$('walkOrigin').value;return val==='map'?walkOrigin:projects[+val]?centroid(projects[+val].pts):null}
+function currentWalkFingerprint(){return JSON.stringify({origin:currentWalkOrigin(),source:$('walkTargets').value,resources:projects.filter(p=>resourceCategory(p.type)==='public').map(p=>[p.name,p.pts])})}
+function setWalkOriginMarker(){const point=currentWalkOrigin();if(!point||!mapReady)return;walkOriginMarker?.remove();const el=document.createElement('div');el.className='walk-origin';walkOriginMarker=new maplibregl.Marker({element:el}).setLngLat(point).addTo(map)}
+function clearWalkResults(message='已清除步行路线。'){walkRunId++;walkAnalysis=null;walkRoutes=fc([]);if(mapReady&&map.getSource('walk-routes'))map.getSource('walk-routes').setData(walkRoutes);$('walkResults').replaceChildren();$('walkSummary').hidden=true;$('walkStatus').textContent=message}
+function showWalkRoute(i){const r=walkAnalysis?.results[i];if(!r?.coordinates?.length)return;const b=new maplibregl.LngLatBounds();r.coordinates.forEach(p=>b.extend(p));map.fitBounds(b,{padding:planningMapPadding(true),maxZoom:17});map.getSource('walk-routes').setData(fc([{type:'Feature',properties:{color:walkColor(r.duration)},geometry:{type:'LineString',coordinates:r.coordinates}}]))}
+async function runWalkAnalysis(){const origin=currentWalkOrigin();if(!origin)return $('walkStatus').textContent='请先选择资源起点，或点击地图设置起点。';if(!mapReady)return;const source=$('walkTargets').value,targets=projects.filter(p=>resourceCategory(p.type)==='public').map(p=>({name:p.name,point:centroid(p.pts)})).filter(t=>haversine(origin,t.point)>2);if(source==='resources'&&!targets.length)return $('walkStatus').textContent='请先添加公服资源，或选择高德设施作为目标。';clearWalkResults('正在查询高德步行路线，最多计算 5 个候选设施…');const run=walkRunId,requestedFingerprint=currentWalkFingerprint();setWalkOriginMarker();$('runWalk').disabled=true;try{const response=await fetch('/api/walk-access',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({origin,source,targets:source==='resources'?targets:[]}),signal:AbortSignal.timeout(90000)});const data=await response.json();if(run!==walkRunId)return;if(requestedFingerprint!==currentWalkFingerprint()){$("walkStatus").textContent="资源或起点已变化，请重新计算。";return}if(!response.ok)throw Error(data.error||'步行分析失败');walkAnalysis=data;walkFingerprint=currentWalkFingerprint();walkRoutes=fc(data.results.filter(r=>r.coordinates?.length>=2).map(r=>({type:'Feature',properties:{color:walkColor(r.duration)},geometry:{type:'LineString',coordinates:r.coordinates}})));map.getSource('walk-routes').setData(walkRoutes);const ok=data.results.filter(r=>Number.isFinite(r.duration));$('walkSummary').hidden=false;$('walkSummary').textContent='本次候选 '+data.candidateCount+' 个，已查询 '+data.results.length+' 个，成功 '+ok.length+' 个。累计可达：5分钟 '+ok.filter(r=>r.duration<=300).length+' 个；10分钟 '+ok.filter(r=>r.duration<=600).length+' 个；15分钟 '+ok.filter(r=>r.duration<=900).length+' 个。';$('walkResults').innerHTML=data.results.map((r,i)=>`<div class="walk-result"><b>${escapeHTML(r.name)}</b>${Number.isFinite(r.duration)?`<small style="color:${walkColor(r.duration)}">步行 ${(r.duration/60).toFixed(1)} 分钟 · ${Math.round(r.distance)} 米</small><button data-walk-route="${i}">查看路线</button>`:`<small>${escapeHTML(r.error||'未获得路线')}</small>`}</div>`).join('');document.querySelectorAll('[data-walk-route]').forEach(b=>b.onclick=()=>showWalkRoute(+b.dataset.walkRoute));$('walkStatus').textContent=ok.length?'已完成实际步行路线查询。仅统计本次候选点，结果不是完整等时圈。':'未获得可用路线，请查看候选设施的错误原因。';}catch(e){if(run===walkRunId)$('walkStatus').textContent='计算失败：'+e.message}finally{$('runWalk').disabled=false}}
+function initPlanning(){
+ $('openPlanning').onclick=()=>openModule('planningPanel');$('toggleTable').onclick=()=>toggleAttributeTable($('attributeTable').hidden);$('closeTable').onclick=()=>toggleAttributeTable(false);$('planningTable').onclick=()=>{closeModulePanels();toggleAttributeTable(true)};
+ $('tableSelectedOnly').onchange=refreshAttributeTable;$('clearTableSelection').onclick=()=>{selectedRows.clear();refreshAttributeTable();refreshMap()};$('zoomTableSelection').onclick=fitSelectedRows;
+ $('tableSelectAll').onchange=e=>{attributePairs().forEach(({i})=>e.target.checked?selectedRows.add(i):selectedRows.delete(i));refreshAttributeTable();refreshMap()};
+ document.querySelectorAll('[data-sort]').forEach(b=>b.onclick=()=>{tableSort={key:b.dataset.sort,asc:tableSort.key===b.dataset.sort?!tableSort.asc:true};refreshAttributeTable()});
+ $('batchType').innerHTML=Object.values(creationTypes).flat().map(t=>'<option>'+t+'</option>').join('');$('applyBatchType').onclick=()=>{if(drawing)return alert('请先保存或取消边界编辑');if(!selectedRows.size)return;const type=$('batchType').value;for(const i of selectedRows){const p=projects[i];if(!p)continue;p.type=type;p.currentUse=inferUse(type);p.govCalc=null;p.entCalc=null}renewalAreas=[];activeArea=null;if(editing!==null&&projects[editing])applyProject(projects[editing]);updateUI()};
+ $('planningSnap').onclick=()=>{if(!amapRoadData.features.length||!amapRoadVisible){$('roadSnap').checked=true;openModule('roadsPanel');$('roadsStatus').textContent='请先加载当前视野道路，再从资源档案进入边界编辑。';return}if(editing===null){closeModulePanels();$('snapStatus').textContent='请先选择要编辑的资源';return}$('roadSnap').checked=true;$('editBoundary').click()};
+ $('roadSnap').onchange=()=>{if(!$('roadSnap').checked){clearSnapIndicator();$('snapStatus').textContent='吸附已关闭'}};
+ $('finish').addEventListener('click',()=>{if(!drawing)clearSnapIndicator()});$('cancel').addEventListener('click',clearSnapIndicator);
+ $('openWalk').onclick=()=>{syncWalkOrigin();openModule('walkPanel')};$('pickWalkOrigin').onclick=()=>{if(!mapReady)return alert('地图尚未加载');pickingWalkOrigin=true;closeModulePanels();closePanel();$('walkStatus').textContent='请在地图单击选择起点';map.getCanvas().style.cursor='crosshair'};
+ $('walkOrigin').onchange=()=>{clearWalkResults('起点已更新，请重新计算。');setWalkOriginMarker()};$('walkTargets').onchange=()=>clearWalkResults('目标来源已变化，请重新计算。');$('runWalk').onclick=runWalkAnalysis;$('clearWalk').onclick=()=>{clearWalkResults();walkOriginMarker?.remove();walkOriginMarker=null};
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&pickingWalkOrigin){pickingWalkOrigin=false;map.getCanvas().style.cursor='';openModule('walkPanel');$('walkStatus').textContent='已取消地图选点。'}});
+}
+
+initFeatureModules();
+initPlanning();
+initResourceManager();
+loadState();document.body.classList.toggle("satellite-mode",basemap==="satellite");if(renewalAreas.length)activeArea=0;$("light").classList.toggle("on",basemap==="light");$("satellite").classList.toggle("on",basemap==="satellite");updateUI();const sc=document.createElement("script");sc.src="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.js";sc.onload=init;sc.onerror=()=>alert("地图资源加载失败，请联网后重新打开");document.head.appendChild(sc);
+})();
+</script>
+</body>
+</html>

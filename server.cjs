@@ -1,0 +1,6 @@
+const http=require('node:http'),fs=require('node:fs'),path=require('node:path');
+const roadHandler=require('./api/amap-roads.js'),walkHandler=require('./api/walk-access.js');const base=__dirname;
+const envFile=process.env.AMAP_ENV_FILE;if(envFile&&fs.existsSync(envFile)){for(const line of fs.readFileSync(envFile,'utf8').replace(/^\uFEFF/,'').split(/\r?\n/)){const m=line.match(/^AMAP_WEB_KEY=(.+)$/);if(m)process.env.AMAP_WEB_KEY=m[1].trim()}}
+const allowed=new Map([['/','index.html'],['/index.html','index.html'],['/density-worker.js','density-worker.js']]);
+const server=http.createServer(async(req,res)=>{const url=new URL(req.url,'http://localhost');if(url.pathname==='/api/amap-roads')return roadHandler(req,res);if(url.pathname==='/api/walk-access')return walkHandler(req,res);const file=allowed.get(url.pathname);if(!file){res.writeHead(404);return res.end('Not found')}res.setHeader('Content-Type',file.endsWith('.html')?'text/html; charset=utf-8':'application/javascript; charset=utf-8');res.setHeader('Cache-Control','no-store');fs.createReadStream(path.join(base,file)).pipe(res)});
+const port=Number(process.env.PORT||4173);server.listen(port,'127.0.0.1',()=>console.log('Urban Renewal Lab v3: http://127.0.0.1:'+port+' · 高德服务端配置'+(process.env.AMAP_WEB_KEY?'已读取':'未设置')));
