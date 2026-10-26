@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node server.cjs",
-    "test": "node tests/core.test.cjs && node tests/walk.test.cjs",
+    "test": "node tests/core.test.cjs && node tests/walk.test.cjs && node tests/usage-guard.test.cjs",
     "test:gis": "python -m unittest discover -s tests -p test_gis.py -v",
     "sync:vendor": "node scripts/sync-vendor.cjs"
   },
