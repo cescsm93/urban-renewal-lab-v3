@@ -2,3 +2,8 @@ geopandas==1.2.0
 shapely==2.2.0
 pyproj==3.8.0
 pyogrio==0.13.0
+networkx>=3.4,<4
+scipy>=1.15,<2
+momepy>=0.10,<0.12
+libpysal>=4.12,<5
+esda>=2.7,<3
