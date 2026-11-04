@@ -1,0 +1,2237 @@
+[
+  {
+    "id": "zermatt",
+    "country": "瑞士",
+    "region": "欧洲",
+    "lat": 46.0207,
+    "lon": 7.7491,
+    "officialUrl": "https://www.matterhornparadise.ch/en",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.matterhornparadise.ch/en"
+      },
+      {
+        "title": "国际区域的边界",
+        "url": "https://www.matterhornparadise.ch/ZBAG/13-trade/01-downloads/03-prospekte-broschueren/inspiration-manual-en.pdf"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.matterhornparadise.ch/en",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.matterhornparadise.ch/ZBAG/00-keyvisuals/02_winter/67907/image-thumb__67907__portal-hero/20260317_tr-steg_landschaft_sonnenaufgang_winter_sued-15.1d1dfbb9.jpg",
+      "sourceUrl": "https://www.matterhornparadise.ch/en",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.matterhornparadise.ch/en",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Zermatt",
+    "name": "采尔马特",
+    "description": "采尔马特位于瑞士瓦莱州，与意大利切尔维尼亚组成跨国滑雪网络。官方口径的 360 公里指国际联通区域，不是单一村庄的雪道长度。",
+    "depth": {
+      "title": "跨国滑雪，马特洪峰的两面",
+      "sections": [
+        {
+          "title": "规模统计的正确口径",
+          "text": "官方资料列出国际区域 360 公里雪道和 54 个索道设施，范围包含瑞士与意大利。最高点口径为 3,899 米；这不是采尔马特村庄海拔，也不是每条雪道的起点。",
+          "source": "https://www.matterhornparadise.ch/ZBAG/13-trade/01-downloads/03-prospekte-broschueren/inspiration-manual-en.pdf"
+        },
+        {
+          "title": "冰川与季节",
+          "text": "官方将全年滑雪作为目的地特色，但全年可滑并不意味着冬季全部跨国网络始终开放。冰川滑雪范围、跨境通行和冬季全区票，应按具体日期在运营方确认。",
+          "source": "https://www.matterhornparadise.ch/ZBAG/13-trade/01-downloads/03-prospekte-broschueren/inspiration-manual-en.pdf"
+        },
+        {
+          "title": "不滑雪的山地体验",
+          "text": "运营方除雪票外还提供 Peak Pass、观景与山地餐饮产品。同行者若不滑雪，应比较观景票与滑雪票覆盖，不能把不同用途票种的价格直接互比。",
+          "source": "https://www.matterhornparadise.ch/en"
+        }
+      ],
+      "story": {
+        "title": "国际区域的边界",
+        "text": "同一个马特洪峰滑雪区横跨瑞士与意大利，票种覆盖与跨境缆车运行情况会影响可到达的范围。做行程时应把“区域总规模”与当天实际开放分开看。",
+        "source": "https://www.matterhornparadise.ch/ZBAG/13-trade/01-downloads/03-prospekte-broschueren/inspiration-manual-en.pdf"
+      },
+      "source": "https://www.matterhornparadise.ch/ZBAG/13-trade/01-downloads/03-prospekte-broschueren/inspiration-manual-en.pdf",
+      "checkedAt": "2026-11-04"
+    }
+  },
+  {
+    "id": "verbier",
+    "country": "瑞士",
+    "region": "欧洲",
+    "lat": 46.0969,
+    "lon": 7.2286,
+    "officialUrl": "https://verbier4vallees.ch/en",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://verbier4vallees.ch/en"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://verbier4vallees.ch/en",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://verbier4vallees.ch/V4V-Website/home/Winter/93388/image-thumb__93388__hero-cutout/homepage-24-25%20%281%29.7cfe53d6.jpg",
+      "sourceUrl": "https://verbier4vallees.ch/en",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://verbier4vallees.ch/en",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Verbier",
+    "name": "韦尔比耶",
+    "description": "瑞士 · Verbier。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "st-moritz",
+    "country": "瑞士",
+    "region": "欧洲",
+    "lat": 46.497,
+    "lon": 9.839,
+    "officialUrl": "https://www.mountains.ch/en",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.mountains.ch/en"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.mountains.ch/en",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.datocms-assets.com/212367/1782895929-2018-corviglia-ssb-corviglia-001.jpg?auto=format&fit=max&w=1200",
+      "sourceUrl": "https://www.mountains.ch/en",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.mountains.ch/en",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "St. Moritz",
+    "name": "圣莫里茨",
+    "description": "瑞士 · St. Moritz。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "davos-klosters",
+    "country": "瑞士",
+    "region": "欧洲",
+    "lat": 46.802,
+    "lon": 9.836,
+    "officialUrl": "https://www.davosklostersmountains.ch/en",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.davosklostersmountains.ch/en"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.davosklostersmountains.ch/en",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://api.davos.ch/fileadmin/_processed_/8/3/csm_KV_W2024-25_G%C3%A4steprogramm_Ski-Alpin-Parsenn-2021_C_MatthiasPaintner__24__d7a00af84a.jpg",
+      "sourceUrl": "https://www.davos.ch/en/",
+      "credit": "官方旅游／运营方网页图片 · 版权归原权利人",
+      "status": "官方来源提取；未逐图人工核实",
+      "source": "https://www.davos.ch/en/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Davos Klosters",
+    "name": "达沃斯克洛斯特斯",
+    "description": "瑞士 · Davos Klosters。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "jungfrau-ski-region",
+    "country": "瑞士",
+    "region": "欧洲",
+    "lat": 46.624,
+    "lon": 8.035,
+    "officialUrl": "https://www.jungfrau.ch/en-gb/jungfrau-ski-region/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.jungfrau.ch/en-gb/jungfrau-ski-region/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.jungfrau.ch/en-gb/jungfrau-ski-region/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://media.jungfrau.ch/image/upload/ar_1200:630,c_fill,f_auto,fl_lossy,q_auto,w_1200/v1/fileadmin/Skigebiet_Grindelwald-Wengen/Jungfrau-Skiregion-Skifahren-Piste-Schnee-Eiger?_a=BAAAV6GY",
+      "sourceUrl": "https://www.jungfrau.ch/en-gb/jungfrau-ski-region/",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.jungfrau.ch/en-gb/jungfrau-ski-region/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Jungfrau Ski Region",
+    "name": "少女峰滑雪区",
+    "description": "瑞士 · Jungfrau Ski Region。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "laax",
+    "country": "瑞士",
+    "region": "欧洲",
+    "lat": 46.821,
+    "lon": 9.258,
+    "officialUrl": "https://www.flimslaax.com/en",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.flimslaax.com/en"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.flimslaax.com/en",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.flimslaax.com/fileadmin/Daten/0Flims_Laax_Bilder/3-Outdoor/3-8-Wintersport/3-8-6-Intro-Slider/251127_FXL_Keyvisuals_Website_Slider_Intro_1920x750.jpg",
+      "sourceUrl": "https://www.flimslaax.com/en",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.flimslaax.com/en",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Laax",
+    "name": "莱克斯",
+    "description": "瑞士 · Laax。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "chamonix",
+    "country": "法国",
+    "region": "欧洲",
+    "lat": 45.924,
+    "lon": 6.869,
+    "officialUrl": "https://www.montblancnaturalresort.com/en",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.montblancnaturalresort.com/en"
+      },
+      {
+        "title": "1924 年的冬季运动转折",
+        "url": "https://en.chamonix.com/our-inspirations/chamonix-the-extraordinary-story-the-olympic-adventure"
+      },
+      {
+        "title": "从登山到冬季旅行",
+        "url": "https://en.chamonix.com/chamonix-mont-blanc-valley/history-of-the-valley"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.montblancnaturalresort.com/en",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.datocms-assets.com/146703/1731400916-home_forfait-chamonix-le-pass.webp",
+      "sourceUrl": "https://www.montblancnaturalresort.com/en",
+      "credit": "官方页面图片 · 版权归原权利人",
+      "status": "从官网图片元素提取，未逐图人工核实",
+      "source": "https://www.montblancnaturalresort.com/en",
+      "httpStatus": 206,
+      "contentType": "image/webp"
+    },
+    "nameEn": "Chamonix",
+    "name": "霞慕尼",
+    "description": "霞慕尼的体验应理解为多个山地滑雪区组成的山谷。不同区域之间的交通与票种需要提前确认；本图鉴的一个地图点不代表所有雪道从同一处出发。",
+    "depth": {
+      "title": "勃朗峰山谷，不止一个雪场",
+      "sections": [
+        {
+          "title": "从登山到冬季旅行",
+          "text": "官方历史将 1786 年 Jacques Balmat 与 Michel Paccard 首登勃朗峰视为山谷发展的重要节点。铁路于 1901 年到达后，游客更容易进入山谷，旅行基础逐步扩大。",
+          "source": "https://en.chamonix.com/chamonix-mont-blanc-valley/history-of-the-valley"
+        },
+        {
+          "title": "区域而非单一山坡",
+          "text": "运营方列出的目的地包含 Chamonix、Le Tour–Vallorcine、Argentière 与 Les Houches–Saint-Gervais 等。浏览时要先辨别区域与通票范围，再决定住在哪个入口附近。",
+          "source": "https://www.montblancnaturalresort.com/en"
+        },
+        {
+          "title": "冰雪竞技的人物记忆",
+          "text": "官方奥运回顾提到，霞慕尼单板选手 Karine Ruby 在长野冬奥会获得金牌。山谷的运动文化既包含早期登山，也包含后来发展的现代雪上项目。",
+          "source": "https://en.chamonix.com/our-inspirations/chamonix-the-extraordinary-story-the-olympic-adventure"
+        }
+      ],
+      "story": {
+        "title": "1924 年的冬季运动转折",
+        "text": "霞慕尼官方历史资料记载，这里举办了 1924 年首届冬奥会。高山滑雪当时尚未成为比赛项目；今天的滑雪旅行与百年前的冰雪赛事并非同一种体验。",
+        "source": "https://en.chamonix.com/our-inspirations/chamonix-the-extraordinary-story-the-olympic-adventure"
+      },
+      "source": "https://en.chamonix.com/our-inspirations/chamonix-the-extraordinary-story-the-olympic-adventure",
+      "checkedAt": "2026-11-04"
+    }
+  },
+  {
+    "id": "val-thorens",
+    "country": "法国",
+    "region": "欧洲",
+    "lat": 45.298,
+    "lon": 6.583,
+    "officialUrl": "https://www.valthorens.com/en/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.valthorens.com/en/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.valthorens.com/en/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.valthorens.com/app/uploads/2023/09/230110_Domaine_Neige_Fraiche-L.-Brochot-OT-Val-Thorens-15.jpg",
+      "sourceUrl": "https://www.valthorens.com/en/",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.valthorens.com/en/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Val Thorens",
+    "name": "瓦尔托伦斯",
+    "description": "法国 · Val Thorens。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "courchevel",
+    "country": "法国",
+    "region": "欧洲",
+    "lat": 45.415,
+    "lon": 6.634,
+    "officialUrl": "https://courchevel.com/en/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://courchevel.com/en/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://courchevel.com/en/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.s3v.com/app/uploads/iris-images/5989/grosnom-pisteur-rezi1-372x590-f50_50.webp",
+      "sourceUrl": "https://www.s3v.com/en/",
+      "credit": "官方旅游／运营方网页图片 · 版权归原权利人",
+      "status": "官方来源提取；未逐图人工核实；自动图片访问未通过（原站限制或超时），界面应显示缺失占位",
+      "source": "https://www.s3v.com/en/",
+      "httpStatus": null,
+      "contentType": "ReadTimeout"
+    },
+    "nameEn": "Courchevel",
+    "name": "高雪维尔",
+    "description": "法国 · Courchevel。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "val-disere",
+    "country": "法国",
+    "region": "欧洲",
+    "lat": 45.448,
+    "lon": 6.979,
+    "officialUrl": "https://www.valdisere.com/en/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.valdisere.com/en/"
+      },
+      {
+        "title": "官方身份复核（2026-11-04）",
+        "url": "https://www.valdisere.com/en/"
+      }
+    ],
+    "verification": {
+      "status": 403,
+      "finalUrl": "https://www.valdisere.com/en/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实",
+      "officialIdentity": "官方网页已通过网页检索交叉核实；自动 HTTP 请求受限制"
+    },
+    "photo": {
+      "url": "https://www.valdisere.com/app/uploads/valdisere/2026/08/thumbs/47480/ratio_16_9/hp-skieur-au-sommet-1920x1080.webp",
+      "sourceUrl": "https://www.valdisere.com/en/",
+      "credit": "官方旅游／运营方网页图片 · 版权归原权利人",
+      "status": "官网图片链接；外链可用性受原站限制；自动图片访问未通过（原站限制或超时），界面应显示缺失占位",
+      "source": "https://www.valdisere.com/en/",
+      "httpStatus": 403,
+      "contentType": "text/html; charset=UTF-8"
+    },
+    "nameEn": "Val d’Isère",
+    "name": "瓦尔迪泽尔",
+    "description": "法国 · Val d’Isère。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "tignes",
+    "country": "法国",
+    "region": "欧洲",
+    "lat": 45.469,
+    "lon": 6.907,
+    "officialUrl": "https://www.tignes.net/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.tignes.net/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.tignes.net/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.tignes.net/wp-content/uploads/2025/04/Paysage-Tignes.jpg",
+      "sourceUrl": "https://www.tignes.net/",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.tignes.net/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Tignes",
+    "name": "蒂涅",
+    "description": "法国 · Tignes。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "alpe-d-huez",
+    "country": "法国",
+    "region": "欧洲",
+    "lat": 45.092,
+    "lon": 6.069,
+    "officialUrl": "https://www.alpedhuez.com/en/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.alpedhuez.com/en/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.alpedhuez.com/en/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.alpedhuez.com/wp-content/uploads/2026/02/2026-Lionel_Royet-OT_Alpe_dHuez_0129_3766-scaled.jpg",
+      "sourceUrl": "https://www.alpedhuez.com/en/",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.alpedhuez.com/en/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Alpe d’Huez",
+    "name": "阿尔普迪埃",
+    "description": "法国 · Alpe d’Huez。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "les-deux-alpes",
+    "country": "法国",
+    "region": "欧洲",
+    "lat": 45.011,
+    "lon": 6.126,
+    "officialUrl": "https://www.les2alpes.com/winter/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.les2alpes.com/winter/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.les2alpes.com/winter/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://woody.cloudly.space/app/uploads/les-deux-alpes/2023/12/thumbs/piste-de-ski-domaine-skiable-des-2-Alpes-640x320-crop-1729067686.webp",
+      "sourceUrl": "https://www.les2alpes.com/winter/",
+      "credit": "官方页面图片 · 版权归原权利人",
+      "status": "从官网图片元素提取，未逐图人工核实",
+      "source": "https://www.les2alpes.com/winter/",
+      "httpStatus": 206,
+      "contentType": "image/webp"
+    },
+    "nameEn": "Les Deux Alpes",
+    "name": "双阿尔卑斯",
+    "description": "法国 · Les Deux Alpes。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "avoriaz",
+    "country": "法国",
+    "region": "欧洲",
+    "lat": 46.191,
+    "lon": 6.775,
+    "officialUrl": "https://www.avoriaz.com/en/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.avoriaz.com/en/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.avoriaz.com/en/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.avoriaz.com/_nuxt/img/bg-search.5e2d368.webp",
+      "sourceUrl": "https://www.avoriaz.com/en/",
+      "credit": "官方页面图片 · 版权归原权利人",
+      "status": "从官网图片元素提取，未逐图人工核实",
+      "source": "https://www.avoriaz.com/en/",
+      "httpStatus": 200,
+      "contentType": "image/webp"
+    },
+    "nameEn": "Avoriaz",
+    "name": "阿沃里亚兹",
+    "description": "法国 · Avoriaz。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "solden",
+    "country": "奥地利",
+    "region": "欧洲",
+    "lat": 46.969,
+    "lon": 11.008,
+    "officialUrl": "https://www.soelden.com/en",
+    "price": {
+      "amount": 84.5,
+      "currency": "EUR",
+      "label": "成人 1 日柜台票，Hauptsaison；线上动态优惠另计",
+      "period": "2026-12-05—12-18；2027-01-07—01-29；2027-02-27—04-18",
+      "source": "https://www.soelden.com/de/aktivitaeten/winter/skifahren-snowboarden/skipaesse-preise/winter",
+      "checkedAt": "2026-11-04",
+      "season": "2026–27"
+    },
+    "priceStatus": "官网已核实日期价；不是实时库存或最低价",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.soelden.com/en"
+      },
+      {
+        "title": "《幽灵党》的真实取景地",
+        "url": "https://www.soelden.com/en/region-villages/culinary-gastronomy/restaurants/ice-q-tapas-menu"
+      },
+      {
+        "title": "2026–27 官方票价",
+        "url": "https://www.soelden.com/de/aktivitaeten/winter/skifahren-snowboarden/skipaesse-preise/winter"
+      },
+      {
+        "title": "冬季山地的范围",
+        "url": "https://www.soelden.com/en/activities/winter/skiing-snowboarding/ski-area-information"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.soelden.com/en",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.soelden.com/dam/web/138616/image-thumb__138616__socialThumb/soel_ortsaufnahmen_Winter_Chris_N%C3%B6sig.65892.c5080507.png",
+      "sourceUrl": "https://www.soelden.com/en",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.soelden.com/en",
+      "httpStatus": 206,
+      "contentType": "image/png"
+    },
+    "nameEn": "Sölden",
+    "name": "索尔登",
+    "description": "索尔登位于奥地利厄茨河谷。雪场的高山环境与 Gaislachkogl 一带的建筑，使这里既是冬季运动目的地，也是电影旅行目的地。",
+    "depth": {
+      "title": "冰川、现代建筑与邦德",
+      "sections": [
+        {
+          "title": "冬季山地的范围",
+          "text": "运营方资料列出约 147 公里雪道、31 个索道设施与两个冰川滑雪区，海拔范围 1,350–3,340 米。这些是雪区统计，不是当日可滑里程。",
+          "source": "https://www.soelden.com/en/activities/winter/skiing-snowboarding/ski-area-information"
+        },
+        {
+          "title": "从教学到山地挑战",
+          "text": "官方列出滑雪学校、器材租赁、免费滑雪巴士及雪地公园，并以 BIG3 观景体验串联三座三千米级滑雪山。教学、观景与高山滑行应按同行者能力分别安排。",
+          "source": "https://www.soelden.com/en/activities/winter/skiing-snowboarding/ski-area-information"
+        },
+        {
+          "title": "票种与山谷联票",
+          "text": "官方票价说明中，1–2 日票仅适用索尔登；3 日起属于 Ötztal Superskipass，覆盖厄茨河谷更多雪区。提前线上价格可能变化，不能把某一天的柜台价当全年固定价。",
+          "source": "https://www.soelden.com/de/aktivitaeten/winter/skifahren-snowboarden/skipaesse-preise/winter"
+        }
+      ],
+      "story": {
+        "title": "《幽灵党》的真实取景地",
+        "text": "官方旅游资料确认，2015 年《Spectre／007：幽灵党》在索尔登取景，ice Q 餐厅是其中的重要建筑。如今 007 ELEMENTS 展览延续了电影与山地环境的关联。",
+        "source": "https://www.soelden.com/en/region-villages/culinary-gastronomy/restaurants/ice-q-tapas-menu"
+      },
+      "source": "https://www.soelden.com/en/region-villages/culinary-gastronomy/restaurants/ice-q-tapas-menu",
+      "checkedAt": "2026-11-04"
+    }
+  },
+  {
+    "id": "st-anton-am-arlberg",
+    "country": "奥地利",
+    "region": "欧洲",
+    "lat": 47.129,
+    "lon": 10.268,
+    "officialUrl": "https://www.stantonamarlberg.com/en",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "已核实有中级雪道；其他级别未录入",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.stantonamarlberg.com/en"
+      },
+      {
+        "title": "Hannes Schneider 与滑雪学校",
+        "url": "https://www.skischule-arlberg.com/geschichte/geschichte-seit-1921/"
+      },
+      {
+        "title": "官方身份复核（2026-11-04）",
+        "url": "https://www.stantonamarlberg.com/en"
+      },
+      {
+        "title": "雪道运行的入口",
+        "url": "https://www.arlbergerbergbahnen.com/en/winter/ski-area/cable-cars-and-pistes/"
+      }
+    ],
+    "verification": {
+      "status": 503,
+      "finalUrl": "https://www.stantonamarlberg.com/en",
+      "method": "HTTP GET；可访问性不等于全部内容已核实",
+      "officialIdentity": "官方网页已通过网页检索交叉核实；自动 HTTP 请求受限制"
+    },
+    "photo": {
+      "url": "https://www.skiarlberg.at/lech-zuers/01-winter/skiregion/632/image-thumb__632__hero-grid-bg-img/pistenrillen-zuerserseebahn.9271102e.jpg",
+      "sourceUrl": "https://www.skiarlberg.at/en/",
+      "credit": "官方旅游／运营方网页图片 · 版权归原权利人",
+      "status": "官方来源提取；未逐图人工核实",
+      "source": "https://www.skiarlberg.at/en/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "St. Anton am Arlberg",
+    "name": "圣安东",
+    "description": "圣安东位于奥地利阿尔贝格地区。区域滑雪网络与村庄旅游服务应分别查询；雪道颜色是当地分级，不能直接当作跨国统一坡度标准。",
+    "depth": {
+      "title": "阿尔贝格的教学传统",
+      "sections": [
+        {
+          "title": "人物与技术",
+          "text": "学校历史记载，Hannes Schneider 1907 年已在阿尔贝格从事滑雪教学，后来通过阿尔贝格教学方法改变了学习方式。1921 年建立学校，是当地教学传统的关键节点。",
+          "source": "https://www.skischule-arlberg.com/geschichte/geschichte-seit-1921/"
+        },
+        {
+          "title": "传播者的角色",
+          "text": "同一历史资料也记载，Rudolf Gomperz 长期以写作与组织活动支持 Schneider，并参与阿尔贝格技术传播。滑雪文化的形成不仅依靠运动员，也依赖教学与出版。",
+          "source": "https://www.skischule-arlberg.com/geschichte/geschichte-seit-1921/"
+        },
+        {
+          "title": "雪道运行的入口",
+          "text": "Arlberger Bergbahnen 官方状态页逐项列出缆车、雪道难度及开放状态，例如 Stanton Speed 被列为中级雪道。应从这类实时页面判断当天路线，而不是从村庄知名度推断。",
+          "source": "https://www.arlbergerbergbahnen.com/en/winter/ski-area/cable-cars-and-pistes/"
+        }
+      ],
+      "story": {
+        "title": "Hannes Schneider 与滑雪学校",
+        "text": "阿尔贝格滑雪学校的历史资料记载，Hannes Schneider 于 1921 年创办学校。他的教学与阿尔贝格技术，是理解当地滑雪文化的重要线索。",
+        "source": "https://www.skischule-arlberg.com/geschichte/geschichte-seit-1921/"
+      },
+      "source": "https://www.skischule-arlberg.com/geschichte/geschichte-seit-1921/",
+      "checkedAt": "2026-11-04"
+    },
+    "difficulties": [
+      "intermediate"
+    ],
+    "difficultySource": "https://www.arlbergerbergbahnen.com/en/winter/ski-area/cable-cars-and-pistes/"
+  },
+  {
+    "id": "kitzbuhel",
+    "country": "奥地利",
+    "region": "欧洲",
+    "lat": 47.446,
+    "lon": 12.392,
+    "officialUrl": "https://www.kitzski.at/en/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.kitzski.at/en/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.kitzski.at/en/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.kitzski.at/_next/static/media/keycard-red.1xmojijdywjzi.webp",
+      "sourceUrl": "https://www.kitzski.at/en/",
+      "credit": "官方页面图片 · 版权归原权利人",
+      "status": "从官网图片元素提取，未逐图人工核实",
+      "source": "https://www.kitzski.at/en/",
+      "httpStatus": 206,
+      "contentType": "image/webp"
+    },
+    "nameEn": "Kitzbühel",
+    "name": "基茨比厄尔",
+    "description": "奥地利 · Kitzbühel。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "ischgl",
+    "country": "奥地利",
+    "region": "欧洲",
+    "lat": 47.012,
+    "lon": 10.291,
+    "officialUrl": "https://www.ischgl.com/en",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.ischgl.com/en"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.ischgl.com/en/winter",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.ischgl.com/001_TVB/MARKETING/Winter-25-26/155693243/image-thumb__155693243__hero/REI_8426-2.c90b33b4.jpg",
+      "sourceUrl": "https://www.ischgl.com/en/winter",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.ischgl.com/en/winter",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Ischgl",
+    "name": "伊施格尔",
+    "description": "奥地利 · Ischgl。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "saalbach-hinterglemm",
+    "country": "奥地利",
+    "region": "欧洲",
+    "lat": 47.391,
+    "lon": 12.636,
+    "officialUrl": "https://www.saalbach.com/en",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.saalbach.com/en"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.saalbach.com/en",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.saalbach.com/fotos-marketing/hol-fotos-startseite/image-thumb__9026809__top-sujet/Saalbach-Hinterglemm-Ski-Alpin-Herosilde-c-saalabch_com-markuslandauer.jpg",
+      "sourceUrl": "https://www.saalbach.com/en",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.saalbach.com/en",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Saalbach Hinterglemm",
+    "name": "萨尔巴赫",
+    "description": "奥地利 · Saalbach Hinterglemm。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "obertauern",
+    "country": "奥地利",
+    "region": "欧洲",
+    "lat": 47.248,
+    "lon": 13.559,
+    "officialUrl": "https://www.obertauern.com/en/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.obertauern.com/en/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.obertauern.com/en/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.obertauern.com/fileadmin/_processed_/e/7/csm_Skifahren_Winter_24_25_Obertauern_02_f880c3ed01.jpg",
+      "sourceUrl": "https://www.obertauern.com/en/",
+      "credit": "官方页面图片 · 版权归原权利人",
+      "status": "从官网图片元素提取，未逐图人工核实",
+      "source": "https://www.obertauern.com/en/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Obertauern",
+    "name": "上陶恩",
+    "description": "奥地利 · Obertauern。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "cortina-d-ampezzo",
+    "country": "意大利",
+    "region": "欧洲",
+    "lat": 46.54,
+    "lon": 12.136,
+    "officialUrl": "https://www.dolomitisuperski.com/it/comprensori/cortina-d-ampezzo",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.dolomitisuperski.com/en/Experience/Ski-areas/Cortina-d-Ampezzo"
+      },
+      {
+        "title": "《最高机密》的雪上追逐",
+        "url": "https://time.com/4079504/james-bond-facts-trivia/"
+      },
+      {
+        "title": "官方身份复核（2026-11-04）",
+        "url": "https://www.dolomitisuperski.com/en/Experience/Ski-areas/Cortina-d-Ampezzo"
+      },
+      {
+        "title": "多山体旅行",
+        "url": "https://www.dolomitisuperski.com/it/comprensori/cortina-d-ampezzo"
+      }
+    ],
+    "verification": {
+      "status": 403,
+      "finalUrl": "https://www.dolomitisuperski.com/en/Experience/Ski-areas/Cortina-d-Ampezzo",
+      "method": "HTTP GET；可访问性不等于全部内容已核实",
+      "officialIdentity": "官方网页已通过网页检索交叉核实；自动 HTTP 请求受限制"
+    },
+    "photo": {
+      "url": "https://www.dolomitisuperski.com/.imaging/mte/dolomitisuperski/654x484/dam/dss/comprensori/01_cortina/Winter/2014_Averau-srl_seggiovia-Potor_Super8-Ski-Tour_A9R6245_www.bandion.it.jpg/jcr%3Acontent/2014_Averau%20srl_seggiovia%20Potor_Super8%20Ski%20Tour_A9R6245_www.bandion.it.jpg",
+      "sourceUrl": "https://www.dolomitisuperski.com/it/comprensori/cortina-d-ampezzo",
+      "credit": "官方旅游／运营方网页图片 · 版权归原权利人",
+      "status": "官网图片链接；外链可用性受原站限制",
+      "source": "https://www.dolomitisuperski.com/it/comprensori/cortina-d-ampezzo",
+      "httpStatus": 206,
+      "contentType": "image/jpeg;charset=UTF-8"
+    },
+    "nameEn": "Cortina d’Ampezzo",
+    "name": "科尔蒂纳丹佩佐",
+    "description": "科尔蒂纳丹佩佐位于意大利多洛米蒂。周边滑雪区分散在不同山体，行程应留意山脚交通和票种适用范围，不应仅凭地图直线距离安排转场。",
+    "depth": {
+      "title": "多洛米蒂的山城背景",
+      "sections": [
+        {
+          "title": "多山体旅行",
+          "text": "Dolomiti Superski 官方科尔蒂纳页分别提供索道、雪道、雪道图与摄像头入口，并将现场信息与住宿规划分开。看图时需确认实际交通连接，不能把周围山体都理解为无缝滑行。",
+          "source": "https://www.dolomitisuperski.com/it/comprensori/cortina-d-ampezzo"
+        },
+        {
+          "title": "不止滑雪的目的地",
+          "text": "运营方介绍突出多洛米蒂景观、当地传统、康养与餐饮。它适合把山地活动与山城停留结合；这里的文化特色不需要靠未经证实的明星到访名单来成立。",
+          "source": "https://www.dolomitisuperski.com/it/comprensori/cortina-d-ampezzo"
+        },
+        {
+          "title": "先算票种再安排行程",
+          "text": "官方页面提供按日期和成人、少年、儿童、老年类别计算票价的入口，并提示提前至少两日购买可有优惠。年龄组和提前购买条件影响预算，因此本图鉴不填写无日期的固定日票。",
+          "source": "https://www.dolomitisuperski.com/it/comprensori/cortina-d-ampezzo"
+        }
+      ],
+      "story": {
+        "title": "《最高机密》的雪上追逐",
+        "text": "《For Your Eyes Only／007：最高机密》（1981）的滑雪段落在科尔蒂纳拍摄。TIME 的邦德资料回顾记载了这一取景关联；该事实不表示电影追逐路线是一条可复刻的公众雪道。",
+        "source": "https://time.com/4079504/james-bond-facts-trivia/"
+      },
+      "source": "https://time.com/4079504/james-bond-facts-trivia/",
+      "checkedAt": "2026-11-04"
+    }
+  },
+  {
+    "id": "val-gardena",
+    "country": "意大利",
+    "region": "欧洲",
+    "lat": 46.554,
+    "lon": 11.76,
+    "officialUrl": "https://www.valgardena.it/en/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.valgardena.it/en/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.valgardena.it/en/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.valgardena.it/fileadmin/files/_processed_/0/e/csm_ski-snowboard-val-gardena-89_388503a40b.webp",
+      "sourceUrl": "https://www.valgardena.it/en/",
+      "credit": "官方页面图片 · 版权归原权利人",
+      "status": "从官网图片元素提取，未逐图人工核实",
+      "source": "https://www.valgardena.it/en/",
+      "httpStatus": 206,
+      "contentType": "image/webp"
+    },
+    "nameEn": "Val Gardena",
+    "name": "加尔代纳山谷",
+    "description": "意大利 · Val Gardena。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "alta-badia",
+    "country": "意大利",
+    "region": "欧洲",
+    "lat": 46.55,
+    "lon": 11.874,
+    "officialUrl": "https://www.altabadia.org/en",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.altabadia.org/en"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.altabadia.org/en",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.altabadia.org/images/content/2675215_mobile_0_330_2000_2667/1cX1c/fileadmin/user_upload/Foto/Bike/Mountain-bike/Alta_Badia_mountain-bike-Dolomiti_by_Alex_Moling.jpg",
+      "sourceUrl": "https://www.altabadia.org/en",
+      "credit": "官方页面图片 · 版权归原权利人",
+      "status": "从官网图片元素提取，未逐图人工核实",
+      "source": "https://www.altabadia.org/en",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Alta Badia",
+    "name": "阿尔塔巴迪亚",
+    "description": "意大利 · Alta Badia。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "cervinia",
+    "country": "意大利",
+    "region": "欧洲",
+    "lat": 45.937,
+    "lon": 7.633,
+    "officialUrl": "https://www.cervinia.it/en",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.cervinia.it/en"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.cervinia.it/en",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.cervinia.it/assets/img/social-share-image.jpg",
+      "sourceUrl": "https://www.cervinia.it/en",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.cervinia.it/en",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Cervinia",
+    "name": "切尔维尼亚",
+    "description": "意大利 · Cervinia。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "sierra-nevada",
+    "country": "西班牙",
+    "region": "欧洲",
+    "lat": 37.096,
+    "lon": -3.398,
+    "officialUrl": "https://sierranevada.es/en/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://sierranevada.es/en/"
+      },
+      {
+        "title": "官方身份复核（2026-11-04）",
+        "url": "https://sierranevada.es/en/"
+      }
+    ],
+    "verification": {
+      "status": 403,
+      "finalUrl": "https://sierranevada.es/en/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实",
+      "officialIdentity": "官方网页已通过网页检索交叉核实；自动 HTTP 请求受限制"
+    },
+    "photo": {
+      "url": "https://turismo.granada.org/sites/default/files/2023-09/mirlo_blanco_1.jpg",
+      "source": "https://turismo.granada.org/en/sierra-nevada-winter-non-skiers",
+      "sourceUrl": "https://turismo.granada.org/en/sierra-nevada-winter-non-skiers",
+      "credit": "Ayuntamiento de Granada · 版权所有",
+      "status": "市旅游局 Sierra Nevada Mirlo Blanco 冬季活动区配图，非雪道全景；自动图片访问未通过（原站限制或超时），界面应显示缺失占位",
+      "httpStatus": 403,
+      "contentType": "text/html"
+    },
+    "nameEn": "Sierra Nevada",
+    "name": "内华达山",
+    "description": "西班牙 · Sierra Nevada。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "grandvalira",
+    "country": "安道尔",
+    "region": "欧洲",
+    "lat": 42.542,
+    "lon": 1.733,
+    "officialUrl": "https://www.grandvalira.com/en",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.grandvalira.com/en"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.grandvalira.com/en",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.grandvalira.com/sites/default/files/styles/carousel_header_small/public/2025-12/09_GV_Slide-Home.jpg.webp?h=d7266505&itok=V6xIzHVD",
+      "sourceUrl": "https://www.grandvalira.com/en",
+      "credit": "官方页面图片 · 版权归原权利人",
+      "status": "从官网图片元素提取，未逐图人工核实",
+      "source": "https://www.grandvalira.com/en",
+      "httpStatus": 200,
+      "contentType": "image/webp"
+    },
+    "nameEn": "Grandvalira",
+    "name": "格兰德瓦利拉",
+    "description": "安道尔 · Grandvalira。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "trysil",
+    "country": "挪威",
+    "region": "欧洲",
+    "lat": 61.307,
+    "lon": 12.236,
+    "officialUrl": "https://www.skistar.com/en/ski-destinations/trysil/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.skistar.com/en/ski-destinations/trysil/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.skistar.com/en/ski-destinations/trysil/winter-in-trysil/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.skistar.com/globalassets/bilder-nya-skistar.com/skidorter_profilbilder/trysil/trysil_barn_ski.jpg",
+      "sourceUrl": "https://www.skistar.com/en/ski-destinations/trysil/winter-in-trysil/",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.skistar.com/en/ski-destinations/trysil/winter-in-trysil/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Trysil",
+    "name": "特吕西尔",
+    "description": "挪威 · Trysil。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "are",
+    "country": "瑞典",
+    "region": "欧洲",
+    "lat": 63.398,
+    "lon": 13.081,
+    "officialUrl": "https://www.skistar.com/en/ski-destinations/are/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.skistar.com/en/ski-destinations/are/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.skistar.com/en/ski-destinations/are/winter-in-are/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.skistar.com/globalassets/bilder-nya-skistar.com/skidorter_profilbilder/are/are_kabibanan.jpg",
+      "sourceUrl": "https://www.skistar.com/en/ski-destinations/are/winter-in-are/",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.skistar.com/en/ski-destinations/are/winter-in-are/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Åre",
+    "name": "奥勒",
+    "description": "瑞典 · Åre。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "levi",
+    "country": "芬兰",
+    "region": "欧洲",
+    "lat": 67.805,
+    "lon": 24.802,
+    "officialUrl": "https://www.levi.fi/en/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.levi.fi/en/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.levi.fi/de/levi-im-sommer/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://images.ctfassets.net/sqofpczsslzu/6o8o0woXq0yUCX3uBUadmN/eb4d3341b21768a83207a748acae2a85/Levi2017_July_H2A5726_Web.jpg?w=1200&h=630&fl=progressive&q=50&fm=jpg&fit=fill&bg=transparent",
+      "sourceUrl": "https://www.levi.fi/de/levi-im-sommer/",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.levi.fi/de/levi-im-sommer/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Levi",
+    "name": "列维",
+    "description": "芬兰 · Levi。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "whistler",
+    "country": "加拿大",
+    "region": "北美洲",
+    "lat": 50.116,
+    "lon": -122.957,
+    "officialUrl": "https://www.whistlerblackcomb.com/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.whistlerblackcomb.com/"
+      },
+      {
+        "title": "从申办梦想到 2010",
+        "url": "https://www.whistler.ca/about/whistler-history/"
+      },
+      {
+        "title": "从 Creekside 开始",
+        "url": "https://cdn.whistler.com/s3/pdf/2010-olympic-guide-whistler.pdf"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.whistlerblackcomb.com/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://res.cloudinary.com/whistler/image/upload/w_auto%2Cc_scale%2Cdpr_auto%2Cq_auto/v1/s3/images/hero/winter2026/whistler-canada-winter.jpg",
+      "sourceUrl": "https://www.whistler.com/",
+      "credit": "官方旅游／运营方网页图片 · 版权归原权利人",
+      "status": "官网图片链接；外链可用性受原站限制",
+      "source": "https://www.whistler.com/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Whistler Blackcomb",
+    "name": "惠斯勒黑梳山",
+    "description": "惠斯勒与黑梳山组成相邻的双山网络。规划时需区分村庄、山顶缆车连接和不同山脚入口，缆车开放应以当天官方报告为准。",
+    "depth": {
+      "title": "两座山与一段奥运梦想",
+      "sections": [
+        {
+          "title": "从 Creekside 开始",
+          "text": "官方旅游局的奥运指南记载，Whistler Mountain 于 1966 年在 Creekside 山脚开始首个雪季。今天看到的完整度假村，是分阶段建设的结果。",
+          "source": "https://cdn.whistler.com/s3/pdf/2010-olympic-guide-whistler.pdf"
+        },
+        {
+          "title": "黑梳山与村庄的发展",
+          "text": "惠斯勒市政府记载，1980 年 12 月惠斯勒村、黑梳山及惠斯勒山北侧投入运营。村庄与山地发展并行，使这里逐步形成双山旅行格局。",
+          "source": "https://www.whistler.ca/about/whistler-history/"
+        },
+        {
+          "title": "奥运遗产也可以参观",
+          "text": "官方奥运指南介绍了山上的 Legacy Display，内容包括赛事故事与照片，也展示 Didier Défago 在 2010 年夺冠时使用的滑降雪板。展陈信息属于历史指南，现时开放需另查。",
+          "source": "https://cdn.whistler.com/s3/pdf/2010-olympic-guide-whistler.pdf"
+        }
+      ],
+      "story": {
+        "title": "从申办梦想到 2010",
+        "text": "惠斯勒市政府的历史资料记载，2003 年温哥华／惠斯勒获得 2010 冬奥会举办权。这里的奥运故事来自社区长期的发展，而不只是一个赛事标签。",
+        "source": "https://www.whistler.ca/about/whistler-history/"
+      },
+      "source": "https://www.whistler.ca/about/whistler-history/",
+      "checkedAt": "2026-11-04"
+    }
+  },
+  {
+    "id": "banff-sunshine",
+    "country": "加拿大",
+    "region": "北美洲",
+    "lat": 51.078,
+    "lon": -115.782,
+    "officialUrl": "https://www.skibanff.com/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.skibanff.com/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.skibanff.com/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.skibanff.com/sites/default/files/styles/social_share/public/2026-07/Arney%20Canyon%20reedits-2.jpg?itok=x2B6hMOk",
+      "sourceUrl": "https://www.skibanff.com/",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.skibanff.com/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Banff Sunshine",
+    "name": "班夫阳光村",
+    "description": "加拿大 · Banff Sunshine。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "lake-louise",
+    "country": "加拿大",
+    "region": "北美洲",
+    "lat": 51.441,
+    "lon": -116.161,
+    "officialUrl": "https://www.skilouise.com/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.skilouise.com/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.skilouise.com/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.skilouise.com/wp-content/uploads/2025/11/959-wsa-25.jpg",
+      "sourceUrl": "https://www.skilouise.com/",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.skilouise.com/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Lake Louise",
+    "name": "路易斯湖",
+    "description": "加拿大 · Lake Louise。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "revelstoke",
+    "country": "加拿大",
+    "region": "北美洲",
+    "lat": 50.958,
+    "lon": -118.163,
+    "officialUrl": "https://www.revelstokemountainresort.com/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.revelstokemountainresort.com/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.revelstokemountainresort.com/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.revelstokemountainresort.com/site/assets/files/31572/winter_menu_1.550x302.webp",
+      "sourceUrl": "https://www.revelstokemountainresort.com/",
+      "credit": "官方页面图片 · 版权归原权利人",
+      "status": "从官网图片元素提取，未逐图人工核实",
+      "source": "https://www.revelstokemountainresort.com/",
+      "httpStatus": 206,
+      "contentType": "image/webp"
+    },
+    "nameEn": "Revelstoke",
+    "name": "雷夫尔斯托克",
+    "description": "加拿大 · Revelstoke。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "tremblant",
+    "country": "加拿大",
+    "region": "北美洲",
+    "lat": 46.213,
+    "lon": -74.586,
+    "officialUrl": "https://www.tremblant.ca/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.tremblant.ca/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.tremblant.ca/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.tremblant.ca/-/media/tremblant/mountain-and-village/investments/header-timber-summit-en.jpg",
+      "sourceUrl": "https://www.tremblant.ca/",
+      "credit": "官方旅游／运营方网页图片 · 版权归原权利人",
+      "status": "官网图片链接；外链可用性受原站限制",
+      "source": "https://www.tremblant.ca/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Tremblant",
+    "name": "蒙特朗布朗",
+    "description": "加拿大 · Tremblant。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "aspen-snowmass",
+    "country": "美国",
+    "region": "北美洲",
+    "lat": 39.191,
+    "lon": -106.817,
+    "officialUrl": "https://www.aspensnowmass.com/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.aspensnowmass.com/"
+      },
+      {
+        "title": "从 1946 年到 X Games",
+        "url": "https://www.aspensnowmass.com/discover/who-we-are"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.aspensnowmass.com/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.aspensnowmass.com/-/media/aspen-snowmass/images/homepage-hero/homepage-hero-image/winter/2025-26/hp_hero_2526.jpg?mw=752&mh=464&hash=5866BE8C4D8E818ADAC48430BCD8EA7A",
+      "sourceUrl": "https://www.aspensnowmass.com/",
+      "credit": "官方页面图片 · 版权归原权利人",
+      "status": "从官网图片元素提取，未逐图人工核实",
+      "source": "https://www.aspensnowmass.com/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Aspen Snowmass",
+    "name": "阿斯彭斯诺马斯",
+    "description": "Aspen Snowmass 是由不同山体组成的度假区品牌。对比票价和地形时，应先确认讨论的是整个品牌还是其中一座山，而不是把四座山当成单一坡面。",
+    "depth": {
+      "title": "四座山的共同名字",
+      "sections": [
+        {
+          "title": "四座山的性格",
+          "text": "运营方把 Buttermilk 描述为适合学习的绿道与蓝道环境，把 Aspen Highlands 与 Highland Bowl 相联系；Aspen Mountain 的雪道回到城镇。四座山的体验不能由品牌总面积概括。",
+          "source": "https://www.aspensnowmass.com/"
+        },
+        {
+          "title": "Snowmass 的单山规模",
+          "text": "官网为 Snowmass 单山列出 3,300 多英亩与 96 条雪道，强调家庭旅行空间。此处数字仅指 Snowmass，不是四座山的合计。",
+          "source": "https://www.aspensnowmass.com/"
+        },
+        {
+          "title": "统一雪票与配套",
+          "text": "运营方说明一张雪票可覆盖四座山，并提供各山器材租赁、课程和山地餐饮。课程与器材不应被默认包含在普通雪票价格中。",
+          "source": "https://www.aspensnowmass.com/"
+        }
+      ],
+      "story": {
+        "title": "从 1946 年到 X Games",
+        "text": "运营方时间线记载：Aspen Skiing Corporation 于 1946 年成立，Snowmass 在 1967 年开放，Aspen Highlands 于 1993 年加入；2001 年起 Buttermilk 成为 Winter X Games 的举办地。",
+        "source": "https://www.aspensnowmass.com/discover/who-we-are"
+      },
+      "source": "https://www.aspensnowmass.com/discover/who-we-are",
+      "checkedAt": "2026-11-04"
+    }
+  },
+  {
+    "id": "vail",
+    "country": "美国",
+    "region": "北美洲",
+    "lat": 39.64,
+    "lon": -106.374,
+    "officialUrl": "https://www.vail.com/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.vail.com/"
+      },
+      {
+        "title": "官方身份复核（2026-11-04）",
+        "url": "https://www.vail.com/"
+      }
+    ],
+    "verification": {
+      "status": 403,
+      "finalUrl": "https://www.vail.com/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实",
+      "officialIdentity": "官方网页已通过网页检索交叉核实；自动 HTTP 请求受限制"
+    },
+    "photo": {
+      "url": "https://discovervail.com/app/uploads/2022/03/20250325_Cohen_VLMD_Deck_Ski_1125-768x512.jpg",
+      "sourceUrl": "https://discovervail.com/",
+      "credit": "官方旅游／运营方网页图片 · 版权归原权利人",
+      "status": "官方来源提取；未逐图人工核实",
+      "source": "https://discovervail.com/",
+      "httpStatus": 206,
+      "contentType": "image/webp"
+    },
+    "nameEn": "Vail",
+    "name": "韦尔",
+    "description": "美国 · Vail。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "park-city-mountain",
+    "country": "美国",
+    "region": "北美洲",
+    "lat": 40.651,
+    "lon": -111.508,
+    "officialUrl": "https://www.parkcitymountain.com/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.parkcitymountain.com/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.parkcitymountain.com/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://assets.simpleviewinc.com/sv-park-city/image/upload/c_fill%2Cf_jpg%2Ch_512%2Cq_65%2Cw_640/v1/clients/parkcity/20250214_Loosmann_PC_054_b1cad3f3-2a27-4269-886b-0396d5687654.jpg",
+      "sourceUrl": "https://www.visitparkcity.com/things-to-do/park-city-mountain-resort/",
+      "credit": "官方旅游／运营方网页图片 · 版权归原权利人",
+      "status": "官网图片链接；外链可用性受原站限制",
+      "source": "https://www.visitparkcity.com/things-to-do/park-city-mountain-resort/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Park City Mountain",
+    "name": "帕克城",
+    "description": "美国 · Park City Mountain。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "jackson-hole",
+    "country": "美国",
+    "region": "北美洲",
+    "lat": 43.587,
+    "lon": -110.827,
+    "officialUrl": "https://www.jacksonhole.com/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.jacksonhole.com/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.jacksonhole.com/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.datocms-assets.com/50871/1634930614-winter-shopping-tvs-20171205-as-img3596.jpg?fit=crop&h=448.5&w=672",
+      "sourceUrl": "https://www.jacksonhole.com/",
+      "credit": "官方页面图片 · 版权归原权利人",
+      "status": "从官网图片元素提取，未逐图人工核实",
+      "source": "https://www.jacksonhole.com/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Jackson Hole",
+    "name": "杰克逊霍尔",
+    "description": "美国 · Jackson Hole。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "mammoth-mountain",
+    "country": "美国",
+    "region": "北美洲",
+    "lat": 37.651,
+    "lon": -119.028,
+    "officialUrl": "https://www.mammothmountain.com/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.mammothmountain.com/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.mammothmountain.com/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://sc.mammothmountain.com/-/media/project/mammoth/library/brand/crown-superhero/2019-03-25_mm_pm_heli_774_crown_2400x1350.jpg?h=1350&iar=0&w=2400&rev=bd82d076b77a41568b615167fe04ca2d&hash=26CADE8E40EF0D786958ECDD6855EAFF",
+      "sourceUrl": "https://www.mammothmountain.com/",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.mammothmountain.com/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Mammoth Mountain",
+    "name": "猛犸山",
+    "description": "美国 · Mammoth Mountain。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "niseko",
+    "country": "日本",
+    "region": "亚洲",
+    "lat": 42.864,
+    "lon": 140.698,
+    "officialUrl": "https://www.niseko.ne.jp/en/",
+    "price": {
+      "amount": 12600,
+      "currency": "JPY",
+      "label": "成人全山 1 日柜台票",
+      "period": "2026-12-12—2026-12-23；2027-03-01—2027-03-22",
+      "source": "https://www.niseko.ne.jp/en/lift/",
+      "checkedAt": "2026-11-04",
+      "season": "2026–27"
+    },
+    "priceStatus": "官网已核实日期价；不是实时库存或最低价",
+    "difficulty": "含初级／中级／高级雪道（官方资料）",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.niseko.ne.jp/en/"
+      },
+      {
+        "title": "粉雪的地理故事",
+        "url": "https://www.niseko.ne.jp/en/niseko/"
+      },
+      {
+        "title": "2026–27 官方票价",
+        "url": "https://www.niseko.ne.jp/en/lift/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.niseko.ne.jp/en/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.niseko.ne.jp/en/wp-content/themes/niseko2019_p2/images/sns1.jpg",
+      "sourceUrl": "https://www.niseko.ne.jp/en/",
+      "credit": "官方页面图片 · 版权归原权利人",
+      "status": "从官网图片元素提取，未逐图人工核实",
+      "source": "https://www.niseko.ne.jp/en/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Niseko United",
+    "name": "二世古联合",
+    "description": "二世古联合由安努普利、Niseko Village、Grand Hirafu 与花园四个雪场组成，共同环绕二世古安努普利山。全山通票与单区票的覆盖范围不同。",
+    "depth": {
+      "title": "一座山，四个不同的入口",
+      "sections": [
+        {
+          "title": "地形与分区",
+          "text": "官网介绍花园区域有初学者学习区、地形公园与林间滑行体验；Grand Hirafu 是四区中面积最大的区域。这里同时覆盖初、中、高级地形，不能给整个二世古只贴一个难度标签。",
+          "source": "https://www.niseko.ne.jp/en/niseko/"
+        },
+        {
+          "title": "2026–27 的季节差异",
+          "text": "官方计划安努普利与 Grand Hirafu 从 2026 年 11 月 28 日运营至 2027 年 5 月 5 日；Niseko Village 与花园结束更早。日期可受天气调整，春季跨区选择会与隆冬不同。",
+          "source": "https://www.niseko.ne.jp/en/lift/"
+        },
+        {
+          "title": "夜滑与通票",
+          "text": "官方夜滑计划为 2026 年 12 月 12 日至 2027 年 3 月 22 日。全山日票在夜滑运营期最后一天可用到夜滑结束，多日票要求连续使用；单区票不能默认覆盖四区。",
+          "source": "https://www.niseko.ne.jp/en/lift/"
+        }
+      ],
+      "story": {
+        "title": "粉雪的地理故事",
+        "text": "官网将粉雪的形成与欧亚大陆季风经过日本海吸收水汽联系起来。山林、学习区、地形公园和不同难度的雪道共同构成体验；粉雪宣传不代表每天的雪况保证。",
+        "source": "https://www.niseko.ne.jp/en/niseko/"
+      },
+      "source": "https://www.niseko.ne.jp/en/niseko/",
+      "checkedAt": "2026-11-04"
+    },
+    "difficulties": [
+      "easy",
+      "intermediate",
+      "advanced"
+    ],
+    "difficultySource": "https://www.niseko.ne.jp/en/niseko/"
+  },
+  {
+    "id": "hakuba-happo-one",
+    "country": "日本",
+    "region": "亚洲",
+    "lat": 36.702,
+    "lon": 137.838,
+    "officialUrl": "https://www.happo-one.jp/en/",
+    "price": {
+      "amount": 9800,
+      "currency": "JPY",
+      "label": "成人 18–64 岁，旺季 1 日票，新购／柜台",
+      "period": "2026-12-19—2027-03-22",
+      "source": "https://www.happo-one.jp/en/ticket/",
+      "checkedAt": "2026-11-04",
+      "season": "2026–27"
+    },
+    "priceStatus": "官网已核实日期价；不是实时库存或最低价",
+    "difficulty": "含初级／中级／高级雪道（官方资料）",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.happo-one.jp/en/"
+      },
+      {
+        "title": "雪票里的年龄边界",
+        "url": "https://www.happo-one.jp/en/ticket/"
+      },
+      {
+        "title": "2026–27 官方票价",
+        "url": "https://www.happo-one.jp/en/ticket/"
+      },
+      {
+        "title": "官方地形口径",
+        "url": "https://www.happo-one.jp/en/gelande/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.happo-one.jp/en/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.happo-one.jp/wp2019/wp-content/uploads/2019/11/ogp-1024x929.png",
+      "sourceUrl": "https://www.happo-one.jp/en/",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.happo-one.jp/en/",
+      "httpStatus": 206,
+      "contentType": "image/png"
+    },
+    "nameEn": "Hakuba Happo-one",
+    "name": "白马八方尾根",
+    "description": "八方尾根是白马地区的一座具体滑雪场，与覆盖多个雪场的 Hakuba Valley 全山票不同。购买前应核对八方尾根票与山谷联票的适用范围。",
+    "depth": {
+      "title": "白马山谷中的八方尾根",
+      "sections": [
+        {
+          "title": "官方地形口径",
+          "text": "八方尾根官网列出 220 公顷、16 条雪道及 760–1,831 米高程范围，初／中／高级组成分别为 30%／50%／20%。这些是雪场公布值，不是本项目 DEM 重新计算的比例。",
+          "source": "https://www.happo-one.jp/en/gelande/"
+        },
+        {
+          "title": "最长线路与坡度",
+          "text": "官网把最长滑行 8,000 米描述为 Riesen Grat–Kurobishi–Skyline–Sakka 的组合，不能误认为一条独立雪道。其最大 37° 是特定雪道的官方指标，并非整场平均坡度。",
+          "source": "https://www.happo-one.jp/en/gelande/"
+        },
+        {
+          "title": "2026–27 购票细节",
+          "text": "旺季为 2026 年 12 月 19 日至次年 3 月 22 日；成人新购一日票 9,800 日元、充值票另价。官方还说明两日票可非连续使用，但不能多人共享一张票。",
+          "source": "https://www.happo-one.jp/en/ticket/"
+        }
+      ],
+      "story": {
+        "title": "雪票里的年龄边界",
+        "text": "八方尾根 2026–27 官方价目页将儿童票列为 6–17 岁、成人票为 18–64 岁，并为补充充值票列出不同价格。比较日本雪场预算时，年龄与新购／充值票种会改变结论。",
+        "source": "https://www.happo-one.jp/en/ticket/"
+      },
+      "source": "https://www.happo-one.jp/en/ticket/",
+      "checkedAt": "2026-11-04"
+    },
+    "difficulties": [
+      "easy",
+      "intermediate",
+      "advanced"
+    ],
+    "difficultySource": "https://www.happo-one.jp/en/gelande/"
+  },
+  {
+    "id": "furano",
+    "country": "日本",
+    "region": "亚洲",
+    "lat": 43.342,
+    "lon": 142.354,
+    "officialUrl": "https://www.princehotels.com/en/ski/furano/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.princehotels.com/en/ski/furano/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.princehotels.com/en/ski/furano/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.princehotels.com/en/ski/furano/img/mountain_map.jpg",
+      "sourceUrl": "https://www.princehotels.com/en/ski/furano/",
+      "credit": "官方页面图片 · 版权归原权利人",
+      "status": "从官网图片元素提取，未逐图人工核实",
+      "source": "https://www.princehotels.com/en/ski/furano/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Furano",
+    "name": "富良野",
+    "description": "日本 · Furano。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "rusutsu",
+    "country": "日本",
+    "region": "亚洲",
+    "lat": 42.738,
+    "lon": 140.911,
+    "officialUrl": "https://rusutsu.com/en/",
+    "price": {
+      "amount": 16700,
+      "currency": "JPY",
+      "label": "成人 19–64 岁，常规季 1 日柜台票；线上 13,200 JPY",
+      "period": "2026-12-19—2027-03-14",
+      "source": "https://rusutsu.com/en/winter-lift-tickets/",
+      "checkedAt": "2026-11-04",
+      "season": "2026–27"
+    },
+    "priceStatus": "官网已核实日期价；不是实时库存或最低价",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://rusutsu.com/en/"
+      },
+      {
+        "title": "2026–27 官方票价",
+        "url": "https://rusutsu.com/en/winter-lift-tickets/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://rusutsu.com/en/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://rusutsu.com/assets/img/common/ogp.jpg",
+      "sourceUrl": "https://rusutsu.com/en/",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://rusutsu.com/en/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Rusutsu",
+    "name": "留寿都",
+    "description": "日本 · Rusutsu。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "shiga-kogen",
+    "country": "日本",
+    "region": "亚洲",
+    "lat": 36.737,
+    "lon": 138.505,
+    "officialUrl": "https://shigakogen-ski.or.jp/english/",
+    "price": {
+      "amount": 9500,
+      "currency": "JPY",
+      "label": "成人 19–59 岁，全山 1 日柜台票",
+      "period": "2026-27 雪季常规票；早季／春季另价",
+      "source": "https://shigakogen-ski.or.jp/english/ticket/",
+      "checkedAt": "2026-11-04",
+      "season": "2026–27"
+    },
+    "priceStatus": "官网已核实日期价；不是实时库存或最低价",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://shigakogen-ski.or.jp/english/"
+      },
+      {
+        "title": "从实体票到可重复使用的 Key Ticket",
+        "url": "https://shigakogen-ski.or.jp/english/ticket/"
+      },
+      {
+        "title": "2026–27 官方票价",
+        "url": "https://shigakogen-ski.or.jp/english/ticket/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.shigakogen-ski.or.jp/english/index.php",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://shigakogen-ski.or.jp/english/assets/images/ogb.jpg",
+      "sourceUrl": "https://www.shigakogen-ski.or.jp/english/index.php",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.shigakogen-ski.or.jp/english/index.php",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Shiga Kogen",
+    "name": "志贺高原",
+    "description": "志贺高原的官方全山通票页面列出 18 个滑雪区与 45 条缆车／吊厢。规模数字是联票覆盖的统计，不是当日开放承诺。",
+    "depth": {
+      "title": "一个通票，多个山地滑雪区",
+      "sections": [
+        {
+          "title": "全山票的覆盖",
+          "text": "2026–27 官方页面明确列出通票覆盖 18 个滑雪区、45 条缆车与吊厢。全山票不意味着所有缆车当天同时运行，应结合分区运行页使用。",
+          "source": "https://shigakogen-ski.or.jp/english/ticket/"
+        },
+        {
+          "title": "家庭票与年龄",
+          "text": "官方成人年龄为 19–59 岁，学生为 13–18 岁，儿童为 0–12 岁，老年票从 60 岁起。官网还列出成人加儿童／学生组合产品；家庭比较应按每个成员的年龄计算。",
+          "source": "https://shigakogen-ski.or.jp/english/ticket/"
+        },
+        {
+          "title": "早季与春季",
+          "text": "2026–27 官方运营期为 12 月 5 日至次年 5 月 5 日；12 月 5–18 日及 4 月 1 日后另列早春季票价。常规多日票允许非连续日期，但早春季多日票要求连续使用。",
+          "source": "https://shigakogen-ski.or.jp/english/ticket/"
+        }
+      ],
+      "story": {
+        "title": "从实体票到可重复使用的 Key Ticket",
+        "text": "官网说明 Key Ticket 可以保留，并在之后通过 Direct-In 线上购票后直接使用闸机。这个小变化体现了山地度假区从纸票走向可重复使用通行系统的演变。",
+        "source": "https://shigakogen-ski.or.jp/english/ticket/"
+      },
+      "source": "https://shigakogen-ski.or.jp/english/ticket/",
+      "checkedAt": "2026-11-04"
+    }
+  },
+  {
+    "id": "yongpyong",
+    "country": "韩国",
+    "region": "亚洲",
+    "lat": 37.644,
+    "lon": 128.681,
+    "officialUrl": "https://www.yongpyong.co.kr/eng/index.do",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.yongpyong.co.kr/eng/index.do"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.yongpyong.co.kr/eng/index.do",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.yongpyong.co.kr/images/eng/main_winter_2017/ski_pass.jpg",
+      "sourceUrl": "https://www.yongpyong.co.kr/eng/index.do",
+      "credit": "官方页面图片 · 版权归原权利人",
+      "status": "从官网图片元素提取，未逐图人工核实",
+      "source": "https://www.yongpyong.co.kr/eng/index.do",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Yongpyong",
+    "name": "龙平",
+    "description": "韩国 · Yongpyong。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "gulmarg",
+    "country": "印度",
+    "region": "亚洲",
+    "lat": 34.048,
+    "lon": 74.38,
+    "officialUrl": "https://www.jammukashmircablecar.com/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.jammukashmircablecar.com/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.jammukashmircablecar.com/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.jammukashmircablecar.com/pub/images/hero-banner-gulmarg-winter.webp",
+      "sourceUrl": "https://www.jammukashmircablecar.com/",
+      "credit": "官方页面图片 · 版权归原权利人",
+      "status": "从官网图片元素提取，未逐图人工核实",
+      "source": "https://www.jammukashmircablecar.com/",
+      "httpStatus": 206,
+      "contentType": "image/webp"
+    },
+    "nameEn": "Gulmarg",
+    "name": "古尔马尔格",
+    "description": "印度 · Gulmarg。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "cardrona",
+    "country": "新西兰",
+    "region": "大洋洲",
+    "lat": -44.876,
+    "lon": 168.948,
+    "officialUrl": "https://www.cardrona.com/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.cardrona.com/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://cardrona-treblecone.com/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://images.ctfassets.net/2atbvuhykqrn/301QwEuamQPZSjkivPTji3/8a541ec68d0a2505cc7a3e4c03b3efc9/W24-Mountains_Homepage_Hero_Desktop.webp",
+      "sourceUrl": "https://cardrona-treblecone.com/",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://cardrona-treblecone.com/",
+      "httpStatus": 206,
+      "contentType": "image/webp"
+    },
+    "nameEn": "Cardrona",
+    "name": "卡德罗纳",
+    "description": "新西兰 · Cardrona。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "the-remarkables",
+    "country": "新西兰",
+    "region": "大洋洲",
+    "lat": -45.054,
+    "lon": 168.814,
+    "officialUrl": "https://www.theremarkables.co.nz/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.theremarkables.co.nz/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.theremarkables.co.nz/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://www.theremarkables.co.nz/_cf/h/cdn.prod.website-files.com/69f122bc870708d57935b25d/6a4ed42e5a14ce03cd941664_re-freeride-skier-skiing-on-remarks-hero.jpg",
+      "sourceUrl": "https://www.theremarkables.co.nz/",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://www.theremarkables.co.nz/",
+      "httpStatus": 200,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "The Remarkables",
+    "name": "卓越山",
+    "description": "新西兰 · The Remarkables。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "thredbo",
+    "country": "澳大利亚",
+    "region": "大洋洲",
+    "lat": -36.505,
+    "lon": 148.305,
+    "officialUrl": "https://www.thredbo.com.au/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://www.thredbo.com.au/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.thredbo.com.au/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://cdn.thredbo.com.au/wp-content/uploads/2026/09/30151509/SEASONPASS27_HOMEPAGE-BANNER_JYE_2560x1707px-1-1-720x464.jpg",
+      "sourceUrl": "https://www.thredbo.com.au/",
+      "credit": "官方旅游／运营方网页图片 · 版权归原权利人",
+      "status": "官网图片链接；外链可用性受原站限制",
+      "source": "https://www.thredbo.com.au/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Thredbo",
+    "name": "斯雷德博",
+    "description": "澳大利亚 · Thredbo。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "portillo",
+    "country": "智利",
+    "region": "南美洲",
+    "lat": -32.836,
+    "lon": -70.129,
+    "officialUrl": "https://skiportillo.com/en/",
+    "price": null,
+    "priceStatus": "未核实当季日期票价；请在官网选择日期查询",
+    "difficulty": "待核实",
+    "coordinatesNote": "雪场/山村近似定位，非雪道入口",
+    "checkedAt": "2026-11-04",
+    "sources": [
+      {
+        "title": "雪场或官方旅游机构网站",
+        "url": "https://skiportillo.com/en/"
+      }
+    ],
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://skiportillo.com/en/home/",
+      "method": "HTTP GET；可访问性不等于全部内容已核实"
+    },
+    "photo": {
+      "url": "https://skiportillo.com/wp-content/uploads/2023/12/All-Inclusive-Resort-Hotel-Ski-Portillo.jpg",
+      "sourceUrl": "https://skiportillo.com/en/home/",
+      "credit": "官方网页分享图 · 版权归原权利人；不代表开放许可",
+      "status": "官方页面 OG 图片，未逐图人工核实",
+      "source": "https://skiportillo.com/en/home/",
+      "httpStatus": 206,
+      "contentType": "image/jpeg"
+    },
+    "nameEn": "Portillo",
+    "name": "波蒂略",
+    "description": "智利 · Portillo。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  }
+]
