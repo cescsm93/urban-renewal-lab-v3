@@ -2,7 +2,7 @@
 const resorts = require('../lib/snow-resorts.json');
 const terrain = require('../lib/snow-terrain.json');
 const facts = require('../lib/snow-facts.json');
-const allowedOrigins=new Set(['https://snow-atlas-field-guide-2026.cescsm616.chatgpt.site','http://127.0.0.1:4173','http://localhost:4173','http://127.0.0.1:4175','http://localhost:4175']);
+const allowedOrigins=new Set(['https://urban-renewal-lab-1.vercel.app','https://snow-atlas-field-guide-2026.cescsm616.chatgpt.site','http://127.0.0.1:4173','http://localhost:4173','http://127.0.0.1:4175','http://localhost:4175']);
 const counters=new Map();
 function evidence(question,resortId){
   const q=question.toLowerCase();

@@ -1,0 +1,6 @@
+[
+  {"id":"black-ibex","title":"Black Ibex · 官方公布坡度","text":"Kaunertaler Gletscher 官方公布 Black Ibex 为 41.3° / 87.85% 坡度，并称其为奥地利最陡雪道；这是运营方陈述，不是独立全球排名。雪道编号1d，Falginjochbahn山顶站附近起始。","url":"https://www.kaunertaler-gletscher.at/kaunertaler-gletscher/im-winter/black-ibex.html","checkedAt":"2026-11-04"},
+  {"id":"harakiri","title":"Harakiri · 官方公布坡度","text":"Mayrhofen 官方页面列 Harakiri 为34号雪道、最大78%坡度；百分比不是角度，atan(0.78)约为38°。该页也使用奥地利最陡宣传，与其他运营方称号存在口径冲突，不能据此断言全球第一。","url":"https://www.mayrhofen.at/en/mountopolis/winter/harakiri","checkedAt":"2026-11-04"},
+  {"id":"langer-zug","title":"Langer Zug · 官方公布坡度","text":"Lech Zürs 官方称 Langer Zug 上段三分之一达80%坡度，为世界上最陡的压雪道之一。80%约38.7°，并不是80°。范围是局部陡段，不能当作全程平均。","url":"https://www.lechzuers.com/en/winter/winter-sports/skiing/langer-zug","checkedAt":"2026-11-04"},
+  {"id":"method","title":"SNOW ATLAS · 地形数据方法","text":"目前图鉴收录50座雪场，不是全球全量数据库。9条示范片段的DEM坡度来自历史Mapzen Terrain Tiles z12，约20–30米像元；100米窗口最大坡度不是官方雪道最大坡度。坡度百分比=tan(角度)*100。没有完整同口径全球测量，所以无法确定全球最陡是哪条；需先区分压雪道、未压雪标记道、野雪路线、局部/平均坡度。","url":"https://registry.opendata.aws/terrain-tiles/","checkedAt":"2026-11-04"}
+]
