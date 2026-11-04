@@ -6,7 +6,7 @@ const allowedOrigins=new Set(['https://snow-atlas-field-guide-2026.cescsm616.cha
 const counters=new Map();
 function evidence(question,resortId){
   const q=question.toLowerCase();
-  const ranked=resorts.map(r=>({r,score:(r.id===resortId?3:0)+[r.name,r.nameEn,r.country].filter(s=>s&&q.includes(s.toLowerCase())).length*5})).sort((a,b)=>b.score-a.score);
+  const ranked=resorts.map(r=>({r,score:(r.id===resortId?3:0)+[r.name,r.nameEn,r.country,r.name.length>3?r.name.slice(0,3):null,r.nameEn?.split(' ')[0]].filter(s=>s&&q.includes(s.toLowerCase())).length*5})).sort((a,b)=>b.score-a.score);
   const chosen=ranked.filter(x=>x.score>0).slice(0,5).map(x=>x.r);
   const sources=[],notes=[];
   function add(title,url,text){if(!url?.startsWith('https://'))return;const id='S'+(sources.length+1);sources.push({id,title,url});notes.push(`[${id}] ${text}`)}
