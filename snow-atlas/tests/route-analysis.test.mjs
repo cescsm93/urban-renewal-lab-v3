@@ -1,0 +1,3 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {routeAnalysis} from '../route-analysis.mjs';
+test('known 50 percent plane gives 26.565 degrees, not 50 degrees',()=>{const a=routeAnalysis([[0,0],[0,.01]],(x,y)=>y*111320*.5);assert.ok(Math.abs(a.max.angle-26.565)<.001);assert.ok(Math.abs(a.max.percent-50)<.001)});
+test('short trails do not invent a maximum and coarse DEM uses wider windows',()=>{assert.equal(routeAnalysis([[0,0],[0,.0002]],()=>3).max,null);const a=routeAnalysis([[0,0],[0,.01]],()=>10,[120,80]);assert.equal(a.window,250);assert.equal(a.max.angle,0)});
