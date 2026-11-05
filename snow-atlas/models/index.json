@@ -1,0 +1,352 @@
+{
+  "zermatt": {
+    "routes": 138,
+    "retrievedAt": "2026-11-04",
+    "note": "社区映射的已采集范围内雪道片段，非完整官方雪场模型；无缆车、建筑或实时雪面实测。",
+    "model": "models/zermatt.json",
+    "evidence": "data/zermatt-osm.json"
+  },
+  "verbier": {
+    "routes": 248,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/verbier.json",
+    "evidence": "data/verbier-osm.json"
+  },
+  "st-moritz": {
+    "routes": 137,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/st-moritz.json",
+    "evidence": "data/st-moritz-osm.json"
+  },
+  "davos-klosters": {
+    "routes": 175,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/davos-klosters.json",
+    "evidence": "data/davos-klosters-osm.json"
+  },
+  "jungfrau-ski-region": {
+    "routes": 106,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/jungfrau-ski-region.json",
+    "evidence": "data/jungfrau-ski-region-osm.json"
+  },
+  "laax": {
+    "routes": 118,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/laax.json",
+    "evidence": "data/laax-osm.json"
+  },
+  "chamonix": {
+    "routes": 90,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/chamonix.json",
+    "evidence": "data/chamonix-osm.json"
+  },
+  "val-thorens": {
+    "routes": 474,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/val-thorens.json",
+    "evidence": "data/val-thorens-osm.json"
+  },
+  "courchevel": {
+    "routes": 479,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/courchevel.json",
+    "evidence": "data/courchevel-osm.json"
+  },
+  "val-disere": {
+    "routes": 235,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/val-disere.json",
+    "evidence": "data/val-disere-osm.json"
+  },
+  "tignes": {
+    "routes": 288,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/tignes.json",
+    "evidence": "data/tignes-osm.json"
+  },
+  "alpe-d-huez": {
+    "routes": 363,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/alpe-d-huez.json",
+    "evidence": "data/alpe-d-huez-osm.json"
+  },
+  "les-deux-alpes": {
+    "routes": 297,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/les-deux-alpes.json",
+    "evidence": "data/les-deux-alpes-osm.json"
+  },
+  "avoriaz": {
+    "routes": 470,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/avoriaz.json",
+    "evidence": "data/avoriaz-osm.json"
+  },
+  "solden": {
+    "routes": 129,
+    "retrievedAt": "2026-11-05",
+    "note": "社区映射的已采集范围内雪道片段，非完整官方雪场模型；无缆车、建筑或实时雪面实测。",
+    "model": "models/solden.json",
+    "evidence": "data/solden-osm.json"
+  },
+  "st-anton-am-arlberg": {
+    "routes": 211,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/st-anton-am-arlberg.json",
+    "evidence": "data/st-anton-am-arlberg-osm.json"
+  },
+  "kitzbuhel": {
+    "routes": 167,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/kitzbuhel.json",
+    "evidence": "data/kitzbuhel-osm.json"
+  },
+  "ischgl": {
+    "routes": 190,
+    "retrievedAt": "2026-11-05",
+    "note": "社区映射的已采集范围内雪道片段，非完整官方雪场模型；无缆车、建筑或实时雪面实测。",
+    "model": "models/ischgl.json",
+    "evidence": "data/ischgl-osm.json"
+  },
+  "saalbach-hinterglemm": {
+    "routes": 248,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/saalbach-hinterglemm.json",
+    "evidence": "data/saalbach-hinterglemm-osm.json"
+  },
+  "obertauern": {
+    "routes": 278,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/obertauern.json",
+    "evidence": "data/obertauern-osm.json"
+  },
+  "cortina-d-ampezzo": {
+    "routes": 107,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/cortina-d-ampezzo.json",
+    "evidence": "data/cortina-d-ampezzo-osm.json"
+  },
+  "val-gardena": {
+    "routes": 203,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/val-gardena.json",
+    "evidence": "data/val-gardena-osm.json"
+  },
+  "alta-badia": {
+    "routes": 188,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/alta-badia.json",
+    "evidence": "data/alta-badia-osm.json"
+  },
+  "cervinia": {
+    "routes": 150,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/cervinia.json",
+    "evidence": "data/cervinia-osm.json"
+  },
+  "sierra-nevada": {
+    "routes": 163,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/sierra-nevada.json",
+    "evidence": "data/sierra-nevada-osm.json"
+  },
+  "grandvalira": {
+    "routes": 140,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/grandvalira.json",
+    "evidence": "data/grandvalira-osm.json"
+  },
+  "trysil": {
+    "routes": 247,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/trysil.json",
+    "evidence": "data/trysil-osm.json"
+  },
+  "are": {
+    "routes": 263,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/are.json",
+    "evidence": "data/are-osm.json"
+  },
+  "levi": {
+    "routes": 162,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/levi.json",
+    "evidence": "data/levi-osm.json"
+  },
+  "whistler": {
+    "routes": 84,
+    "retrievedAt": "2026-11-04",
+    "note": "社区映射的已采集范围内雪道片段，非完整官方雪场模型；无缆车、建筑或实时雪面实测。",
+    "model": "models/whistler.json",
+    "evidence": "data/whistler-osm.json"
+  },
+  "banff-sunshine": {
+    "routes": 199,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/banff-sunshine.json",
+    "evidence": "data/banff-sunshine-osm.json"
+  },
+  "lake-louise": {
+    "routes": 163,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/lake-louise.json",
+    "evidence": "data/lake-louise-osm.json"
+  },
+  "revelstoke": {
+    "routes": 97,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/revelstoke.json",
+    "evidence": "data/revelstoke-osm.json"
+  },
+  "tremblant": {
+    "routes": 177,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/tremblant.json",
+    "evidence": "data/tremblant-osm.json"
+  },
+  "aspen-snowmass": {
+    "routes": 291,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。",
+    "model": "models/aspen-snowmass.json",
+    "evidence": "data/aspen-snowmass-osm.json"
+  },
+  "vail": {
+    "routes": 280,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/vail.json",
+    "evidence": "data/vail-osm.json"
+  },
+  "park-city-mountain": {
+    "routes": 567,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/park-city-mountain.json",
+    "evidence": "data/park-city-mountain-osm.json"
+  },
+  "jackson-hole": {
+    "routes": 196,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/jackson-hole.json",
+    "evidence": "data/jackson-hole-osm.json"
+  },
+  "mammoth-mountain": {
+    "routes": 197,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/mammoth-mountain.json",
+    "evidence": "data/mammoth-mountain-osm.json"
+  },
+  "niseko": {
+    "routes": 120,
+    "retrievedAt": "2026-11-04",
+    "note": "社区映射的已采集范围内雪道片段，非完整官方雪场模型；无缆车、建筑或实时雪面实测。",
+    "model": "models/niseko.json",
+    "evidence": "data/niseko-osm.json"
+  },
+  "hakuba-happo-one": {
+    "routes": 115,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/hakuba-happo-one.json",
+    "evidence": "data/hakuba-happo-one-osm.json"
+  },
+  "furano": {
+    "routes": 63,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/furano.json",
+    "evidence": "data/furano-osm.json"
+  },
+  "rusutsu": {
+    "routes": 38,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/rusutsu.json",
+    "evidence": "data/rusutsu-osm.json"
+  },
+  "shiga-kogen": {
+    "routes": 163,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/shiga-kogen.json",
+    "evidence": "data/shiga-kogen-osm.json"
+  },
+  "yongpyong": {
+    "routes": 40,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/yongpyong.json",
+    "evidence": "data/yongpyong-osm.json"
+  },
+  "gulmarg": {
+    "routes": 16,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/gulmarg.json",
+    "evidence": "data/gulmarg-osm.json"
+  },
+  "cardrona": {
+    "routes": 80,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/cardrona.json",
+    "evidence": "data/cardrona-osm.json"
+  },
+  "the-remarkables": {
+    "routes": 39,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/the-remarkables.json",
+    "evidence": "data/the-remarkables-osm.json"
+  },
+  "thredbo": {
+    "routes": 107,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/thredbo.json",
+    "evidence": "data/thredbo-osm.json"
+  },
+  "portillo": {
+    "routes": 39,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/portillo.json",
+    "evidence": "data/portillo-osm.json"
+  }
+}
