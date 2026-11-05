@@ -34,10 +34,10 @@ export async function openMountain(resort){
  disposeScene=()=>{controller.abort();clearTimeout(abortTimer)};
  try{
   if(modelCache.has(resort.id)){model=modelCache.get(resort.id)}
-  else if(['zermatt','niseko','whistler'].includes(resort.id)){abortTimer=setTimeout(()=>controller.abort(),30000);const r=await terrainRequest(`models/${resort.id}.json`,{signal:controller.signal});model=await r.json()}
+  else if(['zermatt','niseko','whistler','solden','ischgl'].includes(resort.id)){abortTimer=setTimeout(()=>controller.abort(),30000);const r=await terrainRequest(`models/${resort.id}.json`,{signal:controller.signal});model=await r.json()}
   else{status.textContent='此雪场未预载模型。可联网获取真实地形与周边已映射雪道。';const b=document.createElement('button');b.className='primary';b.textContent='加载周边真实地形';status.append(document.createElement('br'),b);await new Promise((resolve,reject)=>{b.onclick=resolve;controller.signal.addEventListener('abort',()=>reject(new Error('cancelled')),{once:true})});abortTimer=setTimeout(()=>controller.abort(),120000);model=await loadLive(resort,status,controller.signal)}
   clearTimeout(abortTimer);if(generation!==token)return;if(modelCache.size>=12)modelCache.delete(modelCache.keys().next().value);modelCache.set(resort.id,model);const clean=buildScene(model,resort);disposeScene=()=>{controller.abort();clean()};
- }catch(error){if(generation!==token)return;clearTimeout(abortTimer);controller.abort();status.textContent=terrainError(error);const retry=document.createElement('button');retry.className='primary';retry.textContent='重新加载地形';retry.onclick=()=>{dialog.close();setTimeout(()=>openMountain(resort),0)};status.append(document.createElement('br'),retry);document.querySelector('#terrain-note').textContent='没有取得真实地形数据时不显示替代山体。地图和百科仍可使用。'}
+ }catch(error){if(generation!==token)return;clearTimeout(abortTimer);controller.abort();status.textContent=terrainError(error);const retry=document.createElement('button');retry.className='primary';retry.textContent='重新加载地形';retry.onclick=()=>{dialog.addEventListener('close',()=>openMountain(resort),{once:true});dialog.close()};status.append(document.createElement('br'),retry);document.querySelector('#terrain-note').textContent='没有取得真实地形数据时不显示替代山体。地图和百科仍可使用。'}
 }
 function buildScene(model,resort){
  const mount=document.querySelector('#terrain-canvas'),status=document.querySelector('#terrain-status'),routeBox=document.querySelector('#terrain-routes');
