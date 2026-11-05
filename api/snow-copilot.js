@@ -11,9 +11,9 @@ function evidence(question,resortId){
   const sources=[],notes=[];
   function add(title,url,text){if(!url?.startsWith('https://'))return;const id='S'+(sources.length+1);sources.push({id,title,url});notes.push(`[${id}] ${text}`)}
   for(const f of facts)add(f.title,f.url,f.text);
-  notes.push(`数据库仅收录50座雪场。地区与名称索引：${resorts.map(r=>`${r.name}(${r.nameEn})/${r.country}`).join('；')}。这不是全球所有雪场。`);
+  notes.push(`数据库收录${resorts.length}座雪场。地区与名称索引：${resorts.map(r=>`${r.name}(${r.nameEn})/${r.country}`).join('；')}。这不是全球所有雪场。`);
   for(const r of chosen){
-    add(`${r.name} · 官网`,r.officialUrl,JSON.stringify({name:r.name,nameEn:r.nameEn,country:r.country,description:r.description||'未采集',price:r.price||'未核实',checkedAt:r.checkedAt}));
+    add(`${r.name} · ${r.datasetId?"社区来源（运营资料待核实）":"官网"}`,r.datasetId?"https://openskidata.org/":r.officialUrl,JSON.stringify({name:r.name,nameEn:r.nameEn,country:r.country,description:r.description||'未采集',price:r.price||'未核实',checkedAt:r.checkedAt}));
     for(const section of r.depth?.sections||[])add(`${r.name} · ${section.title}`,section.source||section.sourceUrl||r.depth.source,section.text);
     if(r.depth?.story)add(`${r.name} · ${r.depth.story.title}`,r.depth.story.source,r.depth.story.text);
   }

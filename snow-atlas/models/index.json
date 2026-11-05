@@ -348,5 +348,250 @@
     "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
     "model": "models/portillo.json",
     "evidence": "data/portillo-osm.json"
+  },
+  "atlas-10ae866e1207": {
+    "routes": 48,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-10ae866e1207.json",
+    "evidence": "data/atlas-10ae866e1207-osm.json"
+  },
+  "atlas-1de6206a0bf7": {
+    "routes": 78,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-1de6206a0bf7.json",
+    "evidence": "data/atlas-1de6206a0bf7-osm.json"
+  },
+  "atlas-25d31b46a111": {
+    "routes": 90,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-25d31b46a111.json",
+    "evidence": "data/atlas-25d31b46a111-osm.json"
+  },
+  "atlas-328e480e30be": {
+    "routes": 75,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-328e480e30be.json",
+    "evidence": "data/atlas-328e480e30be-osm.json"
+  },
+  "atlas-3d67e539bc06": {
+    "routes": 25,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-3d67e539bc06.json",
+    "evidence": "data/atlas-3d67e539bc06-osm.json"
+  },
+  "atlas-a61289e1a39b": {
+    "routes": 50,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-a61289e1a39b.json",
+    "evidence": "data/atlas-a61289e1a39b-osm.json"
+  },
+  "atlas-d236071dfae0": {
+    "routes": 33,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-d236071dfae0.json",
+    "evidence": "data/atlas-d236071dfae0-osm.json"
+  },
+  "atlas-abeec2d49d52": {
+    "routes": 27,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-abeec2d49d52.json",
+    "evidence": "data/atlas-abeec2d49d52-osm.json"
+  },
+  "atlas-b5ae84843510": {
+    "routes": 20,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-b5ae84843510.json",
+    "evidence": "data/atlas-b5ae84843510-osm.json"
+  },
+  "atlas-958659975a8e": {
+    "routes": 59,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-958659975a8e.json",
+    "evidence": "data/atlas-958659975a8e-osm.json"
+  },
+  "atlas-0508608e3ecf": {
+    "routes": 8,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-0508608e3ecf.json",
+    "evidence": "data/atlas-0508608e3ecf-osm.json"
+  },
+  "atlas-1d4e49eb2343": {
+    "routes": 15,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-1d4e49eb2343.json",
+    "evidence": "data/atlas-1d4e49eb2343-osm.json"
+  },
+  "atlas-75041c354eab": {
+    "routes": 11,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-75041c354eab.json",
+    "evidence": "data/atlas-75041c354eab-osm.json"
+  },
+  "atlas-86867b02103e": {
+    "routes": 10,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-86867b02103e.json",
+    "evidence": "data/atlas-86867b02103e-osm.json"
+  },
+  "atlas-d6b4a47a75a1": {
+    "routes": 15,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-d6b4a47a75a1.json",
+    "evidence": "data/atlas-d6b4a47a75a1-osm.json"
+  },
+  "atlas-ec66fe3530b0": {
+    "routes": 28,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-ec66fe3530b0.json",
+    "evidence": "data/atlas-ec66fe3530b0-osm.json"
+  },
+  "atlas-a9ea6fa11bc9": {
+    "routes": 22,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-a9ea6fa11bc9.json",
+    "evidence": "data/atlas-a9ea6fa11bc9-osm.json"
+  },
+  "atlas-345a0901ab06": {
+    "routes": 13,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-345a0901ab06.json",
+    "evidence": "data/atlas-345a0901ab06-osm.json"
+  },
+  "atlas-c1de4bb42717": {
+    "routes": 26,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-c1de4bb42717.json",
+    "evidence": "data/atlas-c1de4bb42717-osm.json"
+  },
+  "atlas-f27f5651a6e0": {
+    "routes": 1,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-f27f5651a6e0.json",
+    "evidence": "data/atlas-f27f5651a6e0-osm.json"
+  },
+  "atlas-fa473fa12ab6": {
+    "routes": 92,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-fa473fa12ab6.json",
+    "evidence": "data/atlas-fa473fa12ab6-osm.json"
+  },
+  "atlas-9ebf3503311d": {
+    "routes": 100,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-9ebf3503311d.json",
+    "evidence": "data/atlas-9ebf3503311d-osm.json"
+  },
+  "atlas-5a057d919d5b": {
+    "routes": 18,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-5a057d919d5b.json",
+    "evidence": "data/atlas-5a057d919d5b-osm.json"
+  },
+  "atlas-125d02338620": {
+    "routes": 153,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-125d02338620.json",
+    "evidence": "data/atlas-125d02338620-osm.json"
+  },
+  "atlas-a06c96ff5a34": {
+    "routes": 97,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-a06c96ff5a34.json",
+    "evidence": "data/atlas-a06c96ff5a34-osm.json"
+  },
+  "atlas-a90ddb281417": {
+    "routes": 71,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-a90ddb281417.json",
+    "evidence": "data/atlas-a90ddb281417-osm.json"
+  },
+  "atlas-650eebed3cbc": {
+    "routes": 69,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-650eebed3cbc.json",
+    "evidence": "data/atlas-650eebed3cbc-osm.json"
+  },
+  "atlas-562a20a60164": {
+    "routes": 230,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-562a20a60164.json",
+    "evidence": "data/atlas-562a20a60164-osm.json"
+  },
+  "atlas-35632469fb7c": {
+    "routes": 287,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-35632469fb7c.json",
+    "evidence": "data/atlas-35632469fb7c-osm.json"
+  },
+  "atlas-996de78b34e9": {
+    "routes": 98,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-996de78b34e9.json",
+    "evidence": "data/atlas-996de78b34e9-osm.json"
+  },
+  "atlas-c32e64673614": {
+    "routes": 51,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-c32e64673614.json",
+    "evidence": "data/atlas-c32e64673614-osm.json"
+  },
+  "atlas-cb461faaed3f": {
+    "routes": 46,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-cb461faaed3f.json",
+    "evidence": "data/atlas-cb461faaed3f-osm.json"
+  },
+  "atlas-cd6cd576ac1a": {
+    "routes": 189,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-cd6cd576ac1a.json",
+    "evidence": "data/atlas-cd6cd576ac1a-osm.json"
+  },
+  "atlas-bcdeff232b7a": {
+    "routes": 99,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-bcdeff232b7a.json",
+    "evidence": "data/atlas-bcdeff232b7a-osm.json"
+  },
+  "atlas-583dbc4651db": {
+    "routes": 84,
+    "retrievedAt": "2026-11-05",
+    "note": "概略位置周边检索所得 OSM 社区线路片段，可能含相邻雪区；非官方完整名录、边界或开放状态。每条线可查原始 OSM 依据。 线路由 OpenSkiData / OpenSkiMap.org 整理，保留其原始平面坐标；© OpenStreetMap contributors (ODbL), Skimap.org, Who’s On First, © Mapterhorn。",
+    "model": "models/atlas-583dbc4651db.json",
+    "evidence": "data/atlas-583dbc4651db-osm.json"
   }
 }

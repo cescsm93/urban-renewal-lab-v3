@@ -2233,5 +2233,1150 @@
     "nameEn": "Portillo",
     "name": "波蒂略",
     "description": "智利 · Portillo。查看官方雪道、运行状态与日期票价；本图鉴坐标为雪场或山村近似位置。"
+  },
+  {
+    "id": "atlas-10ae866e1207",
+    "name": "太舞滑雪场",
+    "nameEn": "太舞滑雪场",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 40.88063485,
+    "lon": 115.44004175,
+    "officialUrl": "https://www.thaiwoo.com/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://www.thaiwoo.com/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.thaiwoo.com/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": null,
+    "datasetId": "10ae866e1207078251f3ddf62bbb76bdacba580c"
+  },
+  {
+    "id": "atlas-1de6206a0bf7",
+    "name": "北大湖滑雪场",
+    "nameEn": "Beidahu Ski Resort, 北大湖滑雪度假区",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 43.4115534,
+    "lon": 126.6178317,
+    "officialUrl": "https://www.beidahu.com/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "http://www.beidahuski.com/"
+      },
+      {
+        "title": "北大湖运营方官网（已核对网页身份）",
+        "url": "https://www.beidahu.com/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.beidahu.com/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": null,
+    "datasetId": "1de6206a0bf70c0499d14cff30a1db68d3b89a1f"
+  },
+  {
+    "id": "atlas-25d31b46a111",
+    "name": "密苑云顶滑雪场",
+    "nameEn": "密苑云顶乐园, Yunding Resort Secret Garden, 云顶滑雪公园",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 40.949328949999995,
+    "lon": 115.41798655,
+    "officialUrl": "https://www.secretgardenresorts.com/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://www.secretgardenresorts.com/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.secretgardenresorts.com/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": null,
+    "datasetId": "25d31b46a111dd776d81cee73adfc2a5e35aaae5"
+  },
+  {
+    "id": "atlas-328e480e30be",
+    "name": "万龙滑雪场",
+    "nameEn": "Wanlong Paradise Resort, 万龙度假天堂",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 40.95836595,
+    "lon": 115.38854975000001,
+    "officialUrl": null,
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": "待核实"
+    },
+    "photo": null,
+    "datasetId": "328e480e30beb0cedb77ff214d91fd7ffeab73e8"
+  },
+  {
+    "id": "atlas-3d67e539bc06",
+    "name": "南山滑雪场",
+    "nameEn": "南山滑雪场, Nanshan Ski Resort",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 40.32957225,
+    "lon": 116.85652855000001,
+    "officialUrl": "https://www.nanshanski.com/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://www.nanshanski.com/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.nanshanski.com/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": null,
+    "datasetId": "3d67e539bc06d7704c4a469db58672dd632be6b4"
+  },
+  {
+    "id": "atlas-a61289e1a39b",
+    "name": "松花湖滑雪场",
+    "nameEn": "松花湖滑雪场, Songhua Lake Ski Resort",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 43.67296595,
+    "lon": 126.6137985,
+    "officialUrl": null,
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": "待核实"
+    },
+    "photo": null,
+    "datasetId": "a61289e1a39b5908befa9e06cadb0c036a7e38b9"
+  },
+  {
+    "id": "atlas-d236071dfae0",
+    "name": "可可托海滑雪场",
+    "nameEn": "Koktokay Ski Resort, 可可托海滑雪场",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 47.173381500000005,
+    "lon": 90.0648226,
+    "officialUrl": null,
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": "待核实"
+    },
+    "photo": null,
+    "datasetId": "d236071dfae0579f466dbcc0cf7c31a35c935d7b"
+  },
+  {
+    "id": "atlas-abeec2d49d52",
+    "name": "将军山滑雪场",
+    "nameEn": "将军山滑雪场",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 47.82786045,
+    "lon": 88.1569697,
+    "officialUrl": null,
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": "待核实"
+    },
+    "photo": null,
+    "datasetId": "abeec2d49d52dd669f98e426fa601a59a1badd1c"
+  },
+  {
+    "id": "atlas-b5ae84843510",
+    "name": "鳌山滑雪场",
+    "nameEn": "鳌山滑雪场",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 34.01773705,
+    "lon": 107.39900435000001,
+    "officialUrl": null,
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": "待核实"
+    },
+    "photo": null,
+    "datasetId": "b5ae84843510b51e90a6660fbd01331b66b79684"
+  },
+  {
+    "id": "atlas-958659975a8e",
+    "name": "富龙滑雪场",
+    "nameEn": "富龙滑雪场",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 40.9686965,
+    "lon": 115.30375624999999,
+    "officialUrl": null,
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": "待核实"
+    },
+    "photo": null,
+    "datasetId": "958659975a8ebdc240f41fe7431081b7543dad1e"
+  },
+  {
+    "id": "atlas-0508608e3ecf",
+    "name": "军都山滑雪场",
+    "nameEn": "军都山滑雪场",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 40.2384786,
+    "lon": 116.32477645,
+    "officialUrl": "https://www.bjski.com.cn/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://www.bjski.com.cn/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.bjski.com.cn/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": null,
+    "datasetId": "0508608e3ecf8358da6567f006e3e3e9d183a613"
+  },
+  {
+    "id": "atlas-1d4e49eb2343",
+    "name": "丝绸之路滑雪场",
+    "nameEn": "丝绸之路滑雪场",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 43.431683500000005,
+    "lon": 87.41591955,
+    "officialUrl": "http://www.silkroadresort.com/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "http://www.silkroadresort.com/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 403,
+      "finalUrl": "http://www.silkroadresort.com/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": null,
+    "datasetId": "1d4e49eb234357dec0fe3d7bd079705cdd76107e"
+  },
+  {
+    "id": "atlas-75041c354eab",
+    "name": "西岭雪山滑雪场",
+    "nameEn": "西岭雪山滑雪场",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 30.6989659,
+    "lon": 103.17942755,
+    "officialUrl": "https://www.xiling.cn/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://www.xiling.cn/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": "访问失败 / 待复核"
+    },
+    "photo": null,
+    "datasetId": "75041c354eabf8a968f63526cb8f2285fc72fc06"
+  },
+  {
+    "id": "atlas-86867b02103e",
+    "name": "万科石京龙滑雪场",
+    "nameEn": "万科石京龙滑雪场, Shijinglong Ski Resort",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 40.52659405,
+    "lon": 115.96261955,
+    "officialUrl": "http://www.vksjl.com/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "http://www.vksjl.com/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": "访问失败 / 待复核"
+    },
+    "photo": null,
+    "datasetId": "86867b02103ed47d0be94df9d6209e6e1328f8ba"
+  },
+  {
+    "id": "atlas-d6b4a47a75a1",
+    "name": "多乐美地滑雪场",
+    "nameEn": "多乐美地度假山庄&滑雪场",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 40.83272585,
+    "lon": 115.37298179999999,
+    "officialUrl": "https://www.saibeiski.com/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://www.saibeiski.com/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": "访问失败 / 待复核"
+    },
+    "photo": null,
+    "datasetId": "d6b4a47a75a13abea43483a86081eca8523b2208"
+  },
+  {
+    "id": "atlas-ec66fe3530b0",
+    "name": "万峰通化滑雪场",
+    "nameEn": "万峰通化滑雪度假区, Wanfeng Tonghua Ski Resort",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 41.643847449999996,
+    "lon": 125.9490022,
+    "officialUrl": "http://www.wanfengtonghuaski.com/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "http://www.wanfengtonghuaski.com/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "http://www.wanfengtonghuaski.com/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": null,
+    "datasetId": "ec66fe3530b0deae2b35369484136524601ec775"
+  },
+  {
+    "id": "atlas-a9ea6fa11bc9",
+    "name": "长城岭滑雪场",
+    "nameEn": "长城岭滑雪场",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 41.00556145,
+    "lon": 115.4537792,
+    "officialUrl": "https://www.cclski.cn/Index.asp",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://www.cclski.cn/Index.asp"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 404,
+      "finalUrl": "https://www.cclski.cn/index.asp",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": null,
+    "datasetId": "a9ea6fa11bc958180ecd383239ac090bdab4f887"
+  },
+  {
+    "id": "atlas-345a0901ab06",
+    "name": "庙香山滑雪场",
+    "nameEn": "庙香山滑雪场",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 43.9540861,
+    "lon": 125.885298,
+    "officialUrl": "http://www.mxsski.com",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "http://www.mxsski.com"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "http://www.mxsski.com/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": null,
+    "datasetId": "345a0901ab0600a3c11ebeefb093c5e902a35914"
+  },
+  {
+    "id": "atlas-c1de4bb42717",
+    "name": "亚布力阳光滑雪场",
+    "nameEn": "亚布力阳光滑雪度假区",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 44.77286665,
+    "lon": 128.4351828,
+    "officialUrl": null,
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": "待核实"
+    },
+    "photo": null,
+    "datasetId": "c1de4bb42717f3cf078bf0228fa0a17dcecf524f"
+  },
+  {
+    "id": "atlas-f27f5651a6e0",
+    "name": "翠华山滑雪场",
+    "nameEn": "翠华山滑雪场",
+    "country": "中国",
+    "region": "亚洲",
+    "lat": 33.969774099999995,
+    "lon": 109.0180799,
+    "officialUrl": "https://www.chshuaxue.com/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://www.chshuaxue.com/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.chshuaxue.com/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": null,
+    "datasetId": "f27f5651a6e0ee6e052fac81f4451e48398dd432"
+  },
+  {
+    "id": "atlas-fa473fa12ab6",
+    "name": "加米施经典滑雪区",
+    "nameEn": "Skigebiet Garmisch-Classic",
+    "country": "德国",
+    "region": "欧洲",
+    "lat": 47.45769315,
+    "lon": 11.0783651,
+    "officialUrl": "https://zugspitze.de/en/winter/skiarea/garmisch-classic",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://zugspitze.de/en/winter/skiarea/garmisch-classic"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://zugspitze.de/en/Our-mountain-worlds/Winter/Garmisch-Classic-ski-area",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": null,
+    "datasetId": "fa473fa12ab6059b9e93af8498afa0efdea2cff6"
+  },
+  {
+    "id": "atlas-9ebf3503311d",
+    "name": "卢卡",
+    "nameEn": "Rukatunturi, Ruka",
+    "country": "芬兰",
+    "region": "欧洲",
+    "lat": 66.1737696,
+    "lon": 29.24457515,
+    "officialUrl": "https://www.ruka.fi",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://www.ruka.fi"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.ruka.fi/fi",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": {
+      "url": "https://www.ruka.fi/themes/custom/ski_valley_ruka/logo.png",
+      "sourceUrl": "https://www.ruka.fi/fi",
+      "credit": "来源网页分享图，版权归原权利人；未人工核验画面"
+    },
+    "datasetId": "9ebf3503311da1c2e8d04a89c04e678a0d347367"
+  },
+  {
+    "id": "atlas-5a057d919d5b",
+    "name": "High1滑雪场",
+    "nameEn": "하이원스키장, HiOne Ski",
+    "country": "韩国",
+    "region": "亚洲",
+    "lat": 37.19111095,
+    "lon": 128.82957820000001,
+    "officialUrl": "https://www.high1.com/ski/index.do",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://www.high1.com/ski/index.do"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.high1.com/ski/index.do",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": null,
+    "datasetId": "5a057d919d5bb752cf6de8a88068236c3133a57a"
+  },
+  {
+    "id": "atlas-125d02338620",
+    "name": "巴凯拉贝雷特",
+    "nameEn": "Estació d'Esquí Baqueira-Beret",
+    "country": "西班牙",
+    "region": "欧洲",
+    "lat": 42.697216,
+    "lon": 0.96841,
+    "officialUrl": "http://www.baqueira.cat",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "http://www.baqueira.cat"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 403,
+      "finalUrl": "https://www.baqueira.es:443/ca",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": null,
+    "datasetId": "125d02338620dc079d5d635595a099370161bf83"
+  },
+  {
+    "id": "atlas-a06c96ff5a34",
+    "name": "海姆瑟达尔",
+    "nameEn": "Hemsedal skisenter",
+    "country": "挪威",
+    "region": "欧洲",
+    "lat": 60.85126785,
+    "lon": 8.51053495,
+    "officialUrl": "http://www.skistar.com/hemsedal",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "http://www.skistar.com/hemsedal"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.skistar.com/no/vare-skisteder/hemsedal/vinter-i-hemsedal/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": {
+      "url": "https://www.skistar.com/contentassets/5bebb138c9b547a9a810d2f6e2353d44/hemsedal_raeste-skisted.jpg",
+      "sourceUrl": "https://www.skistar.com/no/vare-skisteder/hemsedal/vinter-i-hemsedal/",
+      "credit": "来源网页分享图，版权归原权利人；未人工核验画面"
+    },
+    "datasetId": "a06c96ff5a340aa3db6c8369ebc7334513637f10"
+  },
+  {
+    "id": "atlas-a90ddb281417",
+    "name": "萨伦",
+    "nameEn": "Sälen",
+    "country": "瑞典",
+    "region": "欧洲",
+    "lat": 61.1738524,
+    "lon": 13.08616455,
+    "officialUrl": "https://www.skistar.com/en/ski-destinations/salen",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://www.skistar.com/en/ski-destinations/salen"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.skistar.com/en/ski-destinations/salen/winter-in-salen/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": {
+      "url": "https://www.skistar.com/contentassets/b879fdf6692a49d089e2da50f6f634ec/toppbild_salen.jpg",
+      "sourceUrl": "https://www.skistar.com/en/ski-destinations/salen/winter-in-salen/",
+      "credit": "来源网页分享图，版权归原权利人；未人工核验画面"
+    },
+    "datasetId": "a90ddb2814177b4fe5041d31947430a994346452"
+  },
+  {
+    "id": "atlas-650eebed3cbc",
+    "name": "瓦卡帕帕",
+    "nameEn": "Whakapapa",
+    "country": "新西兰",
+    "region": "大洋洲",
+    "lat": -39.24818295,
+    "lon": 175.5603893,
+    "officialUrl": "https://www.whakapapa.com/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://www.whakapapa.com/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.whakapapa.com/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": {
+      "url": "https://media.whakapapa.com/KNOLL_RIDGE_CHALET_SUMMER_TRAILS_2026_2400_X_1800_PX_ef38604d8d.webp",
+      "sourceUrl": "https://www.whakapapa.com/",
+      "credit": "来源网页分享图，版权归原权利人；未人工核验画面"
+    },
+    "datasetId": "650eebed3cbc4d95ec15ed68c8266794c735683d"
+  },
+  {
+    "id": "atlas-562a20a60164",
+    "name": "佩里舍",
+    "nameEn": "Perisher",
+    "country": "澳大利亚",
+    "region": "大洋洲",
+    "lat": -36.4078107,
+    "lon": 148.3841999,
+    "officialUrl": "https://www.charlottepass.com.au/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://www.charlottepass.com.au/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://charlottepass.com.au/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": {
+      "url": "https://charlottepass.com.au/wp-content/uploads/2021/05/CP-Stacked-Logo-Red.png",
+      "sourceUrl": "https://charlottepass.com.au/",
+      "credit": "来源网页分享图，版权归原权利人；未人工核验画面"
+    },
+    "datasetId": "562a20a601646b66731b356f79d1bcdd26a6e280"
+  },
+  {
+    "id": "atlas-35632469fb7c",
+    "name": "埃尔科罗拉多",
+    "nameEn": "El Colorado",
+    "country": "智利",
+    "region": "南美洲",
+    "lat": -33.3406606,
+    "lon": -70.27831885,
+    "officialUrl": "https://www.elcolorado.cl/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://www.elcolorado.cl/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.elcolorado.cl/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": null,
+    "datasetId": "35632469fb7cccf46b30c15b9f1758f7dff918ac"
+  },
+  {
+    "id": "atlas-996de78b34e9",
+    "name": "卡特德拉尔",
+    "nameEn": "Cerro Catedral",
+    "country": "阿根廷",
+    "region": "南美洲",
+    "lat": -41.16667545,
+    "lon": -71.46463165,
+    "officialUrl": "https://www.catedralaltapatagonia.com/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://www.catedralaltapatagonia.com/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://catedralaltapatagonia.com/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": {
+      "url": "https://catedralaltapatagonia.com/wp-content/uploads/2024/05/demo1.png",
+      "sourceUrl": "https://catedralaltapatagonia.com/",
+      "credit": "来源网页分享图，版权归原权利人；未人工核验画面"
+    },
+    "datasetId": "996de78b34e97c95d665d00cd0b668cfaee6e150"
+  },
+  {
+    "id": "atlas-c32e64673614",
+    "name": "博罗韦茨",
+    "nameEn": "Borovets",
+    "country": "保加利亚",
+    "region": "欧洲",
+    "lat": 42.236464049999995,
+    "lon": 23.5962252,
+    "officialUrl": "https://www.borovets-bg.com/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://www.borovets-bg.com/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.borovets-bg.com/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": {
+      "url": "https://www.borovets-bg.com/files/richeditor/reload-online-2.jpg",
+      "sourceUrl": "https://www.borovets-bg.com/",
+      "credit": "来源网页分享图，版权归原权利人；未人工核验画面"
+    },
+    "datasetId": "c32e64673614d65c65f0123491f1976f62e9a55c"
+  },
+  {
+    "id": "atlas-cb461faaed3f",
+    "name": "马里博尔波霍列",
+    "nameEn": "Smučišča Mariborsko Pohorje",
+    "country": "斯洛文尼亚",
+    "region": "欧洲",
+    "lat": 46.514381900000004,
+    "lon": 15.5474182,
+    "officialUrl": "https://www.mariborskopohorje.si/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://www.mariborskopohorje.si/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 404,
+      "finalUrl": "https://www.mariborskopohorje.si/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": null,
+    "datasetId": "cb461faaed3fbddd289cb3d86c6d8a7bbb4649bd"
+  },
+  {
+    "id": "atlas-cd6cd576ac1a",
+    "name": "亚斯纳低塔特拉",
+    "nameEn": "Jasna Low Tatras",
+    "country": "斯洛伐克",
+    "region": "欧洲",
+    "lat": 48.950719199999995,
+    "lon": 19.588304700000002,
+    "officialUrl": "https://www.jasna.sk/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://www.jasna.sk/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.jasna.sk/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": {
+      "url": "https://www.jasna.sk/fileadmin/resort_upload/jasna/jesen_v_jasnej.jpg",
+      "sourceUrl": "https://www.jasna.sk/",
+      "credit": "来源网页分享图，版权归原权利人；未人工核验画面"
+    },
+    "datasetId": "cd6cd576ac1a8785d423d174200b9a4a920df1e1"
+  },
+  {
+    "id": "atlas-bcdeff232b7a",
+    "name": "克利诺韦茨",
+    "nameEn": "Skiareál Klínovec",
+    "country": "捷克",
+    "region": "欧洲",
+    "lat": 50.38724045,
+    "lon": 12.97113865,
+    "officialUrl": "https://klinovec.cz/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://klinovec.cz/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": "访问失败 / 待复核"
+    },
+    "photo": null,
+    "datasetId": "bcdeff232b7a427105725de80f1c6759384c0b83"
+  },
+  {
+    "id": "atlas-583dbc4651db",
+    "name": "黑山佩茨滑雪区",
+    "nameEn": "Skiresort Černá Hora-Pec",
+    "country": "捷克",
+    "region": "欧洲",
+    "lat": 50.692590249999995,
+    "lon": 15.7635085,
+    "officialUrl": "https://skiresort.cz/",
+    "price": null,
+    "priceStatus": "未核实当季票价，请向雪场查询",
+    "difficulty": "待核实",
+    "checkedAt": "2026-11-05",
+    "coordinatesNote": "OpenSkiData 范围中心，非入口；来源可能包含复合雪区",
+    "sources": [
+      {
+        "title": "OpenSkiData / OSM 雪区资料与来源",
+        "url": "https://openskidata.org/"
+      },
+      {
+        "title": "社区记录的运营网站（身份待复核）",
+        "url": "https://skiresort.cz/"
+      }
+    ],
+    "description": "依据公开地理资料新增。官网链接来自社区记录，访问状态单独标注；未核实的票价、规模和故事不填充。",
+    "verification": {
+      "status": 200,
+      "finalUrl": "https://www.skiresort.cz/",
+      "method": "HTTP GET，仅检查可访问性，网站归属仍需复核"
+    },
+    "photo": {
+      "url": "https://www.skiresort.cz/media/uploads/pages/billboardovka_small_tkjua0p.jpg",
+      "sourceUrl": "https://www.skiresort.cz/",
+      "credit": "来源网页分享图，版权归原权利人；未人工核验画面"
+    },
+    "datasetId": "583dbc4651db7ebcc7875a11180b634ec108ba8a"
   }
 ]

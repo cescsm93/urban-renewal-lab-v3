@@ -1,0 +1,5 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';
+import {terrainError,terrainRequest} from '../terrain-network.mjs';
+test('transient network failures retry once',async()=>{let calls=0;const r=await terrainRequest('/fixed',{fetcher:async()=>{if(++calls===1)throw new TypeError('Failed to fetch');return new Response('ok')}});assert.equal(await r.text(),'ok');assert.equal(calls,2)});
+test('outages produce readable messages after bounded retry',async()=>{let calls=0;await assert.rejects(()=>terrainRequest('/fixed',{fetcher:async()=>{calls++;return new Response(JSON.stringify({error:'雪道数据源繁忙，请稍后重试'}),{status:503})}}),/数据源繁忙/);assert.equal(calls,2);assert.equal(terrainError(new TypeError('Failed to fetch')),'网络未能连接地形服务，请检查网络后重试。')});
+test('abort and invalid input never loop or retry',async()=>{const c=new AbortController();c.abort();let calls=0;await assert.rejects(()=>terrainRequest('/fixed',{signal:c.signal,fetcher:async()=>{calls++}}));assert.equal(calls,0);await assert.rejects(()=>terrainRequest('/fixed',{fetcher:async()=>{calls++;return new Response('{}',{status:400})}}));assert.equal(calls,1)});
