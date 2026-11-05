@@ -1,4 +1,7 @@
 import * as THREE from 'three';
+import {terrainRequest,terrainError} from './terrain-network.mjs';
+const TERRAIN_API='https://urban-renewal-lab-1.vercel.app/api/snow-terrain';
+const modelCache=new Map();
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 let disposeScene=null,token=0;
 document.querySelector('#mountain-dialog').addEventListener('close',()=>closeMountain());
@@ -7,11 +10,10 @@ const labels={novice:'初级',easy:'初级',intermediate:'中级',advanced:'高�
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function sample(model,lon,lat){const[w,s,e,n]=model.bounds,u=Math.max(0,Math.min(model.width-1,(lon-w)/(e-w)*(model.width-1))),v=Math.max(0,Math.min(model.height-1,(n-lat)/(n-s)*(model.height-1))),x=Math.floor(u),y=Math.floor(v),xx=Math.min(x+1,model.width-1),yy=Math.min(y+1,model.height-1),a=u-x,b=v-y,h=model.elevations;return a+b<=1?h[y*model.width+x]+(h[y*model.width+xx]-h[y*model.width+x])*a+(h[yy*model.width+x]-h[y*model.width+x])*b:h[yy*model.width+xx]+(h[yy*model.width+x]-h[yy*model.width+xx])*(1-a)+(h[y*model.width+xx]-h[yy*model.width+xx])*(1-b)}
 async function loadLive(resort,status,signal){
- status.textContent='正在读取 OSM 周边雪道（最长约30秒）…';
- const query=`[out:json][timeout:25];way["piste:type"="downhill"](around:5000,${resort.lat},${resort.lon});out tags geom;`;
- const response=await fetch('https://overpass-api.de/api/interpreter?data='+encodeURIComponent(query),{signal});if(!response.ok)throw Error('OSM 服务暂不可用，请稍后重试');const raw=await response.json();
+ status.textContent='正在读取周边真实雪道，繁忙时会自动尝试备用数据源…';
+ const response=await terrainRequest(TERRAIN_API+'?kind=pistes&id='+encodeURIComponent(resort.id),{signal});const raw=await response.json();
  const ways=raw.elements.filter(w=>w.type==='way'&&w.geometry?.length>1&&w.tags?.area!=='yes');if(!ways.length)throw Error('周边5公里尚未取得可用的 OSM 雪道线路；不生成虚构雪道');
- const all=ways.flatMap(w=>w.geometry),w=Math.min(...all.map(p=>p.lon))-.002,e=Math.max(...all.map(p=>p.lon))+.002,s=Math.min(...all.map(p=>p.lat))-.002,n=Math.max(...all.map(p=>p.lat))+.002;
+ let w=Infinity,e=-Infinity,s=Infinity,n=-Infinity;for(const way of ways)for(const p of way.geometry){w=Math.min(w,p.lon);e=Math.max(e,p.lon);s=Math.min(s,p.lat);n=Math.max(n,p.lat)}w-=.002;e+=.002;s-=.002;n+=.002;
  const model={resortId:resort.id,bounds:[w,s,e,n],width:96,height:96,elevations:[],routes:{type:'FeatureCollection',features:ways.map(v=>({type:'Feature',geometry:{type:'LineString',coordinates:v.geometry.map(p=>[p.lon,p.lat])},properties:{osmId:v.id,name:v.tags['piste:name']||v.tags.name||v.tags.ref||`OSM ${v.id}`,difficulty:v.tags['piste:difficulty']||'unknown',source:`https://www.openstreetmap.org/way/${v.id}`}}))},coverageNote:'按雪场概略位置周边5公里检索的社区映射片段，不是官方完整雪道目录；地形网格随范围变化。',retrievedAt:new Date().toISOString().slice(0,10)};
  status.textContent=`已取得 ${ways.length} 段线路，正在下载真实 DEM 地形…`;
  const cache=new Map(),z=12,nt=2**z;
@@ -19,7 +21,7 @@ async function loadLive(resort,status,signal){
  const[ax,ay]=tilepoint(w,n),[bx,by]=tilepoint(e,s);if((Math.floor(bx)-Math.floor(ax)+1)*(Math.floor(by)-Math.floor(ay)+1)>50)throw Error('映射范围过大，暂不自动加载该区域');
  const jobs=[];for(let tx=Math.floor(ax);tx<=Math.floor(bx);tx++)for(let ty=Math.floor(ay);ty<=Math.floor(by);ty++)jobs.push([tx,ty]);
  // Bound concurrent raster downloads; sample actual pixels, never synthesize terrain.
- for(let i=0;i<jobs.length;i+=4)await Promise.all(jobs.slice(i,i+4).map(async([tx,ty])=>{const r=await fetch(`https://s3.amazonaws.com/elevation-tiles-prod/terrarium/${z}/${tx}/${ty}.png`,{signal});if(!r.ok)throw Error('DEM 高程瓦片无法取得');const bitmap=await createImageBitmap(await r.blob()),canvas=document.createElement('canvas');canvas.width=canvas.height=256;const context=canvas.getContext('2d');context.drawImage(bitmap,0,0);cache.set(`${tx}/${ty}`,context.getImageData(0,0,256,256).data);bitmap.close()}));
+ for(let i=0;i<jobs.length;i+=4)await Promise.all(jobs.slice(i,i+4).map(async([tx,ty])=>{const r=await terrainRequest(TERRAIN_API+`?kind=dem&id=${encodeURIComponent(resort.id)}&x=${tx}&y=${ty}`,{signal});const bitmap=await createImageBitmap(await r.blob()),canvas=document.createElement('canvas');canvas.width=canvas.height=256;const context=canvas.getContext('2d');context.drawImage(bitmap,0,0);cache.set(`${tx}/${ty}`,context.getImageData(0,0,256,256).data);bitmap.close()}));
  for(let row=0;row<model.height;row++)for(let col=0;col<model.width;col++){const[x,y]=tilepoint(w+(e-w)*col/(model.width-1),n-(n-s)*row/(model.height-1)),pixels=cache.get(`${Math.floor(x)}/${Math.floor(y)}`),k=(Math.min(255,Math.floor(y%1*256))*256+Math.min(255,Math.floor(x%1*256)))*4;model.elevations.push(Math.round((pixels[k]*256+pixels[k+1]+pixels[k+2]/256-32768)*10)/10)}
  return model;
 }
@@ -28,13 +30,14 @@ export async function openMountain(resort){
  closeMountain();const generation=token,dialog=document.querySelector('#mountain-dialog'),body=document.querySelector('#mountain-body');
  body.innerHTML=`<div class="mountain-header"><span class="eyebrow">TERRAIN EXPLORER / THREE.JS</span><h2>${esc(resort.nameZh||resort.name)} <small>${esc(resort.nameEn||'')}</small></h2><p>真实高程 · 雪道空间位置 · 原比例地形</p></div><div class="mountain-layout"><div class="terrain-stage"><div id="terrain-canvas"></div><div class="terrain-overlay"><span id="terrain-status" role="status">正在读取真实三维地形…</span><div><button id="terrain-reset">复位视角</button><button id="terrain-wire">网格</button></div></div><div class="terrain-hint">拖动旋转 · 双指 / 滚轮缩放 · 右键平移 · 高程比例 1:1</div></div><aside class="terrain-info"><div class="route-title"><span id="route-count">雪道档案</span><select id="terrain-filter" aria-label="三维雪道难度"><option value="all">全部难度</option><option value="easy">初级</option><option value="intermediate">中级</option><option value="advanced">高级 / 专家</option></select></div><div id="terrain-routes"></div><p class="terrain-disclaimer" id="terrain-note">DEM为历史地形，不含实时雪面；雪道宽度为显示效果，不是实测。社区线路可能不完整。</p></aside></div>`;
  dialog.showModal();const controller=new AbortController();let model;const status=document.querySelector('#terrain-status');
- const abortTimer=setTimeout(()=>controller.abort(),65000);
+ let abortTimer;
  disposeScene=()=>{controller.abort();clearTimeout(abortTimer)};
  try{
-  if(['zermatt','niseko','whistler'].includes(resort.id)){const r=await fetch(`models/${resort.id}.json`,{signal:controller.signal});if(!r.ok)throw Error('预载模型读取失败');model=await r.json()}
-  else{status.textContent='此雪场未预载模型。可联网获取真实地形与周边已映射雪道。';const b=document.createElement('button');b.className='primary';b.textContent='加载周边真实地形';status.append(document.createElement('br'),b);await new Promise((resolve,reject)=>{b.onclick=resolve;controller.signal.addEventListener('abort',()=>reject(new Error('cancelled')),{once:true})});model=await loadLive(resort,status,controller.signal)}
-  clearTimeout(abortTimer);if(generation!==token)return;const clean=buildScene(model,resort);disposeScene=()=>{controller.abort();clean()};
- }catch(error){if(generation!==token)return;status.textContent=error.name==='AbortError'?'数据加载超时，请关闭后重试。':error.message;document.querySelector('#terrain-note').textContent='没有取得真实地形数据时不显示替代山体。地图和百科仍可使用。'}
+  if(modelCache.has(resort.id)){model=modelCache.get(resort.id)}
+  else if(['zermatt','niseko','whistler'].includes(resort.id)){abortTimer=setTimeout(()=>controller.abort(),30000);const r=await terrainRequest(`models/${resort.id}.json`,{signal:controller.signal});model=await r.json()}
+  else{status.textContent='此雪场未预载模型。可联网获取真实地形与周边已映射雪道。';const b=document.createElement('button');b.className='primary';b.textContent='加载周边真实地形';status.append(document.createElement('br'),b);await new Promise((resolve,reject)=>{b.onclick=resolve;controller.signal.addEventListener('abort',()=>reject(new Error('cancelled')),{once:true})});abortTimer=setTimeout(()=>controller.abort(),120000);model=await loadLive(resort,status,controller.signal)}
+  clearTimeout(abortTimer);if(generation!==token)return;if(modelCache.size>=12)modelCache.delete(modelCache.keys().next().value);modelCache.set(resort.id,model);const clean=buildScene(model,resort);disposeScene=()=>{controller.abort();clean()};
+ }catch(error){if(generation!==token)return;clearTimeout(abortTimer);controller.abort();status.textContent=terrainError(error);const retry=document.createElement('button');retry.className='primary';retry.textContent='重新加载地形';retry.onclick=()=>{dialog.close();setTimeout(()=>openMountain(resort),0)};status.append(document.createElement('br'),retry);document.querySelector('#terrain-note').textContent='没有取得真实地形数据时不显示替代山体。地图和百科仍可使用。'}
 }
 function buildScene(model,resort){
  const mount=document.querySelector('#terrain-canvas'),status=document.querySelector('#terrain-status'),routeBox=document.querySelector('#terrain-routes');
