@@ -26,30 +26,29 @@ async function invoke(body) {
 }
 
 (async()=>{
-  const originalKey = process.env.DEEPSEEK_API_KEY;
+  const originalKey = process.env.VERCEL;
   const originalEnabled = process.env.COPILOT_AI_ENABLED;
   const originalFetch = global.fetch;
   try {
     process.env.COPILOT_AI_ENABLED = 'true';
-    delete process.env.DEEPSEEK_API_KEY;
+    process.env.VERCEL='1';
     assert.equal((await invoke({question:'有多少资源？',resources})).statusCode,503);
-    process.env.DEEPSEEK_API_KEY = 'mock-key';
+    delete process.env.VERCEL;
     global.fetch = async (url, options) => {
-      assert.equal(url,'https://api.deepseek.com/chat/completions');
-      assert.equal(options.headers.Authorization,'Bearer mock-key');
+      assert.equal(url,'http://127.0.0.1:11434/api/chat');
       const sent = JSON.parse(options.body);
-      assert.equal(sent.model,'deepseek-flash');
+      assert.equal(sent.model,'qwen2.5:7b-instruct-q4_K_M');
       assert.ok(!options.body.includes('完整边界'));
-      return {ok:true,json:async()=>({choices:[{message:{content:'{"metric":"largest","scope":"all","category":"residential"}'}}]})};
+      return {ok:true,json:async()=>({message:{content:'{"metric":"largest","scope":"all","category":"residential"}'}})};
     };
     const result = await invoke({question:'最大的居住资源在哪里？',resources});
     assert.equal(result.statusCode,200);
-    assert.equal(result.body.mode,'deepseek');
+    assert.equal(result.body.mode,'ollama');
     assert.equal(result.body.index,1);
-    console.log('PASS Copilot intent, deterministic GIS facts, missing-key fallback and mocked DeepSeek request');
+    console.log('PASS Copilot intent, deterministic GIS facts, cloud rule fallback and mocked Ollama request');
   } finally {
-    if (originalKey === undefined) delete process.env.DEEPSEEK_API_KEY;
-    else process.env.DEEPSEEK_API_KEY=originalKey;
+    if (originalKey === undefined) delete process.env.VERCEL;
+    else process.env.VERCEL=originalKey;
     if (originalEnabled === undefined) delete process.env.COPILOT_AI_ENABLED;
     else process.env.COPILOT_AI_ENABLED=originalEnabled;
     global.fetch=originalFetch;

@@ -12,25 +12,16 @@ async function readBody(req) {
   return JSON.parse(body);
 }
 
-async function classify(question, key) {
-  const response = await fetch('https://api.deepseek.com/chat/completions', {
-    method:'POST',
-    headers:{'Content-Type':'application/json', Authorization:`Bearer ${key}`},
-    body:JSON.stringify({
-      model:'deepseek-flash',
-      thinking:{type:'disabled'},
-      max_tokens:180,
-      response_format:{type:'json_object'},
-      messages:[
-        {role:'system',content:'你是城市更新地图查询的意图识别器。只返回 JSON 对象，不写解释。字段：metric=count|area|largest|breakdown|find|help；scope=all|view|filter；category=industrial|residential|public|commercial|other|null；searchText=字符串。问数量/多少选 count，面积合计选 area，最大/最大面积选 largest，分类/各类选 breakdown，按项目名称定位选 find，不属于这些问题选 help。只有明确提到当前视野/屏幕时才选 view；明确提到筛选时才选 filter。不要根据资源数据臆造事实。'},
-        {role:'user',content:question}
-      ]
-    }),
-    signal:AbortSignal.timeout(15000)
+async function classify(question) {
+  const response=await fetch('http://127.0.0.1:11434/api/chat',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({model:process.env.OLLAMA_MODEL||'qwen2.5:7b-instruct-q4_K_M',stream:false,format:'json',options:{temperature:0,num_predict:180},messages:[{role:'system',content:'你是城市更新地图查询意图识别器。只返回JSON：metric=count|area|largest|breakdown|find|help；scope=all|view|filter；category=industrial|residential|public|commercial|other|null；searchText=字符串。问数量选count，面积合计选area，最大面积选largest，分类选breakdown，按名称定位选find，其余选help。仅明确提到视野才用view，筛选才用filter。'},{role:'user',content:question}]}),
+    signal:AbortSignal.timeout(90000)
   });
-  if (!response.ok) throw Error(response.status === 401 ? 'DeepSeek 密钥无效' : response.status === 402 ? 'DeepSeek 账户余额不足' : response.status === 429 ? 'DeepSeek 请求过于频繁' : 'DeepSeek 服务暂不可用');
-  const data = await response.json();
-  return normalizeIntent(data?.choices?.[0]?.message?.content);
+  if(!response.ok)throw Error('本机 Ollama 不可用，请检查模型是否已下载');
+  const data=await response.json();const intent=normalizeIntent(data?.message?.content);
+  intent.scope=/视野|视窗|当前地图|屏幕内/.test(question)?'view':/筛选|过滤/.test(question)?'filter':'all';
+  return intent;
 }
 
 async function handler(req, res) {
@@ -44,18 +35,17 @@ async function handler(req, res) {
   let input;
   try { input = validateInput(await readBody(req)); }
   catch (e) { return send(400, {error:e.message}); }
-  if (process.env.COPILOT_AI_ENABLED !== 'true') return send(503, {error:'DeepSeek 问答尚未开放，已切换为本地规则'});
-  if (!process.env.DEEPSEEK_API_KEY) return send(503, {error:'此环境尚未配置 DeepSeek，已切换为本地规则'});
+  if (process.env.VERCEL || process.env.COPILOT_AI_ENABLED === 'false') return send(503, {error:'此环境使用规则查询；Qwen 仅在本机服务启用'});
   const quota = take(req, 'copilot');
   if (!quota.allowed) {
     res.setHeader('Retry-After', String(quota.retryAfter));
     return send(429, {error:'地图 Copilot 今日或近期提问次数已达保护上限'});
   }
   try {
-    const intent = await classify(input.question, process.env.DEEPSEEK_API_KEY);
-    return send(200, {...answer(input, intent), mode:'deepseek'});
+    const intent = await classify(input.question);
+    return send(200, {...answer(input, intent), mode:'ollama'});
   } catch (e) {
-    return send(502, {error:e.name === 'TimeoutError' ? 'DeepSeek 回答超时' : e.message});
+    return send(502, {error:e.name === 'TimeoutError' ? 'Ollama 回答超时' : e.message});
   }
 }
 

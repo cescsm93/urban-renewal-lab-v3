@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict');const {computeGrid}=require('../density-worker');const t=require('../api/amap-roads')._test;
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
-const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8'),tileCode=html.match(/function roadTilesForBounds\(bbox\)\{[\s\S]*?\n\}(?=\nfunction setRoadFeatures)/)?.[0];assert(tileCode,'road tiling function exists');
+const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8').replace(/\r\n/g,'\n'),tileCode=html.match(/function roadTilesForBounds\(bbox\)\{[\s\S]*?\n\}(?=\nfunction setRoadFeatures)/)?.[0];assert(tileCode,'road tiling function exists');
 const roadTilesForBounds=vm.runInNewContext(`const ROAD_TILE_LON_STEP=.05,ROAD_TILE_LAT_STEP=.04,ROAD_TILE_LIMIT=20;${tileCode};roadTilesForBounds`);
 const first=roadTilesForBounds([118.72,31.95,118.86,32.05]),panned=roadTilesForBounds([118.76,31.95,118.90,32.05]);
 assert(first.length>1&&first.length<=20);assert(first.some(a=>panned.some(b=>JSON.stringify(a)===JSON.stringify(b))),'panned view reuses stable tiles');

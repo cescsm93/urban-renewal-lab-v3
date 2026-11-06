@@ -6,3 +6,5 @@ tests/
 *.png
 *.md
 server.cjs
+
+.local-data/
