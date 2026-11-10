@@ -1,4 +1,5 @@
 const assert = require('node:assert/strict');
+const {createHash} = require('node:crypto');
 const {validateInput, normalizeIntent, answer} = require('../lib/copilot-core.cjs');
 const handler = require('../api/copilot.js');
 
@@ -17,8 +18,8 @@ assert.match(answer(input,{metric:'count',scope:'view',category:null}).text,/共
 assert.match(answer(input,{metric:'area',scope:'filter',category:null}).text,/30\.700 公顷/);
 assert.throws(()=>validateInput({question:'问题',resources:[{...resources[0],areaHa:Infinity}]}),/无效/);
 
-async function invoke(body) {
-  const req = {method:'POST',body,headers:{'x-forwarded-for':'198.51.100.44'}};
+async function invoke(body, extraHeaders = {}) {
+  const req = {method:'POST',body,headers:{'x-forwarded-for':'198.51.100.44',...extraHeaders}};
   const headers = {};
   const res = {statusCode:200,setHeader:(key,value)=>{headers[key]=value},end(value){this.body=JSON.parse(value)}};
   await handler(req,res);
@@ -29,6 +30,9 @@ async function invoke(body) {
   const originalKey = process.env.VERCEL;
   const originalEnabled = process.env.COPILOT_AI_ENABLED;
   const originalFetch = global.fetch;
+  const configNames = ['QWEN_BRIDGE_URL', 'QWEN_BRIDGE_TOKEN', 'QWEN_ACCESS_CODE_SHA256'];
+  const originalConfig = Object.fromEntries(configNames.map(key => [key, process.env[key]]));
+  configNames.forEach(key => delete process.env[key]);
   try {
     process.env.COPILOT_AI_ENABLED = 'true';
     process.env.VERCEL='1';
@@ -45,12 +49,36 @@ async function invoke(body) {
     assert.equal(result.statusCode,200);
     assert.equal(result.body.mode,'ollama');
     assert.equal(result.body.index,1);
-    console.log('PASS Copilot intent, deterministic GIS facts, cloud rule fallback and mocked Ollama request');
+    process.env.VERCEL = '1';
+    process.env.QWEN_BRIDGE_URL = 'https://relay.example';
+    process.env.QWEN_BRIDGE_TOKEN = 'test-relay-token';
+    process.env.QWEN_ACCESS_CODE_SHA256 = createHash('sha256').update('test-access-code').digest('hex');
+    let calls = 0;
+    global.fetch = async (url, options) => {
+      calls++;
+      assert.equal(url.href, 'https://relay.example/classify');
+      assert.equal(options.headers.Authorization, 'Bearer test-relay-token');
+      assert.deepEqual(JSON.parse(options.body), { question: input.question });
+      return { ok: true, json: async () => ({ intent: { metric: 'largest', category: 'residential' } }) };
+    };
+    assert.equal((await invoke(input)).statusCode, 401);
+    assert.equal((await invoke(input, {'x-qwen-access-code':'wrong'})).statusCode, 401);
+    assert.equal(calls, 0);
+    const online = await invoke(input, {'x-qwen-access-code':'test-access-code'});
+    assert.equal(online.statusCode, 200);
+    assert.equal(online.body.mode, 'ollama-online');
+    assert.equal(online.body.index, 1);
+    assert.equal(calls, 1);
+    console.log('PASS Copilot intent, GIS facts, local Ollama, online access gate and question-only bridge');
   } finally {
     if (originalKey === undefined) delete process.env.VERCEL;
     else process.env.VERCEL=originalKey;
     if (originalEnabled === undefined) delete process.env.COPILOT_AI_ENABLED;
     else process.env.COPILOT_AI_ENABLED=originalEnabled;
+    for (const key of configNames) {
+      if (originalConfig[key] === undefined) delete process.env[key];
+      else process.env[key] = originalConfig[key];
+    }
     global.fetch=originalFetch;
   }
 })().catch(error=>{console.error(error);process.exitCode=1});
