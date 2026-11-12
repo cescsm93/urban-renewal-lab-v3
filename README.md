@@ -1,5 +1,25 @@
 # Urban Renewal Lab v3
 
+线上演示：<https://urban-renewal-lab-1.vercel.app/>
+
+## 产品定位与目标用户
+
+Urban Renewal Lab 是一款运行在浏览器里的城市更新规划试验工具。面向规划师与更新项目经理，用来做资源盘点、经济测算、公服步行可达和片区讨论：在地图上整理资源档案，按档案中手工填写的参数测算政府收支与企业收益，查看本次候选公服设施的步行路线，编辑边界时可吸附当前已加载的道路，并用 DeepSeek 地图 Copilot 辅助问答。可将当前资源与已查询结果导出为一页「项目前期研判图」（下载 PNG，或在浏览器打印窗口中保存为 PDF），带到片区讨论里对照。
+
+明确非目标：不替代正式规划审批或法定图纸；不做跨用户云端资源库（资源、建议片区与参考图层只留在访问者当前浏览器，换设备前请用「备份／恢复」下载项目 JSON）；模型与规则输出不生成审批结论，仅供讨论。
+
+### v1.1 路线图
+
+见父问题 [#1 v1.1 版本计划](https://github.com/cescsm93/urban-renewal-lab-v3/issues/1)。
+
+- [#2](https://github.com/cescsm93/urban-renewal-lab-v3/issues/2) README 补充产品定位、目标用户与本路线图
+- [#3](https://github.com/cescsm93/urban-renewal-lab-v3/issues/3) 将同仓的 `snow-atlas/` 滑雪图鉴拆到独立仓库
+- [#4](https://github.com/cescsm93/urban-renewal-lab-v3/issues/4) 片区步行覆盖支持从 OSM 拉取步行路网（当前需自行上传路网与设施点）
+- [#5](https://github.com/cescsm93/urban-renewal-lab-v3/issues/5) Terra Draw 编辑试验接入道路吸附（当前吸附只在原编辑器；本轮不把 Terra Draw 设为默认编辑器）
+- [#6](https://github.com/cescsm93/urban-renewal-lab-v3/issues/6) 一页「项目前期研判图」强化计算口径与局限声明
+- [#7](https://github.com/cescsm93/urban-renewal-lab-v3/issues/7) Copilot 限流做成跨实例可执行的费用防护（当前次数限制只计在单个服务进程内）
+- [#8](https://github.com/cescsm93/urban-renewal-lab-v3/issues/8) 补齐移动端道路吸附的触控验收（桌面拖点已查过）
+
 ## DeepSeek 地图 Copilot
 
 `api/copilot.js` 调用 DeepSeek 识别提问所需的查询类型、范围和资源类别；Node 服务按当前浏览器提交的资源摘要精确计算数量、面积、最大资源，并返回地图定位索引。摘要包含名称、类型、面积及是否在视野／筛选结果中，仅留在本站服务端；只将问题发送给 DeepSeek，不发送资源摘要、完整多边形、经济测算字段或高德 Key。模型不可用时页面明确标示并切换原有本地规则。模型不是资源数据源，也不生成规划审批结论。
