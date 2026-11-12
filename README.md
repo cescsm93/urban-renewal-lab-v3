@@ -7,7 +7,7 @@
 - **项目库**：项目层、宗地层、建筑层等档案图层，以及在线更新资源。项目备份 JSON 包含所有档案图层和原始属性字段。
 - **场景库**：已建立本机空库，尚未录入记录。
 
-后续与同事共享政策库、资源库和本地模型，优先走本机／局域网或受控私人网络。Vercel 只用于公开演示，不连接本机政策库、合作伙伴资料或 Qwen。以下章节保留历史实现记录；实际可用范围以当前代码和部署配置为准。
+后续与同事共享政策库、资源库和本地模型，优先走本机／局域网或受控私人网络。Vercel 公开版不连接本机政策库或合作伙伴资料；地图 Copilot 若另行配置受口令保护的桥接，只向本机 Qwen 发送地图问题，不发送私有文档。以下章节保留历史实现记录；实际可用范围以当前代码和部署配置为准。
 
 ## DeepSeek 地图 Copilot
 
@@ -111,3 +111,13 @@ node tests/walk.test.cjs
 公开部署前需配置身份验证和用户／IP 限流。当前服务只监听本机；后端的单任务步行查询与进程内缓存不代替公开服务的配额控制。路况数据与步行结果只在本次会话显示，未写入资源 JSON。
 
 2026-10-26 已发布到原 Vercel 线上站点：https://urban-renewal-lab-1.vercel.app/ 。发布源码提交为 `11791d9`，网页 SHA256 与本地 index.html 一致。高德 Key 已作为生产环境服务端密钥配置。
+
+## 公网试用本机 Qwen 7B
+
+生产网站的地图 Copilot 接收管理员提供的体验口令。Vercel 验证口令后通过 HTTPS 中转把问题交给主机上的 Ollama。Qwen 返回查询意图，资源统计由网站服务端完成。体验口令保存在主机的 `.local-data/online-qwen-access.txt`。
+
+主机运行 `node qwen-bridge.cjs`。中转绑定 `127.0.0.1:4194`，每次处理一个模型请求。在线试用另有按 IP 和整站的限额。中转只接收带服务端凭证的查询意图请求。
+
+本次试用使用 Cloudflare Quick Tunnel。启动命令为 `cloudflared tunnel --protocol quic --no-autoupdate --url http://127.0.0.1:4194`。保持 Ollama、中转和隧道运行。重启隧道后会分配新的地址，需要更新 Vercel 生产环境的 `QWEN_BRIDGE_URL` 并重新部署。口令仍使用原文件。
+
+Vercel 生产环境使用 `QWEN_BRIDGE_URL`、`QWEN_BRIDGE_TOKEN` 和 `QWEN_ACCESS_CODE_SHA256`。中转凭证对应主机的 `.local-data/online-qwen-bridge.txt`，体验口令哈希为访问口令文件的 SHA-256。两份主机口令文件均在 Git 忽略目录中。

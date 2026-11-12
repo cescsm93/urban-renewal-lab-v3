@@ -11,3 +11,4 @@ server.cjs
 lan-server.cjs
 lib/shared-store.cjs
 lib/shared-workspace.js
+qwen-bridge.cjs
