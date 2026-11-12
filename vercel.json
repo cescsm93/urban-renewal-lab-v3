@@ -12,6 +12,10 @@
     "api/spatial-analysis.py": {
       "maxDuration": 90,
       "excludeFiles": "{tests/**,vendor/**,*.png,*.md,server.cjs,density-worker.js,index.html}"
+    },
+    "api/gdb-import.py": {
+      "maxDuration": 90,
+      "excludeFiles": "{tests/**,vendor/**,*.png,*.md,server.cjs,density-worker.js,index.html}"
     }
   }
 }

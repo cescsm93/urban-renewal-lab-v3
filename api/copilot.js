@@ -1,4 +1,5 @@
 const {take} = require('../lib/usage-guard.cjs');
+const {validateAssessment, assessProject} = require('../lib/project-assessment.cjs');
 const {validateInput, normalizeIntent, answer} = require('../lib/copilot-core.cjs');
 
 async function readBody(req) {
@@ -24,6 +25,8 @@ async function classify(question) {
   return intent;
 }
 
+let assessmentRunning = false;
+
 async function handler(req, res) {
   const send = (status, data) => {
     res.statusCode = status;
@@ -32,16 +35,26 @@ async function handler(req, res) {
     res.end(JSON.stringify(data));
   };
   if (req.method !== 'POST') return send(405, {error:'仅支持 POST'});
-  let input;
-  try { input = validateInput(await readBody(req)); }
+  let input, assessment;
+  try {
+    const body = await readBody(req);
+    assessment = body?.mode === 'assessment';
+    input = assessment ? validateAssessment(body) : validateInput(body);
+  }
   catch (e) { return send(400, {error:e.message}); }
   if (process.env.VERCEL || process.env.COPILOT_AI_ENABLED === 'false') return send(503, {error:'此环境使用规则查询；Qwen 仅在本机服务启用'});
+  if (assessment && assessmentRunning) return send(429, {error:'正在生成另一份研判，请稍后再试'});
   const quota = take(req, 'copilot');
   if (!quota.allowed) {
     res.setHeader('Retry-After', String(quota.retryAfter));
     return send(429, {error:'地图 Copilot 今日或近期提问次数已达保护上限'});
   }
   try {
+    if (assessment) {
+      assessmentRunning = true;
+      try { return send(200, { mode: 'assessment', result: await assessProject(input) }); }
+      finally { assessmentRunning = false; }
+    }
     const intent = await classify(input.question);
     return send(200, {...answer(input, intent), mode:'ollama'});
   } catch (e) {

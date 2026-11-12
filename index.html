@@ -44,13 +44,32 @@ body.satellite-mode .project-map-label{background:rgba(16,35,43,.84);border-colo
 
 .storage-card{padding:12px;border:1px solid #b7d3dc;border-radius:11px;background:#eef7f9;color:#234d5a;font-size:13px;line-height:1.65;margin-top:12px}.storage-card b{display:block;margin-bottom:3px}.storage-card p{margin:4px 0}.storage-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.storage-actions button{margin-top:9px}.method-card{margin-top:10px;padding:10px 12px;border-left:3px solid #3d8598;border-radius:8px;background:#edf4f6;font-size:12px;line-height:1.65;color:#355864}.method-card b{display:block;color:#173e4c}.method-card p{margin:3px 0}.storage-status{margin-top:8px;font-size:12px;line-height:1.5;color:#315d69}@media(max-width:720px){.workspace-nav button{padding:6px 4px;font-size:11px}.storage-actions{grid-template-columns:1fr}}
 .brief-preview{margin-top:12px;border:1px solid #cbd8db;border-radius:10px;max-height:54vh;overflow:auto;background:#e7eded;padding:8px}.brief-preview svg{display:block;width:100%;height:auto;background:white;box-shadow:0 3px 15px #17343d26}.brief-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}.brief-actions button{margin-top:8px}.brief-preview:empty{display:none}
+#archivePanel{position:fixed;top:78px;right:16px;z-index:51;width:min(370px,calc(100vw - 32px));max-height:78vh;overflow:auto;background:#fff;border:1px solid #cbdcde;border-radius:16px;box-shadow:0 12px 36px #153a4960;padding:16px;color:#17343d}
+#archivePanel[hidden]{display:none}#archivePanel header{display:flex;justify-content:space-between;align-items:center}#archivePanel header button{border:0;background:#e7eff0;border-radius:8px;font-size:20px;padding:2px 9px}
+#archivePanel p{font-size:12px;line-height:1.55;color:#4b6872}.archive-layer-row{display:flex;align-items:center;gap:8px;padding:9px 3px;font-size:13px}.archive-layer-row input{width:17px;height:17px}.archive-layer-row span:nth-child(2){width:13px;height:13px;border-radius:4px;flex:none}.archive-layer-row span:nth-child(3){flex:1;min-width:0}.archive-layer-row button{font-size:11px;border:1px solid #cbdcde;background:#fff;border-radius:6px;padding:4px;white-space:nowrap}
+.archive-upload{display:block;background:#eef4f4;padding:12px;border-radius:9px;margin:12px 0;font-size:12px}.archive-upload input{width:100%;margin-top:8px}
+.archive-record{max-height:min(55vh,500px);overflow:auto;font:12px/1.45 "Microsoft YaHei",sans-serif;color:#17343d}.archive-record h3{margin:0 0 10px;font-size:15px}.archive-record dl{display:grid;grid-template-columns:115px minmax(0,1fr);gap:0;margin:0}.archive-record dt,.archive-record dd{margin:0;padding:7px 5px;border-bottom:1px solid #e4eded;overflow-wrap:anywhere}.archive-record dt{color:#5e7780}.archive-record dd{font-weight:650}
+.rm-heading{display:flex;flex-direction:column;gap:3px;min-width:0}.rm-heading .rm-count{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rm-toggle{flex:none;border:1px solid #c7d5d9;border-radius:8px;background:#edf3f4;color:#315763;font-size:11px;font-weight:800;min-height:30px;padding:4px 9px;cursor:pointer}.rm-toggle:hover{background:#dfecee}.rm-toggle:focus-visible{outline:2px solid #176d82;outline-offset:2px}
+.projects.collapsed{bottom:auto;height:auto;max-height:none;width:215px}.projects.collapsed .rm-head{border-bottom:0;padding:8px 10px}.projects.collapsed .rm-tabs,.projects.collapsed .rm-pane,.projects.collapsed .rm-footer{display:none}
+@media(max-width:720px){.projects.collapsed{width:184px;height:auto;max-height:none}.projects.collapsed .rm-head{padding:7px 8px}.projects.collapsed .rm-heading b{font-size:10px}.projects.collapsed .rm-heading .rm-count{font-size:8px}.rm-toggle{min-height:32px;padding:4px 7px}}
+.resource-panel-actions{display:flex;gap:7px;margin:10px 0}.resource-panel-actions button{flex:1;border:1px solid #b5cbd1;background:#eaf2f3;color:#24505d;border-radius:9px;padding:9px 5px;font-size:11px;font-weight:800;cursor:pointer}
+.archive-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}.archive-actions button,.archive-edit-controls button,.archive-pages button{border:1px solid #bed0d5;border-radius:8px;background:#e8f1f3;color:#244f5a;padding:8px;font-size:11px;font-weight:800;cursor:pointer}.archive-actions button:first-child{grid-column:1/-1;background:#17343d;color:#fff}.archive-edit-controls{background:#fff7e9;border:1px solid #e7bf7e;border-radius:10px;padding:10px;margin-top:9px}.archive-edit-controls[hidden]{display:none}.archive-edit-controls b{font-size:12px}.archive-edit-controls p{margin:5px 0}.archive-pages{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:7px;font-size:11px}.archive-pages button:disabled{opacity:.4;cursor:default}.archive-table-toolbar input{width:min(210px,100%);min-height:32px;font-size:12px}.archive-vertex{width:18px;height:18px;border:3px solid #fff;border-radius:50%;background:#1788aa;box-shadow:0 2px 7px #17343d88;cursor:move}.archive-midpoint{width:15px;height:15px;background:#edb045;cursor:pointer}
+#archivePanel.table-open{width:min(1100px,calc(100vw - 32px));max-height:calc(100vh - 96px)}.archive-table-toggle{border:0;border-radius:9px;background:#17343d;color:#fff;font-weight:800;padding:9px 12px;margin:8px 0;cursor:pointer}.archive-table[hidden]{display:none}.archive-table{border-top:1px solid #d7e2e4;margin-top:8px;padding-top:9px}.archive-table-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.archive-table-toolbar label{font-size:12px;font-weight:800}.archive-table-toolbar select{width:auto;max-width:240px;min-height:34px;font-size:12px}.archive-table-scroll{max-height:48vh;overflow:auto;border:1px solid #d5e1e4;border-radius:9px;margin-top:8px}.archive-table table{border-collapse:collapse;min-width:100%;white-space:nowrap;font-size:11px}.archive-table th,.archive-table td{border:1px solid #e0e9eb;padding:6px 8px;min-width:125px;max-width:270px;overflow:hidden;text-overflow:ellipsis}.archive-table th{position:sticky;top:0;background:#e8f1f3;z-index:1;text-align:left}.archive-table th:first-child,.archive-table td:first-child{position:sticky;left:0;background:#f6f9f9;z-index:2;min-width:85px}.archive-table th:first-child{z-index:3;background:#e8f1f3}.archive-table .archive-cell{border:0;background:transparent;text-align:left;color:#21424c;cursor:text;width:100%;min-width:100px;padding:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.archive-table .archive-cell:hover{background:#e8f3f5}.archive-table .archive-missing{color:#899ba1}.archive-table .archive-edit{width:100%;min-width:140px;min-height:29px;font-size:12px;padding:3px 5px}.archive-table .archive-locate{border:0;border-radius:6px;background:#deeaed;color:#245563;padding:5px 7px;cursor:pointer}.archive-table-note{font-size:11px;line-height:1.5;color:#557079;margin-top:7px}
+@media(max-width:720px){#archivePanel.table-open{left:7px;right:7px;top:135px;width:auto;max-height:calc(100vh - 145px)}.archive-table-scroll{max-height:38vh}.archive-table th,.archive-table td{min-width:115px}.resource-panel-actions button{font-size:10px}}
+.copilot-workspace[hidden]{display:none!important}.copilot-workspace{position:fixed;inset:0;z-index:1000;background:#edf3f4;color:#17343d;display:flex;flex-direction:column;font:15px/1.6 system-ui,-apple-system,"Microsoft YaHei",sans-serif}.copilot-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px clamp(18px,3vw,48px);background:#fff;border-bottom:1px solid #d5e1e4}.copilot-head h1{font-size:25px;margin:0}.copilot-head p{margin:0;color:#617b83;font-size:13px}.copilot-head button,.copilot-actions button,.copilot-source button,.copilot-source a{border:0;border-radius:9px;background:#17343d;color:#fff;padding:10px 14px;font:inherit;font-weight:700;cursor:pointer;text-decoration:none}.copilot-layout{min-height:0;flex:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,40%);gap:20px;padding:20px clamp(18px,3vw,48px)}.copilot-main,.copilot-evidence{min-height:0;background:#fff;border:1px solid #d6e2e5;border-radius:16px;padding:22px;display:flex;flex-direction:column;overflow:auto}.copilot-main h2,.copilot-evidence h2{font-size:18px;margin:0 0 12px}.copilot-main form{display:grid;gap:12px}.copilot-main textarea{box-sizing:border-box;width:100%;min-height:110px;resize:vertical;border:1px solid #b9cdd1;border-radius:11px;padding:14px;font:inherit;font-size:16px;line-height:1.6;color:#17343d}.copilot-actions{display:flex;flex-wrap:wrap;gap:9px}.copilot-actions button{background:#176d82}.copilot-actions button.secondary{background:#e6f0f2;color:#24505d}.copilot-actions button[hidden]{display:none}.copilot-main small{color:#607d85;line-height:1.5}.copilot-answer-box{margin-top:22px;padding:20px;border-radius:12px;background:#f2f7f8;flex:1}.copilot-answer-box p{font-size:16px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}.copilot-evidence>p{font-size:13px;color:#617b83;margin:0 0 12px}.copilot-sources{display:grid;gap:9px}.copilot-source{border:1px solid #d2e1e5;border-radius:11px;padding:12px;background:#f9fbfb}.copilot-source b,.copilot-source small{display:block;overflow-wrap:anywhere}.copilot-source small{color:#5e7882;margin:4px 0 9px}.copilot-source-actions{display:flex;gap:7px;flex-wrap:wrap}.copilot-source button,.copilot-source a{font-size:12px;padding:7px 10px}.copilot-source button{background:#e3eef1;color:#285462}.copilot-preview{width:100%;min-height:360px;flex:1;border:1px solid #d2e1e5;border-radius:10px;margin-top:14px;background:#fff}.copilot-preview[hidden]{display:none!important}body.copilot-open{overflow:hidden}@media(max-width:720px){.copilot-head{padding:10px 14px}.copilot-head h1{font-size:19px}.copilot-head p{font-size:11px}.copilot-layout{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:8px}.copilot-main,.copilot-evidence{padding:13px}.copilot-main textarea{min-height:76px}.copilot-answer-box{margin-top:10px;padding:12px}.copilot-answer-box p{font-size:14px}.copilot-preview{min-height:260px}}
+#copilotPagePreview{height:auto;min-height:0;max-height:none;flex:none;object-fit:contain}
 </style>
+<link rel="stylesheet" href="visual-theme.css">
 </head>
 <body>
-<div id="map"></div><details class="copilot glass"><summary>地图 Copilot</summary><p>本机服务由 Ollama Qwen 7B 理解提问，数量和面积由网站计算。公网使用规则查询。模型不可用时自动回退规则，不发送问题给 DeepSeek。</p><form id="copilotForm"><input id="copilotQuestion" aria-label="地图问题" placeholder="最大的居住更新资源在哪里？"><button>查询</button></form><p id="copilotAnswer" role="status"></p><button id="copilotLocate" hidden>定位结果</button></details>
+<div id="map"></div>
+<section id="copilotWorkspace" class="copilot-workspace" aria-label="Copilot 工作区" hidden>
+  <header class="copilot-head"><div><h1>地图 Copilot</h1><p>地图数据问答 · 本地政策知识库 · 原文溯源</p></div><button id="closeCopilot" type="button">返回地图</button></header>
+  <div class="copilot-layout"><main class="copilot-main"><h2>提问</h2><form id="copilotForm"><textarea id="copilotQuestion" aria-label="地图或政策问题" placeholder="例如：上海市城市更新专家委员会的任期是多久？"></textarea><div class="copilot-actions"><button type="submit">查询地图</button><button id="askLocalKnowledge" class="secondary" type="button" hidden>问本地政策库</button><button id="openProjectAssessment" class="secondary" type="button">做前期研判</button></div></form><small id="knowledgeStatus" hidden></small><div class="copilot-answer-box"><h2>回答</h2><p id="copilotAnswer" role="status">输入问题后选择查询方式。政策回答中的 [1] 对应右侧同编号的原文件。</p><div class="copilot-actions"><button id="copilotLocate" class="secondary" type="button" hidden>定位地图结果</button></div></div></main><aside class="copilot-evidence"><h2>来源与原文</h2><p>点击来源可在此预览，也可在新标签打开原文件。PDF 将定位到引用页。</p><div id="copilotSources" class="copilot-sources"><p>查询政策知识库后，引用文件会显示在这里。</p></div><iframe id="copilotSourcePreview" class="copilot-preview" title="知识库笔记原文预览" hidden></iframe><img id="copilotPagePreview" class="copilot-preview" alt="引用的 PDF 原文页" hidden></aside></div>
+</section>
 <div class="top">
   <div class="brand glass"><b>Urban Renewal Lab</b></div>
-  <nav class="workspace-nav glass" aria-label="工作模块"><button id="openPanel">资源档案</button><button id="openPlanning">工作流</button><button id="toggleTable" aria-expanded="false">属性表</button><button id="openStorage">备份／恢复</button></nav><div class="theme glass"><button id="light" class="on">浅色</button><button id="satellite">影像</button><button id="openRoads">高德道路</button></div>
+  <nav class="workspace-nav glass" aria-label="工作模块"><button id="openData" type="button">导入数据</button><button id="openPlanning">工作流</button><button id="openCopilot" type="button">Copilot</button><button id="openLibraries" type="button">四库</button></nav><button id="openPanel" hidden>在线资源档案</button><div class="theme glass"><button id="light">浅色</button><button id="satellite" class="on">影像</button><button id="openRoads">高德道路</button></div>
 </div>
 <div class="summary glass">
   <div class="metric"><span>资源</span><b id="mCount">0</b></div>
@@ -60,7 +79,7 @@ body.satellite-mode .project-map-label{background:rgba(16,35,43,.84);border-colo
 </div>
 <div class="projects glass" id="resourceManager">
   <div class="rm-head">
-    <div class="rm-title"><b>更新资源管理器</b><span class="rm-count" id="rmSummary">0 处资源 · 0 个片区</span></div>
+    <div class="rm-title"><div class="rm-heading"><b>更新资源管理器</b><span class="rm-count" id="rmSummary">0 处资源 · 0 个片区</span></div><button class="rm-toggle" id="toggleResourceManager" type="button" aria-expanded="true" aria-controls="rm-resources rm-areas">收起 ▴</button></div>
     <div class="rm-tabs"><button class="rm-tab on" data-rm-tab="resources">更新资源</button><button class="rm-tab" data-rm-tab="areas">建议片区</button></div>
   </div>
 
@@ -103,7 +122,7 @@ body.satellite-mode .project-map-label{background:rgba(16,35,43,.84);border-colo
 <div class="drawbar glass" id="drawbar"><label class="snap-control"><input type="checkbox" id="roadSnap">道路吸附</label><select id="snapTolerance" aria-label="吸附容差"><option value="10">10 像素</option><option value="20">20 像素</option><option value="30">30 像素</option></select><span id="snapStatus" role="status"></span><span id="drawHint" role="status">单击添加节点，双击结束；Esc 取消</span><button class="cancel" id="undo">撤销一点</button><button class="finish" id="finish">完成圈选</button><button class="cancel" id="cancel">取消</button></div>
 
 <section class="panel glass closed" id="panel">
-  <button class="close" id="close">×</button><h2 id="panelTitle">更新资源</h2>
+  <button class="close" id="close">×</button><h2 id="panelTitle">更新资源</h2><div class="resource-panel-actions"><button id="resourceArchive" type="button">档案图层与属性表</button><button id="openStorage" type="button">备份／恢复</button></div>
   <div class="tabs"><button class="on" data-tab="base">资源档案</button></div>
 
   <div id="archiveEmpty" class="note" hidden>请选择左侧资源，或先按分类绘制新资源，再查看档案。</div><div class="pane on" id="base">
@@ -194,11 +213,11 @@ body.satellite-mode .project-map-label{background:rgba(16,35,43,.84);border-colo
 </section>
 <section class="panel glass closed module-panel" id="densityPanel"><button class="close" data-close-module>×</button><h2>资源分布密度</h2><p class="module-intro">从资源分布到热点识别</p><label for="densityCategory">资源分类</label><select id="densityCategory"><option value="all">全部资源</option><option value="industrial">产业</option><option value="residential">居住</option><option value="public">公服</option><option value="commercial">商业</option><option value="other">其他</option></select><label for="densityScope">计算范围</label><select id="densityScope"><option value="view">当前地图视野</option><option value="resources">所选分类资源范围</option></select><label for="densityRadius">密度统计半径</label><select id="densityRadius"><option value="100">100 米</option><option value="250" selected>250 米</option><option value="500">500 米</option></select><div class="module-grid"><button id="showHeat">一键生成热力图</button><button id="showGrid">生成 5 米栅格</button></div><button class="primary secondary" id="clearDensity">关闭密度图</button><button class="primary secondary" id="cancelDensity" hidden>取消栅格计算</button><div id="densityLegend" class="note" hidden><div class="density-ramp"></div><div class="ramp-labels"><span>低</span><span>资源密集 · 高</span></div></div><p id="densityStatus" class="note" role="status">5 米是栅格采样间距；密度为所设半径内资源中心点数量。零值透明。最多生成 100 万个栅格，超出时请缩小视野。</p><div class="method-card"><b>密度图 · 来源与口径</b><p>来源：当前浏览器内所选分类的更新资源。热力图对每处资源中心点等权显示；5 米栅格按所选半径统计邻近中心点数量。</p><p>局限：颜色代表本图中的相对密集程度，不表示地块面积、人口或更新价值；不同范围和参数的图不宜直接比颜色。</p></div><button class="primary secondary" id="exportDensity" hidden>导出栅格 PNG＋空间元数据</button></section>
 <section class="panel glass closed module-panel" id="roadsPanel"><button class="close" data-close-module>×</button><h2>高德道路</h2><p class="module-intro">当前视野内的高德路况覆盖道路</p><p class="note">大视野会自动拆成多个小范围分批查询；已加载的范围短时间内会复用。单次最多 20 块，范围再大请稍微放大。道路以灰蓝线显示，点击查看名称。道路返回范围受高德路况覆盖限制，并非完整路网。地图仍采用 WGS84；高德道路会转换后叠加。</p><button id="loadAmapRoads" class="primary">加载当前视野道路</button><button id="hideAmapRoads" class="primary secondary">隐藏道路图层</button><p id="roadsStatus" class="note" role="status">点击加载当前视野；分块查询需要一些时间，也会消耗高德接口额度。</p><p class="note">道路来源：© 高德地图。仅用于当前分析会话，未加入项目导出。</p></section>
-<section class="panel glass closed module-panel" id="planningPanel"><button class="close" data-close-module>×</button><h2>工作流</h2><p class="module-intro">步骤 1 整理数据 → 步骤 2 编辑资源 → 步骤 3 空间分析 → 步骤 4 经济测算；成套交付请进入“前期研究”。</p><div class="planning-tools"><button id="openGIS"><b>数据体检与导入</b><span>GeoPandas／Shapely · 坐标与几何检查</span></button><button id="openTerra"><b>Terra Draw 编辑试验</b><span>独立草稿 · 撤销重做 · 检查后保存</span></button><button id="openEconomics"><b>经济测算</b><span>政府收支 · 企业收益</span></button><button id="openDensity"><b>资源密度</b><span>热力图 · 5 米栅格</span></button><button id="planningAreas"><b>建议更新片区</b><span>邻近资源分组 · 人工审查边界</span></button><button id="openPOI"><b>项目周边 POI</b><span>高德地点 · 自定义 0.1～5 公里范围</span></button><button id="openWalk"><b>公服步行可达性</b><span>真实路线 · 5 / 10 / 15 分钟</span></button><button id="openCoverage"><b>片区步行覆盖</b><span>上传步行路网／设施点 · 5／10／15 分钟</span></button><button id="openMorphology"><b>街区形态分析</b><span>建筑覆盖率 · 街道密度 · 街区尺度</span></button><button id="openHotspots"><b>统计热点检验</b><span>局部 Moran I · 不确定性</span></button><button id="planningTable"><b>地图与属性表</b><span>筛选 · 多选 · 批量分类</span></button><button id="planningSnap"><b>道路吸附编辑</b><span>加载道路后微调资源边界</span></button></div></section>
+<section class="panel glass closed module-panel" id="planningPanel"><button class="close" data-close-module>×</button><h2>工作流</h2><p class="module-intro">步骤 1 整理数据 → 步骤 2 编辑资源 → 步骤 3 空间分析 → 步骤 4 经济测算；成套交付请进入“前期研究”。</p><div class="planning-tools"><button id="openGIS"><b>数据体检与导入</b><span>GeoPandas／Shapely · 坐标与几何检查</span></button><button id="openTerra"><b>Terra Draw 编辑试验</b><span>独立草稿 · 撤销重做 · 检查后保存</span></button><button id="openEconomics"><b>经济测算</b><span>政府收支 · 企业收益</span></button><button id="openDensity"><b>资源密度</b><span>热力图 · 5 米栅格</span></button><button id="planningAreas"><b>建议更新片区</b><span>邻近资源分组 · 人工审查边界</span></button><button id="openPOI"><b>项目周边 POI</b><span>高德地点 · 自定义 0.1～5 公里范围</span></button><button id="openWalk"><b>公服步行可达性</b><span>真实路线 · 5 / 10 / 15 分钟</span></button><button id="openCoverage"><b>片区步行覆盖</b><span>上传步行路网／设施点 · 5／10／15 分钟</span></button><button id="openMorphology"><b>街区形态分析</b><span>建筑覆盖率 · 街道密度 · 街区尺度</span></button><button id="openHotspots"><b>统计热点检验</b><span>局部 Moran I · 不确定性</span></button><button id="planningTable"><b>在线更新资源批量编辑</b><span>筛选 · 多选 · 批量分类</span></button><button id="planningSnap"><b>道路吸附编辑</b><span>加载道路后微调资源边界</span></button></div></section>
 <section class="panel glass closed module-panel" id="briefPanel"><button class="close" data-close-module>×</button><h2>项目前期研判图</h2><p class="module-intro">汇总当前资源档案和已查询的周边地点，生成一页可审查的研究图</p><label for="briefProject">更新资源</label><select id="briefProject"></select><label for="briefRadius">展示半径（公里）</label><input id="briefRadius" type="number" min="0.1" max="5" step="0.1" value="2"><p class="note">先查询同一资源和半径内的 POI，再回这里生成。未查询时仍可生成项目基础图；不会补造房价、商业租金和人口数据。</p><button class="primary secondary" id="briefToPOI">去查询周边 POI</button><button class="primary" id="makeBrief">生成研判图</button><div class="brief-actions"><button class="primary secondary" id="briefPNG" disabled>下载 PNG</button><button class="primary secondary" id="briefPDF" disabled>打印／保存 PDF</button></div><p id="briefStatus" class="note" role="status">请选择一个更新资源。</p><div id="briefPreview" class="brief-preview"></div><div class="method-card"><b>数据口径</b><p>POI 仅使用本次页面会话已加载的高德分页结果；不同资源或半径的结果不会混用。点位数量不等于真实人流、商业需求或公服覆盖率。图中位置示意不含真实道路底图。生成后为固定快照，资源或查询变化时请重新生成。</p></div></section>
 <section class="panel glass closed module-panel" id="poiPanel"><button class="close" data-close-module>×</button><h2>项目周边 POI</h2><p class="module-intro">查询已框选资源中心点周边的高德地点</p><label for="poiProject">更新资源</label><select id="poiProject"></select><label for="poiRadius">查询半径（公里）</label><input id="poiRadius" type="number" min="0.1" max="5" step="0.1" value="2"><p class="note">以资源中心点为圆心，不是按地块边界测距。高德每页最多请求 20 个地点，同一条件最多约 200 条；继续加载可查看后续结果，会消耗接口额度。</p><button class="primary" id="runPOI">查询周边地点</button><button class="primary secondary" id="morePOI" hidden>继续加载</button><button class="primary secondary" id="clearPOI">清除地点图层</button><p id="poiStatus" class="note" role="status">请先选择已框选的更新资源。</p><div id="poiResults"></div><div class="method-card"><b>来源与范围</b><p>来源：高德地图周边搜索。距离是资源中心点到 POI 的直线距离，不能代表步行时间。结果受高德收录、排序、分页与接口额度影响，未加载完时不是范围内的完整清单。</p></div></section>
-<section class="panel glass closed module-panel" id="storagePanel"><button class="close" data-close-module>×</button><h2>备份／恢复项目</h2><div class="storage-card"><b>你的资源现在存在哪里？</b><p>资源档案、建议片区和导入的参考图层，自动保存在当前设备、当前浏览器的此网站存储空间里。GitHub 仓库和 Vercel 网页不会自动保存你的项目数据；换设备、换浏览器或清除网站数据后，原数据不会自动出现。</p><p>请定期下载项目备份 JSON，并把文件保存在自己能找到的位置。恢复时选择这个备份文件。</p></div><p id="storageSummary" class="storage-status" role="status"></p><div class="storage-actions"><button class="primary" id="downloadBackup">下载项目备份</button><button class="primary secondary" id="restoreBackup">从备份恢复</button></div><input id="restoreFile" type="file" accept=".json,application/json" hidden><p id="restoreStatus" class="storage-status" role="status">恢复会替换当前浏览器里的资源和片区；操作前请先下载一份现有项目备份。</p></section>
-<section class="attribute-table glass" id="attributeTable" hidden aria-label="资源属性表"><div class="table-toolbar"><b>资源属性表</b><span id="tableSummary"></span><label><input type="checkbox" id="tableSelectedOnly">仅选中</label><button id="zoomTableSelection">定位选中</button><button id="clearTableSelection">清除选择</button><select id="batchType" aria-label="批量资源类型"></select><button id="applyBatchType">应用分类</button><button id="closeTable" aria-label="关闭属性表">×</button></div><div class="table-scroll"><table><thead><tr><th><input type="checkbox" id="tableSelectAll" aria-label="选择当前表格全部资源"></th><th><button data-sort="name">资源名称 ↕</button></th><th>资源类型</th><th><button data-sort="area">面积 ha ↕</button></th><th>权属</th><th>阶段</th><th>操作</th></tr></thead><tbody id="attributeRows"></tbody></table></div><div class="table-tip">与左侧搜索和分类筛选同步；点击名称定位，勾选可多选；地图 Shift＋单击可增减选择。</div></section>
+<section class="panel glass closed module-panel" id="storagePanel"><button class="close" data-close-module>×</button><h2>备份／恢复项目与档案图层</h2><div class="storage-card"><b>项目备份包含什么？</b><p>下载的 JSON 包含在线更新资源、建议片区、导入的参考图层，以及档案图层中的项目层、宗地层、建筑层等全部图层和原始属性字段；已加载的前期研究专题数据也会一并打包。换浏览器或电脑时，请用此文件恢复。</p><p>政策库 PDF、合作伙伴资源库和场景库分别保存在本机，不在项目备份中。请单独保留原始文件或下载对应资料库备份；GitHub 与 Vercel 不会自动保存这些私有数据。</p></div><p id="storageSummary" class="storage-status" role="status"></p><div class="storage-actions"><button class="primary" id="downloadBackup">下载项目备份</button><button class="primary secondary" id="restoreBackup">从备份恢复</button></div><input id="restoreFile" type="file" accept=".json,application/json" hidden><p id="restoreStatus" class="storage-status" role="status">恢复会替换当前浏览器里的资源、片区和档案图层；操作前请先下载一份现有项目备份。</p></section>
+<section class="attribute-table glass" id="attributeTable" hidden aria-label="在线更新资源批量编辑"><div class="table-toolbar"><b>在线更新资源批量编辑</b><span id="tableSummary"></span><label><input type="checkbox" id="tableSelectedOnly">仅选中</label><button id="zoomTableSelection">定位选中</button><button id="clearTableSelection">清除选择</button><select id="batchType" aria-label="批量资源类型"></select><button id="applyBatchType">应用分类</button><button id="closeTable" aria-label="关闭属性表">×</button></div><div class="table-scroll"><table><thead><tr><th><input type="checkbox" id="tableSelectAll" aria-label="选择当前表格全部资源"></th><th><button data-sort="name">资源名称 ↕</button></th><th>资源类型</th><th><button data-sort="area">面积 ha ↕</button></th><th>权属</th><th>阶段</th><th>操作</th></tr></thead><tbody id="attributeRows"></tbody></table></div><div class="table-tip">与左侧搜索和分类筛选同步；点击名称定位，勾选可多选；地图 Shift＋单击可增减选择。</div></section>
 <section class="panel glass closed module-panel" id="walkPanel"><button class="close" data-close-module>×</button><h2>公服步行可达性</h2><p class="module-intro">查看从一个起点到公服设施的实际步行时间</p><label for="walkOrigin">起点</label><select id="walkOrigin"><option value="map">地图选点</option></select><button id="pickWalkOrigin" class="primary secondary">在地图上选择起点</button><label for="walkTargets">目标公服来源</label><select id="walkTargets"><option value="resources">已录入公服资源</option><option value="hospital">高德 · 医院</option><option value="school">高德 · 学校</option><option value="park">高德 · 公园</option></select><p class="note">每次分析最多查询周边 2 公里内最近的 5 个候选设施；资源默认用中心点，可在地图上另选实际出入口作为起点。</p><button id="runWalk" class="primary">计算步行可达性</button><label class="poi-label-toggle" for="showPoiLabels"><input id="showPoiLabels" type="checkbox" checked>在地图显示 POI 名称</label><button id="clearWalk" class="primary secondary">清除路线与 POI</button><p id="walkStatus" class="note" role="status">按高德步行路线估算时间，不生成完整等时圈。</p><div class="walk-legend"><span>● ≤5 分钟</span><span>● ≤10 分钟</span><span>● ≤15 分钟</span><span>● 超过15分钟</span></div><div id="walkSummary" class="note" hidden></div><div id="walkResults"></div><div class="method-card"><b>步行分析 · 来源与口径</b><p>来源：当前浏览器内的公服资源，或高德周边搜索候选；路线与时间来自高德步行路径规划。先按直线距离选出 2 公里内最多 5 个候选，再逐一计算步行路线。</p><p>局限：只统计这几个候选点，不是完整等时圈或全区域公服覆盖率；中心点可能不是设施入口，开放状态和实际通行需现场核查。</p></div><p class="note">地图仅标注本次查询的设施点，最多 5 处；名称开关不会清除点位或路线。结果不代表全部公服覆盖率。时间为高德估算，开放状态与通行限制需现场核查。来源：© 高德地图。</p></section>
 <section class="panel glass closed module-panel" id="coveragePanel"><button class="close" data-close-module>×</button><h2>片区步行覆盖</h2><p class="module-intro">沿上传的步行路网，估算设施对居住资源的 5／10／15 分钟覆盖</p><label for="spatialRoads">可步行路网 GeoJSON（线，WGS84）</label><input id="spatialRoads" type="file" accept=".geojson,.json"><label for="spatialFacilities">学校／公园等设施入口 GeoJSON（点，WGS84）</label><input id="spatialFacilities" type="file" accept=".geojson,.json"><p class="note">居住资源取当前资源库中“居住”分类的多边形。设施点必须是真实入口；普通车行路况线不能直接替代步行路网。</p><button class="primary" id="runCoverage">生成步行覆盖</button><p id="coverageStatus" class="note" role="status">请上传路网和设施入口；上传文件只用于本次分析。</p><div id="coverageResult"></div></section>
 <section class="panel glass closed module-panel" id="morphologyPanel"><button class="close" data-close-module>×</button><h2>街区形态分析</h2><p class="module-intro">用建筑轮廓与街道线分析当前更新资源</p><label for="spatialBuildings">建筑轮廓 GeoJSON（面，WGS84）</label><input id="spatialBuildings" type="file" accept=".geojson,.json"><p class="note">街道线共用“片区步行覆盖”里上传的路网；如需换道路，请在那里重新选择。此处仅在当前资源面内计算指标。</p><button class="primary" id="runMorphology">分析街区形态</button><p id="morphologyStatus" class="note" role="status">需要建筑轮廓、街道线及至少一处更新资源。</p><div id="morphologyResult"></div></section>
@@ -209,15 +228,16 @@ body.satellite-mode .project-map-label{background:rgba(16,35,43,.84);border-colo
 
 <script src="vendor/terra-draw.umd.js"></script><script src="vendor/terra-draw-maplibre-gl-adapter.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7/turf.min.js"></script>
-<script src="lib/brief-sheet.js"></script><script src="vendor/jspdf.umd.min.js"></script><script src="vendor/fflate.umd.js"></script><script src="lib/research-workspace.js"></script>
+<script src="lib/brief-sheet.js"></script><script src="vendor/jspdf.umd.min.js"></script><script src="vendor/fflate.umd.js"></script><script src="lib/project-assessment.js"></script><script src="lib/program-analysis.js"></script><script src="lib/archive-layers.js"></script><script src="lib/research-workspace.js"></script><script src="lib/library-workspace.js"></script>
+<!-- LAN_SHARED -->
 <script>
 (function(){
 "use strict";
 const $=id=>document.getElementById(id);
 const colors={"工业更新":"#e85a64","商业更新":"#497fd1","片区更新":"#e49b45","居住更新":"#7a69c7","老旧小区":"#7a69c7","危旧住宅":"#9c67b8","老旧厂区":"#e85a64","低效产业用地":"#d96652","老旧商业":"#497fd1","城中村":"#a86db1","闲置低效用地":"#d98b32","历史文化资源":"#3e9c86","公共设施短板":"#4b9a9d","交通市政设施":"#567b9e","公共空间":"#62a36f","其他资源":"#75858b","历史街区":"#3e9c86"};
 const STORAGE_KEY="urban-renewal-lab-state-v3";
-let vertexMarkers=[],vertexMode=false,areaEditing=null;
-let map,mapReady=false,projects=[],renewalAreas=[],drawing=false,pts=[],editing=null,basemap="light",redrawing=false,activeArea=null,projectMarkers=[];
+let vertexMarkers=[],vertexMode=false,areaEditing=null,projectFilesLoading=0;
+let map,mapReady=false,projects=[],renewalAreas=[],drawing=false,pts=[],editing=null,basemap="satellite",redrawing=false,activeArea=null,projectMarkers=[];
 let importedReferenceGeoJSON={type:"FeatureCollection",features:[]};
 const fc=f=>({type:"FeatureCollection",features:f});
 const deepCopy=x=>JSON.parse(JSON.stringify(x));
@@ -250,8 +270,8 @@ function normalizeProject(raw){
  const plannedLandArea=+(p.plannedLandArea??a)||a;
  const oldF=p.finance||{};
  let oldRent=+(oldF.rent??900)||900;if(oldRent>250)oldRent=oldRent/12;
- return {
-  geometry:p.geometry||null,labelPoint:p.labelPoint||null,gisReport:p.gisReport||null,source:p.source,sourceAttributes:p.sourceAttributes,name:p.name||nextProjectName(),type:p.type||"老旧厂区",stage:p.stage||"前期研究",mode:p.mode||"拆改结合",pts:Array.isArray(p.pts)?p.pts:[],
+  return {
+   archiveLink:p.archiveLink||null,geometry:p.geometry||null,labelPoint:p.labelPoint||null,gisReport:p.gisReport||null,source:p.source,sourceAttributes:p.sourceAttributes,name:p.name||nextProjectName(),type:p.type||"老旧厂区",stage:p.stage||"前期研究",mode:p.mode||"拆改结合",pts:Array.isArray(p.pts)?p.pts:[],
   currentLandArea:a,existingGfa:+(p.existingGfa??p.oldGfa??0)||0,existingFar:a>0?+(p.existingGfa??p.oldGfa??0)/(a*10000):0,owner:p.owner||"国有企业",landNature:p.landNature||"出让",currentUse,
   plannedUse:p.plannedUse||currentUse,plannedFar,plannedLandArea,plannedGfa:plannedLandArea*10000*plannedFar,
   government:p.government||{landGrant:+(oldF.landCost??8000)||0,relocation:+(oldF.reloc??12000)||0,assetAcq:0,sitePrep:1500,other:0},
@@ -259,10 +279,31 @@ function normalizeProject(raw){
   govCalc:p.govCalc||null,entCalc:p.entCalc||p.calc||null
  }
 }
-function loadState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return;const st=JSON.parse(raw);if(Array.isArray(st.projects))projects=st.projects.filter(x=>Array.isArray(x.pts)&&x.pts.length>=3).map(normalizeProject);if(Array.isArray(st.renewalAreas))renewalAreas=st.renewalAreas;if(st.importedReferenceGeoJSON?.type==="FeatureCollection")importedReferenceGeoJSON=st.importedReferenceGeoJSON;basemap=st.basemap||st.theme||"light";if(!["light","satellite"].includes(basemap))basemap="light"}catch(e){}}
+function loadState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return;const st=JSON.parse(raw);if(Array.isArray(st.projects))projects=st.projects.filter(x=>Array.isArray(x.pts)&&x.pts.length>=3).map(normalizeProject);if(Array.isArray(st.renewalAreas))renewalAreas=st.renewalAreas;if(st.importedReferenceGeoJSON?.type==="FeatureCollection")importedReferenceGeoJSON=st.importedReferenceGeoJSON;if(Array.isArray(st.archiveLayers))RenewalArchive.restore(st.archiveLayers);basemap=st.basemapUiVersion===2?(st.basemap||st.theme||"satellite"):"satellite";if(!["light","satellite"].includes(basemap))basemap="satellite"}catch(e){}}
+function syncArchiveProjects(){
+ const layer=RenewalArchive.capture().find(row=>row.name==='项目层');
+ const previous=new Map(projects.filter(p=>p.archiveLink).map(p=>[p.archiveLink,p]));
+ const manual=projects.filter(p=>!p.archiveLink);
+ const imported=(layer?.collection?.features||[]).flatMap((feature,index)=>{
+  const geometry=feature.geometry;
+  const ring=geometry?.type==='Polygon'?geometry.coordinates?.[0]:geometry?.type==='MultiPolygon'?geometry.coordinates?.[0]?.[0]:null;
+  if(!ring||ring.length<4)return [];
+  const pts=ring.slice(0,-1).map(point=>[+point[0],+point[1]]);
+  if(pts.length<3||areaHa(pts)<.000001)return [];
+  const props=feature.properties||{},link='项目层:'+index;
+  const name=String(propFirst(props,['项目名称','名称','name','项目编号'])||'更新项目'+(index+1));
+  const old=previous.get(link);
+  const area=areaHa(pts);
+  const type=normalizeImportedType(propFirst(props,['项目类型','更新类型','资源类型'])||'其他资源');
+  const base=old&&old.name===name?old:newDefaultProject(area,pts);
+  return [normalizeProject({...base,archiveLink:link,name,type,currentUse:old&&old.name===name?old.currentUse:inferUse(type),plannedUse:old&&old.name===name?old.plannedUse:inferUse(type),source:'导入档案 · 项目层',sourceAttributes:props,geometry:deepCopy(geometry),pts,currentLandArea:area,plannedLandArea:old&&old.name===name?old.plannedLandArea:area})];
+ });
+ projects=[...manual,...imported];
+ if(editing!==null&&editing>=projects.length)editing=null;
+}
 let storageWriteError=false;
-function updateStorageSummary(){const el=$("storageSummary");if(!el)return;el.textContent=storageWriteError?"自动保存失败：当前浏览器可能禁止网站存储或空间已满。请立即下载项目备份。":`当前浏览器有 ${projects.length} 处资源、${renewalAreas.length} 个建议片区。页面会自动保存在此浏览器；下载备份后才能可靠地带到另一台设备。`}
-function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({version:7,basemap,projects,renewalAreas,importedReferenceGeoJSON,updatedAt:new Date().toISOString()}));storageWriteError=false}catch(e){storageWriteError=true;showImportStatus('<b>自动保存失败</b> 请打开“备份／恢复”下载项目备份。')}updateStorageSummary()}
+function updateStorageSummary(){const el=$("storageSummary");if(!el)return;if(window.RenewalShared?.active()){el.textContent="当前为共享项目。修改后请点地图下方的「保存共享版本」，或下载备份。";return}el.textContent=storageWriteError?"自动保存失败：当前浏览器可能禁止网站存储或空间已满。请立即下载项目备份。":`当前浏览器有 ${projects.length} 处资源、${renewalAreas.length} 个建议片区。页面会自动保存在此浏览器；下载备份后才能可靠地带到另一台设备。`}
+function saveState(){if(window.RenewalShared?.active()){updateStorageSummary();window.RenewalShared.noteChange();return}try{localStorage.setItem(STORAGE_KEY,JSON.stringify({version:7,basemapUiVersion:2,basemap,projects,renewalAreas,importedReferenceGeoJSON,archiveLayers:RenewalArchive.capture(),updatedAt:new Date().toISOString()}));storageWriteError=false}catch(e){storageWriteError=true;showImportStatus('<b>自动保存失败</b> 请打开“备份／恢复”下载项目备份。')}updateStorageSummary()}
 
 function projectMatchesManager(p){
  const q=(resourceManagerState?.query||"").trim().toLowerCase();
@@ -310,7 +351,7 @@ function assessRenewalArea(a){
  return{overall,priority,priorityClass,color,rank:0,scores:{cluster,urgency,potential,implementation,economic},facts:{count:ps.length,area:+a.areaHa||0,existingFar,plannedFar,totalExisting,totalPlanned,topTypes,multiCount,calcCount},summary:summary.replace(/；$/,"。"),economicDirect:calcCount>0};
 }
 function evaluateAllAreas(){renewalAreas.forEach(a=>a.assessment=assessRenewalArea(a));[...renewalAreas].sort((a,b)=>(b.assessment?.overall||0)-(a.assessment?.overall||0)).forEach((a,i)=>a.assessment.rank=i+1)}
-function renderAreaAssessment(i){const box=$("areaAssessment"),a=renewalAreas[i];if(!a||!a.assessment){box.classList.remove("show");box.innerHTML="";return}const x=a.assessment,s=x.scores,f=x.facts;const row=(n,v)=>`<div class="score-row"><span>${n}</span><div class="score-track"><div class="score-fill" style="width:${Math.round(v)}%"></div></div><b>${Math.round(v)}</b></div>`;box.innerHTML=`<div class="assess-head"><div><b><span class="rank-no">${x.rank}</span>${escapeHTML(a.name)}</b><div class="assess-total"><strong>${Math.round(x.overall)}</strong><span>综合分</span></div></div><span class="priority-badge ${x.priorityClass}">${x.priority}</span></div>${row("资源集聚度",s.cluster)}${row("更新紧迫度",s.urgency)}${row("开发潜力",s.potential)}${row("实施可行度",s.implementation)}${row("经济可行性",s.economic)}<div class="assess-facts"><div class="fact"><span>现状 → 规划 FAR</span><b>${f.existingFar.toFixed(2)} → ${f.plannedFar.toFixed(2)}</b></div><div class="fact"><span>建筑增量</span><b>${((f.totalPlanned-f.totalExisting)/10000).toFixed(1)} 万㎡</b></div><div class="fact"><span>资源构成</span><b>${f.topTypes||"—"}</b></div><div class="fact"><span>复杂权属</span><b>${f.multiCount} / ${f.count} 处</b></div></div><div class="assess-summary">${x.summary}</div><div class="method-note">综合分：集聚25% · 紧迫20% · 潜力20% · 实施15% · 经济20%${x.economicDirect?" · 已纳入已测算经济结果":" · 经济项为参数估算"}</div>`;box.classList.add("show")}
+function renderAreaAssessment(i){const box=$("areaAssessment"),a=renewalAreas[i];if(!a||!a.assessment){box.classList.remove("show");box.innerHTML="";return}const x=a.assessment,s=x.scores,f=x.facts;const row=(n,v)=>`<div class="score-row"><span>${n}</span><div class="score-track"><div class="score-fill" style="width:${Math.round(v)}%"></div></div><b>${Math.round(v)}</b></div>`;box.innerHTML=`<div class="assess-head"><div><b><span class="rank-no">${x.rank}</span>${escapeHTML(a.name)}</b><div class="assess-total"><strong>${Math.round(x.overall)}</strong><span>综合分</span></div></div><span class="priority-badge ${x.priorityClass}">${x.priority}</span></div>${row("资源集聚度",s.cluster)}${row("更新紧迫度",s.urgency)}${row("开发潜力",s.potential)}${row("实施可行度",s.implementation)}${row("经济可行性",s.economic)}<div class="assess-facts"><div class="fact"><span>现状 → 规划 FAR</span><b>${f.existingFar.toFixed(2)} → ${f.plannedFar.toFixed(2)}</b></div><div class="fact"><span>建筑增量</span><b>${((f.totalPlanned-f.totalExisting)/10000).toFixed(1)} 万㎡</b></div><div class="fact"><span>资源构成</span><b>${escapeHTML(f.topTypes||"—")}</b></div><div class="fact"><span>复杂权属</span><b>${f.multiCount} / ${f.count} 处</b></div></div><div class="assess-summary">${x.summary}</div><div class="method-note">综合分：集聚25% · 紧迫20% · 潜力20% · 实施15% · 经济20%${x.economicDirect?" · 已纳入已测算经济结果":" · 经济项为参数估算"}</div>`;box.classList.add("show")}
 function areaData(){return fc(renewalAreas.map((a,i)=>({type:"Feature",properties:{id:i,name:a.name,count:a.resourceIds.length,area:a.areaHa,color:a.assessment?.color||"#d99a32",score:Math.round(a.assessment?.overall||0),priority:a.assessment?.priority||"待研判"},geometry:{type:"Polygon",coordinates:[a.pts]}})))}
 function areaLabelData(){return fc(renewalAreas.map((a,i)=>({type:"Feature",properties:{id:i,label:a.name+" · "+(a.assessment?.priority||"待研判")+" · "+Math.round(a.assessment?.overall||0)},geometry:{type:"Point",coordinates:a.center}})))}
 function refreshMap(){if(!mapReady)return;const ps=map.getSource("projects"),ls=map.getSource("labels"),cs=map.getSource("resource-centers"),as=map.getSource("renewal-areas"),als=map.getSource("renewal-area-labels"),irs=map.getSource("imported-reference"),ds=map.getSource("draft"),df=map.getSource("draftFill"),dps=map.getSource("draftPts");if(ps)ps.setData(mapData());if(ls)ls.setData(labelData());if(cs)cs.setData(centerData());if(as)as.setData(areaData());if(als)als.setData(areaLabelData());if(irs)irs.setData(importedReferenceGeoJSON);const line=pts.length>1?[{type:"Feature",geometry:{type:"LineString",coordinates:pts},properties:{}}]:[];const poly=pts.length>=3?[{type:"Feature",geometry:{type:"Polygon",coordinates:[[...pts,pts[0]]]},properties:{}}]:[];if(ds)ds.setData(fc(line));if(df)df.setData(fc(poly));if(dps)dps.setData(fc(pts.map(p=>({type:"Feature",geometry:{type:"Point",coordinates:p},properties:{}}))));syncProjectMarkers()}
@@ -352,11 +393,15 @@ function renderResourceList(){
  if(resourceManagerState.sort==="areaAsc")rows.sort((a,b)=>(+a.p.currentLandArea||0)-(+b.p.currentLandArea||0));
  if(resourceManagerState.sort==="recent")rows.sort((a,b)=>b.i-a.i);
  $("resourceVisibleCount").textContent=`${rows.length} / ${projects.length}`;
- $("projectList").innerHTML=rows.length?rows.map(({p,i})=>`<div class="resource-row ${editing===i?"sel":""}" data-i="${i}"><div class="resource-main"><div class="resource-name"><i class="dot" style="background:${colors[p.type]||"#547782"}"></i><b>${escapeHTML(p.name)}</b></div><div class="resource-sub">${escapeHTML(p.type)} · FAR ${(+p.existingFar||0).toFixed(2)} · ${p.stage||"前期研究"}</div></div><div class="resource-area">${(+p.currentLandArea||0).toFixed(2)} ha</div></div>`).join(""):`<div class="empty-list">${projects.length?"没有匹配的更新资源":"点击下方“新建更新资源”，在地图上圈选更新资源。"}</div>`;
+ $("projectList").innerHTML=rows.length?rows.map(({p,i})=>`<div class="resource-row ${editing===i?"sel":""}" data-i="${i}"><div class="resource-main"><div class="resource-name"><i class="dot" style="background:${colors[p.type]||"#547782"}"></i><b>${escapeHTML(p.name)}</b></div><div class="resource-sub">${escapeHTML(p.type)} · FAR ${(+p.existingFar||0).toFixed(2)} · ${escapeHTML(p.stage||"前期研究")}</div></div><div class="resource-area">${(+p.currentLandArea||0).toFixed(2)} ha</div></div>`).join(""):`<div class="empty-list">${projects.length?"没有匹配的更新资源":"点击下方“新建更新资源”，在地图上圈选更新资源。"}</div>`;
  document.querySelectorAll(".resource-row").forEach(c=>c.onclick=()=>selectProject(+c.dataset.i));
  renderCurrentResource();
 }
 function initResourceManager(){
+ const manager=$('resourceManager'),toggle=$('toggleResourceManager');
+ const setCollapsed=collapsed=>{manager.classList.toggle('collapsed',collapsed);toggle.setAttribute('aria-expanded',String(!collapsed));toggle.textContent=collapsed?'展开 ▾':'收起 ▴';toggle.setAttribute('aria-label',collapsed?'展开更新资源管理器':'收起更新资源管理器')};
+ try{setCollapsed(localStorage.getItem('renewal-resource-manager-collapsed')==='1')}catch{setCollapsed(false)}
+ toggle.onclick=()=>{const collapsed=!manager.classList.contains('collapsed');setCollapsed(collapsed);try{localStorage.setItem('renewal-resource-manager-collapsed',collapsed?'1':'0')}catch{}};
  document.querySelectorAll(".rm-tab").forEach(b=>b.onclick=()=>setResourceManagerTab(b.dataset.rmTab));
  $("resourceSearch").addEventListener("input",e=>{resourceManagerState.query=e.target.value;renderResourceList();refreshMap()});
  document.querySelectorAll(".rm-chip").forEach(b=>b.onclick=()=>{resourceManagerState.filter=b.dataset.filter;document.querySelectorAll(".rm-chip").forEach(x=>x.classList.toggle("on",x===b));renderResourceList();refreshMap()});
@@ -370,7 +415,7 @@ function updateUI(){
  $("mCount").textContent=projects.length;
  $("rmSummary").textContent=projects.length+" 处资源 · "+renewalAreas.length+" 个片区";
  const ranked=renewalAreas.map((a,i)=>({a,i})).sort((x,y)=>(y.a.assessment?.overall||0)-(x.a.assessment?.overall||0));
- $("areaList").innerHTML=ranked.length?ranked.map(({a,i})=>`<div class="area-card ${activeArea===i?"sel":""}" data-area="${i}"><div class="area-top"><b><span class="rank-no">${a.assessment?.rank||"-"}</span>${escapeHTML(a.name)} · ${a.reviewed?"已审查":"待审查"}</b><span class="priority-badge ${a.assessment?.priorityClass||"priority-low"}">${a.assessment?.priority||"待研判"}</span></div><small>${a.resourceIds.length}处资源 · ${a.areaHa.toFixed(1)} ha · ${a.dominantType} · <span class="area-score">${Math.round(a.assessment?.overall||0)}分</span></small></div>`).join(""):'<div class="empty-list">还没有建议片区。先录入至少 2 处相邻资源，再点击上方按钮生成。</div>';
+ $("areaList").innerHTML=ranked.length?ranked.map(({a,i})=>`<div class="area-card ${activeArea===i?"sel":""}" data-area="${i}"><div class="area-top"><b><span class="rank-no">${a.assessment?.rank||"-"}</span>${escapeHTML(a.name)} · ${a.reviewed?"已审查":"待审查"}</b><span class="priority-badge ${a.assessment?.priorityClass||"priority-low"}">${a.assessment?.priority||"待研判"}</span></div><small>${a.resourceIds.length}处资源 · ${a.areaHa.toFixed(1)} ha · ${escapeHTML(a.dominantType)} · <span class="area-score">${Math.round(a.assessment?.overall||0)}分</span></small></div>`).join(""):'<div class="empty-list">还没有建议片区。先录入至少 2 处相邻资源，再点击上方按钮生成。</div>';
  document.querySelectorAll(".area-card").forEach(c=>c.onclick=()=>zoomRenewalArea(+c.dataset.area));
  $("mArea").textContent=projects.reduce((a,p)=>a+(+p.currentLandArea||0),0).toFixed(1)+" ha";updateAreaSelection();
  const inv=projects.reduce((a,p)=>a+(p.entCalc?.investment||0),0),gfa=projects.reduce((a,p)=>a+(+p.plannedGfa||0),0);$("mInv").textContent=inv?money(inv):"—";$("mGfa").textContent=gfa?(gfa/10000).toFixed(1)+"万㎡":"—";
@@ -396,7 +441,20 @@ function applyProject(p){
  const e=p.enterprise||{};const defs={buildCost:5500,otherRate:18,buildYears:3,loanRatio:55,loanRate:4.2,rentable:82,occ:90,monthlyRent:75,rentGrowth:2,opexRate:22,capRate:5.5,discountRate:7,holdYears:15};Object.keys(defs).forEach(k=>$(k).value=e[k]??defs[k]);
  if(p.govCalc)showGov(p.govCalc);else $("govResults").style.display="none";if(p.entCalc)showEnt(p.entCalc,p);else $("entResults").style.display="none";
 }
-function selectProject(i){if(!projects[i])return;selectedRows.clear();selectedRows.add(i);closeModulePanels();$("base").classList.add("on");editing=i;setResourceManagerTab("resources");const p=projects[i];applyProject(p);$("panelTitle").textContent=p.name;updateActionButtons();openPanel();updateUI();if(mapReady)map.flyTo({center:projectCenter(p),zoom:Math.max(map.getZoom(),14),duration:550})}
+function selectProject(i){
+ if(!projects[i])return;
+ selectedRows.clear();selectedRows.add(i);closeModulePanels();editing=i;setResourceManagerTab('resources');
+ const p=projects[i];
+ if(p.archiveLink){
+  closePanel();RenewalWorkspace.close();
+  const featureIndex=Number(p.archiveLink.split(':')[1]);
+  RenewalArchive.focusRecord('项目层',featureIndex);
+  updateUI();return;
+ }
+ $('base').classList.add('on');applyProject(p);$('panelTitle').textContent=p.name;
+ updateActionButtons();openPanel();updateUI();
+ if(mapReady)map.flyTo({center:projectCenter(p),zoom:Math.max(map.getZoom(),14),duration:550});
+}
 
 function newDefaultProject(a,poly){const name=nextProjectName();const plannedFar=2.5;return normalizeProject({name,type:"老旧厂区",stage:"前期研究",mode:"拆改结合",pts:poly,currentLandArea:a,existingGfa:0,existingFar:0,owner:"国有企业",landNature:"出让",currentUse:"工业",plannedUse:"工业",plannedFar,plannedLandArea:a,plannedGfa:a*10000*plannedFar})}
 function startDrawing(isRedraw=false){closeModulePanels();
@@ -453,18 +511,19 @@ function generateRenewalAreas(){if(projects.length<2)return alert("至少需要�
  if(!renewalAreas.length){activeArea=null;alert("当前参数下没有形成集聚片区。可以适当增大集聚半径，或降低最少资源数。 ")}else{evaluateAllAreas();activeArea=renewalAreas.map((a,i)=>({i,s:a.assessment?.overall||0})).sort((a,b)=>b.s-a.s)[0].i}updateUI();}
 $("generateAreas").onclick=generateRenewalAreas;
 
-function downloadProjectBackup(){const payload={app:"Urban Renewal Lab",version:7,exportedAt:new Date().toISOString(),basemap,projects,renewalAreas,importedReferenceGeoJSON};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="urban-renewal-backup-"+new Date().toISOString().slice(0,10)+".json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);$("restoreStatus").textContent="备份文件已开始下载。请到浏览器的下载目录确认文件存在，并另存一份。"}
+function downloadProjectBackup(){const payload={app:"Urban Renewal Lab",version:7,...RenewalWorkspace.captureStudy(),exportedAt:new Date().toISOString(),basemap,projects,renewalAreas,importedReferenceGeoJSON,archiveLayers:RenewalArchive.capture()};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="urban-renewal-backup-"+new Date().toISOString().slice(0,10)+".json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);$("restoreStatus").textContent="备份文件已开始下载。请到浏览器的下载目录确认文件存在，并另存一份。"}
 function restoreProjectBackup(data,filename){
  if(!data||data.app!=="Urban Renewal Lab"||!Array.isArray(data.projects)||data.projects.some(p=>!p||!Array.isArray(p.pts)||p.pts.length<3||p.pts.some(pt=>!Array.isArray(pt)||pt.length<2||!Number.isFinite(+pt[0])||!Number.isFinite(+pt[1]))))throw Error("这不是可识别的 Urban Renewal Lab 项目备份，当前数据未改变。");
  if(data.renewalAreas!=null&&(!Array.isArray(data.renewalAreas)||data.renewalAreas.some(a=>!a||!Array.isArray(a.pts)||!Array.isArray(a.resourceIds))))throw Error("备份中的建议片区格式不正确，当前数据未改变。");
  if(data.importedReferenceGeoJSON!=null&&(data.importedReferenceGeoJSON.type!=="FeatureCollection"||!Array.isArray(data.importedReferenceGeoJSON.features)))throw Error("备份中的参考图层格式不正确，当前数据未改变。");
+ const archiveData=data.archiveLayers==null?[]:RenewalArchive.validate(data.archiveLayers);
  const nextProjects=data.projects.map(normalizeProject),nextAreas=data.renewalAreas||[],nextReferences=data.importedReferenceGeoJSON||fc([]),count=nextProjects.length;
  if(!confirm(`即将从“${filename}”恢复 ${count} 处资源，替换当前 ${projects.length} 处资源和全部建议片区。请确认已下载当前项目备份。继续恢复吗？`)){$("restoreStatus").textContent="已取消恢复，当前数据未改变。";return false}
- projects=nextProjects;renewalAreas=nextAreas;importedReferenceGeoJSON=nextReferences;if(["light","satellite"].includes(data.basemap))basemap=data.basemap;editing=null;activeArea=renewalAreas.length?0:null;selectedRows.clear();updateActionButtons();updateUI();fitImportedOrProjects();
+ projects=nextProjects;renewalAreas=nextAreas;importedReferenceGeoJSON=nextReferences;RenewalArchive.restore(archiveData);if(data.studyLayers)RenewalWorkspace.restoreStudy(data);if(["light","satellite"].includes(data.basemap))basemap=data.basemap;editing=null;activeArea=renewalAreas.length?0:null;selectedRows.clear();updateActionButtons();updateUI();fitImportedOrProjects();
  $("restoreStatus").textContent=storageWriteError?"备份已在本次页面打开，但自动保存失败。请立即下载项目备份，关闭网页后数据可能消失。":`已从“${filename}”恢复 ${count} 处资源。请检查地图和档案。`;
  showImportStatus(`<b>恢复完成</b> ${count} 处资源`);return true
 }
-$("exportData").onclick=downloadProjectBackup;$("downloadBackup").onclick=downloadProjectBackup;$("openStorage").onclick=()=>{updateStorageSummary();openModule("storagePanel")};$("restoreBackup").onclick=()=>$("restoreFile").click();$("restoreFile").onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{if(file.size>20*1024*1024)throw Error("备份文件超过 20 MB，请检查文件。");restoreProjectBackup(JSON.parse(await file.text()),file.name)}catch(err){$("restoreStatus").textContent="恢复失败："+err.message}finally{e.target.value=""}};
+$("exportData").onclick=downloadProjectBackup;$("downloadBackup").onclick=downloadProjectBackup;$("openStorage").onclick=()=>{updateStorageSummary();openModule("storagePanel")};$("restoreBackup").onclick=()=>$("restoreFile").click();$("restoreFile").onchange=async e=>{const file=e.target.files?.[0];if(!file)return;projectFilesLoading++;try{if(file.size>20*1024*1024)throw Error("备份文件超过 20 MB，请检查文件。");restoreProjectBackup(JSON.parse(await file.text()),file.name)}catch(err){$("restoreStatus").textContent="恢复失败："+err.message}finally{projectFilesLoading--;e.target.value=""}};
 function showImportStatus(html){const el=$("importStatus");el.innerHTML=html;el.classList.add("show");clearTimeout(showImportStatus._t);showImportStatus._t=setTimeout(()=>el.classList.remove("show"),7000)}
 function loadScriptOnce(src,test){return new Promise((resolve,reject)=>{if(test())return resolve();const sc=document.createElement("script");sc.src=src;sc.onload=()=>resolve();sc.onerror=reject;document.head.appendChild(sc)})}
 async function ensureShpJs(){await loadScriptOnce("https://unpkg.com/shpjs@6.2.0/dist/shp.js",()=>typeof window.shp==="function");return window.shp}
@@ -499,7 +558,7 @@ async function handleImportFiles(files){const arr=[...files];if(!arr.length)retu
  if(!handled)return alert("暂不支持该文件格式。可导入 SHP（ZIP 或同名 shp/dbf/prj）、GeoJSON、CSV 经纬度数据，或本工具 JSON。 ");
  fitImportedOrProjects();showImportStatus(`<b>已导入</b> ${totalP} 个面资源${totalR?` · ${totalR} 个点/线参考要素`:''}${totalBad?` · ${totalBad} 个几何异常或含内洞的要素未载入`:''}`);saveState();
 }
-$("importData").onclick=()=>$("importFile").click();$("importFile").onchange=async e=>{try{await handleImportFiles(e.target.files||[])}finally{e.target.value=""}};
+$("importData").onclick=()=>$("importFile").click();$("importFile").onchange=async e=>{projectFilesLoading++;try{await handleImportFiles(e.target.files||[])}finally{projectFilesLoading--;e.target.value=""}};
 
 function addMapLayers(){
  if(!map.getSource("satellite"))map.addSource("satellite",{type:"raster",tiles:["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],tileSize:256,attribution:"Tiles © Esri"});
@@ -510,13 +569,13 @@ function addMapLayers(){
  if(!map.getLayer("renewal-area-fill"))map.addLayer({id:"renewal-area-fill",type:"fill",source:"renewal-areas",paint:{"fill-color":["get","color"],"fill-opacity":.12}});
  if(!map.getLayer("renewal-area-line"))map.addLayer({id:"renewal-area-line",type:"line",source:"renewal-areas",paint:{"line-color":["get","color"],"line-width":4,"line-dasharray":[2,1]}});
  if(!map.getSource("renewal-area-labels"))map.addSource("renewal-area-labels",{type:"geojson",data:areaLabelData()});
- if(!map.getLayer("renewal-area-label"))map.addLayer({id:"renewal-area-label",type:"symbol",source:"renewal-area-labels",layout:{"text-field":["get","label"],"text-size":14,"text-allow-overlap":true},paint:{"text-color":"#8a5b0d","text-halo-color":"#fff6df","text-halo-width":3}});
+ if(!map.getLayer("renewal-area-label"))map.addLayer({id:"renewal-area-label",type:"symbol",source:"renewal-area-labels",layout:{"text-field":["get","label"],"text-font":["Noto Sans Regular"],"text-size":14,"text-allow-overlap":true},paint:{"text-color":"#8a5b0d","text-halo-color":"#fff6df","text-halo-width":3}});
  if(!map.getSource("projects"))map.addSource("projects",{type:"geojson",data:mapData()});
  if(!map.getLayer("project-fill"))map.addLayer({id:"project-fill",type:"fill",source:"projects",paint:{"fill-color":["get","color"],"fill-opacity":.30}});
  if(!map.getLayer("resource-extrusion"))map.addLayer({id:"resource-extrusion",type:"fill-extrusion",source:"projects",layout:{visibility:"none"},paint:{"fill-extrusion-color":["get","color"],"fill-extrusion-height":["get","height"],"fill-extrusion-base":0,"fill-extrusion-opacity":.42}});
  if(!map.getLayer("project-line"))map.addLayer({id:"project-line",type:"line",source:"projects",paint:{"line-color":["get","color"],"line-width":["case",["==",["get","selected"],1],5,3],"line-opacity":["case",["==",["get","selected"],1],1,.9]}});
  if(!map.getSource("labels"))map.addSource("labels",{type:"geojson",data:labelData()});
- if(!map.getLayer("project-label"))map.addLayer({id:"project-label",type:"symbol",source:"labels",layout:{visibility:"none"},paint:{}});
+ if(!map.getLayer("project-label"))map.addLayer({id:"project-label",type:"symbol",source:"labels",layout:{visibility:"none","text-font":["Noto Sans Regular"]},paint:{}});
  if(!map.getSource("imported-reference"))map.addSource("imported-reference",{type:"geojson",data:importedReferenceGeoJSON});
  if(!map.getLayer("imported-ref-line"))map.addLayer({id:"imported-ref-line",type:"line",source:"imported-reference",filter:["==",["geometry-type"],"LineString"],paint:{"line-color":"#1b8397","line-width":2.5,"line-opacity":.8}});
  if(!map.getLayer("imported-ref-point"))map.addLayer({id:"imported-ref-point",type:"circle",source:"imported-reference",filter:["==",["geometry-type"],"Point"],paint:{"circle-radius":5,"circle-color":"#16a7b5","circle-stroke-color":"#fff","circle-stroke-width":1.5,"circle-opacity":.9}});
@@ -533,10 +592,10 @@ function init(){
  map=new maplibregl.Map({container:"map",style:"https://tiles.openfreemap.org/styles/positron",center:[118.76,32],zoom:11.5});
  map.addControl(new maplibregl.NavigationControl(),"bottom-right");
  let lastResourceClick=0;
- map.on("load",()=>{
-  mapReady=true;addMapLayers();addAnalysisLayers();addPlanningLayers();addGISPreviewLayer();addSpatialLayers();map.on("zoom",()=>{if(densityMode==="heat")map.setPaintProperty("analysis-heat","heatmap-radius",heatRadiusPixels())});setBasemap(basemap);fitAllProjects();
+ map.once("style.load",()=>{
+  mapReady=true;addMapLayers();addAnalysisLayers();addPlanningLayers();addGISPreviewLayer();addSpatialLayers();archiveSession.attachMap();map.on("zoom",()=>{if(densityMode==="heat")map.setPaintProperty("analysis-heat","heatmap-radius",heatRadiusPixels())});setBasemap(basemap);fitAllProjects();
   map.on("click","project-fill",e=>{
-   if(drawing||terraActive||pickingWalkOrigin||!e.features||!e.features.length)return;
+    if(drawing||terraActive||pickingWalkOrigin||RenewalArchive.isEditing()||RenewalArchive.hitAt(e.point)||!e.features||!e.features.length)return;
    lastResourceClick=Date.now();
    const i=Number(e.features[0].properties.id);
    if(Number.isInteger(i)&&projects[i]){if(e.originalEvent?.shiftKey){toggleRowSelection(i);return}selectProject(i)}
@@ -544,11 +603,13 @@ function init(){
   map.on("mouseenter","project-fill",()=>{if(!drawing)map.getCanvas().style.cursor="pointer"});
   map.on("mouseleave","project-fill",()=>{if(!drawing)map.getCanvas().style.cursor=""});
  });
- map.on("dblclick",e=>{if(terraActive)return;if(drawing&&!vertexMode){e.preventDefault();$("finish").click()}});
+  map.on("dblclick",e=>{if(RenewalArchive.handleDoubleClick(e))return;if(terraActive)return;if(drawing&&!vertexMode){e.preventDefault();$("finish").click()}});
  map.on("click",e=>{
-  if(terraActive)return;if(pickingWalkOrigin){pickingWalkOrigin=false;map.getCanvas().style.cursor="";walkOrigin=[e.lngLat.lng,e.lngLat.lat];$("walkOrigin").value="map";setWalkOriginMarker();openModule("walkPanel");$("walkStatus").textContent="地图起点已设置，可以计算步行可达性。";return}
+   if(RenewalArchive.handleMapClick(e))return;
+   if(terraActive)return;if(pickingWalkOrigin){pickingWalkOrigin=false;map.getCanvas().style.cursor="";walkOrigin=[e.lngLat.lng,e.lngLat.lat];$("walkOrigin").value="map";setWalkOriginMarker();openModule("walkPanel");$("walkStatus").textContent="地图起点已设置，可以计算步行可达性。";return}
  if(drawing){if(vertexMode)return;if(e.originalEvent?.detail===2)return;pts.push(snapToRoad([e.lngLat.lng,e.lngLat.lat]));refreshMap();return}
   if(Date.now()-lastResourceClick<120)return;
+ if(RenewalArchive.openAt(e))return;
  if(map.getLayer("amap-roads-line")){const roads=map.queryRenderedFeatures(e.point,{layers:["amap-roads-line"]});if(roads.length){new maplibregl.Popup().setLngLat(e.lngLat).setText((roads[0].properties.name||"未命名道路")+" · 高德地图").addTo(map);return}}
   // 几何兜底：即使渲染图层查询失败，也可按经纬度命中用户录入的更新资源。
   const idx=projectAtLngLat([e.lngLat.lng,e.lngLat.lat]);
@@ -567,13 +628,68 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&terraActive){cancel
 let copilotResult=null;
 function queryMap(q){let rows=projects.map((p,i)=>({p,i}));let scope='全部资源';if(/筛选/.test(q)){rows=rows.filter(({p})=>projectMatchesManager(p));scope='当前筛选结果'}if(/视野|屏幕/.test(q)){if(!mapReady)return {text:'地图尚未加载，无法读取当前视野。'};const b=map.getBounds();rows=rows.filter(({p})=>b.contains(projectCenter(p)));scope+='（中心点位于当前视野）'}const cats=[[/产业|工业|厂/,'industrial'],[/居住|住宅|小区/,'residential'],[/商业/,'commercial'],[/公服|公共服务|公共设施/,'public'],[/其他/,'other']];const cat=cats.find(([re])=>re.test(q));if(cat)rows=rows.filter(({p})=>resourceCategory(p.type)===cat[1]);if(!rows.length)return{text:scope+'：没有匹配的更新资源。'};if(/最大|最多面积/.test(q)){const max=Math.max(...rows.map(({p})=>projectAreaHa(p))),hits=rows.filter(({p})=>Math.abs(projectAreaHa(p)-max)<1e-8);return{text:scope+'：最大面积资源为 '+hits.map(({p})=>p.name).join('、')+'，面积 '+max.toFixed(3)+' ha。按边界重算，点击定位首个结果。',index:hits[0].i}}if(/分类|类型|分布/.test(q)){const counts={};rows.forEach(({p})=>counts[p.type]=(counts[p.type]||0)+1);return{text:scope+'，共 '+rows.length+' 处：\n'+Object.entries(counts).map(([k,v])=>k+'：'+v+' 处').join('\n')}}if(/多少|数量|几[个处]|面积/.test(q))return{text:scope+'：'+rows.length+' 处，资源面积合计 '+rows.reduce((a,{p})=>a+projectAreaHa(p),0).toFixed(3)+' ha（重叠部分重复计入）。'};return{text:'目前支持资源数量、分类统计、面积合计和最大面积项目。例：图上有多少个产业更新资源？最大的居住更新资源在哪里？'}}
 $("copilotForm").onsubmit=async e=>{e.preventDefault();const question=$("copilotQuestion").value.trim();if(!question)return;const button=$("copilotForm").querySelector('button');button.disabled=true;$("copilotAnswer").textContent='正在理解问题并核对地图数据…';$("copilotLocate").hidden=true;try{const bounds=mapReady?map.getBounds():null;const resources=projects.map((p,index)=>({index,name:p.name,type:p.type,category:resourceCategory(p.type),areaHa:projectAreaHa(p),inView:!!bounds?.contains(projectCenter(p)),inFilter:projectMatchesManager(p)}));const response=await fetch('/api/copilot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question,resources}),signal:AbortSignal.timeout(95000)});const data=await response.json();if(!response.ok)throw Error(data.error||'服务暂不可用');copilotResult=data;$("copilotAnswer").textContent='【本机 Qwen 理解提问；地图数据计算】\n'+data.text}catch(error){copilotResult=queryMap(question);$("copilotAnswer").textContent='【规则查询】\n'+copilotResult.text+'\n原因：'+error.message}finally{$("copilotLocate").hidden=copilotResult?.index==null;button.disabled=false}};$("copilotLocate").onclick=()=>{if(copilotResult?.index!=null)selectProject(copilotResult.index)};
+fetch('/api/local-knowledge',{signal:AbortSignal.timeout(5000)}).then(response=>response.ok?response.json():null).then(data=>{const button=$('askLocalKnowledge');button.hidden=!data?.available;if(data?.pdf?.indexed){button.textContent='问本地政策库（笔记＋PDF）';const status=$('knowledgeStatus');status.hidden=false;status.textContent='已接入 '+data.notes+' 篇笔记、'+data.pdf.indexed+' 份 PDF；可检索向量 '+data.pdf.vectorChunks+'/'+data.pdf.chunks+' 段。图片页仍请核对原文。'}}).catch(()=>{});
+function clearCopilotSources(message='地图查询依据当前资源档案；政策来源只在本地政策库问答后显示。'){
+  $('copilotSources').replaceChildren();
+  const note=document.createElement('p');note.textContent=message;$('copilotSources').append(note);
+  $('copilotSourcePreview').hidden=true;$('copilotSourcePreview').removeAttribute('src');
+  $('copilotPagePreview').hidden=true;$('copilotPagePreview').removeAttribute('src');
+}
+function renderCopilotSources(sources){
+  $('copilotSources').replaceChildren();
+  $('copilotSourcePreview').hidden=true;$('copilotSourcePreview').removeAttribute('src');
+  $('copilotPagePreview').hidden=true;$('copilotPagePreview').removeAttribute('src');
+  for(const source of sources||[]){
+    if(!source.openUrl)continue;
+    const url=new URL(source.openUrl,location.origin);
+    if(url.origin!==location.origin||url.pathname!=='/api/local-knowledge/source')continue;
+    const article=document.createElement('article');article.className='copilot-source';
+    const title=document.createElement('b');title.textContent='['+source.id+'] '+source.title;
+    const detail=document.createElement('small');detail.textContent=source.kind+(source.page?' · 第 '+source.page+' 页':'')+' · '+source.method+'\n'+source.path;
+    const actions=document.createElement('div');actions.className='copilot-source-actions';
+    const preview=document.createElement('button');preview.type='button';preview.textContent='在此预览';
+    preview.onclick=()=>{
+      $('copilotSourcePreview').hidden=true;$('copilotSourcePreview').removeAttribute('src');
+      $('copilotPagePreview').hidden=true;$('copilotPagePreview').removeAttribute('src');
+      if(source.kind==='PDF'){
+        const imageUrl=new URL(url);imageUrl.hash='';imageUrl.searchParams.set('view','page');imageUrl.searchParams.set('page',String(source.page||1));
+        $('copilotPagePreview').src=imageUrl.pathname+imageUrl.search;$('copilotPagePreview').hidden=false;
+      }else{$('copilotSourcePreview').src=url.pathname+url.search;$('copilotSourcePreview').hidden=false}
+    };
+    const open=document.createElement('a');open.href=url.pathname+url.search+url.hash;open.target='_blank';open.rel='noopener';open.textContent='打开原文件';
+    actions.append(preview,open);article.append(title,detail,actions);$('copilotSources').append(article);
+  }
+  if(!$('copilotSources').childElementCount)clearCopilotSources('本次没有可打开的本地来源。');
+}
+function closeCopilotWorkspace(){
+  $('copilotWorkspace').hidden=true;document.body.classList.remove('copilot-open');
+  $('openCopilot').classList.remove('on');$('copilotSourcePreview').removeAttribute('src');$('copilotSourcePreview').hidden=true;
+  $('copilotPagePreview').removeAttribute('src');$('copilotPagePreview').hidden=true;
+}
+$('openCopilot').onclick=()=>{closeModulePanels();$('copilotWorkspace').hidden=false;document.body.classList.add('copilot-open');$('openCopilot').classList.add('on');$('copilotQuestion').focus()};
+$('closeCopilot').onclick=closeCopilotWorkspace;
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('copilotWorkspace').hidden)closeCopilotWorkspace()});
+$('copilotForm').addEventListener('submit',()=>clearCopilotSources(),true);
+$('copilotLocate').onclick=()=>{if(copilotResult?.index!=null){closeCopilotWorkspace();selectProject(copilotResult.index)}};
+$('askLocalKnowledge').onclick=async()=>{
+  const question=$('copilotQuestion').value.trim();if(!question)return alert('请先输入政策问题');
+  const button=$('askLocalKnowledge');button.disabled=true;$('copilotLocate').hidden=true;
+  clearCopilotSources('正在检索并核对原文…');$('copilotAnswer').textContent='正在本机检索政策资料并请 Qwen 回答…';
+  try{
+    const response=await fetch('/api/local-knowledge',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question}),signal:AbortSignal.timeout(125000)});
+    const data=await response.json();if(!response.ok)throw Error(data.error||'本机政策库暂不可用');
+    $('copilotAnswer').textContent=data.answer;
+    renderCopilotSources(data.sources);
+  }catch(error){$('copilotAnswer').textContent='政策库查询未完成：'+error.message;clearCopilotSources('没有取得可核对的来源。')}
+  finally{button.disabled=false}
+};
 let pendingResourceType='老旧厂区',densityWorker=null,densityImage=null,densityMode='none',densityFingerprint='',densityMeta=null;
 let amapRoadData=fc([]),amapRoadVisible=false,activeRoadController=null;
 const roadTileCache=new Map(),ROAD_TILE_TTL=120000,ROAD_TILE_LON_STEP=.05,ROAD_TILE_LAT_STEP=.04,ROAD_TILE_LIMIT=20;
 const creationTypes={industrial:['老旧厂区','低效产业用地'],residential:['老旧小区','危旧住宅','城中村'],public:['公共设施短板','交通市政设施','公共空间'],commercial:['老旧商业'],other:['闲置低效用地','历史文化资源','其他资源']};
 const categoryNames={industrial:'产业',residential:'居住',public:'公服',commercial:'商业',other:'其他'};
 function closeModulePanels(){$("openPlanning").classList.remove("on");$("openRoads").classList.remove("on");$("openStorage").classList.remove("on");document.querySelectorAll('.module-panel').forEach(p=>p.classList.add('closed'))}
-function openModule(id){if(drawing)return alert('请先保存或取消当前边界编辑');closePanel();closeModulePanels();$(id).classList.remove('closed');$("openPlanning").classList.toggle("on",id!=="roadsPanel"&&id!=="storagePanel");$("openRoads").classList.toggle("on",id==="roadsPanel");$("openStorage").classList.toggle("on",id==="storagePanel")}
+function openModule(id){if(drawing||RenewalArchive.isEditing())return alert('请先保存或取消当前边界编辑');RenewalArchive.close();closePanel();closeModulePanels();$(id).classList.remove('closed');$("openPlanning").classList.toggle("on",id!=="roadsPanel"&&id!=="storagePanel");$("openRoads").classList.toggle("on",id==="roadsPanel");$("openStorage").classList.toggle("on",id==="storagePanel")}
 function chooseCreation(cat){if(drawing)return;document.querySelectorAll('[data-create]').forEach(b=>b.classList.toggle('on',b.dataset.create===cat));$('createSubtype').replaceChildren(...creationTypes[cat].map(t=>{const o=document.createElement('option');o.value=o.textContent=t;return o}));$('newProject').textContent='＋ 在'+categoryNames[cat]+'分类下绘制资源';pendingResourceType=$('createSubtype').value;setResourceManagerTab('resources');renderResourceList()}
 function syncEconomicsOptions(){const box=$('economicsProject');if(!box)return;const selected=box.value;box.replaceChildren(...projects.map((p,i)=>{const o=document.createElement('option');o.value=i;o.textContent=p.name+' · '+p.type;return o}));if(projects[+selected])box.value=selected;else if(editing!==null&&projects[editing])box.value=editing;$('economicsEmpty').hidden=projects.length>0;$('eco').style.display=projects.length?'block':'none'}
 function selectEconomicsProject(i){if(!projects[i])return;selectedRows.clear();selectedRows.add(i);editing=i;applyProject(projects[i]);$('economicsProject').value=i;renderCurrentResource()}
@@ -656,7 +772,7 @@ function planningMapPadding(route){if(window.innerWidth<=720){if(route)closeModu
 function attributePairs(){let rows=projects.map((p,i)=>({p,i})).filter(({p,i})=>projectMatchesManager(p)&&(!$('tableSelectedOnly').checked||selectedRows.has(i)));const {key,asc}=tableSort;rows.sort((a,b)=>(key==='area'?projectAreaHa(a.p)-projectAreaHa(b.p):String(a.p.name).localeCompare(String(b.p.name),'zh-CN'))*(asc?1:-1));return rows}
 function refreshAttributeTable(){if(!$('attributeRows'))return;for(const i of selectedRows)if(!projects[i])selectedRows.delete(i);const rows=attributePairs();$('tableSummary').textContent=rows.length+' 条 · 已选 '+selectedRows.size+' 条';$('attributeRows').innerHTML=rows.map(({p,i})=>`<tr data-row="${i}" class="${selectedRows.has(i)?'is-selected':''}"><td><input type="checkbox" data-select-row="${i}" ${selectedRows.has(i)?'checked':''} aria-label="选择${escapeHTML(p.name)}"></td><td><button data-locate-row="${i}">${escapeHTML(p.name)}</button></td><td>${escapeHTML(p.type)}</td><td>${projectAreaHa(p).toFixed(3)}</td><td>${escapeHTML(p.owner)}</td><td>${escapeHTML(p.stage)}</td><td><button data-edit-row="${i}">编辑档案</button></td></tr>`).join('')||'<tr><td colspan="7">当前条件下没有资源</td></tr>';$('tableSelectAll').checked=rows.length>0&&rows.every(({i})=>selectedRows.has(i));$('tableSelectAll').indeterminate=rows.some(({i})=>selectedRows.has(i))&&!$('tableSelectAll').checked;document.querySelectorAll('[data-select-row]').forEach(b=>b.onchange=()=>toggleRowSelection(+b.dataset.selectRow));document.querySelectorAll('[data-locate-row]').forEach(b=>b.onclick=()=>selectProject(+b.dataset.locateRow));document.querySelectorAll('[data-edit-row]').forEach(b=>b.onclick=()=>selectProject(+b.dataset.editRow))}
 function toggleRowSelection(i){if(drawing)return;selectedRows.has(i)?selectedRows.delete(i):selectedRows.add(i);refreshAttributeTable();refreshMap()}
-function toggleAttributeTable(show=!$('attributeTable').hidden){$('attributeTable').hidden=!show;document.body.classList.toggle('table-open',show);$('toggleTable').classList.toggle('on',show);$('toggleTable').setAttribute('aria-expanded',String(show));refreshAttributeTable()}
+function toggleAttributeTable(show=!$('attributeTable').hidden){$('attributeTable').hidden=!show;document.body.classList.toggle('table-open',show);refreshAttributeTable()}
 function fitSelectedRows(){if(!mapReady||!selectedRows.size)return;const coords=[...selectedRows].filter(i=>projects[i]).flatMap(i=>projectVertices(projects[i]));const b=new maplibregl.LngLatBounds();coords.forEach(p=>b.extend(p));map.fitBounds(b,{padding:planningMapPadding(false),maxZoom:17})}
 function nearestOnSegments(point,segments,tolerance){let best=null,bestDistance=tolerance;for(const [a,b] of segments){const dx=b[0]-a[0],dy=b[1]-a[1],length=dx*dx+dy*dy;const t=length?Math.max(0,Math.min(1,((point[0]-a[0])*dx+(point[1]-a[1])*dy)/length)):0;const candidate=[a[0]+t*dx,a[1]+t*dy],d=Math.hypot(point[0]-candidate[0],point[1]-candidate[1]);if(d<=bestDistance){best=candidate;bestDistance=d}}return best}
 function clearSnapIndicator(){snapMarker?.remove();snapMarker=null}
@@ -686,7 +802,7 @@ async function runWalkAnalysis(){const origin=currentWalkOrigin();if(!origin)ret
 function initPlanning(){
  $('briefToPOI').onclick=()=>{const i=$('briefProject').value,r=$('briefRadius').value;syncPOIProjects();if(i!==''&&projects[+i])$('poiProject').value=i;$('poiRadius').value=r;openModule('poiPanel')};$('makeBrief').onclick=makeBrief;$('briefPNG').onclick=downloadBriefPNG;$('briefPDF').onclick=printBriefPDF;
  $('openPOI').onclick=()=>{syncPOIProjects();openModule('poiPanel')};$('runPOI').onclick=()=>loadPOI(false);$('morePOI').onclick=()=>loadPOI(true);$('clearPOI').onclick=clearPOI;$('poiProject').onchange=clearPOI;$('poiRadius').onchange=clearPOI;
- $('openPlanning').onclick=()=>openModule('planningPanel');$('toggleTable').onclick=()=>toggleAttributeTable($('attributeTable').hidden);$('closeTable').onclick=()=>toggleAttributeTable(false);$('planningTable').onclick=()=>{closeModulePanels();toggleAttributeTable(true)};
+ $('openPlanning').onclick=()=>openModule('planningPanel');$('closeTable').onclick=()=>toggleAttributeTable(false);$('planningTable').onclick=()=>{closeModulePanels();toggleAttributeTable(true)};
  $('planningAreas').onclick=()=>{closeModulePanels();setResourceManagerTab('areas')};
  $('tableSelectedOnly').onchange=refreshAttributeTable;$('clearTableSelection').onclick=()=>{selectedRows.clear();refreshAttributeTable();refreshMap()};$('zoomTableSelection').onclick=fitSelectedRows;
  $('tableSelectAll').onchange=e=>{attributePairs().forEach(({i})=>e.target.checked?selectedRows.add(i):selectedRows.delete(i));refreshAttributeTable();refreshMap()};
@@ -737,6 +853,12 @@ function addSpatialLayers(){
 }
 function spatialFeaturesFromProjects(list){return fc(list.map(p=>({type:'Feature',geometry:projectGeometry(p),properties:{name:p.name,type:p.type}})))}
 async function spatialFile(id){const file=$(id).files[0];if(!file)throw Error('请先选择 '+(id==='spatialRoads'?'步行路网':id==='spatialFacilities'?'设施入口':'建筑轮廓')+' GeoJSON');if(file.size>2*1024*1024)throw Error('单个文件最多 2 MB，请裁剪研究范围');let data;try{data=JSON.parse(await file.text())}catch{throw Error(file.name+' 不是有效 GeoJSON')}if(data.type!=='FeatureCollection'||!Array.isArray(data.features))throw Error(file.name+' 应是 GeoJSON FeatureCollection');return data}
+async function spatialBuildings(){
+ if($('spatialBuildings').files[0])return spatialFile('spatialBuildings');
+ const layer=RenewalArchive.capture().find(row=>row.name==='建筑层');
+ if(layer?.collection?.features?.length)return layer.collection;
+ return spatialFile('spatialBuildings');
+}
 async function callSpatial(payload){const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),85000);try{const res=await fetch('/api/spatial-analysis',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:ctrl.signal});const data=await res.json();if(!res.ok||data.error)throw Error(data.error||'分析失败');return data}catch(e){if(e.name==='AbortError')throw Error('分析超时，请缩小范围');throw e}finally{clearTimeout(timer)}}
 function spatialMap(data){spatialOverlay=data;if(mapReady){map.getSource('spatial-results')?.setData(data);if(data.features.length)fitGISFeatures(data.features)}}
 function spatialNotes(result){return `<div class="method-card"><b>数据来源与计算口径</b><p>${escapeHTML(result.method)}</p><p>局限：${escapeHTML(result.limits)}</p></div>`}
@@ -750,7 +872,7 @@ async function runSpatial(kind){const status=$(kind+'Status'),button=$('run'+kin
   output.innerHTML=`<div class="method-card"><b>居住资源覆盖</b><p>5 分钟 ${s.counts['5']}/${s.residences} · 10 分钟 ${s.counts['10']}/${s.residences} · 15 分钟 ${s.counts['15']}/${s.residences}</p><p>已连入路网设施 ${s.facilities} 处；路网 ${s.roadNodes} 节点。</p></div>`+result.homes.map(h=>`<div class="gis-report-row"><b>${escapeHTML(h.name)}</b>${h.minutes==null?'不可达':h.minutes+' 分钟'} · 吸附 ${h.snapMeters} 米</div>`).join('')+spatialNotes(result);
  }else if(kind==='morphology'){
   if(!projects.length)throw Error('请先录入更新资源');
-  result=await callSpatial({kind,roads:await spatialFile('spatialRoads'),buildings:await spatialFile('spatialBuildings'),areas:spatialFeaturesFromProjects(projects)});
+  result=await callSpatial({kind,roads:await spatialFile('spatialRoads'),buildings:await spatialBuildings(),areas:spatialFeaturesFromProjects(projects)});
   const s=result.summary;output.innerHTML=`<div class="method-card"><b>整体数据</b><p>建筑 ${s.buildings} 栋 · 街道线 ${s.streets} 条 · 闭合街区 ${s.blocks} 个 · 平均节点度 ${s.meanNodeDegree??'—'}</p></div>`+result.rows.map(r=>`<div class="gis-report-row"><b>${escapeHTML(r.name)}</b>建筑覆盖率 ${r.buildingCoveragePct}% · 街道 ${r.streetMetersPerHa} 米/公顷 · 街区中位面积 ${r.medianBlockHa??'—'} 公顷</div>`).join('')+spatialNotes(result);
  }else{
   result=await callSpatial({kind:'hotspots',resources:spatialFeaturesFromProjects(projects),cellMeters:+$('hotspotCell').value});spatialMap(result.grid);const s=result.summary;
@@ -762,7 +884,9 @@ function initSpatialTools(){for(const [button,panel] of [['openCoverage','covera
 
 
 
-RenewalWorkspace.init({map:()=>mapReady?map:null,save:()=>({projects,renewalAreas,basemap,importedReferenceGeoJSON}),restore:s=>{if(!Array.isArray(s.projects))throw Error('备份缺少资源');projects=s.projects.map(normalizeProject);renewalAreas=s.renewalAreas||[];importedReferenceGeoJSON=s.importedReferenceGeoJSON||null;updateUI();saveState()},projects:()=>projects,snapshot:(i,radius)=>{const p=projects[i],center=projectCenter(p),match=poiPage>0&&poiQuery===JSON.stringify([i,center,radius,projectGeometry(p)]);return{project:deepCopy(p),center,areaHa:projectAreaHa(p),radius,pois:match?deepCopy(poiItems):[],poiLoaded:match,poiQueryComplete:match&&poiTotal<=poiItems.length,walk:walkAnalysis?deepCopy(walkAnalysis):null}}});
+const archiveSession=RenewalArchive.init({getMap:()=>mapReady?map:null,onChange:()=>{syncArchiveProjects();updateUI()},validateBoundary:validBoundary});
+RenewalWorkspace.init({map:()=>mapReady?map:null,save:()=>({projects,renewalAreas,basemap,importedReferenceGeoJSON,archiveLayers:RenewalArchive.capture()}),restore:s=>{if(!Array.isArray(s.projects))throw Error('备份缺少资源');projects=s.projects.map(normalizeProject);renewalAreas=s.renewalAreas||[];importedReferenceGeoJSON=s.importedReferenceGeoJSON||null;RenewalArchive.restore(s.archiveLayers||[]);updateUI();saveState()},projects:()=>projects,snapshot:(i,radius)=>{const p=projects[i],center=projectCenter(p),match=poiPage>0&&poiQuery===JSON.stringify([i,center,radius,projectGeometry(p)]);return{project:deepCopy(p),geometry:deepCopy(projectGeometry(p)),center,areaHa:projectAreaHa(p),radius,pois:match?deepCopy(poiItems):[],poiLoaded:match,poiQueryComplete:match&&poiTotal<=poiItems.length,walk:walkAnalysis&&walkFingerprint===currentWalkFingerprint()?deepCopy(walkAnalysis):null}}});
+$('openProjectAssessment').onclick = () => {closeCopilotWorkspace();RenewalWorkspace.openAssessment(editing)};
 initFeatureModules();
 const workflowGrid=document.querySelector('#planningPanel .planning-tools');
 for(const [title,ids] of [['01 数据准备',['openGIS','planningTable']],['02 边界编辑',['openTerra','planningSnap']],['03 周边与空间分析',['openPOI','openWalk','openCoverage','openMorphology','openHotspots','openDensity']],['04 更新方案与经济',['planningAreas','openEconomics']]]){const heading=document.createElement('h3');heading.textContent=title;heading.style.gridColumn='1 / -1';workflowGrid.append(heading);for(const id of ids)workflowGrid.append($(id))}
@@ -771,7 +895,37 @@ initPlanning();
 initGISTools();
 initSpatialTools();
 initResourceManager();
-loadState();document.body.classList.toggle("satellite-mode",basemap==="satellite");if(renewalAreas.length)activeArea=0;$("light").classList.toggle("on",basemap==="light");$("satellite").classList.toggle("on",basemap==="satellite");updateUI();const sc=document.createElement("script");sc.src="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.js";sc.onload=init;sc.onerror=()=>alert("地图资源加载失败，请联网后重新打开");document.head.appendChild(sc);
+$("openData").onclick=()=>{if(drawing)return alert('请先保存或取消当前边界编辑');closePanel();closeModulePanels();RenewalWorkspace.close();RenewalArchive.open()};
+$("openLibraries").onclick=()=>{if(drawing||RenewalArchive.isEditing())return alert('请先保存或取消当前边界编辑');closeCopilotWorkspace();closeModulePanels();RenewalWorkspace.close();RenewalArchive.close();RenewalLibraries.open()};
+loadState();syncArchiveProjects();archiveSession.autoload();document.body.classList.toggle("satellite-mode",basemap==="satellite");if(renewalAreas.length)activeArea=0;$("light").classList.toggle("on",basemap==="light");$("satellite").classList.toggle("on",basemap==="satellite");updateUI();const sc=document.createElement("script");sc.src="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.js";sc.onload=init;sc.onerror=()=>alert("地图资源加载失败，请联网后重新打开");document.head.appendChild(sc);
+if (window.RenewalShared) {
+  window.RenewalShared.init({
+    capture: () => deepCopy({projects, renewalAreas, basemap, importedReferenceGeoJSON, archiveLayers:RenewalArchive.capture(), ...RenewalWorkspace.captureStudy()}),
+    editing: () => drawing || vertexMode || terraActive || areaEditing !== null || projectFilesLoading > 0 || RenewalWorkspace.isImporting(),
+    apply: state => {
+      projects = state.projects.map(normalizeProject);
+      renewalAreas = deepCopy(state.renewalAreas);
+      importedReferenceGeoJSON = deepCopy(state.importedReferenceGeoJSON);
+      if (Array.isArray(state.archiveLayers)) RenewalArchive.restore(state.archiveLayers);
+      editing = null;
+      activeArea = renewalAreas.length ? 0 : null;
+      selectedRows.clear();
+      gisRevision++;
+      gisReport = null;
+      clearGISPreview();
+      clearPOI();
+      clearWalkResults();
+      spatialMap(fc([]));
+      RenewalWorkspace.restoreStudy(state);
+      closePanel();
+      closeModulePanels();
+      updateActionButtons();
+      setBasemap(state.basemap);
+      updateUI();
+      fitImportedOrProjects();
+    }
+  });
+}
 })();
 </script>
 </body>

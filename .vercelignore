@@ -8,3 +8,6 @@ tests/
 server.cjs
 
 .local-data/
+lan-server.cjs
+lib/shared-store.cjs
+lib/shared-workspace.js

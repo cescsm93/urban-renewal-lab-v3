@@ -1,0 +1,111 @@
+/* Imagery-first interface inspired by the supplied planning-system reference. */
+:root {
+  --glass-deep: rgba(7, 39, 53, .78);
+  --glass-mid: rgba(11, 60, 76, .72);
+  --glass-line: rgba(143, 224, 227, .38);
+  --glass-text: #f0fbfc;
+  --glass-muted: #b9d9df;
+  --accent: #3fc0c9;
+  --accent-strong: #116f87;
+  --ink: #163743;
+}
+
+body { background: #102f37; }
+body::before { content: ""; position: fixed; z-index: 19; inset: 0 0 auto; height: 4px; background: linear-gradient(90deg, #1d8b9e, #47bfca 50%, #125673); pointer-events: none; }
+button { cursor: pointer; }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid #5dd4dc; outline-offset: 2px; }
+.glass { background: var(--glass-deep); border: 1px solid var(--glass-line); color: var(--glass-text); -webkit-backdrop-filter: blur(18px) saturate(130%); backdrop-filter: blur(18px) saturate(130%); box-shadow: 0 14px 42px rgba(0, 16, 25, .27), inset 0 1px rgba(255, 255, 255, .12); }
+.top { top: max(14px, env(safe-area-inset-top)); align-items: flex-start; gap: 12px; }
+.brand { border-radius: 10px; padding: 11px 17px; border-left: 3px solid var(--accent); white-space: nowrap; }
+.brand b { color: #f5ffff; font-size: 15px; letter-spacing: .025em; }
+.workspace-nav { border-radius: 10px; gap: 3px; padding: 4px; background: rgba(5, 40, 55, .86); }
+.workspace-nav button, .theme button { color: #d5eff2; border-radius: 7px; transition: background .16s, color .16s; }
+.workspace-nav button:hover, .theme button:hover { background: rgba(122, 220, 224, .18); color: #fff; }
+.workspace-nav button.on, .theme button.on { background: linear-gradient(145deg, #168ba1, #0f627c); color: #fff; box-shadow: inset 0 1px rgba(255, 255, 255, .24), 0 2px 10px #061f2a55; }
+.theme { height: 45px; border-radius: 10px; background: rgba(5, 40, 55, .86); }
+.summary { top: 84px; border-radius: 10px; padding: 6px 8px; background: rgba(7, 39, 53, .81); }
+.metric { min-width: 84px; border-right: 1px solid rgba(190, 240, 242, .18); }
+.metric:last-child { border-right: 0; }
+.metric span { color: var(--glass-muted); font-size: 10px; }
+.metric b { color: #fff; font-size: 13px; }
+
+/* A translucent map rail with clear rows and controls. */
+.projects { top: 154px; width: 310px; bottom: 14px; max-height: none; padding: 0; border-radius: 12px; background: rgba(7, 44, 60, .81); }
+.rm-head, .rm-controls { border-color: rgba(170, 225, 230, .2); }
+.rm-heading b, .projects-head b { color: #f3ffff; }
+.rm-count, .rm-sort span, .creation label, .cluster-tools label { color: var(--glass-muted); }
+.rm-toggle { background: rgba(115, 211, 216, .15); border-color: rgba(150, 225, 230, .4); color: #edfafa; }
+.rm-toggle:hover { background: rgba(115, 211, 216, .26); }
+.rm-tabs { background: rgba(2, 25, 39, .48); }
+.rm-tab { color: #b8d8df; }
+.rm-tab.on { background: #d5f4f4; color: #114b5a; }
+.rm-search input, .rm-sort select, .creation select, .cluster-tools input { background: rgba(246, 254, 254, .94); border-color: #95c9d0; color: var(--ink); }
+.rm-search input::placeholder { color: #61808b; }
+.rm-chip { background: rgba(176, 229, 231, .14); color: #d5eff1; }
+.rm-chip.on { background: #26a4b1; color: #fff; }
+.current-resource { background: rgba(170, 227, 230, .16); border-color: rgba(170, 227, 230, .3); }
+.current-resource .eyebrow, .current-resource small { color: #bddce1; }
+.resource-row { border-bottom: 1px solid rgba(167, 229, 232, .12); color: #f3fafa; }
+.resource-row:hover, .resource-row.sel { background: rgba(87, 197, 205, .22); border-color: rgba(145, 227, 230, .34); }
+.resource-row small, .card small { color: #bfd8df; }
+.rm-footer { background: rgba(4, 34, 48, .82); border-color: rgba(170, 225, 230, .2); }
+.category-grid button { background: rgba(178, 230, 231, .12); color: #e2f4f5; border-color: rgba(164, 222, 225, .32); }
+.category-grid button.on { background: #168da1; border-color: #66d1d9; color: #fff; }
+.rm-add, .cluster-btn { background: linear-gradient(125deg, #168fa1, #087389); color: #fff; }
+.rm-tool { background: rgba(157, 221, 224, .17); color: #e6f7f8; border: 1px solid rgba(177, 236, 237, .22); }
+.area-scroll .note, .area-scroll .method-card { background: rgba(218, 246, 248, .95); color: #23515e; }
+
+/* Editing panels are pale glass so dense forms remain easy to read. */
+.panel.glass, .attribute-table.glass, .drawbar.glass { background: rgba(237, 249, 250, .90); color: var(--ink); border-color: rgba(174, 226, 231, .72); -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px); }
+.panel h2 { color: #103c4c; }
+.panel h3, .section-title { color: #13677a; }
+.field label, .module-panel>label { color: #466c78; }
+.panel .note, .panel .kpi, .panel .method-card { background: rgba(210, 235, 239, .78); color: #244d5a; }
+.panel input, .panel select, .attribute-table input, .attribute-table select { background: rgba(255, 255, 255, .96); border-color: #a6c7ce; color: var(--ink); }
+.panel input[readonly] { background: #e5eff1; }
+.primary, .finish, .openpanel { background: linear-gradient(125deg, #147f93, #0b5f77); color: #fff; }
+.secondary { background: #447785; }
+.resource-panel-actions button, .module-grid button, .planning-tools button, .ws-tool { background: rgba(227, 246, 248, .86); border-color: #a6ced3; color: #195267; }
+.close { background: #d4e8eb; color: #205568; }
+.attribute-table .table-scroll th { background: #dceef0; }
+.drawbar { box-shadow: 0 12px 36px #071e2b52; }
+
+/* Archives, research, Copilot and the four libraries inherit the same palette. */
+#archivePanel { background: rgba(232, 248, 249, .91); border-color: #a7d5da; -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); }
+#archivePanel header b { color: #12596b; }
+body .ws { background: rgba(235, 248, 249, .92); border-color: #a9d8dd; -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); }
+body .ws aside { background: rgba(7, 45, 61, .94); border-right: 1px solid var(--glass-line); }
+body .ws aside button { background: rgba(63, 177, 190, .20); color: #effcfc; border: 1px solid rgba(138, 218, 223, .24); }
+body .ws aside button:hover { background: rgba(63, 177, 190, .38); }
+body .ws .ws-status { background: #d9f0f1; }
+.copilot-workspace { background: rgba(7, 39, 53, .87); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.copilot-head { background: rgba(7, 47, 62, .94); border-color: var(--glass-line); color: #f0fbfc; }
+.copilot-head p { color: #b8d9df; }
+.copilot-main, .copilot-evidence { background: rgba(245, 252, 252, .96); border-color: #b0d8dc; }
+.copilot-head button, .copilot-actions button, .copilot-source button, .copilot-source a { background: #117e93; }
+.library-workspace { background: rgba(7, 39, 53, .86) !important; color: #f0fbfc !important; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.library-workspace .library-head, .library-workspace .library-tabs { background: rgba(7, 47, 62, .9); border-color: var(--glass-line); }
+.library-workspace .library-head button, .library-workspace .library-action { background: #117e93; }
+.library-workspace .library-tabs button { background: rgba(178, 227, 230, .12); border-color: rgba(160, 224, 227, .3); color: #e6f9fa; }
+.library-workspace .library-tabs button.on { background: #11879b; color: #fff; }
+.library-workspace .library-intro p { color: #c0dce1; }
+.library-workspace .library-list, .library-workspace .library-detail, .library-workspace .library-empty { background: rgba(241, 251, 251, .95); border-color: #add6da; color: var(--ink); }
+.library-workspace .library-row { background: transparent; }
+.library-workspace .library-row:hover, .library-workspace .library-row.on { background: #d8eef0; }
+
+@media (max-width: 720px) {
+  .top { left: 7px; right: 7px; gap: 5px; }
+  .brand { padding: 8px 9px; max-width: 51%; }
+  .brand b { font-size: 12px; }
+  .theme { height: 36px; }
+  .theme button { padding: 5px; font-size: 10px; }
+  .workspace-nav { height: 40px; width: 100%; }
+  .workspace-nav button { padding: 5px 3px; font-size: 10px; white-space: nowrap; }
+  .summary { top: 105px; left: 7px; right: 7px; overflow-x: auto; }
+  .metric { min-width: 72px; }
+  .projects { top: 161px; left: 7px; width: 216px; height: 54%; max-height: 54%; bottom: auto; }
+  .projects.collapsed { width: 184px; height: auto; }
+  .panel { bottom: 7px; }
+  body .ws { inset: 88px 5px 5px; }
+  body .ws aside { border-right: 0; border-bottom: 1px solid var(--glass-line); }
+}
