@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgis/postgis:17-3.5
+    container_name: renewal-lab-postgis
+    restart: unless-stopped
+    env_file: ../.local-data/postgis.env
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - renewal_postgis_data:/var/lib/postgresql/data
+      - ./001_schema.sql:/docker-entrypoint-initdb.d/001_schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U renewal_lab -d renewal_lab"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  renewal_postgis_data:

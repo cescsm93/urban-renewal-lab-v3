@@ -13,6 +13,7 @@
     "sync:vendor": "node scripts/sync-vendor.cjs"
   },
   "dependencies": {
+    "pg": "^8.23.1",
     "terra-draw": "1.38.0",
     "terra-draw-maplibre-gl-adapter": "1.5.0"
   }
