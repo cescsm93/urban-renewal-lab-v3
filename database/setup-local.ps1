@@ -28,4 +28,7 @@ if ($LASTEXITCODE -ne 0) { throw 'PostGIS extension validation failed.' }
 Get-Content -LiteralPath (Join-Path $PSScriptRoot '002_pilot.sql') -Raw |
   docker compose -f $compose exec -T db psql -v ON_ERROR_STOP=1 -U renewal_lab -d renewal_lab
 if ($LASTEXITCODE -ne 0) { throw 'PostGIS schema migration failed.' }
+Get-Content -LiteralPath (Join-Path $PSScriptRoot '003_archive.sql') -Raw |
+  docker compose -f $compose exec -T db psql -v ON_ERROR_STOP=1 -U renewal_lab -d renewal_lab
+if ($LASTEXITCODE -ne 0) { throw 'PostGIS archive migration failed.' }
 Write-Host 'Local PostGIS is ready at 127.0.0.1:5432. Credentials are in .local-data/postgis.env.'

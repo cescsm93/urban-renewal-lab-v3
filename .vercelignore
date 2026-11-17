@@ -15,4 +15,6 @@ qwen-bridge.cjs
 lib/four-copilot.cjs
 lib/four-copilot-ui.js
 lib/postgis-pilot.cjs
+lib/postgis-db.cjs
+lib/postgis-archive.cjs
 database/

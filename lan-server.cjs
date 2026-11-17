@@ -120,6 +120,8 @@ server.on('request', async (req, res) => {
       if (url.pathname === '/' && req.method === 'GET') return serveHtml(res, loginPage);
       return send(res, 401, { error: '登录已过期，请刷新页面重新登录' });
     }
+    req.archiveUser = session.username;
+    req.archiveHasUser = shared.hasUser;
     if (url.pathname === '/api/postgis/pilot' && req.method !== 'GET' && session.username !== 'admin')
       return send(res, 403, { error: 'PostGIS 项目层试点仅管理员可以写入' });
     if (url.pathname === '/lan-logout' && req.method === 'POST') {
