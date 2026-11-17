@@ -885,6 +885,17 @@ function initSpatialTools(){for(const [button,panel] of [['openCoverage','covera
 
 
 const archiveSession=RenewalArchive.init({getMap:()=>mapReady?map:null,onChange:()=>{syncArchiveProjects();updateUI()},validateBoundary:validBoundary});
+window.RenewalCopilotContext={projects:()=>{
+  const drawn=projects.map(p=>({name:p.name,type:p.type,stage:p.stage,areaHa:projectAreaHa(p)}));
+  const archived=RenewalArchive.capture().filter(layer=>/项目|更新/.test(layer.name)).flatMap(layer=>
+    layer.collection.features.map(feature=>{
+      const p=feature.properties||{};
+      return {name:String(p['项目名称']||p['更新项目名称']||p['名称']||p.name||p._archiveTitle||''),
+        type:String(p['项目类型']||p['更新类型']||p['项目类别']||p['类型']||''),
+        stage:String(p['实施阶段']||p['项目阶段']||p['阶段']||''),areaHa:null};
+    }).filter(row=>row.name));
+  return [...drawn,...archived];
+}};
 RenewalWorkspace.init({map:()=>mapReady?map:null,save:()=>({projects,renewalAreas,basemap,importedReferenceGeoJSON,archiveLayers:RenewalArchive.capture()}),restore:s=>{if(!Array.isArray(s.projects))throw Error('备份缺少资源');projects=s.projects.map(normalizeProject);renewalAreas=s.renewalAreas||[];importedReferenceGeoJSON=s.importedReferenceGeoJSON||null;RenewalArchive.restore(s.archiveLayers||[]);updateUI();saveState()},projects:()=>projects,snapshot:(i,radius)=>{const p=projects[i],center=projectCenter(p),match=poiPage>0&&poiQuery===JSON.stringify([i,center,radius,projectGeometry(p)]);return{project:deepCopy(p),geometry:deepCopy(projectGeometry(p)),center,areaHa:projectAreaHa(p),radius,pois:match?deepCopy(poiItems):[],poiLoaded:match,poiQueryComplete:match&&poiTotal<=poiItems.length,walk:walkAnalysis&&walkFingerprint===currentWalkFingerprint()?deepCopy(walkAnalysis):null}}});
 $('openProjectAssessment').onclick = () => {closeCopilotWorkspace();RenewalWorkspace.openAssessment(editing)};
 initFeatureModules();
@@ -928,5 +939,6 @@ if (window.RenewalShared) {
 }
 })();
 </script>
+<!-- PRIVATE_COPILOT -->
 </body>
 </html>

@@ -12,3 +12,5 @@ lan-server.cjs
 lib/shared-store.cjs
 lib/shared-workspace.js
 qwen-bridge.cjs
+lib/four-copilot.cjs
+lib/four-copilot-ui.js

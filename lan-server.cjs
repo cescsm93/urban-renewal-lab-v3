@@ -58,7 +58,7 @@ function queueCopilot(req, res) {
 
 const loginPage = `<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Renewal Lab 内网登录</title>
 <style>body{font:16px system-ui;color:#183d48;background:#edf4f5}main{max-width:420px;margin:10vh auto;background:white;padding:32px;border-radius:16px}label,input{display:block}input{box-sizing:border-box;width:100%;margin:6px 0 16px;padding:12px;border:1px solid #b9cdd1;border-radius:8px}button{background:#164854;color:white;border:0;border-radius:8px;padding:10px 18px}p{line-height:1.6}#status{color:#a52e38}</style>
-<main><h1>Urban Renewal Lab</h1><p>使用成员账号进入共享项目。体验地图、政策知识库和 Qwen 时，可留空账号并输入原网站口令。</p>
+<main><h1>Urban Renewal Lab</h1><p>同事可使用导入数据、工作流、Copilot 和研判报告；四库列表仅管理员可查看。同事可留空账号输入试用口令。</p>
 <form><label>成员账号<input id="username" autocomplete="username" maxlength="32"></label><label>访问口令<input type="password" id="password" autocomplete="current-password" maxlength="128" required></label><button>进入工作台</button></form><p id="status" role="status"></p></main>
 <script>
 document.querySelector('form').onsubmit = async event => {
@@ -125,6 +125,32 @@ server.on('request', async (req, res) => {
       res.setHeader('Set-Cookie', 'renewal_lan=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0');
       return send(res, 200, { ok: true });
     }
+    if (session.username !== 'admin') {
+      if (req.method === 'GET' && ['/', '/index.html'].includes(url.pathname)) {
+        const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+        return serveHtml(res, html.replace('<!-- LAN_SHARED -->',
+          '<script>window.RenewalPrivateLibrariesHidden=true</script><script src="/shared-workspace.js"></script>')
+          .replace('<!-- PRIVATE_COPILOT -->', '<script src="/lib/four-copilot-ui.js"></script>'));
+      }
+      if (url.pathname === '/api/four-copilot') {
+        req.fourCopilotAuthorized = true;
+        req.fourCopilotOwner = false;
+        if (req.method === 'POST') return queueCopilot(req, res);
+        return await router(req, res);
+      }
+      if (url.pathname.startsWith('/api/shared/'))
+        return send(res, 200, await shared.routes(req, url, session.username));
+      if (url.pathname === '/shared-workspace.js' && req.method === 'GET') {
+        res.writeHead(200, { 'Content-Type': 'application/javascript; charset=utf-8', 'Cache-Control': 'no-store' });
+        return res.end(fs.readFileSync(path.join(__dirname, 'lib/shared-workspace.js')));
+      }
+      if (['/api/partner-library', '/api/scenario-library', '/api/local-knowledge',
+            '/api/local-knowledge/source', '/api/local-project'].includes(url.pathname))
+        return send(res, 403, { error: '四库原始资料仅管理员可查看' });
+      req.headers['x-forwarded-for'] = req.socket.remoteAddress;
+      if (url.pathname === '/api/copilot') return queueCopilot(req, res);
+      return await router(req, res);
+    }
     if (url.pathname.startsWith('/api/shared/')) {
       const result = await shared.routes(req, url, session.username);
       if (url.pathname === '/api/shared/users' && result.reset) {
@@ -138,17 +164,19 @@ server.on('request', async (req, res) => {
     }
     if (req.method === 'GET' && ['/', '/index.html'].includes(url.pathname)) {
       const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
-      return serveHtml(res, html.replace('<!-- LAN_SHARED -->', '<script src="/shared-workspace.js"></script>'));
+      return serveHtml(res, html.replace('<!-- LAN_SHARED -->', '<script src="/shared-workspace.js"></script>').replace('<!-- PRIVATE_COPILOT -->','<script src="/lib/four-copilot-ui.js"></script>'));
     }
     if (url.pathname === '/api/local-project') return send(res, 403, { error: '主机本机快照仅供主机使用，请在共享项目入口保存' });
     req.headers['x-forwarded-for'] = req.socket.remoteAddress;
     if (url.pathname === '/api/local-knowledge' || url.pathname === '/api/local-knowledge/source') {
       req.knowledgeLanAuthorized = true;
+      req.knowledgeSourceAuthorized = true;
       if (url.pathname === '/api/local-knowledge' && req.method === 'POST') return queueCopilot(req, res);
     }
     if (url.pathname === '/api/partner-library' || url.pathname === '/api/scenario-library') {
       req.privateLibraryAuthorized = true;
     }
+    if (url.pathname === '/api/four-copilot') { req.fourCopilotAuthorized = true; req.fourCopilotOwner = true; return req.method === 'POST' ? queueCopilot(req, res) : router(req, res); }
     if (url.pathname === '/api/copilot') return queueCopilot(req, res);
     await router(req, res);
   } catch (error) {
