@@ -274,7 +274,7 @@ function normalizeProject(raw){
  const oldF=p.finance||{};
  let oldRent=+(oldF.rent??900)||900;if(oldRent>250)oldRent=oldRent/12;
   return {
-   archiveLink:p.archiveLink||null,geometry:p.geometry||null,labelPoint:p.labelPoint||null,gisReport:p.gisReport||null,source:p.source,sourceAttributes:p.sourceAttributes,name:p.name||nextProjectName(),type:p.type||"老旧厂区",stage:p.stage||"前期研究",mode:p.mode||"拆改结合",pts:Array.isArray(p.pts)?p.pts:[],
+   archiveLink:p.archiveLink||null,archiveDbId:p.archiveDbId||null,archiveVersion:p.archiveVersion||null,archiveRegistrationNote:p.archiveRegistrationNote||null,archiveSourceFilename:p.archiveSourceFilename||null,scenarioEdited:!!p.scenarioEdited,geometry:p.geometry||null,labelPoint:p.labelPoint||null,gisReport:p.gisReport||null,source:p.source,sourceAttributes:p.sourceAttributes,name:p.name||nextProjectName(),type:p.type||"老旧厂区",stage:p.stage||"前期研究",mode:p.mode||"拆改结合",pts:Array.isArray(p.pts)?p.pts:[],
   currentLandArea:a,existingGfa:+(p.existingGfa??p.oldGfa??0)||0,existingFar:a>0?+(p.existingGfa??p.oldGfa??0)/(a*10000):0,owner:p.owner||"国有企业",landNature:p.landNature||"出让",currentUse,
   plannedUse:p.plannedUse||currentUse,plannedFar,plannedLandArea,plannedGfa:plannedLandArea*10000*plannedFar,
   government:p.government||{landGrant:+(oldF.landCost??8000)||0,relocation:+(oldF.reloc??12000)||0,assetAcq:0,sitePrep:1500,other:0},
@@ -293,13 +293,13 @@ function syncArchiveProjects(){
   if(!ring||ring.length<4)return [];
   const pts=ring.slice(0,-1).map(point=>[+point[0],+point[1]]);
   if(pts.length<3||areaHa(pts)<.000001)return [];
-  const props=feature.properties||{},link='项目层:'+index;
+  const props=feature.properties||{},link=feature.dbId?'项目层:db:'+feature.dbId:'项目层:'+index;
   const name=String(propFirst(props,['项目名称','名称','name','项目编号'])||'更新项目'+(index+1));
-  const old=previous.get(link);
+  const old=previous.get(link)||previous.get('项目层:'+index);
   const area=areaHa(pts);
   const type=normalizeImportedType(propFirst(props,['项目类型','更新类型','资源类型'])||'其他资源');
   const base=old&&old.name===name?old:newDefaultProject(area,pts);
-  return [normalizeProject({...base,archiveLink:link,name,type,currentUse:old&&old.name===name?old.currentUse:inferUse(type),plannedUse:old&&old.name===name?old.plannedUse:inferUse(type),source:'导入档案 · 项目层',sourceAttributes:props,geometry:deepCopy(geometry),pts,currentLandArea:area,plannedLandArea:old&&old.name===name?old.plannedLandArea:area})];
+  return [normalizeProject({...base,archiveLink:link,archiveDbId:feature.dbId||null,archiveVersion:feature.dbVersion||null,archiveRegistrationNote:layer.registrationNote||null,archiveSourceFilename:layer.sourceFilename||null,name,type,currentUse:old&&old.name===name?old.currentUse:inferUse(type),plannedUse:old&&old.name===name?old.plannedUse:inferUse(type),source:feature.dbId?'本机 PostGIS · 项目层':'导入档案 · 项目层',sourceAttributes:props,geometry:deepCopy(geometry),pts,currentLandArea:area,plannedLandArea:old&&old.name===name?old.plannedLandArea:area})];
  });
  projects=[...manual,...imported];
  if(editing!==null&&editing>=projects.length)editing=null;
@@ -431,7 +431,7 @@ function recalcPlannedGfa(){const a=+$('plannedLandArea').value||0,f=+$('planned
 function projectFromForm(p){
  p.name=$("name").value.trim()||p.name||nextProjectName();p.type=$("type").value;p.stage=$("stage").value;p.mode=$("mode").value;
  p.currentLandArea=+$('currentLandArea').value||p.currentLandArea||0;p.existingGfa=+$('existingGfa').value||0;p.existingFar=+$('existingFar').value||0;p.owner=$("owner").value;p.landNature=$("landNature").value;p.currentUse=$("currentUse").value;
- p.plannedUse=$("plannedUse").value;p.plannedFar=+$('plannedFar').value||0;p.plannedLandArea=+$('plannedLandArea').value||0;p.plannedGfa=+$('plannedGfa').value||0;
+ p.plannedUse=$("plannedUse").value;p.plannedFar=+$('plannedFar').value||0;p.plannedLandArea=+$('plannedLandArea').value||0;p.plannedGfa=+$('plannedGfa').value||0;p.scenarioEdited=true;
  p.government={landGrant:+$('govLandGrant').value||0,relocation:+$('govRelocation').value||0,assetAcq:+$('govAssetAcq').value||0,sitePrep:+$('govSitePrep').value||0,other:+$('govOther').value||0};
  p.enterprise={buildCost:+$('buildCost').value||0,otherRate:+$('otherRate').value||0,buildYears:+$('buildYears').value||0,loanRatio:+$('loanRatio').value||0,loanRate:+$('loanRate').value||0,rentable:+$('rentable').value||0,occ:+$('occ').value||0,monthlyRent:+$('monthlyRent').value||0,rentGrowth:+$('rentGrowth').value||0,opexRate:+$('opexRate').value||0,capRate:+$('capRate').value||0,discountRate:+$('discountRate').value||0,holdYears:+$('holdYears').value||0};
  $('entLandCost').value=p.government.landGrant;
@@ -889,6 +889,8 @@ function initSpatialTools(){for(const [button,panel] of [['openCoverage','covera
 
 
 const archiveSession=RenewalArchive.init({getMap:()=>mapReady?map:null,onChange:()=>{syncArchiveProjects();updateUI()},validateBoundary:validBoundary});
+async function refreshArchiveProject(index){const project=projects[index];if(!project?.archiveDbId)return index;await RenewalArchive.refreshFeature(project.archiveDbId);const current=projects.findIndex(row=>row.archiveDbId===project.archiveDbId);if(current<0)throw Error('项目档案已变化，请刷新网页后再研判');return current}
+async function readArchiveProjectContext(index){const id=projects[index]?.archiveDbId;if(!id)return null;const response=await fetch('/api/postgis/archive/projects/'+encodeURIComponent(id)+'/context',{cache:'no-store'});const data=await response.json();if(!response.ok)throw Error(data.error||'无法读取四层空间叠加');if(data.projectVersion!==projects[index].archiveVersion)throw Error('项目在分析期间被修改，请重新生成研判');return data}
 window.RenewalCopilotContext={projects:()=>{
   const drawn=projects.map(p=>({name:p.name,type:p.type,stage:p.stage,areaHa:projectAreaHa(p)}));
   const archived=RenewalArchive.capture().filter(layer=>/项目|更新/.test(layer.name)).flatMap(layer=>
@@ -900,7 +902,7 @@ window.RenewalCopilotContext={projects:()=>{
     }).filter(row=>row.name));
   return [...drawn,...archived];
 }};
-RenewalWorkspace.init({map:()=>mapReady?map:null,save:()=>({projects,renewalAreas,basemap,importedReferenceGeoJSON,archiveLayers:RenewalArchive.capture()}),restore:s=>{if(!Array.isArray(s.projects))throw Error('备份缺少资源');projects=s.projects.map(normalizeProject);renewalAreas=s.renewalAreas||[];importedReferenceGeoJSON=s.importedReferenceGeoJSON||null;RenewalArchive.restore(s.archiveLayers||[]);updateUI();saveState()},projects:()=>projects,snapshot:(i,radius)=>{const p=projects[i],center=projectCenter(p),match=poiPage>0&&poiQuery===JSON.stringify([i,center,radius,projectGeometry(p)]);return{project:deepCopy(p),geometry:deepCopy(projectGeometry(p)),center,areaHa:projectAreaHa(p),radius,pois:match?deepCopy(poiItems):[],poiLoaded:match,poiQueryComplete:match&&poiTotal<=poiItems.length,walk:walkAnalysis&&walkFingerprint===currentWalkFingerprint()?deepCopy(walkAnalysis):null}}});
+RenewalWorkspace.init({map:()=>mapReady?map:null,refreshArchive:refreshArchiveProject,archiveContext:readArchiveProjectContext,save:()=>({projects,renewalAreas,basemap,importedReferenceGeoJSON,archiveLayers:RenewalArchive.captureForState()}),restore:s=>{if(!Array.isArray(s.projects))throw Error('备份缺少资源');projects=s.projects.map(normalizeProject);renewalAreas=s.renewalAreas||[];importedReferenceGeoJSON=s.importedReferenceGeoJSON||null;RenewalArchive.restore(s.archiveLayers||[]);if(RenewalArchive.isDatabaseBacked())syncArchiveProjects();updateUI();saveState()},projects:()=>projects,snapshot:(i,radius)=>{const p=projects[i],center=projectCenter(p),match=poiPage>0&&poiQuery===JSON.stringify([i,center,radius,projectGeometry(p)]);return{project:deepCopy(p),geometry:deepCopy(projectGeometry(p)),center,areaHa:projectAreaHa(p),radius,pois:match?deepCopy(poiItems):[],poiLoaded:match,poiQueryComplete:match&&poiTotal<=poiItems.length,walk:walkAnalysis&&walkFingerprint===currentWalkFingerprint()?deepCopy(walkAnalysis):null}}});
 $('openProjectAssessment').onclick = () => {closeCopilotWorkspace();RenewalWorkspace.openAssessment(editing)};
 initFeatureModules();
 const workflowGrid=document.querySelector('#planningPanel .planning-tools');
