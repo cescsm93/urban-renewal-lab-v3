@@ -84,10 +84,12 @@ async function handler(req, res) {
   catch (e) { return send(400, {error:e.message}); }
   if (online && assessment) return send(503, {error:'完整前期研判仅在本机或局域网启用'});
   if (assessment && assessmentRunning) return send(429, {error:'正在生成另一份研判，请稍后再试'});
-  const quota = take(req, 'copilot');
-  if (!quota.allowed) {
-    res.setHeader('Retry-After', String(quota.retryAfter));
-    return send(429, {error:'地图 Copilot 今日或近期提问次数已达保护上限'});
+  if (online) {
+    const quota = take(req, 'copilot');
+    if (!quota.allowed) {
+      res.setHeader('Retry-After', String(quota.retryAfter));
+      return send(429, {error:'地图 Copilot 今日或近期提问次数已达保护上限'});
+    }
   }
   try {
     if (assessment) {

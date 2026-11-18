@@ -44,14 +44,14 @@ function drain() {
 }
 
 function queueCopilot(req, res) {
-  if (queue.length >= 2) return send(res, 429, { error: '模型正在处理同事的提问，请稍后重试' });
+  if (queue.length >= 3) return send(res, 429, { error: '模型正在处理同事的提问，请稍后重试' });
   const job = { req, res };
   job.timer = setTimeout(() => {
     const index = queue.indexOf(job);
     if (index < 0) return;
     queue.splice(index, 1);
-    send(res, 429, { error: '排队超过15秒，请稍后重试' });
-  }, 15000);
+    send(res, 429, { error: '排队超过60秒，请稍后重试' });
+  }, 60000);
   queue.push(job);
   drain();
 }
