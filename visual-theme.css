@@ -92,6 +92,12 @@ body .ws .ws-status { background: #d9f0f1; }
 .library-workspace .library-list, .library-workspace .library-detail, .library-workspace .library-empty { background: rgba(241, 251, 251, .95); border-color: #add6da; color: var(--ink); }
 .library-workspace .library-row { background: transparent; }
 .library-workspace .library-row:hover, .library-workspace .library-row.on { background: #d8eef0; }
+.library-workspace .library-count { color: #c0dce1; }
+.library-workspace .policy-folder { background: rgba(7, 47, 62, .94); border-color: rgba(160, 224, 227, .35); color: #f0fbfc; }
+.library-workspace .policy-folder summary { color: #f0fbfc; }
+.library-workspace .policy-file { border-color: rgba(160, 224, 227, .22); color: #e0f7fa; }
+.library-workspace .policy-file small { color: #a9d3dc; }
+.library-workspace .policy-file:hover, .library-workspace .policy-file:focus-visible { background: rgba(43, 133, 149, .4); color: #fff; }
 .four-copilot-empty { margin: 4px 0; padding: 16px; border: 1px dashed #a9cbd1; border-radius: 10px; background: #f2f8f8; color: #4a6d76; font-size: 14px; line-height: 1.7; }
 .four-copilot-project[hidden], .four-copilot-project label[hidden] { display: none !important; }
 
@@ -118,3 +124,25 @@ body .ws .ws-status { background: #d9f0f1; }
   .copilot-evidence { min-height: 110px; }
   .copilot-preview { flex: none; min-height: 270px; }
 }
+.maplibregl-marker.housing-map-label {
+  display: grid;
+  gap: 1px;
+  max-width: 126px;
+  padding: 3px 7px;
+  border: 1px solid #88a9ac;
+  border-radius: 5px;
+  background: #f8ffff;
+  color: #153943;
+  font: 12px/1.2 system-ui, sans-serif;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 1px 4px #102d4266;
+}
+.housing-map-label span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.housing-map-label b { color: #094d5a; }
+.housing-map-detail { color: #193c46; font: 14px/1.5 system-ui, sans-serif; }
+.housing-map-detail p { margin: 5px 0; }
+.housing-map-legend { display: flex; flex-wrap: wrap; gap: 5px 14px; }
+.housing-map-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.housing-map-legend i { width: 11px; height: 11px; border-radius: 50%; border: 1px solid #173a4933; }
+#studyChart details > summary { cursor: pointer; font-weight: 650; }

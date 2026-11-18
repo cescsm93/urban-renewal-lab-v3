@@ -231,7 +231,7 @@ body.satellite-mode .project-map-label{background:rgba(16,35,43,.84);border-colo
 
 <script src="vendor/terra-draw.umd.js"></script><script src="vendor/terra-draw-maplibre-gl-adapter.umd.js"></script>
 <script src="vendor/turf.min.js"></script>
-<script src="lib/brief-sheet.js"></script><script src="vendor/jspdf.umd.min.js"></script><script src="vendor/fflate.umd.js"></script><script src="lib/project-assessment.js"></script><script src="lib/program-analysis.js"></script><script src="lib/archive-layers.js"></script><script src="lib/research-workspace.js"></script><script src="lib/library-workspace.js"></script><script src="lib/map-project-query.js"></script>
+<!-- OFFLINE_POPULATION --><script src="lib/brief-sheet.js"></script><script src="vendor/jspdf.umd.min.js"></script><script src="vendor/fflate.umd.js"></script><script src="lib/project-assessment.js"></script><script src="lib/program-analysis.js"></script><script src="lib/archive-layers.js"></script><script src="lib/research-workspace.js"></script><script src="lib/library-workspace.js"></script><script src="lib/map-project-query.js"></script>
 <!-- LAN_SHARED -->
 <script>
 (function(){
@@ -625,7 +625,7 @@ function init(){
  map.once("style.load",()=>{
   mapReady=true;addMapLayers();addAnalysisLayers();addPlanningLayers();addGISPreviewLayer();addSpatialLayers();archiveSession.attachMap();ensureProjectHighlight();map.on("zoom",()=>{if(densityMode==="heat")map.setPaintProperty("analysis-heat","heatmap-radius",heatRadiusPixels())});map.on('moveend',syncProjectMarkers);map.on('resize',syncProjectMarkers);setBasemap(basemap);fitAllProjects();
   map.on("click","project-fill",e=>{
-    if(drawing||terraActive||pickingWalkOrigin||RenewalArchive.isEditing()||RenewalArchive.hitAt(e.point)||!e.features||!e.features.length)return;
+    if(e.defaultPrevented||drawing||terraActive||pickingWalkOrigin||RenewalArchive.isEditing()||RenewalArchive.hitAt(e.point)||!e.features||!e.features.length)return;
    lastResourceClick=Date.now();
    const i=Number(e.features[0].properties.id);
    if(Number.isInteger(i)&&projects[i]){if(RenewalArchive.openAt(e))return;if(e.originalEvent?.shiftKey){toggleRowSelection(i);return}selectProject(i)}
@@ -635,6 +635,7 @@ function init(){
  });
   map.on("dblclick",e=>{if(RenewalArchive.handleDoubleClick(e))return;if(terraActive)return;if(drawing&&!vertexMode){e.preventDefault();$("finish").click()}});
  map.on("click",e=>{
+   if(!drawing&&!terraActive&&!pickingWalkOrigin&&!RenewalArchive.isEditing()&&RenewalWorkspace.inspectHousingAt(e.point)){e.preventDefault();return}
    if(RenewalArchive.handleMapClick(e))return;
    if(terraActive)return;if(pickingWalkOrigin){pickingWalkOrigin=false;map.getCanvas().style.cursor="";walkOrigin=[e.lngLat.lng,e.lngLat.lat];$("walkOrigin").value="map";setWalkOriginMarker();openModule("walkPanel");$("walkStatus").textContent="地图起点已设置，可以计算步行可达性。";return}
  if(drawing){if(vertexMode)return;if(e.originalEvent?.detail===2)return;pts.push(snapToRoad([e.lngLat.lng,e.lngLat.lat]));refreshMap();return}

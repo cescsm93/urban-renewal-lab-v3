@@ -105,7 +105,7 @@ async function login(req, res) {
 
 function serveHtml(res, html) {
   res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
-  res.end(html);
+  res.end(require('./lib/offline-population.cjs').html(html));
 }
 
 server.on('request', async (req, res) => {
@@ -148,8 +148,8 @@ server.on('request', async (req, res) => {
         res.writeHead(200, { 'Content-Type': 'application/javascript; charset=utf-8', 'Cache-Control': 'no-store' });
         return res.end(fs.readFileSync(path.join(__dirname, 'lib/shared-workspace.js')));
       }
-      if (['/api/partner-library', '/api/scenario-library', '/api/local-knowledge',
-            '/api/local-knowledge/source', '/api/local-project'].includes(url.pathname))
+      if (['/api/partner-library', '/api/scenario-library', '/api/scenario-library/source', '/api/local-knowledge',
+            '/api/local-knowledge/source', '/api/local-knowledge/catalog', '/api/local-project'].includes(url.pathname))
         return send(res, 403, { error: '四库原始资料仅管理员可查看' });
       req.headers['x-forwarded-for'] = req.socket.remoteAddress;
       if (url.pathname === '/api/copilot') return queueCopilot(req, res);
@@ -172,12 +172,12 @@ server.on('request', async (req, res) => {
     }
     if (url.pathname === '/api/local-project') return send(res, 403, { error: '主机本机快照仅供主机使用，请在共享项目入口保存' });
     req.headers['x-forwarded-for'] = req.socket.remoteAddress;
-    if (url.pathname === '/api/local-knowledge' || url.pathname === '/api/local-knowledge/source') {
+    if (url.pathname === '/api/local-knowledge' || url.pathname === '/api/local-knowledge/source' || url.pathname === '/api/local-knowledge/catalog') {
       req.knowledgeLanAuthorized = true;
       req.knowledgeSourceAuthorized = true;
       if (url.pathname === '/api/local-knowledge' && req.method === 'POST') return queueCopilot(req, res);
     }
-    if (url.pathname === '/api/partner-library' || url.pathname === '/api/scenario-library') {
+    if (url.pathname === '/api/partner-library' || url.pathname === '/api/scenario-library' || url.pathname === '/api/scenario-library/source') {
       req.privateLibraryAuthorized = true;
     }
     if (url.pathname === '/api/four-copilot') { req.fourCopilotAuthorized = true; req.fourCopilotOwner = true; return req.method === 'POST' ? queueCopilot(req, res) : router(req, res); }
