@@ -92,6 +92,8 @@ body .ws .ws-status { background: #d9f0f1; }
 .library-workspace .library-list, .library-workspace .library-detail, .library-workspace .library-empty { background: rgba(241, 251, 251, .95); border-color: #add6da; color: var(--ink); }
 .library-workspace .library-row { background: transparent; }
 .library-workspace .library-row:hover, .library-workspace .library-row.on { background: #d8eef0; }
+.four-copilot-empty { margin: 4px 0; padding: 16px; border: 1px dashed #a9cbd1; border-radius: 10px; background: #f2f8f8; color: #4a6d76; font-size: 14px; line-height: 1.7; }
+.four-copilot-project[hidden], .four-copilot-project label[hidden] { display: none !important; }
 
 @media (max-width: 720px) {
   .top { left: 7px; right: 7px; gap: 5px; }
@@ -108,4 +110,11 @@ body .ws .ws-status { background: #d9f0f1; }
   .panel { bottom: 7px; }
   body .ws { inset: 88px 5px 5px; }
   body .ws aside { border-right: 0; border-bottom: 1px solid var(--glass-line); }
+  .copilot-workspace { overflow-y: auto; overscroll-behavior: contain; }
+  .copilot-head { position: sticky; top: 0; z-index: 2; flex: none; }
+  .copilot-layout { display: flex; flex-direction: column; flex: none; min-height: 0; gap: 10px; padding: 10px 8px 24px; }
+  .copilot-main, .copilot-evidence { min-height: 0; overflow: visible; padding: 14px; flex: none; }
+  .copilot-answer-box { flex: none; min-height: 110px; }
+  .copilot-evidence { min-height: 110px; }
+  .copilot-preview { flex: none; min-height: 270px; }
 }
