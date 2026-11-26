@@ -1,0 +1,3 @@
+const fs=require('node:fs'),path=require('node:path');const root=path.join(__dirname,'..'),out=path.join(root,'vendor');fs.mkdirSync(out,{recursive:true});
+for(const [pkg,file] of [['terra-draw','terra-draw.umd.js'],['terra-draw-maplibre-gl-adapter','terra-draw-maplibre-gl-adapter.umd.js']]){fs.copyFileSync(path.join(root,'node_modules',pkg,'dist',file),path.join(out,file));const license=path.join(root,'node_modules',pkg,'LICENSE');if(fs.existsSync(license))fs.copyFileSync(license,path.join(out,pkg+'-LICENSE.txt'));else if(!fs.existsSync(path.join(out,pkg+'-LICENSE.txt')))throw Error('Missing committed upstream license for '+pkg)}
+console.log('Terra Draw browser assets and licenses synchronized');

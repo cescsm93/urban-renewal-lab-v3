@@ -1,0 +1,2661 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:,">
+ <title>城市更新工作台 · 公开演示</title>
+<style>
+:root {
+  --bg:#f1f3ee; --surface:#fff; --fg:#1b2a23; --muted:#52645a;
+  --border:#dce4dc; --accent:#194f3d; --accent-soft:#e6efe8;
+  --map:#eaf0ea; --water:#e5eff0; --project:#208065; --parcel:#667d95;
+  --building:#936c49; --plan:#8b698e; --warn:#795222; --warn-bg:#fbf3e3;
+  --selected:#003c2c; --neighbor:#246a91; --shadow:0 6px 23px rgba(25,53,42,.10);
+  --font-body:"Microsoft YaHei UI","PingFang SC",system-ui,sans-serif;
+  --font-mono:Consolas,monospace; --radius:9px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--fg);font:14px/1.55 var(--font-body);overflow:hidden}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+button:disabled{cursor:default;opacity:.45}
+button:focus-visible,[tabindex]:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--neighbor);outline-offset:2px}
+button,a{-webkit-tap-highlight-color:transparent}
+h1,h2,h3,p{margin:0}
+h1{font-size:25px;line-height:1.3;letter-spacing:-.045em}
+h2{font-size:23px;line-height:1.3;letter-spacing:-.04em}
+h3{font-size:14px}
+small,.muted{color:var(--muted)}
+small{font-size:12px}
+svg{display:block}
+.icon{width:17px;height:17px;flex:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:36px;padding:6px 12px;border:1px solid var(--border);border-radius:7px;background:var(--surface);font-weight:600;white-space:nowrap}
+.btn:hover:not(:disabled){background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 30%,var(--border))}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.btn.primary:hover{background:var(--selected)}
+.btn.selected{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 33%,var(--border));color:var(--accent)}
+.btn.icon-btn{width:35px;padding:0;min-height:33px}
+.btn.link{background:transparent;border-color:transparent;padding-inline:5px;color:var(--accent)}
+.shell{height:100%;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:55px 62px minmax(0,1fr) 29px}
+.topnav{display:flex;align-items:center;justify-content:space-between;padding:0 23px;background:var(--surface);border-bottom:1px solid var(--border)}
+.brand,.brand-mark,.top-actions,.crumbs,.row,.chips,.actions,.pane-title,.tabs{display:flex;align-items:center;gap:8px}
+.brand{gap:11px;font-weight:750;letter-spacing:-.02em}
+.brand-mark{width:33px;height:33px;justify-content:center;background:var(--accent);color:var(--surface);border-radius:9px}
+.brand-mark svg{width:20px;height:20px}
+.brand small{font-size:11px;font-weight:500;margin-left:7px;letter-spacing:0}
+.prototype-tag{border:1px solid var(--border);border-radius:5px;padding:3px 8px;font-size:11px;color:var(--muted)}
+.workspace-head{display:flex;justify-content:space-between;align-items:center;padding:0 23px;background:var(--surface);border-bottom:1px solid var(--border);gap:14px}
+.crumbs{gap:7px;color:var(--muted);flex-wrap:wrap}
+.crumbs button{padding:3px 5px;background:transparent;border:0;color:var(--accent);font-weight:650}
+.crumbs strong{color:var(--fg);padding-inline:3px}
+.workspace-label{font-size:12px;color:var(--muted)}
+.workspace{min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 372px}
+.map-frame{min-height:0;min-width:0;position:relative;overflow:hidden;background:var(--map);isolation:isolate}
+.map-frame svg#map{position:absolute;inset:0;width:100%;height:100%;touch-action:none}
+.map-tools,.map-controls,.legend,.locator,.scale,.layer-pop{position:absolute;z-index:2}
+.map-tools{top:14px;left:15px;display:flex;gap:7px;max-width:calc(100% - 30px);flex-wrap:wrap}
+.map-tools .btn,.map-controls,.legend,.layer-pop,.scale,.locator{box-shadow:var(--shadow)}
+.map-controls{right:15px;bottom:48px;display:grid;background:var(--surface);border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.map-controls button{width:35px;height:35px;padding:0;border:0;border-bottom:1px solid var(--border);border-radius:0}
+.map-controls button:last-child{border-bottom:0}
+.layer-pop{top:55px;left:15px;width:228px;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)}
+.layer-pop[hidden],.drawer[hidden],.toast[hidden],.locator[hidden]{display:none}
+.layer-pop label{display:flex;align-items:center;gap:7px;padding:5px 1px}
+.layer-pop label small{margin-left:auto}
+.layer-pop hr{border:0;border-top:1px solid var(--border);margin:7px 0}
+.legend{bottom:17px;left:15px;padding:8px 11px;background:var(--surface);border-radius:8px;max-width:calc(100% - 72px)}
+.legend-items{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
+.legend-items span{display:flex;align-items:center;gap:5px}
+.swatch{--sw:var(--project);width:11px;height:9px;border:1.5px solid var(--sw);background:color-mix(in srgb,var(--sw) 20%,transparent);border-radius:2px;flex:none}
+.parcel{--sw:var(--parcel)}.building{--sw:var(--building)}.plan{--sw:var(--plan)}.extent{--sw:var(--accent);border-style:dashed}.neighbor{--sw:var(--neighbor);border-style:dashed}
+.locator{right:15px;top:14px;max-width:210px;padding:5px 9px;border-radius:6px;background:var(--surface);color:var(--muted);font-size:11px}
+.scale{right:15px;bottom:16px;background:var(--surface);color:var(--muted);padding:3px 7px;border-radius:4px;font-size:10px}
+.scale::after{content:"";display:block;height:3px;border:1px solid var(--muted);border-top:0}
+.inspector{min-width:0;min-height:0;overflow:auto;border-left:1px solid var(--border);background:var(--surface)}
+.panel-head,.panel-block{padding:18px 19px;border-bottom:1px solid var(--border)}
+.panel-head{padding-top:19px;padding-bottom:17px}
+.panel-head .kicker{color:var(--accent);font-size:11px;font-weight:700;margin-bottom:4px}
+.panel-head p{margin-top:7px;line-height:1.6;color:var(--muted);font-size:12px}
+.panel-block h3{margin-bottom:8px}
+.project-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px}
+.metric{padding:9px 11px;background:var(--bg);border-radius:7px;min-width:0}
+.metric small{display:block;white-space:nowrap}
+.metric strong{font:700 24px/1.25 var(--font-mono);display:block;margin:3px 0}
+.metric .muted{font-size:11px}
+.panel-list{display:grid;gap:4px}
+.list-item{width:100%;display:flex;align-items:center;gap:8px;min-height:37px;text-align:left;padding:6px 8px;border:1px solid transparent;background:transparent;border-radius:7px}
+.list-item:hover,.list-item.active{background:var(--accent-soft);border-color:var(--border)}
+.list-item>span:first-child{flex:1}
+.list-item .leader{display:block;height:3px;background:var(--project);width:100%;max-width:57px;border-radius:4px}
+.list-item small{white-space:nowrap}
+.list-item small.num{font:600 12px var(--font-mono)}
+.list-item .arrow{color:var(--accent);font-size:16px}
+.list-title{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.data-note{font-size:11px;color:var(--muted);line-height:1.6}
+.entry-card{padding:11px;border:1px solid var(--border);border-radius:8px;margin-top:6px}
+.entry-card p{font-size:12px;margin-top:4px;color:var(--muted)}
+.compact-select{border:1px solid var(--border);border-radius:6px;padding:5px 7px;background:var(--surface);max-width:100%}
+.key-values{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0}
+.key-values div{background:var(--bg);padding:7px 9px;border-radius:6px}
+.key-values dt{font-size:11px;color:var(--muted)}
+.key-values dd{font-size:12px;margin:1px 0 0;overflow-wrap:anywhere}
+.rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.rel-grid button{justify-content:space-between;min-width:0;font-size:12px}
+.chips{gap:5px;flex-wrap:wrap;margin-top:8px}
+.chip{background:var(--bg);border-radius:4px;padding:2px 6px;font-size:11px;color:var(--muted)}
+.warn{background:var(--warn-bg);color:var(--warn);padding:8px 10px;border-radius:6px;font-size:12px}
+.status{display:flex;align-items:center;justify-content:space-between;padding:0 17px;background:var(--surface);border-top:1px solid var(--border);font-size:11px;color:var(--muted);gap:10px}
+.status span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.area-outline{fill:color-mix(in srgb,var(--accent) 5%,transparent);stroke:var(--accent);stroke-opacity:.65;stroke-width:1.4;stroke-dasharray:6 4;vector-effect:non-scaling-stroke}
+.admin-shape,.feature{cursor:pointer;vector-effect:non-scaling-stroke;stroke-linejoin:round;fill-rule:evenodd}
+.admin-shape{fill:var(--bg);stroke:color-mix(in srgb,var(--accent) 34%,var(--border));stroke-width:1.25}
+.admin-shape.available{fill:color-mix(in srgb,var(--project) 17%,var(--surface));stroke:var(--project);stroke-width:1.7}
+.admin-shape:hover,.admin-shape.focused{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2}
+.admin-label,.place-label,.project-label,.scope-label{pointer-events:none;text-anchor:middle;font-family:var(--font-body);font-weight:650;paint-order:stroke;stroke:var(--bg);stroke-width:3.6px;stroke-linejoin:round;fill:var(--fg);font-size:13px}
+.admin-label.available{fill:var(--accent);font-size:15px}
+.place-label{font-size:11px;font-weight:500;fill:var(--muted)}
+.feature{fill:color-mix(in srgb,var(--sw) 26%,transparent);stroke:var(--sw);stroke-width:.7}
+.feature.parcel{fill:color-mix(in srgb,var(--sw) 5%,transparent);stroke-opacity:.63}
+.feature.building{fill:color-mix(in srgb,var(--sw) 13%,transparent);stroke-opacity:.60;stroke-width:.55}
+.feature.plan{fill:color-mix(in srgb,var(--sw) 12%,transparent);stroke-opacity:.73;stroke-dasharray:3 2}
+.feature.project{--sw:var(--project);fill:color-mix(in srgb,var(--sw) 35%,transparent);stroke-width:1.4}
+.feature.is-active:hover{stroke-width:2.8;fill:color-mix(in srgb,var(--sw) 48%,transparent)}
+.feature.is-related{stroke-opacity:1;stroke-width:1.45}
+.feature.is-chosen{fill:color-mix(in srgb,var(--sw) 53%,transparent);stroke:var(--selected);stroke-width:2.8;stroke-dasharray:none;stroke-opacity:1}
+.project-label{font-size:12px;fill:var(--selected);stroke-width:3.4px}
+.pin-group{cursor:pointer}
+.pin-group rect,.pin-group circle{fill:var(--accent);stroke:var(--surface);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.pin-group text{pointer-events:none;fill:var(--surface);font-family:var(--font-body);font-size:12px;font-weight:650;text-anchor:middle}
+.scope-ring{fill:color-mix(in srgb,var(--neighbor) 12%,transparent);stroke:var(--neighbor);stroke-width:2;stroke-dasharray:5 4;vector-effect:non-scaling-stroke;pointer-events:none}
+.scope-label{fill:var(--neighbor);font-size:12px}
+.sample-marker{fill:var(--surface);stroke:var(--neighbor);stroke-width:2;vector-effect:non-scaling-stroke;pointer-events:none}
+.drawer{position:fixed;z-index:6;inset:auto 15px 42px;height:min(39vh,410px);min-height:275px;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;background:var(--surface);border:1px solid var(--border);border-radius:11px;box-shadow:0 14px 60px rgba(22,49,38,.24);overflow:hidden}
+.drawer.max{inset:67px 16px 42px;height:auto}
+.drawer-head{padding:10px 13px;display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.drawer-head h2{font-size:17px;margin-right:4px}
+.drawer-tools{padding:6px 12px;display:flex;justify-content:space-between;align-items:center;gap:7px;border-bottom:1px solid var(--border)}
+.drawer-tools .btn{min-height:32px;font-size:12px}
+.table-scroll{overflow:auto;min-height:0}
+table{border-collapse:separate;border-spacing:0;width:max-content;min-width:100%;font-size:12px}
+th,td{max-width:270px;min-width:116px;padding:7px 10px;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border-bottom:1px solid var(--border);border-right:1px solid var(--border)}
+thead th{position:sticky;top:0;z-index:2;color:var(--muted);background:var(--bg);font-weight:650}
+tbody td:first-child,thead th:first-child{position:sticky;left:0;z-index:1;min-width:134px;background:var(--surface)}
+thead th:first-child{z-index:3;background:var(--bg)}
+tbody tr.selected td{background:var(--accent-soft)}
+tbody tr:hover:not(.selected) td{background:var(--bg)}
+.id-button{padding:1px 0;border:0;background:transparent;color:var(--accent);font:650 12px var(--font-mono)}
+td input{min-width:120px;max-width:245px;padding:4px 6px;border:1px solid var(--accent);border-radius:4px;background:var(--surface)}
+.drawer-foot{padding:5px 12px;border-top:1px solid var(--border);display:flex;gap:8px;align-items:center;justify-content:space-between;min-height:32px}
+.toast{position:fixed;z-index:8;bottom:41px;left:50%;transform:translateX(-50%);padding:7px 14px;background:var(--selected);color:var(--surface);border-radius:7px;box-shadow:var(--shadow)}
+.toast.on-table{bottom:auto;top:10px}
+dialog{width:min(440px,calc(100vw - 30px));border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:var(--shadow);color:var(--fg)}
+dialog::backdrop{background:rgba(22,49,38,.34)}
+dialog p{margin:7px 0 15px;color:var(--muted)}
+dialog .actions{justify-content:flex-end}
+@media(max-width:1100px){.workspace{grid-template-columns:minmax(0,1fr) 326px}.panel-head,.panel-block{padding-inline:13px}}
+@media(max-width:760px){body{overflow:auto}.shell{height:auto;min-height:100%;grid-template-rows:48px auto auto auto}.workspace-head,.topnav{padding-inline:12px}.workspace-head{padding-block:8px}.workspace{display:flex;flex-direction:column}.map-frame{height:56vh;min-height:360px}.inspector{border-left:0;border-top:1px solid var(--border)}.brand small,.workspace-label,.locator,.drawer-head small{display:none}.drawer{inset:auto 6px 9px;height:48vh}.drawer.max{inset:53px 6px 9px}.drawer-tools{flex-wrap:wrap}.legend-items{gap:5px 9px}.status{height:27px}.panel-head{padding-top:13px}}
+:root{
+ --bg:#f2f7f8;--surface:#fff;--fg:#17343d;--muted:#506e77;--border:#d4e4e7;
+ --accent:#176c80;--accent-soft:#e2f2f4;--map:#e7eef0;--water:#dae9ed;--project:#1b8396;
+ --parcel:#697c96;--building:#916f4e;--plan:#856a98;--selected:#063d4e;--neighbor:#216d9c;
+ --shadow:0 8px 28px rgba(18,54,69,.13);--left-size:300px;--ai-size:334px;
+}
+[hidden]{display:none!important}
+.shell{grid-template-rows:55px auto 46px minmax(0,1fr) 26px}
+.main-nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 16px;min-width:0}
+.module-nav,.nav-group{display:flex;align-items:center;gap:5px}
+.module-nav{min-height:46px}
+.nav-group+.nav-group{padding-left:8px;margin-left:6px;border-left:1px solid var(--border)}
+.nav-label{display:none}
+.module-button{display:flex;align-items:center;gap:7px;white-space:nowrap;border:0;border-radius:7px;background:transparent;padding:8px 10px;min-height:36px;color:var(--muted);font-weight:650}
+.module-button:hover,.module-button[aria-current=page]{background:var(--accent-soft);color:var(--accent)}
+.module-icon{display:block;width:17px;height:17px}
+.variant-link{color:inherit;text-decoration:none;font-size:12px}
+.variant-link:hover{text-decoration:underline}
+.role-button{font-size:12px;min-height:32px}
+.workspace{min-width:0;display:grid;grid-template-columns:var(--left-size) minmax(0,1fr) var(--ai-size)}
+.inspector{border-left:0;border-right:1px solid var(--border)}
+.module-page{grid-column:1/3;overflow:auto;min-width:0;min-height:0;padding:22px 26px}
+.module-page h1{margin-bottom:8px}
+.module-page h2{font-size:16px}
+.ai-panel{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto;min-height:0;min-width:0;background:var(--surface);border-left:1px solid var(--border)}
+.ai-head{display:flex;justify-content:space-between;align-items:center;padding:12px 15px;border-bottom:1px solid var(--border)}
+.ai-head h2{font-size:17px}
+.ai-head small{font-size:11px}
+.ai-context{padding:7px 13px;border-bottom:1px solid var(--border);background:var(--bg);font-size:12px;overflow-wrap:anywhere}
+.ai-context strong{color:var(--accent)}
+.ai-feed{min-height:0;overflow:auto;padding:13px;display:flex;flex-direction:column;gap:11px}
+.ai-message{padding:10px 11px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-size:13px;overflow-wrap:anywhere}
+.ai-message.user{background:var(--accent-soft);border-color:transparent;align-self:flex-end}
+.ai-message small{display:block;margin-bottom:4px}
+.ai-actions,.ai-prompts{display:flex;align-items:center;flex-wrap:wrap;gap:5px}
+.ai-actions{margin-top:7px}
+.ai-actions .btn,.ai-prompts .btn{min-height:30px;white-space:normal;padding:4px 7px;font-size:11px}
+.ai-prompts{padding:6px 10px}
+.ai-compose{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:7px;padding:10px;border-top:1px solid var(--border)}
+.ai-compose textarea,.record-form input,.search-input{min-width:0;width:100%;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--fg);padding:7px 9px;font:inherit}
+.ai-compose textarea{resize:vertical;max-height:118px}
+.workspace-label{white-space:nowrap}
+.actions,.section-nav,.module-toolbar{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.module-toolbar{margin:12px 0}
+.choice-label{display:block;margin:6px 0 4px;font-size:12px;color:var(--muted)}
+.summary-stat,.analysis-result{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+.summary-stat strong,.analysis-result strong{font-variant-numeric:tabular-nums}
+.entry-card .btn{margin-top:6px}
+.workspace[data-mode=analysis] #map-tools [data-action=table-open],.workspace[data-mode=partners] #map-tools [data-action=table-open]{display:none}
+.status{border-radius:0}
+.drawer{right:calc(var(--ai-size) + 10px);min-width:0;min-height:260px}
+.drawer.max{right:calc(var(--ai-size) + 10px)}
+.drawer .actions{flex-wrap:nowrap}
+.record-form{display:grid;gap:8px}
+.record-form label{display:grid;gap:2px;font-size:12px}
+.record-form p{margin:0}
+.module-cards{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(min(248px,100%),1fr))}
+.module-cards .entry-card{background:var(--surface)}
+.login-screen{position:fixed;inset:0;display:grid;place-items:center;padding:16px;background:radial-gradient(ellipse at 20% 20%,var(--surface),var(--map) 70%)}
+.login-card{width:min(380px,100%);display:grid;gap:12px;padding:26px;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow)}
+.login-card .brand{margin-bottom:4px}
+.login-card h1{margin-bottom:8px}
+.login-card label{font-size:12px;color:var(--muted)}
+.login-card .btn{margin-top:4px}
+.map-muted{opacity:.36}
+.context-highlight{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2}
+@media(max-width:1200px){:root{--left-size:258px;--ai-size:298px}}
+@media(max-width:880px){
+ body{overflow:auto}
+ .shell{height:auto;min-height:100%;grid-template-rows:48px auto auto auto 26px}
+ .workspace{display:grid;grid-template-columns:minmax(0,1fr)}
+ .module-page{grid-column:auto;padding:15px}
+ .map-frame{height:59vh;min-height:335px;grid-row:1}
+ .inspector{border-right:0;border-top:1px solid var(--border)}
+ .ai-panel{min-height:425px;height:58vh;border-left:0;border-top:1px solid var(--border)}
+ .main-nav{overflow:auto}
+ .workspace-head,.topnav{padding-inline:12px}.workspace-head{padding-block:6px}
+ .drawer,.drawer.max{right:7px;left:7px}
+ .drawer-tools .actions{flex-wrap:wrap}
+ .project-metrics{max-width:540px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+:root{
+  --bg:#050d39;--surface:#071742;--fg:#f0f6ff;--muted:#9fbade;--border:#1b5292;
+  --accent:#24d7f2;--accent-soft:#112e68;--map:#071044;--water:#091943;
+  --project:#33d5ed;--parcel:#6c9ed9;--building:#c6a478;--plan:#9c8bd4;
+  --selected:#c1f6ff;--neighbor:#45caff;--warn:#ffe2a0;--warn-bg:#253453;
+  --screen-top:#0b1557;--screen-bottom:#071040;--mast-glow:#1b55ed;--edge:#0c66b2;
+  --chart-line:#5e88bb;--chart-fill:#3e73bb;--city-fill:#123675;--city-stroke:#76b9fb;
+  --side-nav:#174ab5;--glow:#00ddfa;--radius:1px;--shadow:0 4px 15px #0006;
+}
+html{color-scheme:dark}
+body{font-family:"Microsoft YaHei UI","PingFang SC",sans-serif}
+.shell{min-height:0}
+.topnav{height:100%;position:relative;isolation:isolate;justify-content:center;overflow:hidden;padding-inline:16px;background:linear-gradient(180deg,var(--mast-glow),var(--screen-top) 45%, transparent 97%);border:0}
+.topnav .brand{position:relative;z-index:2;font-size:clamp(20px,2.02vw,39px);font-weight:900;letter-spacing:.16em;color:#fff;text-shadow:0 2px 4px #062359;margin-top:-.14em}
+.topnav .brand-mark{display:none}
+.topnav .top-actions{position:absolute;right:15px;top:5px;z-index:3;font-size:10px;gap:5px}
+.topnav .top-actions .btn{min-height:24px;padding:1px 6px;background:color-mix(in srgb,var(--screen-top) 91%,transparent);font-size:10px}
+.topnav .variant-link{font-size:10px;color:var(--muted)}
+.mast-ornament{position:absolute;inset:0;pointer-events:none}
+.mast-ornament::before,.mast-ornament::after{content:"";position:absolute;left:0;right:0;top:22%;height:69%;clip-path:polygon(0 23%,26.5% 23%,28.4% 0,71.6% 0,73.5% 23%,100% 23%,100% 65%,93% 65%,91.7% 42%,71.9% 42%,69.4% 100%,30.6% 100%,28.1% 42%,8.3% 42%,7% 65%,0 65%);background:linear-gradient(90deg,var(--edge),var(--mast-glow) 33%,var(--glow) 50%,var(--mast-glow) 67%,var(--edge))}
+.mast-ornament::after{top:calc(22% + 4px);height:calc(69% - 7px);opacity:.98;background:linear-gradient(90deg,var(--screen-top) 23%,var(--mast-glow) 38%,var(--side-nav) 50%,var(--mast-glow) 62%,var(--screen-top) 77%)}
+.mast-accents{position:absolute;inset:auto 34px 32%;height:8px;display:flex;justify-content:space-between;pointer-events:none;z-index:1}
+.mast-accents i{display:block;width:42px;height:8px;background:repeating-linear-gradient(90deg,var(--glow) 0 8px,transparent 8px 16px,var(--mast-glow) 16px 24px,transparent 24px 32px,var(--edge) 32px 40px,transparent 40px 48px)}
+.mast-slash{position:absolute;width:39%;height:24%;top:56%;left:30.5%;z-index:1;display:flex;justify-content:space-between;pointer-events:none}
+.mast-slash i{display:block;width:46px;background:repeating-linear-gradient(90deg,var(--glow) 0 7px,transparent 7px 12px);transform:skew(39deg);opacity:.82}
+.mast-slash i+i{transform:skew(-39deg)}
+.board-nav,.board-grid{min-width:0}
+body[data-mode=overview] .shell{grid-template-rows:clamp(60px,8.9vh,105px) clamp(62px,10.7vh,122px) minmax(0,1fr) 19px;background:linear-gradient(175deg,var(--screen-top),var(--screen-bottom) 79%,var(--screen-top))}
+body[data-mode=overview] #main-nav,body[data-mode=overview] .workspace-head{display:none}
+body[data-mode=overview] .workspace{display:block;position:relative}
+.board-nav{position:relative;display:grid;grid-template-columns:26.5% minmax(0,1fr) 26.5%;gap:9px;padding:clamp(15px,2.2vh,27px) clamp(15px,1.15vw,24px) 0;z-index:4;align-content:start}
+.board-nav .left-nav,.board-nav .right-nav{display:grid;gap:5px}
+.board-nav .left-nav{grid-template-columns:repeat(3,minmax(0,1fr))}
+.board-nav .right-nav{grid-template-columns:repeat(4,minmax(0,1fr));grid-column:3}
+.board-nav button{min-width:0;border:1px solid color-mix(in srgb,var(--side-nav) 76%,var(--edge));height:clamp(33px,4.75vh,52px);padding:3px 2px;background:linear-gradient(var(--side-nav),color-mix(in srgb,var(--side-nav) 35%,var(--screen-top)) 62%,var(--screen-top));box-shadow:inset 0 0 7px #3072ff6a;color:color-mix(in srgb,var(--city-stroke) 88%,#c6faff);font-size:clamp(11px,1vw,18px);font-weight:700;white-space:nowrap}
+.board-nav button:hover,.board-nav button[aria-pressed=true]{color:#e0fdff;border-color:var(--glow);box-shadow:inset 0 -1px 8px color-mix(in srgb,var(--glow) 30%,transparent)}
+.board-grid{height:100%;width:100%;position:relative;display:grid;grid-template-columns:26.5% minmax(0,1fr) 26.5%;gap:clamp(7px,.9vw,19px);padding:0 clamp(15px,1.15vw,24px) 10px}
+.board-left,.board-right{min-height:0;min-width:0;display:grid;gap:clamp(6px,1.2vh,14px)}
+.board-left{grid-template-rows:minmax(0,37fr) minmax(0,63fr)}
+.board-right{grid-template-rows:minmax(0,37fr) minmax(0,26fr) minmax(0,37fr)}
+.board-center{min-width:0;min-height:0;display:grid;grid-template-rows:clamp(67px,10.5vh,110px) minmax(0,1fr);margin-top:calc(-1 * clamp(46px,8.35vh,88px))}
+.board-kpis{min-width:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(5px,2.75vw,54px);padding:0 3.5% .6vh;align-items:stretch}
+.board-kpi{display:grid;justify-items:center;align-content:center;min-width:0;position:relative;background:linear-gradient(180deg,color-mix(in srgb,var(--city-fill) 68%,transparent),#0d205f55);border-top:1px solid var(--edge);border-bottom:5px solid #1857a568}
+.board-kpi::after{content:"";width:10px;height:2px;position:absolute;right:0;top:-1px;background:var(--glow)}
+.board-kpi small{color:color-mix(in srgb,var(--city-stroke) 70%,var(--accent));font-size:clamp(12px,1.6vw,30px);white-space:nowrap;font-weight:500}
+.board-kpi strong{font-size:clamp(20px,2.55vw,47px);font-weight:760;line-height:1.11;color:#fafbff;font-variant-numeric:tabular-nums}
+.board-kpi strong em{font-style:normal;font-size:.65em;margin-left:.09em}
+.board-card{display:flex;flex-direction:column;min-height:0;min-width:0;overflow:hidden;padding:clamp(8px,1.15vh,14px) clamp(9px,.85vw,17px);border:1px solid var(--edge);background:color-mix(in srgb,var(--surface) 95%,transparent);box-shadow:inset 0 0 18px #107dff20}
+.panel-title{min-width:0;font-size:clamp(12px,1.04vw,19px);font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0 0 6px;display:flex;gap:6px;align-items:center}
+.panel-title::before{width:9px;height:.95em;flex:none;content:"";background:var(--glow);clip-path:polygon(0 0,60% 0,100% 50%,60% 100%,0 100%)}
+.board-chart{position:relative;flex:1;min-height:0;min-width:0;display:grid;align-items:stretch}
+.bar-chart{display:grid;grid-template-columns:31px minmax(0,1fr);grid-template-rows:minmax(0,1fr) 28px;margin:5px 1px 0}
+.bar-axis{display:flex;flex-direction:column;justify-content:space-between;text-align:right;padding-right:7px;font:10px/1 var(--font-mono);color:var(--muted)}
+.bar-grid{position:relative;display:grid;grid-auto-rows:minmax(0,1fr);align-items:stretch;border-bottom:1px solid var(--chart-line);background:repeating-linear-gradient(to top,var(--chart-line) 0 1px,transparent 1px 16.66%);gap:0;min-width:0}
+.bar-cell{position:relative;display:block;min-width:0;height:100%;padding:0;border:0;background:none}
+.bar-cell:hover{background:#7ec9ff22}
+.bar{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:clamp(3px,48%,14px);height:var(--h);background:linear-gradient(to top,#9acbff45,var(--chart-fill) 38%,var(--chart-fill));box-shadow:0 0 4px #3bb2ff35}
+.bar-labels{grid-column:2;display:grid;margin:0;text-align:center;align-content:start;font-size:clamp(8px,.68vw,12px);color:var(--muted);padding-top:3px}
+.bar-labels span{max-width:2.1em;line-height:1.3;margin:auto;word-break:break-all}
+.horizontal-chart{display:flex;flex-direction:column;justify-content:space-around;gap:5px;min-height:0;padding:3% 0}
+.h-row{display:grid;grid-template-columns:4.6em minmax(0,1fr) 3.1em;gap:6px;align-items:center;padding:1px 0;font-size:clamp(9px,.75vw,14px)}
+.h-row span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted)}
+.h-row strong{color:var(--fg);font:600 12px/1 var(--font-mono);text-align:right}
+.h-track{width:100%;height:clamp(7px,1.25vh,14px);border-left:1px solid var(--chart-line);background:repeating-linear-gradient(to right,#64affb22 0 1px,transparent 1px 25%)}
+.h-fill{height:100%;width:var(--w);background:linear-gradient(90deg,var(--chart-fill),var(--glow))}
+.board-left .h-track{height:clamp(14px,2.3vh,26px)}
+.board-left .h-fill{background:linear-gradient(180deg,#235ea9,#163b83);border-radius:0 4px 4px 0;box-shadow:inset 0 0 8px color-mix(in srgb,var(--glow) 31%,transparent)}
+.donut-chart{display:grid;grid-template-columns:minmax(0,1.16fr) minmax(0,1fr);align-items:center;min-height:0;gap:10px}
+.donut{width:min(95%,160px);aspect-ratio:1;margin:auto;border-radius:50%;position:relative;background:var(--ring);border:3px solid #247eba84;box-shadow:inset 0 0 0 4px var(--surface);display:grid;place-items:center}
+.donut::before{position:absolute;inset:19%;content:"";border-radius:50%;background:var(--surface);box-shadow:0 0 0 4px var(--screen-bottom),0 0 0 8px #183f8877}
+.donut strong{position:relative;font-size:clamp(14px,1.5vw,27px)}
+.donut-key{display:grid;gap:6px;font-size:clamp(9px,.71vw,13px)}
+.donut-key div{display:flex;gap:5px;align-items:center;min-width:0}
+.donut-key i{width:7px;height:7px;border-radius:50%;background:var(--segment);flex:none}
+.donut-key strong{margin-left:auto}
+.screen-meta{position:absolute;z-index:2;display:flex;flex-wrap:wrap;justify-content:center;gap:5px 9px;color:var(--muted);font-size:10px;top:6px;left:0;right:0;pointer-events:none}
+.screen-meta button{color:inherit;background:#081b42d0;border:1px solid var(--edge);border-radius:2px;padding:2px 5px;pointer-events:auto}
+.board-grid .map-frame{background:none;border:0;height:auto}
+.board-grid .map-frame svg#map{inset:9px 1px 3px;width:calc(100% - 2px);height:calc(100% - 12px)}
+.board-grid .map-frame #map>rect{display:none}
+.board-grid .map-tools,.board-grid .locator,.board-grid .legend,.board-grid .scale{display:none}
+.board-grid .map-controls{right:0;background:#081a42be;bottom:6px;border-color:#2773ae40;opacity:.64}
+.board-grid .map-controls:hover{opacity:1}
+.board-grid .map-controls button{width:26px;height:26px;background:transparent;border-color:#2773ae40}
+.board-grid .admin-shape{fill:var(--city-fill);stroke:var(--city-stroke);stroke-width:.9;stroke-dasharray:2.2 1.3}
+.board-grid .admin-shape.available{fill:#0a758d;stroke:var(--accent);stroke-width:1.3;stroke-dasharray:none}
+.board-grid .admin-shape:hover,.board-grid .admin-shape.focused{fill:color-mix(in srgb,var(--city-fill) 72%,var(--accent));stroke:var(--glow)}
+.board-grid .admin-label{fill:#f6fbff;stroke:var(--city-fill);stroke-width:2.8;font-weight:700;font-size:14px}
+.board-grid .admin-label.available{font-size:15.5px;stroke:#0a758d}
+.board-grid .map-count{fill:#dff0ff;stroke:var(--city-fill);stroke-width:2.3;font-size:12px}
+.map-beacon{cursor:pointer;filter:drop-shadow(0 0 5px #008ffe88)}
+.map-beacon ellipse{fill:#0953b8;fill-opacity:.55;stroke:var(--glow);stroke-width:.75}
+.map-beacon path{fill:url(#beacon-light);stroke:#12bbed;stroke-width:.55}
+.board-grid .pin-group rect,.board-grid .pin-group circle{fill:#106b9b;stroke:var(--glow)}
+.board-grid .place-label{fill:#c2deff;stroke:var(--screen-bottom)}
+.board-grid .layer-pop{left:12px;top:31px;z-index:9}
+.board-grid .board-ai-container{position:absolute;right:clamp(15px,1.15vw,24px);top:0;bottom:10px;width:calc((100% - 2 * clamp(15px,1.15vw,24px) - 2 * clamp(7px,.9vw,19px)) * .265);z-index:4;box-shadow:0 7px 32px #0009}
+.board-ai-container .ai-panel{height:100%;border:1px solid var(--edge)}
+.board-ai-container .ai-head{gap:8px}
+.board-grid .board-region-picker{position:absolute;z-index:8;top:0;left:clamp(15px,1.15vw,24px);width:calc((100% - 2 * clamp(15px,1.15vw,24px) - 2 * clamp(7px,.9vw,19px)) * .265);max-height:76%;overflow:auto;background:var(--surface);border:1px solid var(--edge);box-shadow:0 6px 22px #000a;padding:9px}
+.board-region-picker .row-between{gap:5px;display:flex;justify-content:space-between}
+.board-region-picker .panel-head,.board-region-picker .panel-block{padding:8px;border-color:var(--border)}
+.board-region-picker .panel-head h1{font-size:19px}
+.board-region-picker label{display:grid;gap:4px;margin-bottom:7px}
+.board-region-picker select{width:100%;min-height:30px}
+.board-region-picker .list-item{min-height:28px}
+.board-source{position:absolute;bottom:0;right:0;left:0;padding:0 4px;color:var(--muted);font-size:10px;pointer-events:none}
+body[data-mode=overview] .status{background:transparent;border:0;padding-bottom:3px}
+.board-card .warn,.ai-message,.login-card{border-radius:2px}
+.login-card{background:var(--surface);border-color:var(--edge)}
+.btn.primary{color:#031637}
+@media(max-width:900px){
+  .board-grid{gap:5px;padding-inline:8px}.board-nav{gap:5px;padding-inline:8px}
+  .board-card{padding:7px 6px}.board-nav .left-nav,.board-nav .right-nav{gap:3px}
+  .board-grid .board-region-picker,.board-grid .board-ai-container{width:34%;min-width:224px}
+  .bar-axis{display:none}.bar-chart{grid-template-columns:3px minmax(0,1fr)}
+  .h-row{grid-template-columns:3.1em minmax(0,1fr) auto}
+  body[data-mode=overview] .shell{height:100vh;min-height:520px}
+}
+@media(max-width:620px){
+  body[data-mode=overview] .shell{height:auto;min-height:100vh;grid-template-rows:60px auto auto 20px}
+  .topnav .brand{font-size:16px;letter-spacing:.08em}.mast-slash,.mast-accents{display:none}
+  .topnav .top-actions{top:0;right:4px;line-height:1}
+  .board-nav{grid-template-columns:1fr;gap:4px;padding-top:5px;padding-bottom:5px}
+  .board-nav .right-nav{grid-column:1}
+  .board-grid{grid-template-columns:minmax(0,1fr);height:auto}
+  .board-center{grid-row:1;grid-template-rows:66px minmax(290px,47vh);margin-top:0}
+  .board-left,.board-right{grid-template-rows:none;gap:5px}
+  .board-card{min-height:142px}
+  .board-grid .board-region-picker{top:65px;width:calc(100% - 16px);left:8px;max-height:350px}
+  .board-grid .board-ai-container{bottom:auto;top:66px;right:8px;width:calc(100% - 16px);height:min(490px,70vh)}
+}
+
+/* A · 原稿蓝。沿用共享大屏的几何布局，校准底色、仪表和地图。 */
+body[data-variant="a"] {
+  color-scheme: dark;
+  --bg: #070e49;
+  --surface: #031436;
+  --fg: #f0f5ff;
+  --muted: #a7bfdf;
+  --border: #13598e;
+  --accent: #55ebf6;
+  --accent-soft: #103865;
+  --map: #060f42;
+  --water: #0c1c55;
+  --project: #22bfd5;
+  --parcel: #86acd9;
+  --building: #edc36a;
+  --plan: #a5a4fd;
+  --selected: #8df1ff;
+  --neighbor: #68baff;
+  --warn: #ffdd88;
+  --warn-bg: #393021;
+  --chart: #3284de;
+  --chart-a: #5a9cec;
+  --chart-b: #1c67bf;
+  --chart-track: #19477b;
+  --chart-highlight: #61e9fb;
+  --screen-top: #090f57;
+  --screen-bottom: #060e37;
+  --mast-glow: #1b50cf;
+  --edge: #146dbc;
+  --chart-line: #5b86b8;
+  --chart-fill: #508ce2;
+  --city-fill: #152f6a;
+  --city-stroke: #a5c9ef;
+  --side-nav: #1745a3;
+  --glow: #1771ca;
+  --shadow: 0 6px 20px #00092266;
+  --radius: 0px;
+}
+
+body[data-variant="a"] .topnav {
+  background: linear-gradient(180deg, #123d99 0%, #1546b5 32%, #143a9f 61%, #0a1b6e 100%);
+  box-shadow: inset 0 2px #3974d8, inset 0 -2px #0c54a6;
+}
+
+body[data-variant="a"] .topnav .brand {
+  color: #f8fbff;
+  text-shadow: 1px 3px #18377d;
+}
+
+body[data-variant="a"] .board-nav button {
+  border-color: #104fac;
+  border-radius: 0;
+  background: linear-gradient(180deg, #2457b2, #102584 54%, #0a125c);
+  color: #9abfec;
+}
+
+body[data-variant="a"] .board-nav button:hover,
+body[data-variant="a"] .board-nav button[aria-current="page"],
+body[data-variant="a"] .board-nav button[aria-pressed="true"] {
+  border-color: #2389cb;
+  background: linear-gradient(180deg, #2b65c9, #133f9a 55%, #0b2178);
+  color: #83f6ff;
+  box-shadow: inset 0 -2px #187fd2;
+}
+
+body[data-variant="a"] .board-card {
+  background: #031337;
+  border: 1px solid #145a8f;
+  border-radius: 0;
+  box-shadow: inset 0 0 19px #0d65932b;
+}
+
+body[data-variant="a"] .board-card .panel-title {
+  color: #f2f7ff;
+  text-shadow: 0 1px #102754;
+}
+
+body[data-variant="a"] .board-kpi {
+  border-radius: 0;
+  background: linear-gradient(180deg, #0e2c65 0%, #0b2357 100%);
+  border-bottom-color: #165396;
+}
+
+body[data-variant="a"] .board-kpi strong {
+  color: #f5f9ff;
+}
+
+body[data-variant="a"] .map-frame {
+  background: var(--map);
+  border-radius: 0;
+}
+
+body[data-variant="a"] .admin-shape {
+  fill: #152f6a;
+  stroke: #a5c9ef;
+  stroke-opacity: .86;
+}
+
+body[data-variant="a"] .admin-shape.available,
+body[data-variant="a"] .admin-shape.focused {
+  fill: #0c718c;
+  stroke: #42dcea;
+  stroke-opacity: 1;
+}
+
+body[data-variant="a"] .admin-shape:not(.available):not(.focused):hover {
+  fill: #244a87;
+  stroke: #ebf8ff;
+}
+
+body[data-variant="a"] .admin-label,
+body[data-variant="a"] .place-label,
+body[data-variant="a"] .project-label,
+body[data-variant="a"] .scope-label {
+  stroke: #102759;
+}
+
+body[data-variant="a"] .admin-label.available {
+  fill: #f0fcff;
+}
+
+body[data-variant="a"] .pin-group rect,
+body[data-variant="a"] .pin-group circle {
+  fill: #115eaa;
+  stroke: #71eaff;
+}
+
+body[data-variant="a"] .pin-group text {
+  fill: #f4fbff;
+}
+
+body[data-variant="a"] .feature.project {
+  fill: #05a9cc58;
+}
+
+body[data-variant="a"] .ai-panel,
+body[data-variant="a"] .drawer {
+  border-color: #246a9e;
+}
+
+body[data-variant="a"] .ai-head,
+body[data-variant="a"] .drawer-head {
+  background: #0e2860;
+}
+
+body[data-variant="a"] .ai-message {
+  background: #0b2251;
+}
+
+body[data-variant="a"] .ai-message.user {
+  background: #15406e;
+}
+
+body[data-variant="a"] .btn.primary,
+body[data-variant="a"] .btn.primary:hover {
+  color: #042147;
+  background: #6de5fb;
+  border-color: #6de5fb;
+}
+
+body[data-variant="a"] .toast {
+  color: #061a39;
+}
+
+body[data-variant="a"] .login-screen {
+  background: radial-gradient(ellipse at 50% 35%, #183e87, #070e49 63%, #040d34);
+}
+
+body[data-variant="a"] .login-card {
+  background: #081943;
+  border: 1px solid #246a9e;
+  border-radius: 4px;
+}
+
+body[data-variant="a"] dialog {
+  background: var(--surface);
+}
+.a-missing {
+  align-self: start;
+  margin-top: 7px;
+  padding: 7px 8px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+  border-left: 2px solid var(--edge);
+}
+.a-scope-trail {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 5px;
+  color: var(--fg);
+}
+.a-data-tag {
+  align-self: center;
+  color: var(--muted);
+}
+.a-chart-note {
+  flex: none;
+  font-size: 11px;
+  color: var(--muted);
+}
+.a-coverage {
+  margin-top: 19px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+}
+.a-coverage h3 { color: var(--fg); margin-bottom: 5px; }
+.a-coverage .btn { min-height: 28px; margin-top: 9px; font-size: 12px; }
+.a-result-meta,.a-unlocated {
+  display: block;
+  margin-top: 2px;
+}
+#a-workspace-chooser {
+  width: min(460px,calc(100vw - 28px));
+  background: var(--surface);
+  border-color: var(--edge);
+}
+#a-workspace-chooser label {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--muted);
+}
+#a-workspace-results {
+  max-height: 230px;
+  margin-block: 10px;
+  overflow: auto;
+}
+#a-workspace-results .btn {
+  height: auto;
+  white-space: normal;
+}
+.board-grid .a-peek-shape { fill: var(--project); fill-opacity: .46; stroke-width: 1; }
+.board-grid .a-peek-shape:is(:hover,:focus-visible,.is-chosen) { fill-opacity: 1; stroke: var(--selected); }
+
+body[data-variant="a"] #app.shell {
+  grid-template-rows: clamp(60px,8.9vh,105px) clamp(62px,10.7vh,122px) minmax(0,1fr) 19px;
+  background: linear-gradient(176deg,var(--screen-top),var(--screen-bottom) 66%,var(--screen-top));
+}
+body[data-variant="a"] #main-nav,
+body[data-variant="a"] .workspace-head { display:none }
+body[data-variant="a"] .workspace { display:block; position:relative; min-height:0; height:100% }
+body[data-variant="a"] .status { background:transparent;border:0 }
+.detail-grid {
+  display:grid;
+  grid-template-columns: minmax(165px,20.2%) minmax(0,1fr) minmax(245px,27%);
+  gap:clamp(10px,2.18vw,38px);
+  width:100%; height:100%; min-height:0;
+  padding:0 clamp(15px,1.7vw,31px) 11px;
+}
+.detail-rail {
+  min-width:0; min-height:0; padding:1px; overflow:hidden;
+  background:linear-gradient(155deg,var(--edge),#2063ab22 37%,#14d9ff8a 91%);
+  clip-path:polygon(0 17px,17px 0,calc(100% - 17px) 0,100% 17px,100% 100%,0 100%);
+}
+.detail-rail .inspector {
+  height:100%; overflow:auto; padding:13px 12px;
+  border:0; background:linear-gradient(160deg,#081952,#070d32 94%);
+  clip-path:polygon(0 17px,17px 0,calc(100% - 17px) 0,100% 17px,100% 100%,0 100%);
+}
+.detail-rail-title { padding:4px 3px 8px }
+.detail-rail-title h1 { font-size:clamp(17px,1.27vw,24px); letter-spacing:0 }
+.detail-rail-title p { color:var(--muted); font-size:11px; line-height:1.4; margin-top:3px }
+.detail-block { margin:0 0 9px }
+.detail-block h2 {
+  font-size:13px; line-height:1.45; letter-spacing:0; margin:0 0 5px; padding:5px 8px;
+  background:linear-gradient(90deg,#39879d,var(--accent-soft) 48%,transparent); color:#e5f3ff;
+}
+.detail-block label:not(.detail-layer-row label) {
+  display:grid; gap:3px; margin:4px 0; color:var(--muted); font-size:11px;
+}
+.detail-rail .detail-block>.btn {
+  display:flex; justify-content:flex-start; white-space:normal; width:100%;
+  margin:4px 0; padding:4px 7px; min-height:28px; font-size:12px;
+}
+.detail-block .compact-select { width:100%; min-height:30px }
+.detail-block .actions { margin-top:6px }
+.detail-block .data-note { margin:4px 0 }
+.detail-rail .list-item {
+  min-height:28px; border-radius:1px; padding:4px 6px;
+  border:1px solid #22619a38; margin:3px 0; background:#112b5b93;
+}
+.detail-rail .list-item:hover,.detail-rail .list-item.active { background:#144886 }
+.detail-rail .list-item span { text-overflow:ellipsis; overflow:hidden; white-space:nowrap }
+.detail-rail .list-item small { font-size:10px }
+.detail-layer-row { display:flex; gap:4px; min-width:0; align-items:stretch; margin:4px 0; }
+.detail-layer-row label {
+  display:flex; align-items:center; gap:6px; flex:1; min-width:0; padding:4px 6px;
+  background:linear-gradient(90deg,#153e6c,#0c1947); color:var(--fg); font-size:12px;
+}
+.detail-layer-row label input { margin:1px; accent-color:#0eabd0 }
+.detail-layer-row label .swatch { flex:none }
+.detail-count {
+  flex:0 0 39px; min-width:0; text-align:center; background:#102654; color:var(--muted);
+  border:1px solid var(--edge); font-size:10px; padding:2px;
+}
+.detail-count[aria-pressed="true"] { color:#e6fbff; border-color:#40dff0; background:#175381 }
+.detail-main { min-width:0;min-height:0;display:grid;grid-template-rows:26px minmax(0,1fr);overflow:hidden }
+.detail-main-head {
+  display:flex; align-items:center; justify-content:space-between; gap:5px; padding:0 8px;
+  background:linear-gradient(90deg,#12396a 0%,transparent 80%); border-bottom:1px solid var(--edge);
+  font-size:12px; color:#d9ebff;
+}
+.detail-main-head span { text-overflow:ellipsis;overflow:hidden;white-space:nowrap }
+.detail-main-content { min-width:0;min-height:0;position:relative; }
+.detail-main-content .detail-map {
+  position:absolute;inset:0;width:100%;height:100%;min-height:0; overflow:hidden;
+  border:1px solid var(--edge); background:var(--map); box-shadow:inset 0 0 22px #0e77bb29;
+}
+.detail-main-content .detail-map .map-tools { top:7px;left:7px }
+body[data-page="layers"] .detail-map .map-tools,
+body[data-page="region"] .detail-map .map-tools { display:none }
+body[data-page="region"] .detail-map .screen-meta { top:5px }
+.detail-map .legend,.detail-map .locator,.detail-map .scale,.detail-map .map-controls {
+  border:1px solid var(--edge);background:#0a214ce8;box-shadow:none;
+}
+.detail-map .map-controls { right:9px;bottom:39px; }
+.detail-map .legend,.detail-map .scale { bottom:8px }
+.detail-main-content .module-page {
+  height:100%;padding:14px;overflow:auto;min-width:0;border:1px solid var(--edge);
+  background:linear-gradient(165deg,#071944,#071437);
+}
+.detail-main-content .module-page>h2 { font-size:clamp(19px,2vw,27px); margin-bottom:8px;color:#9aeafa; }
+.detail-main-content .module-cards { margin-top:9px }
+.detail-main-content .module-page .detail-block { margin-top:11px }
+.detail-right {
+  min-width:0;min-height:0;display:grid;grid-template-rows:minmax(0,1.16fr) minmax(0,1fr);
+  gap:clamp(7px,1.2vh,13px);padding-top:26px;
+}
+.detail-summary, .detail-analysis {
+  min-width:0;min-height:0;overflow:auto; background:linear-gradient(180deg,#061a47,#071641 96%);
+  border:1px solid var(--edge); box-shadow:inset 0 0 18px #2494f330;
+}
+.detail-summary { padding:10px 12px; }
+.detail-summary .panel-title { margin-bottom:7px; }
+.detail-summary>h3 {
+  color:#57ecf2;font-size:clamp(16px,1.44vw,25px);line-height:1.27;overflow-wrap:anywhere;
+}
+.detail-summary .detail-context { font-size:11px; margin:4px 0;color:var(--muted) }
+.detail-summary .data-note { margin:4px 0 }
+.detail-indicators { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 5px;margin:7px 0 8px }
+.detail-indicators>div { min-width:0;display:grid;text-align:center;justify-items:center;gap:2px;--disk:#30d8dd }
+.detail-indicators>div:nth-child(3n+2) { --disk:#66aef2 }
+.detail-indicators>div:nth-child(3n+3) { --disk:#e5c77e }
+.detail-indicators>div strong { max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:color-mix(in srgb,var(--disk) 55%,#fff);font-size:12px }
+.detail-indicators>div>span {
+  position:relative;width:clamp(31px,69%,85px);height:14px;border-radius:50%;
+  border:1px solid color-mix(in srgb,var(--disk) 70%,transparent);
+  background:radial-gradient(ellipse at 50% 30%,color-mix(in srgb,var(--disk) 72%,transparent),color-mix(in srgb,var(--disk) 30%,transparent));
+  box-shadow:0 3px 0 color-mix(in srgb,var(--disk) 46%,transparent),0 5px 0 color-mix(in srgb,var(--disk) 32%,transparent),0 0 10px color-mix(in srgb,var(--disk) 44%,transparent);
+  margin:2px 0 4px;
+}
+.detail-indicators small { font-size:10px;color:#c0d4f2;line-height:1.22 }
+.detail-table-links { display:flex;flex-wrap:wrap;gap:4px;margin:5px 0 }
+.detail-summary .btn { font-size:11px;min-height:26px;padding:3px 6px }
+.detail-summary .panel-head,.detail-summary .panel-block { padding:5px 0 }
+.detail-summary .panel-head h1,.detail-summary .panel-head h2 { font-size:18px; }
+.detail-analysis { overflow:hidden; }
+.detail-analysis .ai-panel { height:100%;border:0;background:transparent; }
+.detail-analysis .ai-head { padding:6px 8px; }
+.detail-analysis .ai-head h2 { font-size:13px; color:#e7f6ff; }
+.detail-analysis .ai-head h2::before { content:"▸";color:var(--glow);margin-right:5px; }
+.detail-analysis .ai-context,.detail-analysis .ai-feed,.detail-analysis .ai-prompts,.detail-analysis .ai-compose { padding:5px 7px; }
+.detail-analysis .ai-compose textarea { min-height:31px; }
+.detail-analysis .ai-message { padding:6px; }
+@media(max-width:1090px) {
+  .detail-grid { grid-template-columns:minmax(149px,21%) minmax(0,1fr) minmax(217px,27%);gap:10px;padding-inline:9px; }
+  .detail-rail .inspector{padding-inline:7px}
+}
+@media(max-width:760px) {
+  body[data-variant="a"] #app.shell { height:auto;min-height:100vh;grid-template-rows:60px auto auto 20px; }
+  .detail-grid { grid-template-columns:minmax(0,1fr);height:auto; }
+  .detail-main { grid-row:1;min-height:49vh }
+  .detail-right { padding-top:0;grid-template-rows:auto minmax(300px,39vh) }
+  .detail-rail .inspector { max-height:47vh }
+  .detail-summary{overflow:visible}
+}
+
+</style>
+</head>
+<body data-variant="a">
+<section class="login-screen" id="login" aria-label="原型身份选择" data-od-id="login">
+  <div class="login-card"><div class="brand"><span class="brand-mark">城</span> Urban Renewal Lab</div>
+  <h1>城市更新工作台</h1><label for="role-choice">演示身份</label>
+  <select class="compact-select" id="role-choice"><option value="editor">业务人员</option><option value="government">政府</option><option value="external">外部</option><option value="admin">管理员</option></select>
+  <p class="data-note">地名、记录、指标和图形均为虚构。选择身份体验工作台。</p><button class="btn primary" id="login-enter">进入工作台</button></div></section><div class="shell" id="app" hidden>
+  <header class="topnav" data-od-id="app-header"><div class="mast-ornament" aria-hidden="true"></div>
+    <div class="brand"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55"><path d="m3 7 9-4 9 4-9 4-9-4Zm0 5 9 4 9-4M3 17l9 4 9-4"/></svg></span><span>城市更新智慧平台 · 公开演示</span></div>
+    <div class="top-actions"><button class="btn role-button" data-action="switch-role" id="role-button"></button></div>
+  </header>
+  <nav class="board-nav" id="board-nav" aria-label="大屏导航" hidden></nav><nav id="main-nav" class="main-nav" aria-label="工作台模块" data-od-id="module-navigation"><div id="module-nav" class="module-nav"></div></nav><nav class="workspace-head" aria-label="区域路径" data-od-id="regional-navigation"><div class="crumbs" id="crumbs"></div><div class="workspace-label">地图工作台</div></nav>
+  <main class="workspace" data-od-id="workspace">
+        <aside id="inspector" class="inspector" aria-label="区域概览或对象详情" data-od-id="context-inspector"></aside><section id="map-frame" class="map-frame" aria-label="项目地图" data-od-id="interactive-map">
+      <svg id="map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" aria-label="区域及项目图斑地图"></svg>
+      <div id="map-tools" class="map-tools"></div>
+      <div id="layer-pop" class="layer-pop" hidden></div>
+      <div id="locator" class="locator"></div>
+      <div class="map-controls" aria-label="地图视口">
+        <button class="btn icon-btn" data-action="zoom-in" aria-label="放大地图">＋</button>
+        <button class="btn icon-btn" data-action="zoom-out" aria-label="缩小地图">−</button>
+        <button class="btn icon-btn" data-action="fit" aria-label="回到当前区域">⌖</button>
+      </div>
+      <div id="legend" class="legend"></div><div id="scale" class="scale"></div>
+    </section>
+
+<section id="module-page" class="module-page" data-od-id="module-content" hidden></section><aside id="ai-panel" class="ai-panel" aria-label="AI 问答" data-od-id="ai">
+  <header class="ai-head"><div><h2>AI 问答</h2><small>交互演示</small></div><button class="btn icon-btn" data-action="ai-clear" aria-label="清空问答" title="清空问答">↺</button></header>
+  <div class="ai-context" id="ai-context"></div><div class="ai-feed" id="ai-feed" aria-live="polite"></div>
+  <div class="ai-prompts" id="ai-prompts"></div>
+  <form class="ai-compose" id="ai-compose"><textarea id="ai-input" aria-label="输入问题" rows="2" placeholder="询问当前区域或对象…"></textarea><button class="btn primary" type="submit">发送</button></form>
+</aside></main>
+  <footer class="status" data-od-id="status-bar"><span id="status-text"></span><span>本机原型 · 更改仅存于当前浏览器</span></footer>
+</div>
+<section id="drawer" class="drawer" role="region" aria-label="独立属性表窗口" data-od-id="attribute-window" hidden></section>
+<dialog id="change-dialog" aria-labelledby="dialog-title">
+  <h2 id="dialog-title">本行还有待保存的更改</h2>
+  <p>保存后继续，或放弃本次编辑。你也可以留在当前行。</p>
+  <div class="actions">
+    <button class="btn" data-action="keep-edit">继续编辑</button>
+    <button class="btn" data-action="discard-navigate">放弃更改</button>
+    <button class="btn primary" data-action="save-navigate">保存并继续</button>
+  </div>
+</dialog>
+<dialog id="intake-dialog" aria-labelledby="intake-title"><h2 id="intake-title">项目录入</h2>
+  <form id="intake-form" class="record-form">
+    <p>归属片区 · 演示片区</p>
+    <label>项目名称<input id="new-project-name" required maxlength="80" placeholder="填写项目名称"></label>
+    <label>项目类型<select id="new-project-type" class="compact-select"><option>老商服</option><option>老旧住区</option><option>其他</option></select></label>
+    <label>位置说明<input id="new-project-location" required maxlength="120" placeholder="填写地址或资产名称"></label>
+    <label>项目边界 GeoJSON（可选）<input id="new-project-file" type="file" accept=".geojson,.json,application/geo+json,application/json"></label>
+    <small>公开演示以经纬度 (0, 0) 为虚构原点。未提供边界时保存为待落位记录。一个文件可预览并导入多条项目图斑。</small>
+    <p id="intake-feedback" class="data-note" role="status"></p>
+    <div class="actions"><button type="button" class="btn" data-action="close-intake">取消</button><button class="btn primary" type="submit">预览并确认录入</button></div>
+  </form>
+</dialog><div id="toast" class="toast" role="status" hidden></div>
+<script id="map-data" type="application/json">{"cities":[{"id":"DEMO-CITY-A","name":"示例甲市","path":"M245,165L490,165L490,325L245,325Z","box":[245,165,490,325],"at":[367.5,245.0]},{"id":"DEMO-CITY-B","name":"示例乙市","path":"M500,165L745,165L745,325L500,325Z","box":[500,165,745,325],"at":[622.5,245.0]},{"id":"DEMO-CITY-C","name":"示例丙市","path":"M245,335L490,335L490,495L245,495Z","box":[245,335,490,495],"at":[367.5,415.0]},{"id":"DEMO-CITY-D","name":"示例丁市","path":"M500,335L745,335L745,495L500,495Z","box":[500,335,745,495],"at":[622.5,415.0]}],"districts":{"DEMO-CITY-A":[{"id":"DEMO-CITY-A-WEST","name":"示例西区","path":"M160,160L480,160L480,560L160,560Z","box":[160,160,480,560],"at":[320.0,360.0]},{"id":"DEMO-CITY-A-EAST","name":"示例东区","path":"M490,160L830,160L830,560L490,560Z","box":[490,160,830,560],"at":[660.0,360.0]}],"DEMO-CITY-B":[{"id":"DEMO-CITY-B-WEST","name":"示例西区","path":"M160,160L480,160L480,560L160,560Z","box":[160,160,480,560],"at":[320.0,360.0]},{"id":"DEMO-CITY-B-EAST","name":"示例东区","path":"M490,160L830,160L830,560L490,560Z","box":[490,160,830,560],"at":[660.0,360.0]}],"DEMO-CITY-C":[{"id":"DEMO-CITY-C-WEST","name":"示例西区","path":"M160,160L480,160L480,560L160,560Z","box":[160,160,480,560],"at":[320.0,360.0]},{"id":"DEMO-CITY-C-EAST","name":"示例东区","path":"M490,160L830,160L830,560L490,560Z","box":[490,160,830,560],"at":[660.0,360.0]}],"DEMO-CITY-D":[{"id":"DEMO-CITY-D-WEST","name":"示例西区","path":"M160,160L480,160L480,560L160,560Z","box":[160,160,480,560],"at":[320.0,360.0]},{"id":"DEMO-CITY-D-EAST","name":"示例东区","path":"M490,160L830,160L830,560L490,560Z","box":[490,160,830,560],"at":[660.0,360.0]}]},"marker":[325,355],"area":{"path":"M175,140L795,140L795,575L175,575Z","pixelsPerKm":120,"origin":[0,0]},"layers":{"project":[{"id":"DEMO-P-001","props":{"项目编号":"DEMO-P-001","项目名称":"示例项目01","项目类型":"老商服","更新方式":"改造提升","位置":"演示片区第1单元","用地面积":2,"建设内容":"用于演示项目查询与关联浏览。","关联片区编号":"DEMO-AREA-A"},"path":"M220,190L375,190L375,286L220,286Z","box":[220,190,375,286],"at":[297.5,238.0]},{"id":"DEMO-P-002","props":{"项目编号":"DEMO-P-002","项目名称":"示例项目02","项目类型":"老旧住区","更新方式":"改造提升","位置":"演示片区第2单元","用地面积":3,"建设内容":"用于演示项目查询与关联浏览。","关联片区编号":"DEMO-AREA-A"},"path":"M560,220L715,220L715,316L560,316Z","box":[560,220,715,316],"at":[637.5,268.0]},{"id":"DEMO-P-003","props":{"项目编号":"DEMO-P-003","项目名称":"示例项目03","项目类型":"其他","更新方式":"改造提升","位置":"演示片区第3单元","用地面积":4,"建设内容":"用于演示项目查询与关联浏览。","关联片区编号":"DEMO-AREA-A"},"path":"M405,420L560,420L560,516L405,516Z","box":[405,420,560,516],"at":[482.5,468.0]}],"parcel":[{"id":"DEMO-L-001","props":{"宗地编号":"DEMO-L-001","宗地名称":"示例宗地01","关联项目编号":"DEMO-P-001","现状用地性质":"示例用地","实际利用状态":"演示中","宗地面积":2,"位置":"演示片区第1单元"},"path":"M228,198L366,198L366,276L228,276Z","box":[228,198,366,276],"at":[297.0,237.0],"plans":["DEMO-Z-001"]},{"id":"DEMO-L-002","props":{"宗地编号":"DEMO-L-002","宗地名称":"示例宗地02","关联项目编号":"DEMO-P-002","现状用地性质":"示例用地","实际利用状态":"演示中","宗地面积":3,"位置":"演示片区第2单元"},"path":"M568,228L706,228L706,306L568,306Z","box":[568,228,706,306],"at":[637.0,267.0],"plans":["DEMO-Z-002"]},{"id":"DEMO-L-003","props":{"宗地编号":"DEMO-L-003","宗地名称":"示例宗地03","关联项目编号":"DEMO-P-003","现状用地性质":"示例用地","实际利用状态":"演示中","宗地面积":4,"位置":"演示片区第3单元"},"path":"M413,428L551,428L551,506L413,506Z","box":[413,428,551,506],"at":[482.0,467.0],"plans":["DEMO-Z-003"]}],"building":[{"id":"DEMO-B-001","props":{"建筑编号":"DEMO-B-001","建筑名称":"示例建筑01","关联项目编号":"DEMO-P-001","关联宗地编号":"DEMO-L-001","建筑使用功能":"示例空间","建筑层数":2,"建筑面积":100},"path":"M242,208L307,208L307,248L242,248Z","box":[242,208,307,248],"at":[274.5,228.0]},{"id":"DEMO-B-002","props":{"建筑编号":"DEMO-B-002","建筑名称":"示例建筑02","关联项目编号":"DEMO-P-002","关联宗地编号":"DEMO-L-002","建筑使用功能":"示例空间","建筑层数":3,"建筑面积":200},"path":"M582,238L647,238L647,278L582,278Z","box":[582,238,647,278],"at":[614.5,258.0]},{"id":"DEMO-B-003","props":{"建筑编号":"DEMO-B-003","建筑名称":"示例建筑03","关联项目编号":"DEMO-P-003","关联宗地编号":"DEMO-L-003","建筑使用功能":"示例空间","建筑层数":4,"建筑面积":300},"path":"M427,438L492,438L492,478L427,478Z","box":[427,438,492,478],"at":[459.5,458.0]}],"plan":[{"id":"DEMO-Z-001","props":{"规划地块编号":"DEMO-Z-001","规划用地性质":"示例规划用地01","规划状态":"演示中","规划版本":"演示版"},"path":"M208,178L388,178L388,301L208,301Z","box":[208,178,388,301],"at":[298.0,239.5],"parcels":["DEMO-L-001"]},{"id":"DEMO-Z-002","props":{"规划地块编号":"DEMO-Z-002","规划用地性质":"示例规划用地02","规划状态":"演示中","规划版本":"演示版"},"path":"M548,208L728,208L728,331L548,331Z","box":[548,208,728,331],"at":[638.0,269.5],"parcels":["DEMO-L-002"]},{"id":"DEMO-Z-003","props":{"规划地块编号":"DEMO-Z-003","规划用地性质":"示例规划用地03","规划状态":"演示中","规划版本":"演示版"},"path":"M393,408L573,408L573,531L393,531Z","box":[393,408,573,531],"at":[483.0,469.5],"parcels":["DEMO-L-003"]}]}}</script>
+<script>
+'use strict'
+const data = JSON.parse(document.getElementById('map-data').textContent)
+const $ = id => document.getElementById(id)
+const layerKeys = ['project','parcel','building','plan']
+const meta = {
+  project: { label:'项目', id:'项目编号', name:'项目名称', show:['项目类型','更新方式','位置','用地面积','建设内容'] },
+  parcel: { label:'宗地', id:'宗地编号', name:'宗地名称', show:['现状用地性质','实际利用状态','位置','宗地面积','盘活意愿'] },
+  building: { label:'建筑', id:'建筑编号', name:'建筑名称', show:['建筑使用功能','建筑层数','建筑面积','建筑质量','空置率'] },
+  plan: { label:'规划用地', id:'规划地块编号', name:'规划用地性质', show:['规划用地代码','规划状态','规划容积率','建筑高度限制','规划版本'] },
+}
+const cityMap = new Map(data.cities.map(city => [city.id,city]))
+const index = Object.fromEntries(layerKeys.map(key => [key, new Map(data.layers[key].map(f => [f.id,f]))]))
+const storageKey = 'renewal-public-demo-v1-' + document.body.dataset.variant
+let edits = {}
+try { edits = JSON.parse(localStorage.getItem(storageKey) || '{}') ?? {} } catch {}
+const state = {
+  level:'province', city:'DEMO-CITY-A', district:'all', selected:null, anchor:null,
+  active:'project', visible:{project:true,parcel:true,building:false,plan:false}, source:'planning',
+  layersOpen:false, table:false, tableMax:false, tableLayer:'project', scope:'related',
+  editor:null, pending:null, study:null, tablePage:0, zoom:1, ox:0, oy:0,
+}
+const map = $('map')
+const escape = val => String(val ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))
+const fieldProps = (key, f) => ({ ...f.props, ...edits[key]?.[f.id] })
+const name = (key,f) => fieldProps(key,f)[meta[key].name] || f.id
+const label = val => val == null || val === '' ? '—' : typeof val === 'number' ? new Intl.NumberFormat('zh-CN',{maximumFractionDigits:2}).format(val) : val
+const activeFeature = () => state.selected && index[state.selected.key].get(state.selected.id)
+const activeCity = () => cityMap.get(state.city)
+const nearby = () => state.study && index[state.study.key].get(state.study.id)
+const number = n => n.toLocaleString('zh-CN')
+const count = key => data.layers[key].length
+const idList = str => String(str ?? '').match(/DEMO-[A-Z]+-[A-Z0-9]+/g) ?? []
+const unique = arr => [...new Set(arr)]
+const districtFound = () => state.district === 'all' || state.district === 'DEMO-CITY-A-WEST'
+const emptyText = '当前范围未装载该来源样例。'
+const keysByColor = ['plan','parcel','building','project']
+const glyph = {
+  layers:'<path d="m3 7 9-4 9 4-9 4-9-4Zm0 5 9 4 9-4M3 17l9 4 9-4"/>',
+  table:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18m-12-5v11"/>',
+  study:'<circle cx="11" cy="11" r="6"/><circle cx="11" cy="11" r="2"/><path d="m16 16 4 4"/>',
+  back:'<path d="M19 12H5m6-6-6 6 6 6"/>',
+}
+const ico = key => `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.55" aria-hidden="true">${glyph[key]}</svg>`
+const action = (title, act, options = '') => `<button type="button" class="btn${options.includes(' primary') ? ' primary' : ''}" data-action="${act}" ${options.replace(' primary','')}>${title}</button>`
+const swatch = key => `<i class="swatch ${key}" aria-hidden="true"></i>`
+const choice = (title, act, val, selected, icon = '') => `<button class="btn${selected?' selected':''}" data-action="${act}" data-value="${val}" aria-pressed="${Boolean(selected)}">${icon}${title}</button>`
+const featureName = () => state.selected && name(state.selected.key,activeFeature())
+const brief = (level, title, description) => `<div class="panel-head"><div class="kicker">${level}</div><h1>${escape(title)}</h1><p>${description}</p></div>`
+const block = (title, body) => `<section class="panel-block"><h3>${title}</h3>${body}</section>`
+const metrics = value => `<div class="project-metrics"><div class="metric"><small>片区策划项目</small><strong>${value === null ? '—' : number(value)}</strong><small class="muted">${value === null ? '当前范围暂无样例' : '本原型已装载样例'}</small></div><div class="metric"><small>全量可谋划</small><strong>—</strong><small class="muted">未导入全量表</small></div></div>`
+
+function related(projectId) {
+  const answer = { project:[], parcel:[], building:[], plan:[] }
+  if (!index.project.has(projectId)) return answer
+  answer.project = [projectId]
+  answer.parcel = data.layers.parcel.filter(f => idList(f.props['关联项目编号']).includes(projectId)).map(f => f.id)
+  const parcelIds = new Set(answer.parcel)
+  answer.building = data.layers.building.filter(f => idList(f.props['关联项目编号']).includes(projectId)
+    || idList(f.props['关联宗地编号']).some(id => parcelIds.has(id))).map(f => f.id)
+  answer.plan = unique(answer.parcel.flatMap(id => index.parcel.get(id)?.plans ?? []))
+  return answer
+}
+const relationships = Object.fromEntries(data.layers.project.map(f => [f.id, related(f.id)]))
+function projectsFor(key, feature) {
+  return key === 'project' ? [feature.id] : Object.keys(relationships).filter(id => relationships[id][key].includes(feature.id))
+}
+function selectFeature(key, id) {
+  const f = index[key]?.get(id)
+  if (!f) return
+  state.selected = {key,id}
+  const projects = projectsFor(key,f)
+  if (!projects.includes(state.anchor)) state.anchor = projects[0] ?? null
+  state.active = key
+  state.visible[key] = true
+}
+function toArea() {
+  state.level = 'area'
+  state.city = 'DEMO-CITY-A'
+  state.active = 'project'
+  resetNavigation()
+}
+function resetNavigation() {
+  state.selected = state.anchor = state.study = null
+  state.table = state.tableMax = state.layersOpen = false
+  state.zoom = 1
+  state.ox = state.oy = 0
+  $('inspector').scrollTop = 0
+}
+function toCity(city) {
+  if (!cityMap.has(city)) return
+  state.level = 'city'
+  state.city = city
+  state.district = 'all'
+  resetNavigation()
+}
+function render() {
+  renderHeader()
+  renderMap()
+  renderPanel()
+  renderTable()
+}
+function renderHeader() {
+  const parts = state.level === 'province' ? '<strong>示例全省</strong>' :
+    `<button data-action="province">示例全省</button><span aria-hidden="true">›</span>${
+      state.level === 'city' ? `<strong>${activeCity().name}</strong>` :
+        `<button data-action="city" data-value="${state.city}">${activeCity().name}</button><span aria-hidden="true">›</span><strong>演示片区</strong>`}`
+  $('crumbs').innerHTML = parts
+  $('status-text').textContent = state.level === 'area'
+    ? '数据 · 演示片区四层虚构示意，待校核边界' : '虚构区划 · 演示底图'
+}
+function texts(x,y,txt,css='admin-label') {
+  return `<text x="${x}" y="${y}" class="${css}">${escape(txt)}</text>`
+}
+function adminShape(f, inside, emphasized, act) {
+  return `<path class="admin-shape ${emphasized?'available':''} ${inside?'focused':''}" d="${f.path}"
+    tabindex="0" role="button" aria-label="${escape(f.name)}" data-action="${act}" data-value="${f.id}"><title>${escape(f.name)}</title></path>`
+}
+function pin(x,y,w,title,act,val) {
+  return `<g class="pin-group" role="button" tabindex="0" aria-label="${escape(title)}" data-action="${act}" data-value="${val}">
+      <rect x="${x-w/2}" y="${y-15}" width="${w}" height="28" rx="14"/>
+      <text x="${x}" y="${y+3}">${escape(title)}</text></g>`
+}
+function provinceMap() {
+  const shapes = data.cities
+  return shapes.map(f => adminShape(f,false,f.id==='DEMO-CITY-A','city')).join('') +
+    shapes.map(f => texts(f.at[0], f.at[1]+2, f.name.replace(/市$/,''),f.id==='DEMO-CITY-A'?'admin-label available':'admin-label')).join('') +
+    (state.source === 'all' ? '' : shapes.filter(f=>f.id==='DEMO-CITY-A').map(f => pin(f.at[0]-22,f.at[1]+26,104,'3 个策划项目','city',f.id)).join(''))
+}
+function cityMapMarkup() {
+  const shapes = data.districts[state.city] ?? []
+  const hasArea = state.city === 'DEMO-CITY-A' && districtFound() && state.source !== 'all'
+  return shapes.map(f => adminShape(f,state.district===f.id,hasArea && f.id==='DEMO-CITY-A-WEST','district')).join('') +
+    shapes.map(f => texts(f.at[0],f.at[1]+2,f.name)).join('') +
+    (hasArea ? pin(data.marker[0]-30,data.marker[1]-26,129,'演示片区 · 3','area','') : '')
+}
+function vectors() {
+  const selected = state.selected
+  const projectLinks = relationships[state.anchor]
+  const arr = [...keysByColor.filter(k => k !== state.active),state.active]
+  return arr.map(key => {
+    if (!state.visible[key] || (key==='project'&&state.source==='all')) return ''
+    const classes = new Set(projectLinks?.[key] ?? [])
+    const records = data.layers[key].filter(f=>!f.noGeometry).map(f => {
+      const chosen = selected?.key===key && selected.id===f.id
+      const description = name(key,f)
+      return `<path fill-rule="evenodd" class="feature ${key} ${chosen?'is-chosen':''} ${state.active===key?'is-active':''} ${!chosen&&classes.has(f.id)?'is-related':''}" style="pointer-events:${state.active===key?'visiblePainted':'none'}" d="${f.path}" data-action="map-feature" data-layer="${key}" data-value="${f.id}"${key==='project' ? ` tabindex="0" role="button" aria-label="地图 · ${escape(description)}"` : ''}><title>${escape(description)}</title></path>`
+    }).join('')
+    return `<g data-map-layer="${key}">${records}</g>`
+  }).join('')
+}
+function studyGraphic() {
+  const f = nearby()
+  if (!f) return { ring:'', samples:'' }
+  const [x,y] = f.at
+  const r = state.study.km * data.area.pixelsPerKm
+  const samples = studySamples().filter(item=>item.key===state.study.tab)
+  return {
+    ring:`<circle class="scope-ring" cx="${x}" cy="${y}" r="${r}"/>${texts(x,y-Math.min(r + 7, y - 46),state.study.km+' km 周边范围','scope-label')}`,
+    samples: unique([...samples.slice(0,12), ...samples.filter(s=>s.f.id===state.study.highlight)]).map(s=>
+      `<circle class="sample-marker" cx="${s.f.at[0]}" cy="${s.f.at[1]}" r="${s.f.id===state.study.highlight?8:4.4}"/>`).join(''),
+  }
+}
+function areaMap() {
+  const analysis = studyGraphic()
+  const projectLabels = state.visible.project && state.source!=='all' ? data.layers.project.map(f=>texts(f.at[0],f.at[1]+3,name('project',f),'project-label')).join('') : ''
+  return `<path class="area-outline" d="${data.area.path}"/>${analysis.ring}${vectors()}${projectLabels}${analysis.samples}`
+}
+function updateMapTransform() {
+  $('map-content')?.setAttribute('transform',`translate(${500+state.ox} ${360+state.oy}) scale(${state.zoom}) translate(-500 -360)`)
+  $('scale').textContent = state.level === 'area' ? '示意比例 · ' + Math.round(state.zoom * 100) + '%' : '行政区划 · 示意'
+}
+function renderMap() {
+  const area = state.level === 'area'
+  const title = ['province','city','county'].includes(state.level) ?
+    (state.level==='province'?'示例省行政区划':activeCity().name+'区县分布') : '演示片区四层图斑'
+  map.innerHTML = `<title>${title}</title><defs><pattern id="map-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" stroke="var(--accent)" fill="none" stroke-width=".65" opacity=".13"/></pattern></defs>
+    <rect x="-10000" y="-10000" width="20000" height="20000" fill="var(--map)"/>
+    <rect x="-10000" y="-10000" width="20000" height="20000" fill="url(#map-grid)"/>
+    <g id="map-content">${state.level==='province'?provinceMap():['city','county'].includes(state.level)?cityMapMarkup():areaMap()}</g>`
+  updateMapTransform()
+  $('map-tools').innerHTML = choice('图层','layers','',state.layersOpen,ico('layers')) +
+    (area? action(ico('table')+'属性表','table-open') + ' ' + `<label class="btn" title="图斑重叠时由点选层决定"><span class="muted">点选</span><select class="compact-select" id="active-layer" aria-label="地图点选图层">${layerKeys.map(k=>`<option value="${k}" ${state.active===k?'selected':''}>${meta[k].label}</option>`).join('')}</select></label>` : '')
+  $('locator').textContent = area?'示例西区 · 示例街道':'示例省 · 区域浏览'
+  $('legend').innerHTML = `<div class="legend-items">${area ?
+    [ ...layerKeys.filter(k=>state.visible[k]&&(k!=='project'||state.source!=='all')).map(k=>`<span>${swatch(k)}${meta[k].label}</span>`),
+      `<span>${swatch('extent')}工作视图范围</span>`,
+      ...(state.study?[`<span>${swatch('neighbor')}周边范围</span>`]:[]) ].join('') :
+    `<span>${swatch('project')}已装载的策划样例</span><span>${swatch('parcel')}其他区划</span>`}</div>`
+  $('layer-pop').hidden = !state.layersOpen
+  $('layer-pop').innerHTML = `<h3>项目来源</h3>${Object.entries({planning:'片区策划',all:'全量可谋划',both:'两类同时显示'}).map(([k,v]) =>
+    `<label><input type="radio" name="source" value="${k}" ${state.source===k?'checked':''}>${v}${k==='all'?'<small>未导入</small>':''}</label>`).join('')}
+    ${area?'<hr><h3>当前区划图层</h3>'+layerKeys.map(k=>`<label><input type="checkbox" data-visible="${k}" ${state.visible[k]?'checked':''}>${swatch(k)}${meta[k].label}<small>${number(count(k))}</small></label>`).join(''):''}`
+}
+function mainList(short) {
+  return `<div class="panel-list">${data.layers.project.map(f => {
+    const title = name('project',f)
+    return `<button class="list-item ${state.anchor===f.id?'active':''}" data-action="feature" data-layer="project" data-value="${f.id}"><span>${escape(short?title.replace(/更新项目$/,''):title)}</span><small class="num">${escape(f.id.replace('DEMO-P-',''))}</small><span class="arrow">›</span></button>`
+  }).join('')}</div>`
+}
+function overviewPanel() {
+  if (state.level === 'province') {
+    const listing = data.cities.map(f=>`<button class="list-item" data-action="city" data-value="${f.id}"><span>${f.name}</span>${f.id==='DEMO-CITY-A'?'<span class="leader"></span><small class="num">3</small>':'<small>未装载</small>'}<span class="arrow">›</span></button>`).join('')
+    return brief('全省概览','示例全省','按市查看谋划项目的分布，进入市县视图可按区县进一步筛选。') +
+      block('项目来源',metrics(total())) + block('各市项目分布',`<div class="panel-list">${listing}</div>`)
+  }
+  if (state.level === 'city') {
+    const districts = data.districts[state.city] ?? []
+    const has = state.city==='DEMO-CITY-A' && districtFound()
+    const districtOptions = districts.map(f=>`<option value="${f.id}" ${state.district===f.id?'selected':''}>${f.name}</option>`).join('')
+    return brief('市县概览',activeCity().name,'在当前页面按区县筛选，概览和地图同步更新。')+
+      block('区县筛选',`<label><select id="district-filter" class="compact-select" aria-label="区县筛选"><option value="all">全市</option>${districtOptions}</select></label>${metrics(has?total():null)}`)+
+      block('片区项目类型',has?'<div class="list-item"><span>老商服</span><span class="leader"></span><small class="num">3</small></div><p class="data-note">预计实施时间 · 样例未提供</p>':'<p class="data-note">当前范围未装载片区策划样例。</p>')+
+      block('片区清单',has? `<div class="entry-card"><h3>演示片区</h3><p>示例西区 · 示例街道 · 3 个策划项目</p><div class="chips">${action('进入演示片区 →','area',' primary')}</div></div>`:'<p class="data-note">当前范围暂无已装载片区。</p>')
+  }
+  return brief('片区策划概况','演示片区','示例西区 · 示例街道')+
+    block('策划方向',`<p>通过三组虚构记录演示项目、宗地、建筑与规划用地的关联。优先核实既有用途、资产利用情况与规划条件。</p><div class="chips"><span class="chip">3 个谋划项目</span><span class="chip">虚构示意</span></div>`)+
+    block('片区策划项目',state.source==='all'?`<p class="data-note">${emptyText}</p>`:mainList(false))
+}
+function objectPanel() {
+  const f = activeFeature(), key = state.selected.key, props = fieldProps(key,f)
+  const p = state.anchor && index.project.get(state.anchor)
+  const sets = p && relationships[state.anchor]
+  const fields = meta[key].show.slice(0,4).map(field=>`<div><dt>${field}</dt><dd>${escape(label(props[field]))}</dd></div>`).join('')
+  const links = layerKeys.map(k=>action(swatch(k)+meta[k].label+`<strong>${sets ? number(sets[k].length) : k===key?'1':'—'}</strong>`,
+    'table-layer',`data-value="${k}"`)).join('')
+  const projects = projectsFor(key,f)
+  return brief('当前'+meta[key].label,featureName(),`${escape(f.id)} · 演示片区 · 虚构示意`) +
+    block('档案摘要',`<dl class="key-values">${fields}</dl>${props['建设内容']?`<p class="data-note" style="margin-top:8px">${escape(props['建设内容'])}</p>`:''}`) +
+    block('四层属性表',`<div class="rel-grid">${links}</div><p class="data-note" style="margin-top:7px">${p ? '关联范围 · '+escape(name('project',p)) : '当前对象暂无已匹配项目，可查全片区记录。'}</p>${projects.length>1?`<label>关联项目 <select class="compact-select" id="anchor-select">${projects.map(id=>`<option value="${id}" ${id===state.anchor?'selected':''}>${escape(name('project',index.project.get(id)))}</option>`).join('')}</select></label>`:''}</div>`) +
+    block('空间研判',key==='plan' ? '<p class="data-note">规划用地用于核对条件。可以从关联项目或资产发起周边研判。</p>' :
+      `<div class="actions">${action(ico('study')+'周边研判','study',' primary')}${action('回到片区概况','overview')}</div>`) +
+    block('同片区项目',mainList(true))
+}
+function studySamples() {
+  const subject = nearby()
+  if (!subject) return []
+  const [x,y] = subject.at, radius = state.study.km * data.area.pixelsPerKm
+  return ['project','building','parcel'].flatMap(key=>data.layers[key].filter(f=>f.id!==subject.id).map(f=>({
+    key,f,d:Math.hypot(f.at[0]-x,f.at[1]-y)
+  })).filter(s=>s.d<=radius).sort((a,b)=>a.d-b.d))
+}
+function studyPanel() {
+  const f = nearby(), key = state.study.key
+  const all = studySamples()
+  const visible = all.filter(item=>item.key===state.study.tab)
+  const tabs = ['project','building','parcel','market'].map(k => choice(k==='market'?'市场证据':meta[k].label,'study-tab',k,k===state.study.tab)).join('')
+  const rows = visible.slice(0,5).map(({key,f,d}) => `<button class="list-item ${state.study.highlight===f.id?'active':''}" data-action="study-sample" data-layer="${key}" data-value="${f.id}"><span>${escape(name(key,f))}</span><small>约 ${Math.round(d/data.area.pixelsPerKm*1000)} m</small><span class="arrow">›</span></button>`).join('')
+  const market = '<div class="warn">租金、出租状态、人口与 POI 尚未接入本原型。不能从当前样例判断市场需求。</div>'
+  const counts = ['project','building','parcel'].map(k=>`<div class="metric"><small>${meta[k].label}样例</small><strong>${number(all.filter(x=>x.key===k).length)}</strong></div>`).join('')
+  return brief('周边研判',name(key,f),`研究对象 · ${meta[key].label} · ${escape(f.id)}`)+
+    block('研究范围',`<div class="chips">${[.5,1,1.5].map(km=>choice(km+' km','radius',km,state.study.km===km)).join('')}${action('查看完整范围','fit-study')}</div>
+      <p class="data-note" style="margin-top:8px">淡蓝虚线为周边分析范围，可跨出策划片区。距离按示意坐标粗算。</p>`) +
+    block('周边证据',`<div class="project-metrics" style="margin-top:0;grid-template-columns:repeat(3,minmax(0,1fr))">${counts}</div><div class="chips">${tabs}</div>
+      <div class="panel-list" style="margin-top:8px">${state.study.tab==='market'?market:rows||'<p class="data-note">本范围没有该类样例。</p>'}</div>
+      <p class="data-note" style="margin-top:8px">按样例图斑中心落入范围计数。片区以外数据覆盖待补。</p>`) +
+    block('返回',`<div class="actions">${action(ico('back')+'返回图斑','end-study')}</div>`)
+}
+function renderPanel() {
+  $('inspector').innerHTML = state.study?studyPanel():state.selected?objectPanel():overviewPanel()
+}
+
+const pageSize = 45
+function tableRecords() {
+  const k = state.tableLayer
+  if (state.scope === 'all') return data.layers[k]
+  const ids = relationships[state.anchor]?.[k] ?? (state.selected?.key===k ? [state.selected.id] : [])
+  return ids.map(id=>index[k].get(id)).filter(Boolean)
+}
+function showSelectedPage() {
+  const i = tableRecords().findIndex(f=>f.id===state.selected?.id)
+  if (i>=0) state.tablePage=Math.floor(i/pageSize)
+}
+function showTable(k) {
+  state.table = true
+  state.tableLayer=k
+  state.tablePage=0
+  if (!state.anchor && state.selected?.key!==k) state.scope='all'
+  showSelectedPage()
+}
+function fieldList(k) {
+  const m=meta[k], fields=Object.keys(data.layers[k][0]?.props ?? {})
+  return unique([m.name,...m.show,...fields]).filter(s=>s!==m.id)
+}
+const locked = key => key === '关联片区编号' || key === '关联项目编号' || key === '关联宗地编号'
+const numeric = new Set(['用地面积','拟更新建筑面积','宗地面积','现状总建筑面积','现状容积率','土地取得年份','建筑层数','建筑面积','空置率','住户数量','商户数量'])
+function renderTable() {
+  const drawer=$('drawer')
+  drawer.hidden=!state.table
+  drawer.classList.toggle('max',state.tableMax)
+  if (!state.table) { drawer.innerHTML=''; return }
+  const k=state.tableLayer, m=meta[k], fs=tableRecords()
+  const fields=fieldList(k)
+  const pages=Math.max(1,Math.ceil(fs.length/pageSize))
+  state.tablePage=Math.min(state.tablePage,pages-1)
+  const priorScroll=drawer.querySelector('.table-scroll')
+  const previousLeft=priorScroll?.scrollLeft??0
+  const tabs=layerKeys.map(v=>choice(meta[v].label,'table-layer',v,k===v)).join('')
+  const rows=fs.slice(state.tablePage*pageSize,(state.tablePage+1)*pageSize).map(f=>{
+    const props=fieldProps(k,f), chosen=state.selected?.key===k && state.selected.id===f.id
+    const editing=state.editor?.key===k && state.editor?.id===f.id
+    const cells=fields.map(field=>{
+      const val=props[field]
+      const draft=state.editor?.draft[field] ?? val
+      return editing && !locked(field) ?
+        `<td><input aria-label="${escape(field)}" type="${numeric.has(field)?'number':field.endsWith('日期')&&/^\d{4}-\d{2}-\d{2}$/.test(String(draft))?'date':'text'}" ${numeric.has(field)?'step="any"':''} data-field="${escape(field)}" value="${escape(draft)}"></td>` :
+        `<td title="${escape(label(val))}">${escape(label(val))}</td>`
+    }).join('')
+    return `<tr class="${chosen?'selected':''}" data-action="table-row" data-layer="${k}" data-value="${f.id}">
+      <td><button class="id-button" title="在地图上定位" data-action="table-row" data-layer="${k}" data-value="${f.id}">${f.id}</button></td>${cells}</tr>`
+  }).join('')
+  const canEdit=state.selected?.key===k && fs.some(f=>f.id===state.selected.id)
+  const editActions=state.editor ?
+    action('取消编辑','cancel-edit')+action('保存本行','save-edit',' primary') :
+    action('编辑选中行','edit-row',canEdit?' primary':'disabled')
+  drawer.innerHTML=`<header class="drawer-head"><div class="pane-title"><h2>属性表</h2><small>演示片区 · 图表双向联动</small></div>
+    <div class="actions">${action(state.tableMax?'还原窗口':'展开窗口','table-max')}${action('关闭属性表','table-close')}</div></header>
+    <div class="drawer-tools"><div class="tabs" aria-label="四层属性表">${tabs}</div>
+    <div class="actions"><select class="compact-select" id="table-scope" aria-label="属性表记录范围">
+    <option value="related" ${state.scope==='related'?'selected':''}>${state.anchor?'当前项目关联':'当前对象'}</option><option value="all" ${state.scope==='all'?'selected':''}>全片区</option></select>${editActions}</div></div>
+    <div class="table-scroll" tabindex="0" aria-label="${m.label}属性数据"><table><thead><tr><th>${m.id}</th>${fields.map(field=>`<th>${field}</th>`).join('')}</tr></thead>
+    <tbody>${rows||`<tr><td colspan="${fields.length+1}">当前范围暂无${m.label}记录。可切换为全片区。</td></tr>`}</tbody></table></div>
+    <footer class="drawer-foot"><small>${number(fs.length)} 条${m.label}记录${canEdit?' · 选中 '+state.selected.id:''}${state.editor?' · 正在编辑':''}</small><div class="actions">
+    ${pages>1?action('上一页','prev-page',state.tablePage===0?'disabled':'')+'<small>'+ (state.tablePage+1)+' / '+pages+'</small>'+action('下一页','next-page',state.tablePage===pages-1?'disabled':''):''}</div></footer>`
+  const scroll=drawer.querySelector('.table-scroll')
+  scroll.scrollLeft=previousLeft
+  const row=drawer.querySelector('tr.selected')
+  if(row) scroll.scrollTop=Math.max(0,row.offsetTop-60)
+}
+let toastTimer
+function toast(message) {
+  const t=$('toast')
+  t.textContent=message
+  t.classList.toggle('on-table',state.table)
+  t.hidden=false
+  clearTimeout(toastTimer)
+  toastTimer=setTimeout(()=>{t.hidden=true},2800)
+}
+function commitEdit() {
+  if (!state.editor) return true
+  const {key,id,draft}=state.editor
+  const next={}
+  for(const [field,val] of Object.entries(draft)) {
+    if (numeric.has(field) && val !== '') {
+      if (!Number.isFinite(Number(val)) || Number(val)<0) {
+        toast(field+'须为大于或等于 0 的数字')
+        return false
+      }
+      next[field]=Number(val)
+    } else next[field]=val.trim()||null
+  }
+  if (Object.hasOwn(next,meta[key].name) && next[meta[key].name]===null) {
+    toast(meta[key].name+'不能为空')
+    return false
+  }
+  edits[key]??={}
+  edits[key][id]={...edits[key][id],...next}
+  let persisted=true
+  try{localStorage.setItem(storageKey,JSON.stringify(edits))}catch{persisted=false}
+  state.editor=null
+  toast(persisted?'已保存 · 地图和属性表已同步':'已更新本次原型会话')
+  return true
+}
+function go(callback) {
+  if (state.editor && Object.keys(state.editor.draft).length) {
+    state.pending=callback
+    $('change-dialog').showModal()
+    return
+  }
+  state.editor=null
+  callback()
+  render()
+}
+function openStudy() {
+  if(!state.selected || state.selected.key==='plan') return
+  const {zoom,ox,oy}=state
+  state.study={...state.selected,km:1,tab:'project',highlight:null,viewport:{zoom,ox,oy}}
+  state.table=state.tableMax=false
+  $('inspector').scrollTop=0
+}
+function moveToFeature(f) {
+  const [x,y]=f.at
+  const [l,t,r,b]=f.box
+  state.zoom=Math.min(4,Math.max(1,Math.min(410/Math.max(r-l,1),280/Math.max(b-t,1))))
+  state.ox=(500-x)*state.zoom
+  state.oy=(state.tableMax?360:275)-360+(360-y)*state.zoom
+}
+function switchDistrict(id) {
+  state.district=id
+  state.zoom=1
+  state.ox=state.oy=0
+}
+function handle(act,val,key) {
+  switch (act) {
+    case 'province': return go(()=>{state.level='province';resetNavigation()})
+    case 'city': return go(()=>toCity(val))
+    case 'district': return go(()=>switchDistrict(state.district===val?'all':val))
+    case 'area': return go(toArea)
+    case 'layers': state.layersOpen=!state.layersOpen;renderMap();return
+    case 'fit': state.zoom=1;state.ox=state.oy=0;renderMap();return
+    case 'zoom-in': case 'zoom-out':
+      state.zoom=Math.min(7,Math.max(.55,state.zoom*(act==='zoom-in'?1.23:1/1.23)))
+      renderMap()
+      return
+    case 'feature': case 'map-feature': case 'table-row': return go(()=>{
+      state.study=null
+      selectFeature(key,val)
+      if (state.table) {
+        if (state.tableLayer!==key) state.tablePage=0
+        state.tableLayer=key
+        showSelectedPage()
+      }
+      if (act==='table-row') {
+        if(state.tableMax) state.tableMax=false
+        moveToFeature(activeFeature())
+      }
+      $('inspector').scrollTop=0
+    })
+    case 'overview': return go(()=>{state.selected=state.anchor=state.study=null;$('inspector').scrollTop=0})
+    case 'table-open': return go(()=>showTable(state.selected?.key??state.active))
+    case 'table-layer': return go(()=>showTable(val))
+    case 'table-close': return go(()=>{state.table=state.tableMax=false})
+    case 'table-max': state.tableMax=!state.tableMax;$('drawer').classList.toggle('max',state.tableMax);return
+    case 'next-page': return go(()=>{state.tablePage+=1})
+    case 'prev-page': return go(()=>{state.tablePage=Math.max(0,state.tablePage-1)})
+    case 'edit-row':
+      if(state.selected) {
+        state.editor={...state.selected,draft:{}}
+        renderTable()
+        $('drawer').querySelector('tr.selected input')?.focus({preventScroll:true})
+      }
+      return
+    case 'cancel-edit': state.editor=null;renderTable();return
+    case 'save-edit': if(commitEdit()) render();return
+    case 'keep-edit': state.pending=null;$('change-dialog').close();return
+    case 'discard-navigate': case 'save-navigate':
+      if(act==='save-navigate'&&!commitEdit()) return
+      state.editor=null
+      $('change-dialog').close()
+      state.pending?.()
+      state.pending=null
+      render()
+      return
+    case 'study': return go(openStudy)
+    case 'end-study':
+      Object.assign(state,state.study.viewport)
+      state.study=null
+      render()
+      return
+    case 'fit-study': {
+      const f=nearby()
+      const radius=state.study.km*data.area.pixelsPerKm
+      state.zoom=Math.min(4,Math.max(.18,300/radius))
+      state.ox=(500-f.at[0])*state.zoom
+      state.oy=(360-f.at[1])*state.zoom
+      renderMap()
+      return
+    }
+    case 'radius': state.study.km=Number(val);render();return
+    case 'study-tab': state.study.tab=val;state.study.highlight=null;render();return
+    case 'study-sample': state.study.highlight=val;render();return
+  }
+}
+document.addEventListener('click',event=>{
+  if(event.target.closest('input,select')) return
+  const target=event.target.closest('[data-action]')
+  if (!target) return
+  handle(target.dataset.action,target.dataset.value,target.dataset.layer)
+})
+map.addEventListener('keydown',event=>{
+  if(event.key!=='Enter'&&event.key!==' ') return
+  const target=event.target.closest('[data-action]')
+  if (!target) return
+  event.preventDefault()
+  handle(target.dataset.action,target.dataset.value,target.dataset.layer)
+})
+document.addEventListener('input',event=>{
+  const field=event.target.dataset.field
+  if(state.editor && field) state.editor.draft[field]=event.target.value
+})
+document.addEventListener('change',event=>{
+  const t=event.target
+  if(t.id==='district-filter') { switchDistrict(t.value);render();return }
+  if(t.id==='active-layer') go(()=>{state.active=t.value;state.visible[t.value]=true})
+  if(t.id==='anchor-select') go(()=>{state.anchor=t.value;state.tablePage=0})
+  if(t.id==='table-scope') {
+    const previous=state.scope
+    const value=t.value
+    t.value=previous
+    go(()=>{state.scope=value;state.tablePage=0;showSelectedPage()})
+  }
+  if(t.name==='source') {
+    const value=t.value
+    go(()=>{
+      state.source=value
+      if(value==='all' && state.selected?.key==='project') {state.selected=state.anchor=state.study=null;state.table=false}
+    })
+  }
+  if(t.dataset.visible) {
+    const k=t.dataset.visible
+    state.visible[k]=t.checked
+    renderMap()
+  }
+})
+$('change-dialog').addEventListener('cancel',()=>{state.pending=null})
+let drag=null, suppress=false
+map.addEventListener('pointerdown',event=>{
+  if (event.button!==0) return
+  drag={pointer:event.pointerId,x:event.clientX,y:event.clientY,ox:state.ox,oy:state.oy,moved:false}
+})
+map.addEventListener('pointermove',event=>{
+  if(drag?.pointer!==event.pointerId) return
+  const dx=event.clientX-drag.x, dy=event.clientY-drag.y
+  if(!drag.moved && Math.hypot(dx,dy)<5) return
+  if(!drag.moved) map.setPointerCapture(event.pointerId)
+  const ratio=map.getScreenCTM()?.a||1
+  drag.moved=true
+  state.ox=drag.ox+dx/ratio
+  state.oy=drag.oy+dy/ratio
+  updateMapTransform()
+})
+function release(event) {
+  if(drag?.pointer!==event.pointerId) return
+  if(drag.moved) {suppress=true;setTimeout(()=>{suppress=false},0)}
+  drag=null
+}
+map.addEventListener('pointerup',release)
+map.addEventListener('pointercancel',release)
+map.addEventListener('click',event=>{if(suppress)event.stopPropagation()},true)
+map.addEventListener('wheel',event=>{
+  event.preventDefault()
+  const matrix=map.getScreenCTM()
+  if(!matrix) return
+  const point=new DOMPoint(event.clientX,event.clientY).matrixTransform(matrix.inverse())
+  const zoom=Math.min(7,Math.max(.55,state.zoom*(event.deltaY<0?1.13:1/1.13)))
+  const k=zoom/state.zoom
+  state.ox=point.x-500-k*(point.x-500-state.ox)
+  state.oy=point.y-360-k*(point.y-360-state.oy)
+  state.zoom=zoom
+  updateMapTransform()
+},{passive:false})
+const roleNames = { editor:'业务人员', government:'政府', external:'外部', admin:'管理员' }
+const districtId = 'DEMO-CITY-A-WEST'
+const canEdit = () => ['admin','editor'].includes(ui.role)
+const hasSample = () => state.city==='DEMO-CITY-A' && [districtId,'all'].includes(state.district)
+const primaryNames = { overview:'整体概览', edit:'项目编辑' }
+const ui = {
+  mode:'overview', role:null, memory:null, workspace:null, lastSearch:'', focus:null, transition:null,
+  messages:[], resource:'政策文件', scene:null, toolbox:null, importDraft:null,
+}
+const baseline = { render, renderMap, handle, studyPanel, areaMap, cityMapMarkup }
+const getStored = (key, fallback) => { try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback} }
+const setStored = (key, value) => { try{localStorage.setItem(key,JSON.stringify(value))}catch{} }
+const born = getStored(storageKey+'-created',[])
+function addProject(f) {
+  if(index.project.has(f.id)) return
+  index.project.set(f.id,f)
+  data.layers.project.push(f)
+  relationships[f.id]=related(f.id)
+}
+for(const f of born) addProject(f)
+const cityName = id => cityMap.get(id)?.name ?? ''
+const districtsFor = id => data.districts[id] ?? []
+const districtName = () => districtsFor(state.city).find(d=>d.id===state.district)?.name ?? ''
+const total = () => index.project.size
+const cityTotal = id => id==='DEMO-CITY-A' ? total() : null
+const recordsHere = () => state.level==='province' || hasSample()
+const back = title => `<button class="btn link" type="button" data-action="up">‹ ${title}</button>`
+const arrowLink = (title,cmd,value='',options='') => action(title,cmd,`data-value="${escape(value)}" ${options}`)
+const sidebarMetrics = n => metrics(n)
+const groups = [
+  ['项目工作台', [['overview','整体概览'],['edit','项目编辑']]],
+  ['资料与工具', [['resources','资源库'],['scenes','场景库']]],
+]
+const symbols = {overview:'◇',edit:'▤',resources:'▱',scenes:'⧉'}
+function renderNav() {
+  $('module-nav').innerHTML = groups.map(([label, entries]) => `<div class="nav-group"><span class="nav-label">${label}</span>${entries.map(([id,title])=>
+    `<button type="button" class="module-button" data-action="module" data-value="${id}" ${ui.mode===id?'aria-current="page"':''} ${id==='edit'&&!canEdit()?'disabled title="该演示身份仅可浏览"':''}>
+    <span class="module-icon" aria-hidden="true">${symbols[id]}</span>${title}</button>`).join('')}</div>`).join('')
+  $('role-button').textContent = (roleNames[ui.role]??'演示身份')+' ▾'
+  $('app').querySelector('.workspace').dataset.mode = ui.mode
+  const maps = ['overview','edit'].includes(ui.mode)
+  $('map-frame').hidden = $('inspector').hidden = !maps
+  $('module-page').hidden = maps
+}
+function saveWhere() {
+  const {level,city,district,selected,anchor,active,visible,source,study,zoom,ox,oy}=state
+  return {level,city,district,selected,anchor,active,visible:{...visible},source,study,zoom,ox,oy}
+}
+function goOverview() {
+  if(ui.mode==='edit') ui.workspace=saveWhere()
+  ui.mode='overview'
+  if(ui.memory) Object.assign(state,ui.memory)
+  else { state.level='province'; state.district='all'; resetNavigation() }
+}
+function goEdit(id) {
+  if(!canEdit()) return
+  if(ui.mode==='overview') ui.memory=saveWhere()
+  if(ui.mode==='edit' && !id) return
+  ui.mode='edit'
+  if(id || !ui.workspace) {
+    toArea()
+    state.district=districtId
+    if(id && id!=='area') selectFeature('project',id)
+  } else Object.assign(state,ui.workspace)
+}
+function changeModule(target) {
+  if(target===ui.mode) return
+  go(()=>{
+    state.table=state.tableMax=state.layersOpen=false
+    if(target==='overview'){goOverview();return}
+    if(target==='edit'){goEdit();return}
+    if(ui.mode==='edit')ui.workspace=saveWhere()
+    if(ui.mode==='overview')ui.memory=saveWhere()
+    ui.mode=target
+  })
+}
+function navigate(level,id) {
+  const oldLevel=state.level
+  const order=['province','city','county']
+  ui.transition=order.indexOf(level)>order.indexOf(oldLevel)?'in':'out'
+  if(level==='province'){state.level='province';state.district='all';resetNavigation()}
+  if(level==='city')toCity(id??state.city)
+  if(level==='county'){
+    state.level='county'
+    state.district=id
+    resetNavigation()
+  }
+  ui.focus=null
+}
+renderHeader = () => {
+  const elements = ui.mode==='edit' ?
+    ['项目编辑',cityName('DEMO-CITY-A'),'示例西区','演示片区'].map(x=>`<strong>${x}</strong>`) :
+    ui.mode==='overview' ? [
+      state.level==='province'?'<strong>示例全省</strong>':arrowLink('示例全省','province'),
+      ...(state.level==='province'?[]:[state.level==='city'?`<strong>${escape(cityName(state.city))}</strong>`:
+        arrowLink(cityName(state.city),'city',state.city)]),
+      ...(state.level==='county'?[`<strong>${escape(districtName())}</strong>`]:[]),
+    ] : [`<strong>${ui.mode==='scenes'?'场景库':'资源库'}</strong>`]
+  $('crumbs').innerHTML=elements.join('<span aria-hidden="true">›</span>')
+  $('status-text').textContent=ui.mode==='edit'?'演示片区四层 · 虚构示意 · 片区边界为虚构图形':'虚构区划 · 演示统计'
+}
+provinceMap = () => data.cities.map(f=>adminShape(f,false,f.id==='DEMO-CITY-A','city')).join('') +
+  data.cities.map(f=>texts(f.at[0],f.at[1],f.name.replace(/市$/,''),f.id==='DEMO-CITY-A'?'admin-label available':'admin-label')).join('') +
+  (state.source==='all'?'':data.cities.filter(f=>f.id==='DEMO-CITY-A').map(f=>pin(f.at[0]-8,f.at[1]+26,110,total()+' 个策划项目','city',f.id)).join(''))
+cityMapMarkup = () => {
+  const ds=districtsFor(state.city)
+  if(state.level==='city') return ds.map(f=>adminShape(f,false,f.id===districtId,'district')).join('')+
+    ds.map(f=>texts(f.at[0],f.at[1]+2,f.name)).join('')
+  const f=ds.find(d=>d.id===state.district)
+  if(!f) return ''
+  const values=[...f.path.matchAll(/(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/g)].map(p=>[+p[1],+p[2]])
+  const xs=values.map(p=>p[0]), ys=values.map(p=>p[1])
+  const west=Math.min(...xs), east=Math.max(...xs), north=Math.min(...ys), south=Math.max(...ys)
+  const zoom=Math.min(660/(east-west),510/(south-north))
+  const x=500-(west+east)/2*zoom, y=360-(north+south)/2*zoom
+  const marker=[x+(data.marker[0])*zoom,y+(data.marker[1])*zoom]
+  const marks=hasSample()&&state.source!=='all'?
+    `<circle cx="${marker[0]}" cy="${marker[1]}" r="18" class="scope-ring"/>
+     ${pin(Math.min(890,Math.max(125,marker[0])),Math.min(620,Math.max(100,marker[1]+25)),156,'演示片区 · '+total(),'peek-area','')}
+     ${texts(500,655,'项目分布聚合 · 点开片区概况','place-label')}`:''
+  return `<g class="district-shape" transform="translate(${x},${y}) scale(${zoom})"><path class="admin-shape focused" d="${f.path}"/></g>
+     ${texts(500,65,f.name,'admin-label available')}${marks}`
+}
+function renderLeft() {
+  if(ui.mode==='edit'){
+    const menu=`<div class="panel-block editor-bar"><h3><label for="project-find">查找片区或项目</label></h3>
+      <input type="search" id="project-find" class="search-input" placeholder="输入片区、项目名称或编号" value="${escape(ui.lastSearch)}">
+      <div id="search-results"></div><div class="actions" style="margin-top:8px">${action('项目录入','intake',' primary')}${action('工具箱','tools')}</div></div>`
+    return menu + (state.study?baseline.studyPanel():ui.toolbox?toolsPanel():
+      state.selected?objectPanel():overviewPanel())
+  }
+  if(state.level==='province'){
+    const links=data.cities.map(c=>`<button class="list-item" data-action="city" data-value="${c.id}"><span>${c.name}</span>${cityTotal(c.id) ? `<span class="leader"></span><small class="num">${cityTotal(c.id)}</small>`:'<small>未载入</small>'}<span class="arrow">›</span></button>`)
+    return brief('全省概览','示例省','选市查看项目分布。统计仅使用已载入样例。')+
+      block('项目来源',sidebarMetrics(total()))+block('各市项目分布',`<div class="panel-list">${links.join('')}</div>`)
+  }
+  if(state.level==='city'){
+    const rows=districtsFor(state.city).map(d=>`<button class="list-item" data-action="district" data-value="${d.id}"><span>${d.name}</span><small>${d.id===districtId?total()+' 个样例':'未载入'}</small><span class="arrow">›</span></button>`)
+    return brief('市级概览',cityName(state.city),'选择区县，地图缩放至对应行政范围。')+
+      block('项目来源',sidebarMetrics(cityTotal(state.city)))+block('区县分布',`<div class="panel-list">${rows.join('')}</div>`)
+  }
+  const buttons=canEdit()?arrowLink('打开演示片区 →','enter-area','area',' primary'):'<p class="data-note">当前演示身份可查看概况。</p>'
+  const overview=`<div class="entry-card"><strong>演示片区</strong><p>示例街道 · ${total()} 个策划项目</p>${buttons}</div>`
+  const selected=ui.focus&&index.project.get(ui.focus)
+  const summary=selected?`<div class="entry-card"><strong>${escape(name('project',selected))}</strong><p>${escape(fieldProps('project',selected)['项目类型'])} · 预计实施时间待补</p>${canEdit()?arrowLink('打开项目 →','enter-area',selected.id):''}</div>`:''
+  const projectRows=state.source==='all'?'<p class="data-note">未导入全量可谋划项目。</p>':
+    data.layers.project.slice(0,ui.areaPeek?total():4).map(f=>`<button class="list-item ${ui.focus===f.id?'active':''}" data-action="peek-project" data-value="${f.id}"><span>${escape(name('project',f))}</span><span class="arrow">›</span></button>`).join('')
+  return brief('区县概览',districtName(),'了解片区分布和项目构成，可进一步查看项目摘要。')+
+    block('项目来源',sidebarMetrics(hasSample()?total():null))+
+    (hasSample()?block('片区范围',overview)+block('项目摘要',summary+projectRows+(ui.areaPeek?'':action('查看片区完整项目清单','peek-area'))):
+      block('片区范围','<p class="data-note">当前区县暂无已载入的片区样例。</p>'))
+}
+renderPanel = () => {
+  $('inspector').innerHTML=renderLeft()
+  if(ui.mode==='edit')updateSearch()
+}
+function updateSearch() {
+  const node=$('search-results'), query=ui.lastSearch.trim().toLowerCase()
+  if(!node)return
+  const fits=data.layers.project.filter(f=>(name('project',f)+' '+f.id).toLowerCase().includes(query))
+  node.innerHTML=query?(
+    ('演示片区 示例甲市 示例西区'.includes(query)?arrowLink('演示片区','select-area','area'):'')+
+    fits.map(f=>`<button class="list-item" type="button" data-action="feature" data-layer="project" data-value="${f.id}"><span>${escape(name('project',f))}</span><small>${f.id}</small></button>`).join('') ||
+    '<p class="data-note">未找到匹配记录。</p>'
+  ):''
+}
+renderMap = () => {
+  baseline.renderMap()
+  const container=$('map-content')
+  const svgMap=$('map')
+  if(ui.transition && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    const anchor=ui.transition==='in'?.76:1.18
+    const clone=container?.cloneNode(true)
+    if(clone) {
+      clone.removeAttribute('id')
+      container.replaceWith(clone)
+      clone.id='map-content'
+      clone.style.transformOrigin='center'
+      clone.animate([{scale:String(anchor),opacity:.46},{scale:'1',opacity:1}],{duration:420,easing:'cubic-bezier(.2,.75,.3,1)'})
+    }
+  }
+  ui.transition=null
+  if(state.layersOpen){
+    $('layer-pop').insertAdjacentHTML('beforeend',`<hr><h3>参考图层</h3>
+      <p class="data-note">规划 · 项目、规划用地、片区示意范围</p>
+      <p class="data-note">现状 · 宗地及建筑</p><p class="data-note">经济 · 人口、房价、租金、业态待接入</p>
+      <p class="data-note">底图 · 行政区划与矢量图斑，影像待接入</p>`)
+  }
+  svgMap.setAttribute('aria-label','区域、片区及项目地图')
+}
+
+const resources = {
+  '政策文件': [['城市更新政策','按行政适用范围检索与引用政策条款'],['规划依据','按文件版本核对规划条件']],
+  '案例与项目集': [['案例集','查看可比更新案例和实施方式'],['优质项目集','记录可参考的成果和实施经验']],
+  '伙伴资料': [['服务与投资伙伴','查看伙伴方向、地域及参与条件']],
+}
+const scenes = {
+  '城市更新场景':'片区更新方向与项目组合',
+  '资产盘活场景':'闲置楼栋和宗地的再利用',
+  '历史文化保护场景':'保护范围与改造约束核对',
+}
+const methods = ['资金测算','业态分析','设施配置分析','可达性分析']
+function toolButtons() {
+  return `<div class="chips">${methods.map(m=>choice(m,'method',m,ui.toolbox===m)).join('')}</div>`
+}
+function toolBody() {
+  if(ui.toolbox==='资金测算') return `<form id="compare-form" class="record-form"><p>同一对象 · 维持现状与更新方案</p>
+    <label>现状年净收益（万元）<input type="number" step="any" id="income-base" required></label>
+    <label>更新投资额（万元）<input type="number" min="0" step="any" id="investment" required></label>
+    <label>更新后年净收益（万元）<input type="number" step="any" id="income-new" required></label>
+    <button type="submit" class="btn primary">计算静态回收期</button><div id="comparison-result" class="warn" aria-live="polite" hidden></div>
+    <p class="data-note">演示口径为投资额 ÷ 年净收益增量。税费、折现及运营爬坡需要另行测算。</p>
+    </form>`
+  if(ui.toolbox==='业态分析')return `<p>在本次地图范围内核查资产用途和周边业态。</p>${state.selected&&state.selected.key!=='plan'?action('打开周边研判','study',' primary'):'<small>请先在片区地图中点选项目、宗地或建筑。</small>'}`
+  if(ui.toolbox==='设施配置分析')return '<p class="warn">需接入设施位置、服务标准及人口数据。</p>'
+  if(ui.toolbox==='可达性分析')return '<p class="warn">需接入道路网、出行方式及阻抗参数。</p>'
+  return '<p class="data-note">选分析工具后查看所需输入。</p>'
+}
+function toolsPanel() {
+  return brief('分析工具箱',ui.toolbox==='tools'?'分析工具':ui.toolbox,state.selected?escape(featureName()):'片区级工作范围')+
+    block('工具',toolButtons())+block('参数与依据',toolBody())+block('当前对象',action('返回对象','tool-back'))
+}
+function renderModules() {
+  if(ui.mode==='resources'){
+    const cards=resources[ui.resource].map(([title,desc])=>`<div class="entry-card"><h2>${title}</h2><p>${desc}</p><p class="data-note">资源目录演示 · 待接入</p></div>`).join('')
+    $('module-page').innerHTML=`<h1>资源库</h1><div class="module-toolbar">${Object.keys(resources).map(r=>choice(r,'resource',r,ui.resource===r)).join('')}</div><div class="module-cards">${cards}</div>`
+    return
+  }
+  if(ui.mode==='scenes'){
+    const cards=Object.entries(scenes).map(([title,desc])=>`<div class="entry-card"><h2>${title}</h2><p>${desc}</p>${arrowLink('查看场景','scene',title)}</div>`).join('')
+    const selected=ui.scene?`<div class="entry-card"><h2>${ui.scene}</h2><p>${scenes[ui.scene]}。场景资料待入库，可先查看共用工具的输入条件。</p></div>`:''
+    $('module-page').innerHTML=`<h1>场景库</h1><div class="module-cards">${cards}</div>${selected}<section class="toolkit"><h2>工具箱</h2><div class="module-toolbar">${toolButtons()}</div>${toolBody()}</section>`
+  }
+}
+function context() {
+  const f=activeFeature()
+  const picked=ui.focus && index.project.get(ui.focus)
+  if(ui.mode==='edit')return {
+    label:'演示片区'+(f?' / '+f.id:''),
+    id:f?.id, layer:state.selected?.key, area:true, rows:total(),
+  }
+  if (['resources','scenes'].includes(ui.mode)) return {label:ui.mode==='resources'?'资源库 / '+ui.resource:'场景库'+(ui.scene?' / '+ui.scene:''), rows:null}
+  const parts=['示例省']
+  if(state.level!=='province')parts.push(cityName(state.city))
+  if(state.level==='county')parts.push(districtName())
+  if(picked)parts.push(picked.id)
+  return {label:parts.join(' / '),rows:recordsHere()?total():null,id:picked?.id,layer:picked?'project':null,area:state.level==='county'&&hasSample()}
+}
+function renderAI() {
+  const c=context()
+  $('ai-context').innerHTML=`<span>提问范围</span> <strong>${escape(c.label)}</strong>`
+  const feed=$('ai-feed')
+  const last=feed.scrollHeight-feed.scrollTop-feed.clientHeight<45
+  const init=`<div class="ai-message ai-welcome"><small>城市更新助手 · 演示</small><strong>可以从当前地图范围提问</strong><p>查询项目、定位图斑，或查看启动研判需要的证据。</p></div>`
+  feed.innerHTML=init+ui.messages.map(m=>`<div class="ai-message ${m.who==='user'?'user':'assistant'}"><small>${m.who==='user'?'你':'助手'} · ${escape(m.scope)}</small>
+    <p>${escape(m.text)}</p>${m.ref?`<small class="evidence-source">依据 · ${escape(m.ref)}</small>`:''}${m.link?`<div class="ai-actions">${arrowLink(m.link.title,m.link.cmd,m.link.id)}</div>`:''}</div>`).join('')
+  if(last)feed.scrollTop=feed.scrollHeight
+  const prompts=c.id?['这个对象是什么？','周边研判需要什么依据？']:['当前范围有哪些项目？','样例的数据覆盖怎样？']
+  $('ai-prompts').innerHTML=prompts.map(q=>arrowLink(q,'ask',q)).join('')
+}
+function mockAnswer(question,c) {
+  if(/政策|文件|案例|伙伴/.test(question))return {text:'资源库目前开放目录演示，需要接入相应资料后才能检索并引用具体内容。',link:{title:'查看资源库',cmd:'module',id:'resources'}}
+  if(/研判|公寓|租金|回本|可达/.test(question))return {
+    text:'建议先核对实际使用状态和有效规划条件，再按研究范围取周边租金、出租、人口和交通证据。目前市场类数据待接入，图斑仅供示意。',
+    ref:'四层图斑样例与数据覆盖说明',
+    link:ui.mode==='edit'&&state.selected&&state.selected.key!=='plan'?{title:'周边研判',cmd:'study',id:''}:null,
+  }
+  if(/覆盖|范围外|来源/.test(question))return {text:'已载入示例甲市示例西区演示片区的四层图斑。全量可谋划项目及其他地区统计待接入，空白表示未载入。',ref:'演示片区四层样例 · 虚构示意'}
+  if(c.id && c.layer){
+    const f=index[c.layer].get(c.id)
+    if(f)return {
+      text:'当前对象是'+name(c.layer,f)+'（'+c.id+'）。'+(c.layer==='project'?
+        '同项目可查看 '+relationships[c.id].parcel.length+' 宗地、'+relationships[c.id].building.length+' 栋建筑及相关规划用地。':'可通过属性表查看已录入的字段和关联。'),
+      ref:'演示片区 '+meta[c.layer].label+'层',
+      link:ui.mode==='edit'?{title:'打开属性表',cmd:'table-layer',id:c.layer}:
+        canEdit()?{title:'定位并打开项目',cmd:'enter-area',id:c.id}:null,
+    }
+  }
+  if(c.rows!==null)return {
+    text:'这个范围内已载入 '+number(c.rows)+' 个演示片区策划项目，涵盖虚构的商服与住宅等类型。其它来源或地区资料待接入。',
+    ref:'演示片区项目层 · 当前录入状态',
+    link:canEdit() && ui.mode!=='edit'?{title:'打开演示片区',cmd:'enter-area',id:'area'}:null,
+  }
+  return {text:'当前范围暂无可引用的项目样例。可以先浏览已有区县、片区或资源目录。'}
+}
+function ask(question) {
+  if(!question.trim())return
+  const c=context()
+  ui.messages.push({who:'user',text:question.trim(),scope:c.label},{who:'assistant',scope:c.label,...mockAnswer(question,c)})
+  renderAI()
+  $('ai-feed').scrollTop=$('ai-feed').scrollHeight
+}
+render = () => {
+  renderNav()
+  if(['overview','edit'].includes(ui.mode))baseline.render()
+  else {renderHeader();renderModules();renderTable()}
+  renderAI()
+}
+handle = (cmd,value,key) => {
+  if(cmd==='module'){changeModule(value);return}
+  if(cmd==='switch-role'){
+    go(()=>{ui.role=null;ui.mode='overview';ui.messages=[];ui.focus=null;ui.memory=ui.workspace=null
+      state.level='province';resetNavigation();$('app').hidden=true;$('login').hidden=false})
+    $('role-choice').focus()
+    return
+  }
+  if(ui.mode==='overview'){
+    if(cmd==='city'){go(()=>navigate('city',value));return}
+    if(cmd==='district'){go(()=>navigate('county',value));return}
+    if(cmd==='province'||cmd==='up'){go(()=>navigate(cmd==='up'&&state.level==='county'?'city':'province'));return}
+    if(cmd==='peek-area'){ui.areaPeek=true;render();return}
+    if(cmd==='peek-project'){ui.focus=value;render();return}
+  }
+  if(cmd==='enter-area'){go(()=>{ui.toolbox=null;ui.lastSearch='';goEdit(value||'area')});return}
+  if(cmd==='select-area'){go(()=>{ui.toolbox=null;ui.lastSearch='';toArea();state.district=districtId});return}
+  if(cmd==='resource'){ui.resource=value;render();return}
+  if(cmd==='scene'){ui.scene=value;render();return}
+  if(cmd==='tools'||cmd==='method'||cmd==='tool-back'){
+    ui.toolbox=cmd==='tool-back'?null:cmd==='method'?value:'tools'
+    if(ui.mode==='edit') {state.study=null;state.table=false}
+    render()
+    return
+  }
+  if(cmd==='ask'){ask(value);return}
+  if(cmd==='ai-clear'){ui.messages=[];renderAI();return}
+  if(cmd==='intake'&&canEdit()){openIntake();return}
+  if(cmd==='close-intake'){$('intake-dialog').close();return}
+  if (cmd==='study'||cmd==='map-feature'||cmd==='feature'||cmd==='table-row'||cmd==='overview')ui.toolbox=null
+  if(['edit-row','save-edit','save-navigate','cancel-edit','study','table-open','table-layer'].includes(cmd) && !canEdit())return
+  baseline.handle(cmd,value,key)
+}
+
+$('login-enter').addEventListener('click',()=>{
+  ui.role=$('role-choice').value
+  $('login').hidden=true
+  $('app').hidden=false
+  state.level='province'
+  state.source='planning'
+  resetNavigation()
+  render()
+})
+$('ai-compose').addEventListener('submit',event=>{
+  event.preventDefault()
+  const field=$('ai-input')
+  ask(field.value)
+  field.value=''
+})
+document.addEventListener('input',event=>{
+  if(event.target.id==='project-find'){ui.lastSearch=event.target.value;updateSearch()}
+  if(event.target.closest('#intake-form')&&ui.importDraft){
+    ui.importDraft=null
+    $('intake-feedback').textContent=''
+    intakeButton().textContent='预览并确认录入'
+  }
+})
+document.addEventListener('submit',event=>{
+  if(event.target.id!=='compare-form')return
+  event.preventDefault()
+  const gap=Number($('income-new').value)-Number($('income-base').value)
+  const cost=Number($('investment').value)
+  const result=$('comparison-result')
+  result.hidden=false
+  result.textContent='年净收益增量 '+label(gap)+' 万元 · '+(gap>0?'静态回收期约 '+label(cost/gap)+' 年':'未形成正的年净收益增量')
+})
+const intakeButton=()=>document.querySelector('#intake-form button[type=submit]')
+function openIntake(){
+  ui.importDraft=null
+  $('intake-form').reset()
+  $('intake-feedback').textContent=''
+  intakeButton().textContent='预览并确认录入'
+  $('intake-dialog').showModal()
+}
+function projected(geom) {
+  const input=geom?.type==='Polygon'?[geom.coordinates]:geom?.type==='MultiPolygon'?geom.coordinates:null
+  if(!Array.isArray(input)||!input.length)throw Error('只接受带面的 WGS84 GeoJSON。')
+  const [lon,lat]=data.area.origin
+  const cos=Math.cos(lat*Math.PI/180), scale=data.area.pixelsPerKm*111
+  const points=[]
+  const path=input.flatMap(part=>part.map(ring=>{
+    if(!Array.isArray(ring)||ring.length<4)throw Error('多边形环至少需要四个坐标。')
+    return 'M'+ring.map(([x,y])=>{
+      if(!Number.isFinite(x)||!Number.isFinite(y)||Math.abs(x-lon)>.6||Math.abs(y-lat)>.6)throw Error('公开演示以经纬度 (0, 0) 为虚构原点，请使用其附近的示例面。')
+      const pp=[+(500+(x-lon)*cos*scale).toFixed(1),+(360-(y-lat)*scale).toFixed(1)]
+      points.push(pp)
+      return pp.join(',')
+    }).join('L')+'Z'
+  })).join('')
+  const xx=points.map(p=>p[0]), yy=points.map(p=>p[1])
+  const box=[Math.min(...xx),Math.min(...yy),Math.max(...xx),Math.max(...yy)]
+  return {path,box,at:[(box[0]+box[2])/2,(box[1]+box[3])/2]}
+}
+$('intake-form').addEventListener('submit',async event=>{
+  event.preventDefault()
+  const feedback=$('intake-feedback')
+  if(ui.importDraft){
+    const records=ui.importDraft
+    records.forEach(addProject)
+    born.push(...records)
+    setStored(storageKey+'-created',born)
+    $('intake-dialog').close()
+    selectFeature('project',records[0].id)
+    state.source='planning'
+    ui.lastSearch=''
+    render()
+    toast('已录入 '+records.length+' 条原型记录')
+    return
+  }
+  try{
+    const file=$('new-project-file').files[0]
+    let inputs=[null]
+    if(file){
+      if(file.size>6_000_000)throw Error('原型导入上限为 6 MB。')
+      const obj=JSON.parse(await file.text())
+      inputs=obj.type==='FeatureCollection'?obj.features:[obj.type==='Feature'?obj:{geometry:obj}]
+      if(!Array.isArray(inputs)||!inputs.length||inputs.length>200)throw Error('每次预览须包含 1–200 个面。')
+    }
+    const uid=Date.now().toString(36).toUpperCase()
+    ui.importDraft=inputs.map((f,i)=>{
+      const id='DEMO-P-DEMO'+uid+(i+1)
+      const rawTitle=$('new-project-name').value.trim()
+      const title=typeof f?.properties?.['项目名称']==='string'?f.properties['项目名称']:rawTitle+(inputs.length>1?' '+(i+1):'')
+      const location=$('new-project-location').value.trim()
+      if(!title.trim()||!location)throw Error('请填写项目名称和位置说明。')
+      return {id, props:{项目名称:title,项目编号:id,关联片区编号:'DEMO-AREA-A',项目类型:$('new-project-type').value,位置:location,备注:f?'原型导入 · 待核实叠加关系':'待落位 · 原型手工录入'},
+        ...(f?projected(f.geometry):{path:'',box:[0,0,0,0],at:null})}
+    })
+    feedback.textContent='待确认 · '+ui.importDraft.length+' 条'+(file?'面记录':'待落位记录')+'。确认后写入本浏览器。'
+    intakeButton().textContent='确认录入'
+  }catch(error){feedback.textContent=error.message}
+})
+const located = f => Array.isArray(f.at)
+const spatialBaseline = {studySamples,moveToFeature,openStudy,mainList}
+studySamples = () => {
+  const f=nearby()
+  if(!f||!located(f))return []
+  const [x,y]=f.at, radius=state.study.km*data.area.pixelsPerKm
+  return ['project','building','parcel'].flatMap(key=>data.layers[key].filter(s=>s.id!==f.id&&located(s)).map(s=>({key,f:s,d:Math.hypot(s.at[0]-x,s.at[1]-y)})))
+    .filter(r=>r.d<=radius).sort((a,b)=>a.d-b.d)
+}
+moveToFeature = f => {if(f&&located(f))spatialBaseline.moveToFeature(f);else toast('这条记录待落位')}
+openStudy = () => {if(activeFeature()&&located(activeFeature()))spatialBaseline.openStudy();else toast('请先为项目补充真实位置')}
+// The previous cartographic renderer requires a coordinate for labels, but
+// newly entered unlocated records intentionally have no geometry.
+areaMap = () => {
+  const entries=data.layers.project
+  data.layers.project=entries.filter(located)
+  try { return baseline.areaMap() } finally { data.layers.project=entries }
+}
+mainList = short => spatialBaseline.mainList(short)
+
+const dash = { ai:false, region:false, useMock:true }
+const dashRoot = $('app').querySelector('main')
+const navBoard = $('board-nav')
+const dashEl = document.createElement('div')
+dashEl.className = 'board-grid'
+dashEl.id = 'dashboard'
+dashEl.hidden = true
+dashEl.innerHTML = `<div class="board-left"></div><div class="board-center"><div class="board-kpis"></div></div>
+  <div class="board-right"></div><section class="board-region-picker" aria-label="地方详情" hidden></section>
+  <div class="board-ai-container" hidden></div>`
+dashRoot.prepend(dashEl)
+const screen = selector => dashEl.querySelector(selector)
+const frame = $('map-frame')
+const aiPane = $('ai-panel')
+const oldRender = render
+const oldHandle = handle
+const oldProvinceMap = provinceMap
+const oldDraw = renderMap
+const mast = $('app').querySelector('.topnav')
+mast.insertAdjacentHTML('afterbegin','<div class="mast-accents" aria-hidden="true"><i></i><i></i></div><div class="mast-slash" aria-hidden="true"><i></i><i></i></div>')
+const sampleAreas = [9,6,4,5]
+const sampleProjects = [33,25,17,21]
+const compactName = n => n.replace(/市$|区$/,'')
+const tab = (title,cmd,arg='',on=false,disabled=false) =>
+  `<button type="button" data-action="${cmd}" data-value="${escape(arg)}" aria-pressed="${on}" ${disabled?'disabled title="当前演示身份只读"':''}>${title}</button>`
+const tile = (title,html,extra='') => `<section class="board-card ${extra}"><h2 class="panel-title">${title}</h2>${html}</section>`
+const isMock = () => dash.useMock && state.level==='province'
+const metricsInfo = () => isMock() ? [4,24,96]:
+  state.level==='province'?[1,1,total()]:hasSample()?[1,1,total()]:[null,null,null]
+
+function localChart(which) {
+  if(state.level==='province')return data.cities.map((c,i)=>({
+    label:compactName(c.name), value:isMock()?(which==='areas'?sampleAreas[i]:sampleProjects[i]):
+      c.id==='DEMO-CITY-A'?(which==='areas'?1:total()):null,id:c.id,cmd:'city',
+  }))
+  if(state.level==='city')return districtsFor(state.city).map(d=>({
+    label:compactName(d.name), value:d.id===districtId?(which==='areas'?1:total()):null,id:d.id,cmd:'district',
+  }))
+  return hasSample()?[{label:'演示片区',value:which==='areas'?1:total(),id:'',cmd:'peek-area'}]:[]
+}
+function chartBars(rows) {
+  if(!rows.length)return '<div class="board-chart"><p class="data-note">暂无可用样例。</p></div>'
+  const ceiling=Math.max(6,Math.ceil(Math.max(...rows.map(x=>x.value||0))/6)*6)
+  const columns=`grid-template-columns:repeat(${rows.length},minmax(0,1fr))`
+  const ticks=Array.from({length:7},(_,i)=>'<span>'+Math.round(ceiling*(6-i)/6)+'</span>').join('')
+  const barSlots=rows.map(({label,value,cmd,id})=>{
+    const caption=label+' '+(value===null?'未载入':value)
+    return `<button class="bar-cell" type="button" data-action="${cmd}" data-value="${escape(id)}" title="${escape(caption)}" aria-label="${escape(caption)}"><span class="bar" style="--h:${value===null?0:Math.max(1,value/ceiling*100)}%"></span></button>`
+  }).join('')
+  return `<div class="board-chart bar-chart"><div class="bar-axis" aria-hidden="true">${ticks}</div>
+    <div class="bar-grid" style="${columns}">${barSlots}</div>
+    <div class="bar-labels" style="${columns}">${rows.map(x=>'<span>'+escape(x.label)+'</span>').join('')}</div></div>`
+}
+function horizontal(rows) {
+  const max=Math.max(1,...rows.map(r=>r[1]??0))
+  return `<div class="board-chart horizontal-chart">${rows.map(([k,v])=>`<div class="h-row"><span title="${escape(k)}">${escape(k)}</span>
+    <div class="h-track" aria-hidden="true"><div class="h-fill" style="--w:${(v??0)/max*100}%"></div></div><strong>${v??'—'}</strong></div>`).join('')}</div>`
+}
+function typeChart(rows) {
+  const sum=rows.reduce((n,r)=>n+r[1],0)
+  const palette=['#2381fa','#00ddfa','#8069ff','#ffd45a']
+  let start=0
+  const stops=rows.map((r,i)=>{
+    const finish=start+r[1]/Math.max(1,sum)*100
+    const str=`${palette[i]} ${start}% ${finish}%`
+    start=finish
+    return str
+  }).join(',')
+  return `<div class="board-chart donut-chart"><div class="donut" style="--ring:${sum?'conic-gradient('+stops+')':'#163b76'}"><strong>${sum||'—'}</strong></div>
+    <div class="donut-key">${rows.map(([k,v],i)=>`<div><i style="--segment:${palette[i]}"></i><span>${escape(k)}</span><strong>${v||'—'}</strong></div>`).join('')}</div></div>`
+}
+function drawWings() {
+  const covered=state.level==='province'||hasSample()
+  const mock=isMock()
+  const n=covered?total():null
+  const grouping=state.level==='province'?'各市':state.level==='city'?'各区县':'片区'
+  const partnerships=mock?[['开发投资',80],['运营服务',100],['设计咨询',200],['建设实施',500],['其他合作',1000]]:
+    [['开发投资',null],['运营服务',null],['设计咨询',null],['建设实施',null],['其他合作',null]]
+  const features=mock?[['实施型',36],['储备型',42],['其他',18]]:[['改造提升',n?data.layers.project.filter(f=>String(fieldProps('project',f)['更新方式']||'').includes('改造提升')).length:null],['待补时序',n],['全量可谋划',null]]
+  const types=mock?[['老旧住区',31],['老商服',28],['老工业',21],['其他',16]]:
+    [['老商服',n?data.layers.project.filter(f=>fieldProps('project',f)['项目类型']==='老商服').length:0],
+      ['其他',n?data.layers.project.filter(f=>fieldProps('project',f)['项目类型']!=='老商服').length:0]]
+  screen('.board-left').innerHTML=tile(grouping+'片区情况',chartBars(localChart('areas')))+tile(grouping+'合作资源情况',horizontal(partnerships))
+  screen('.board-right').innerHTML=tile(grouping+'项目情况',chartBars(localChart('projects')))+tile('项目特征统计',horizontal(features))+
+    tile('项目类型统计',typeChart(types))
+  screen('.board-kpis').innerHTML=['涉及市县区','片区总数','项目总数'].map((k,i)=>{
+    const v=metricsInfo()[i]
+    return `<div class="board-kpi"><small>${k}</small><strong>${v===null?'—':v+'<em>个</em>'}</strong></div>`
+  }).join('')
+}
+function drawNav() {
+  navBoard.innerHTML=`<div class="left-nav">
+    ${tab(state.level==='province'?'省级统览':state.level==='city'?'市级统览':'区县统览','province','',true)}
+    ${tab('地方详情','board-region','',dash.region)}
+    ${tab('图层管理','layers','',state.layersOpen)}
+    </div><div class="right-nav">
+    ${tab('项目库','module','edit',false,!canEdit())}
+    ${tab('资源库','module','resources')}
+    ${tab('场景库','module','scenes')}
+    ${tab('智能问数','board-ai','',dash.ai)}
+    </div>`
+}
+function drawRegion() {
+  const box=screen('.board-region-picker')
+  box.hidden=!dash.region && state.level!=='county'
+  if(box.hidden)return
+  const opts=[`<option value="">选择城市</option>`, ...data.cities.map(c=>`<option value="${c.id}" ${state.level!=='province'&&state.city===c.id?'selected':''}>${escape(c.name)}</option>`)].join('')
+  const districts=state.level==='province'?'':`<label>选择区县<select class="compact-select" id="dash-district"><option value="">全市</option>${districtsFor(state.city).map(d=>`<option value="${d.id}" ${state.level==='county'&&state.district===d.id?'selected':''}>${escape(d.name)}</option>`).join('')}</select></label>`
+  box.innerHTML=`<div class="row-between"><strong>地方详情</strong>${state.level==='province'?'':tab('返回上一级','board-above')}${tab('收起','board-region')}</div>
+    <label>所在城市<select class="compact-select" id="dash-city">${opts}</select></label>${districts}
+    ${state.level==='county'?renderLeft():''}`
+  if(!dash.region&&state.level==='county') box.hidden=true
+}
+function mountBoard() {
+  const viewing=ui.mode==='overview'
+  document.body.dataset.mode=ui.mode
+  navBoard.hidden=!viewing
+  dashEl.hidden=!viewing
+  if(viewing){
+    if(frame.parentNode!==screen('.board-center'))screen('.board-center').append(frame)
+    if(aiPane.parentNode!==screen('.board-ai-container'))screen('.board-ai-container').append(aiPane)
+    frame.hidden=false
+    $('inspector').hidden=true
+    screen('.board-ai-container').hidden=!dash.ai
+    drawNav()
+    drawWings()
+    drawRegion()
+  }else{
+    if(frame.parentNode!==dashRoot)dashRoot.insertBefore(frame,$('module-page'))
+    if(aiPane.parentNode!==dashRoot)dashRoot.append(aiPane)
+  }
+}
+provinceMap = () => {
+  if(ui.mode!=='overview')return oldProvinceMap()
+  const [x,y]=data.cities.find(c=>c.id==='DEMO-CITY-A').at
+  const badge=`<defs><linearGradient id="beacon-light" x2="0%" y2="100%"><stop stop-color="#7cffff"/><stop offset=".43" stop-color="#058efe"/><stop offset="1" stop-color="#0b31bc"/></linearGradient></defs>
+    <g class="map-beacon" transform="translate(${x} ${y-18})" data-action="city" data-value="DEMO-CITY-A" aria-hidden="true">
+      <ellipse cy="1" rx="9" ry="3"/><path d="M-15-28L0-34L15-28L0-2Z"/><path d="M-15-28L0-23L15-28L0-34Z"/></g>`
+  return data.cities.map(c=>adminShape(c,false,c.id==='DEMO-CITY-A','city')).join('')+badge+
+    data.cities.map((c,i)=>{
+      const active=c.id==='DEMO-CITY-A'
+      const value=isMock()?sampleProjects[i]:active?total():null
+      return texts(c.at[0],c.at[1]-4,compactName(c.name),'admin-label'+(active?' available':''))+
+        (value===null?'':texts(c.at[0],c.at[1]+14,value+'个','admin-label map-count'))
+    }).join('')
+}
+renderMap = () => {
+  oldDraw()
+  const viewing=ui.mode==='overview'
+  map.setAttribute('viewBox',viewing&&state.level==='province'?'130 43 740 634':'0 0 1000 720')
+  frame.querySelector('.screen-meta')?.remove()
+  if(!viewing)return
+  frame.insertAdjacentHTML('beforeend',`<div class="screen-meta"><span>${isMock()?'大屏指标与图表为演示数据':'演示片区样例 · 虚构示意'}</span>
+    ${state.level==='province'?tab(isMock()?'查看样例口径':'查看大屏演示','board-mock'):tab('返回上一级','board-above')}
+    ${state.level==='county'&&hasSample()?tab('演示片区','board-region'):''}</div>`)
+}
+render = () => {
+  mountBoard()
+  oldRender()
+  if(ui.mode==='overview'){
+    $('inspector').hidden=true
+    $('status-text').textContent=isMock()?'统计演示 · 示例省行政区划底图':'样例数据 · 演示片区四层虚构示意'
+  }
+}
+handle = (cmd,value,key) => {
+  if(cmd==='board-region'){dash.region=!dash.region;render();return}
+  if(cmd==='board-ai'){dash.ai=!dash.ai;render();if(dash.ai)$('ai-input').focus();return}
+  if(cmd==='board-mock'){dash.useMock=!dash.useMock;render();return}
+  if(cmd==='board-above'){
+    dash.region=false
+    go(()=>navigate(state.level==='county'?'city':'province'))
+    return
+  }
+  if(cmd==='province')dash.region=false
+  if(ui.mode==='overview'&&['district','peek-area','peek-project'].includes(cmd))dash.region=true
+  if(cmd==='switch-role')dash.region=dash.ai=false
+  oldHandle(cmd,value,key)
+  if(cmd==='layers'&&ui.mode==='overview')drawNav()
+}
+document.addEventListener('change',event=>{
+  const target=event.target
+  if(target.id==='dash-city'){
+    if(!target.value)handle('province')
+    else handle('city',target.value)
+  }
+  if(target.id==='dash-district'){
+    if(!target.value)handle('board-above')
+    else handle('district',target.value)
+  }
+})
+
+// A uses the same screen composition and sample records as the three-way prototype.
+dash.useMock = false
+const aCamera = new Map()
+const aOriginal = {
+  render, handle, renderMap, renderLeft, navigate, localChart, drawWings, drawNav, provinceMap,
+  cityMapMarkup, context, mockAnswer, objectPanel, showTable, renderTable, fieldList, projected,
+  toolBody, goEdit,
+}
+const regionKey = () => state.level==='province'?'province':state.level==='city'?'city/'+state.city:'county/'+state.district
+const getCamera = () => ({zoom:state.zoom,ox:state.ox,oy:state.oy})
+const aRegion = () => state.level==='province'?'示例全省':state.level==='city'?cityName(state.city):districtName()
+const aCoverage = () => ui.mode==='edit' || state.level==='province' || hasSample()
+const isPlanningShown = () => state.source!=='all'
+const aRows = () => aCoverage() && isPlanningShown() ? data.layers.project : []
+const missing = text => `<p class="a-missing">${escape(text)}</p>`
+const layerStatus = () => state.source==='all'?'全量可谋划 · 未导入':
+  !aCoverage()?'片区策划 · 当前区划未导入':state.source==='both'?'片区策划 · 全量可谋划未导入':'片区策划 · 演示片区样例'
+const featuredTypes = ['老商服','老旧住区','其他','类型待补']
+const typeKey = f => fieldProps('project',f)['项目类型']||'类型待补'
+const pendingCount = rows => rows.filter(f=>!located(f)).length
+
+navigate = (level,id) => {
+  if (level==='city' && !cityMap.has(id??state.city)) return
+  if (level==='county' && !districtsFor(state.city).some(d=>d.id===id)) return
+  aCamera.set(regionKey(),getCamera())
+  aOriginal.navigate(level,id)
+  Object.assign(state,aCamera.get(regionKey())??{zoom:1,ox:0,oy:0})
+  ui.areaPeek=false
+}
+localChart = (which) => isPlanningShown() ? aOriginal.localChart(which) :
+  aOriginal.localChart(which).map(row=>({...row,value:null}))
+drawWings = () => {
+  if(isMock() && isPlanningShown()){
+    aOriginal.drawWings()
+    return
+  }
+  const rows=aRows()
+  const coverage=aCoverage()&&isPlanningShown()
+  const group=state.level==='province'?'各市':state.level==='city'?'各区县':'片区'
+  const countLabel = state.level==='province'?'已载入市':'已载入区县'
+  const timings=rows.filter(f=>Boolean(String(fieldProps('project',f)['预计实施时间']??'').trim())).length
+  const typeCount=new Map(featuredTypes.map(t=>[t,0]))
+  for(const f of rows) {
+    const t=typeKey(f)
+    const bucket=typeCount.has(t)?t:'其他'
+    typeCount.set(bucket,typeCount.get(bucket)+1)
+  }
+  const chartNote='<small class="a-chart-note">无柱表示资料未导入</small>'
+  const coverageNote=aCoverage()?'当前样例来自示例甲市示例西区演示片区。':'当前范围尚未载入演示片区样例以外的片区资料。'
+  const resources=missing('伙伴资源尚未接入。')+
+    `<div class="a-coverage"><h3>资料覆盖</h3><p>${escape(coverageNote)}</p><p>全量可谋划项目尚未导入。</p>
+    ${arrowLink('查看资源库','module','resources')}</div>`
+  screen('.board-left').innerHTML=tile(group+'片区情况',chartBars(localChart('areas'))+chartNote)+tile('合作资源情况',resources)
+  screen('.board-right').innerHTML=tile(group+'项目情况',chartBars(localChart('projects'))+chartNote)+
+    tile('项目状态与时序',coverage?horizontal([
+      ['已上图',rows.length-pendingCount(rows)],['待落位',pendingCount(rows)],
+      ['已填时序',timings],['时间待补',rows.length-timings],
+    ]):missing(layerStatus()))+
+    tile('项目类型统计',coverage?typeChart([...typeCount].filter(([,n])=>n>0)):missing(layerStatus()))
+  screen('.board-kpis').innerHTML=[
+    [countLabel,coverage?1:null],['已载入片区',coverage?1:null],['已载入项目',coverage?rows.length:null],
+  ].map(([title,n])=>`<div class="board-kpi"><small>${title}</small><strong>${n===null?'—':n+'<em>个</em>'}</strong></div>`).join('')
+}
+provinceMap = () => {
+  if(ui.mode!=='overview'||isPlanningShown())return aOriginal.provinceMap()
+  return data.cities.map(c=>adminShape(c,false,false,'city')).join('')+
+    data.cities.map(c=>texts(c.at[0],c.at[1],compactName(c.name))).join('')
+}
+cityMapMarkup = () => {
+  if(state.level==='city' && !isPlanningShown()){
+    const districts=districtsFor(state.city)
+    return districts.map(f=>adminShape(f,false,false,'district')).join('')+
+      districts.map(f=>texts(f.at[0],f.at[1]+2,f.name)).join('')
+  }
+  if(state.level!=='county'||!hasSample()||!isPlanningShown())return aOriginal.cityMapMarkup()
+  const f=districtsFor(state.city).find(d=>d.id===state.district)
+  const points=[...f.path.matchAll(/(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/g)].map(p=>[+p[1],+p[2]])
+  const xx=points.map(p=>p[0]),yy=points.map(p=>p[1])
+  const w=Math.min(...xx),e=Math.max(...xx),n=Math.min(...yy),s=Math.max(...yy)
+  const fitting=Math.min(660/(e-w),510/(s-n))
+  const [x,y]=[500-(w+e)/2*fitting,360-(n+s)/2*fitting]
+  // Fit the synthetic area into the district preview.
+  const factor=42*fitting/data.area.pixelsPerKm
+  const [cx,cy]=[x+data.marker[0]*fitting,y+data.marker[1]*fitting]
+  const shapes=aRows().filter(located).map(item=>`<path class="feature project a-peek-shape${ui.focus===item.id?' is-chosen':''}" d="${item.path}"
+    tabindex="0" role="button" aria-label="${escape(name('project',item))}" data-action="peek-project" data-value="${item.id}"/>`).join('')
+  return `<g transform="translate(${x},${y}) scale(${fitting})"><path class="admin-shape focused" d="${f.path}"/></g>
+  <g transform="translate(${cx} ${cy}) scale(${factor}) translate(-500 -360)"><path class="area-outline" d="${data.area.path}" data-action="peek-area"/>${shapes}</g>
+  ${texts(500,65,f.name,'admin-label available')}
+  ${pin(Math.min(890,Math.max(125,cx)),Math.min(620,Math.max(100,cy+49)),153,'演示片区 · '+total(),'peek-area','')}
+  ${texts(500,655,'片区虚线为样例工作范围 · 虚构边界','place-label')}`
+}
+renderLeft = () => {
+  if(ui.mode==='edit'){
+    let content=aOriginal.renderLeft()
+    const rows=aRows()
+    if(!state.selected&&!state.study&&!ui.toolbox)
+      content=content.replace('3 个谋划项目',isPlanningShown()?number(rows.length)+' 个策划项目 · '+pendingCount(rows)+' 个待落位':'全量可谋划未导入')
+    content=content.replace('查找片区或项目','查找片区、项目或资产')
+      .replace('输入片区、项目名称或编号','名称、编号、位置或产权方')
+    return content
+  }
+  if(state.level!=='county'||isPlanningShown())return aOriginal.renderLeft()
+  return brief('区县概览',districtName(),'当前图层来源为全量可谋划。')+block('覆盖说明',missing('全量可谋划项目尚未导入。切换片区策划，可查看已载入样例。'))
+}
+objectPanel = () => {
+  const f=activeFeature()
+  const html=aOriginal.objectPanel()
+  const pending=state.selected.key==='project'&&!located(f)
+  const geo = pending ? '待落位' : f.id.startsWith('DEMO-P-DEMO') ? 'GeoJSON 面 · 待核实' : '虚构示意'
+  const heading=html.replace('· 演示片区 · 虚构示意','· 演示片区 · '+geo)
+  if(pending)return heading.replace(/<button[^>]+data-action="study"[^>]*>[\s\S]*?<\/button>/,'<span class="warn">为项目补齐已核实位置后可研判。</span>')
+  return heading.replace('<div class="actions"><button type="button" class="btn primary" data-action="study"',
+    '<div class="actions">'+action('定位图斑','a-locate')+'<button type="button" class="btn primary" data-action="study"')
+}
+renderMap = () => {
+  aOriginal.renderMap()
+  if(ui.mode!=='overview')return
+  const metaBox=frame.querySelector('.screen-meta')
+  const crumbs=[
+    state.level==='province'?'<strong>示例全省</strong>':tab('示例全省','province'),
+    ...(state.level==='city'?[`<strong>${escape(aRegion())}</strong>`]:state.level==='county'?
+      [tab(cityName(state.city),'board-above'),`<strong>${escape(aRegion())}</strong>`]:[]),
+  ].join('<span aria-hidden="true">›</span>')
+  metaBox.innerHTML=`<div class="a-scope-trail" aria-label="统计范围">${crumbs}</div>
+    <span class="a-data-tag">${isMock()?'模拟大屏数据':escape(layerStatus())}</span>
+    ${state.level==='province'&&isPlanningShown()?tab(isMock()?'回到样例':'查看大屏演示','board-mock'):''}`
+  if(state.level==='county'&&aCoverage()&&isPlanningShown())
+    metaBox.insertAdjacentHTML('beforeend',tab('片区详情','board-region'))
+}
+drawNav = () => {
+  aOriginal.drawNav()
+  const first=navBoard.querySelector('.left-nav button')
+  if(first){
+    first.textContent='省级统览'
+    first.setAttribute('aria-pressed',String(state.level==='province'))
+  }
+}
+render = () => {
+  aOriginal.render()
+  if(ui.mode==='overview'){
+    $('status-text').textContent=isMock()?'模拟大屏 · 问数仅查样例库':aRegion()+' · '+layerStatus()
+    screen('.board-ai-container').setAttribute('aria-label','智能问数浮窗')
+  } else if(ui.mode==='edit') {
+    $('status-text').textContent='演示片区 · '+layerStatus()+' · 虚构工作范围'
+  }
+}
+
+const chooser=document.createElement('dialog')
+chooser.id='a-workspace-chooser'
+chooser.setAttribute('aria-labelledby','a-workspace-title')
+chooser.innerHTML=`<h2 id="a-workspace-title">打开项目工作区</h2><p>选择已有片区，或按项目名称、编号直接打开。</p>
+  <label for="a-workspace-search">片区或项目</label><input type="search" class="search-input" id="a-workspace-search" placeholder="例如演示片区或 DEMO-P-001">
+  <div id="a-workspace-results" class="panel-list"></div><div class="actions">${action('取消','a-close-chooser')}</div>`
+document.body.append(chooser)
+goEdit = id => {
+  aOriginal.goEdit(id)
+  if(canEdit()&&id)state.source='planning'
+}
+function chooseRows() {
+  const query=$('a-workspace-search').value.trim().toLowerCase()
+  const matches=query?data.layers.project.filter(f=>(name('project',f)+' '+f.id).toLowerCase().includes(query)).slice(0,10):[]
+  const area=!query||'示例甲市 示例西区 演示片区'.includes(query)
+  $('a-workspace-results').innerHTML=(area?arrowLink('示例甲市 · 示例西区 · 演示片区','a-open-workspace','area',' primary'):'')+
+    matches.map(f=>arrowLink(escape(name('project',f))+' · '+escape(f.id),'a-open-workspace',f.id)).join('')||
+    missing('当前原型仅载入示例甲市示例西区演示片区。')
+}
+function reopenTarget(id, layer='project', purpose='table') {
+  const f=index[layer]?.get(id)
+  if(!canEdit()||!f)return
+  go(()=>{
+    if(ui.mode!=='edit')goEdit(id && layer==='project'?id:'area')
+    ui.toolbox=null
+    state.study=null
+    state.source='planning'
+    selectFeature(layer,id)
+    if(purpose==='study')openStudy()
+    else showTable(layer)
+  })
+}
+handle = (cmd,value,key) => {
+  if(cmd==='module'&&value==='edit'&&ui.mode!=='edit'&&!ui.workspace&&canEdit()){
+    $('a-workspace-search').value=''
+    chooseRows()
+    chooser.showModal()
+    return
+  }
+  if(cmd==='a-open-workspace'){
+    chooser.close()
+    go(()=>goEdit(value))
+    return
+  }
+  if(cmd==='a-close-chooser'){chooser.close();return}
+  if(cmd==='a-locate'){
+    const f=activeFeature()
+    if(f&&located(f)){moveToFeature(f);renderMap()}
+    return
+  }
+  if(cmd==='a-answer-target'){
+    const [purpose,layer,id]=value.split('|')
+    reopenTarget(id,layer,purpose)
+    return
+  }
+  if(cmd==='switch-role'){aCamera.clear();dash.useMock=false;ui.areaPeek=false}
+  if(ui.mode==='overview'&&cmd==='city')dash.region=true
+  if(ui.mode==='edit'&&cmd==='intake'&&state.source==='all'){
+    toast('当前片区录入仅支持片区策划。请先切换项目来源。')
+    return
+  }
+  if(state.editor&&['intake','tools','method'].includes(cmd)){
+    go(()=>aOriginal.handle(cmd,value,key))
+    return
+  }
+  aOriginal.handle(cmd,value,key)
+}
+document.addEventListener('change',event=>{
+  if(event.target.name==='source'&&event.target.value==='all'){
+    dash.useMock=false
+    ui.focus=null
+    ui.areaPeek=false
+  }
+},true)
+$('a-workspace-search').addEventListener('input',chooseRows)
+updateSearch = () => {
+  const result=$('search-results')
+  if(!result)return
+  const query=ui.lastSearch.trim().toLowerCase()
+  if(!query){result.innerHTML='';return}
+  if(!isPlanningShown()){result.innerHTML=missing('全量可谋划尚未导入。');return}
+  const area='示例甲市 示例西区 演示片区'.includes(query)
+  const rows=layerKeys.filter(k=>k!=='plan').flatMap(k=>data.layers[k].map(f=>({k,f}))).filter(({k,f})=>{
+    const props=fieldProps(k,f)
+    return [f.id,name(k,f),props['位置'],props['土地使用权人'],props['房屋权利人']]
+      .some(val=>String(val??'').toLowerCase().includes(query))
+  })
+  result.innerHTML=(area?arrowLink('演示片区','select-area','area'):'')+
+    rows.slice(0,10).map(({k,f})=>`<button class="list-item" type="button" data-action="feature" data-layer="${k}" data-value="${f.id}">
+      <span>${escape(name(k,f))}<small class="a-result-meta">${meta[k].label} · ${escape(f.id)}${located(f)?'':' · 待落位'}</small></span></button>`).join('')+
+    (rows.length>10?missing('共有 '+rows.length+' 条结果，可补充名称或编号缩小范围。'):'')
+  if(!result.innerHTML)result.innerHTML=missing('未找到匹配记录。')
+}
+
+showTable = k => {
+  state.scope=state.anchor||state.selected?.key===k?'related':'all'
+  aOriginal.showTable(k)
+}
+renderTable = () => {
+  aOriginal.renderTable()
+  if(!state.table||state.tableLayer!=='project')return
+  for(const row of $('drawer').querySelectorAll('tr[data-value]')){
+    const f=index.project.get(row.dataset.value)
+    if(f&&!located(f)){
+      const button=row.querySelector('.id-button')
+      button.title='待落位 · 查看或编辑属性'
+      button.insertAdjacentHTML('afterend','<small class="a-unlocated">待落位</small>')
+    }
+  }
+}
+fieldList = k => {
+  const fields=aOriginal.fieldList(k)
+  return k==='project'?unique([fields[0],'预计实施时间',...fields.slice(1)]):fields
+}
+toolBody = () => ui.toolbox==='资金测算'&&(ui.mode!=='edit'||!activeFeature()||state.selected.key==='plan')?
+  missing('请先在项目工作区选中项目、宗地或建筑，再打开资金测算。'):
+  ui.toolbox==='资金测算'?`<p class="data-note">本次对象 · ${escape(featureName())} · ${escape(state.selected.id)}</p>${aOriginal.toolBody()}`:aOriginal.toolBody()
+
+context = () => {
+  const original=aOriginal.context()
+  if(!['overview','edit'].includes(ui.mode))return original
+  return {...original, rows:aCoverage()&&isPlanningShown()?aRows().length:null,
+    id:isPlanningShown()?original.id:null, layer:isPlanningShown()?original.layer:null,
+    label:original.label+' · '+layerStatus(), mock:ui.mode==='overview'&&isMock(),
+  }
+}
+mockAnswer = (question,c) => {
+  const target=c.layer&&index[c.layer]?.get(c.id)
+  const toTarget = purpose => target&&canEdit()?{title:purpose==='study'?'研判该对象':'打开该对象的属性表',
+    cmd:'a-answer-target',id:[purpose,c.layer,c.id].join('|')}:null
+  if(/数据覆盖|统计口径|样例.*覆盖|来源/.test(question))
+    return {text:'样例库只载入示例甲市示例西区演示片区，包含 3 条虚构初始项目和四层图斑。新录入条目计入本地样例。全量可谋划项目与伙伴资料待接入。',ref:'演示片区四层样例'}
+  if(/政策|文件|案例|伙伴/.test(question))
+    return {text:'当前资源库为目录演示，尚无可引用的已入库资料。',link:{title:'查看资源库',cmd:'module',id:'resources'}}
+  if(c.mock)return {text:'你正在看大屏模拟数据。切回演示片区样例后可以查询实际载入的记录。',link:{title:'回到样例',cmd:'board-mock',id:''}}
+  const namedCity=data.cities.find(item=>question.includes(item.name)||question.includes(compactName(item.name)))
+  if(namedCity&&(!c.label.includes(namedCity.name)&&state.level!=='province'||namedCity.id!=='DEMO-CITY-A'))
+    return {text:'请先选择提问所指城市。当前样例库只有示例甲市演示片区数据。'}
+  if(/周边|研判|公寓|租金|回本|可达/.test(question)) {
+    return {
+      text:target&&!located(target)?'该项目待落位。补齐已核实位置后，才能定义周边研判范围。':
+        '先核对图斑和规划条件，再补齐租金、出租率、人口、交通等市场证据。当前样例可查看周边相邻资产，市场数据尚未接入。',
+      ref:'样例数据覆盖说明',link:target&&located(target)&&c.layer!=='plan'?toTarget('study'):null,
+    }
+  }
+  if(target&&/对象|详情|档案|属性|关联/.test(question)){
+    const group=relationships[c.id]
+    const info=group?'关联 '+group.parcel.length+' 宗地、'+group.building.length+' 栋建筑。':'属性表内可查看保存字段和关联编号。'
+    return {text:name(c.layer,target)+'（'+target.id+'）。'+info,ref:'演示片区 '+meta[c.layer].label+'层',link:toTarget('table')}
+  }
+  if(/多少|几个|项目数|项目情况|哪些项目|项目列表/.test(question)){
+    if(c.rows===null)return {text:'当前范围与来源尚无已载入项目数据，无法统计。'}
+    const rows=aRows()
+    const list=/哪些项目|项目列表/.test(question)?' 例如'+rows.slice(0,3).map(f=>name('project',f)).join('、')+'。':''
+    return {text:'当前筛选已载入 '+c.rows+' 个片区策划项目，其中 '+pendingCount(rows)+' 个待落位。'+list,
+      ref:'片区策划项目层',link:ui.mode==='overview'&&canEdit()&&c.rows?{title:'打开演示片区',cmd:'enter-area',id:'area'}:null}
+  }
+  return {text:'本原型支持查询当前范围的项目数量、查看选中对象的属性和关联，以及了解周边研判所需证据。请选下方示例提问。'}
+}
+
+projected = geom => {
+  const rings=geom?.type==='Polygon'?geom.coordinates:
+    geom?.type==='MultiPolygon'&&Array.isArray(geom.coordinates)?geom.coordinates.flat(1):[]
+  if(!Array.isArray(rings)||!rings.length||!rings.every(r=>Array.isArray(r)&&r.length>=4&&
+    Array.isArray(r[0])&&Array.isArray(r.at(-1))&&r[0][0]===r.at(-1)[0]&&r[0][1]===r.at(-1)[1]))
+    throw Error('请提供使用闭合环的 WGS84 面图斑。')
+  const projection=aOriginal.projected(geom)
+  const outlines=[...data.area.path.matchAll(/(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/g)].map(p=>[+p[1],+p[2]])
+  const xx=outlines.map(p=>p[0]), yy=outlines.map(p=>p[1])
+  const [left,top,right,bottom]=projection.box
+  const tolerance=.1*data.area.pixelsPerKm
+  if(right-left<.2||bottom-top<.2)throw Error('图斑范围过小，无法作为面录入。')
+  if(left<Math.min(...xx)-tolerance||right>Math.max(...xx)+tolerance||
+    top<Math.min(...yy)-tolerance||bottom>Math.max(...yy)+tolerance)
+    throw Error('图斑超出演示片区样例工作范围。请先核对归属片区和坐标。')
+  return projection
+}
+new MutationObserver(()=>{
+  const feedback=$('intake-feedback')
+  if(!ui.importDraft||!$('intake-dialog').open||feedback.querySelector('ul'))return
+  const preview=ui.importDraft.slice(0,4).map(f=>name('project',f)+' · '+(located(f)?'面图斑待核实':'待落位'))
+  const remainder=ui.importDraft.length-preview.length
+  feedback.insertAdjacentHTML('beforeend',`<ul>${preview.map(t=>'<li>'+escape(t)+'</li>').join('')}${remainder?'<li>另有 '+remainder+' 条</li>':''}</ul>`)
+}).observe($('intake-feedback'),{childList:true})
+
+const detail = { regional:false, layers:null, outline:true, queryContext:null }
+const priorPage = { render, handle, drawNav, renderMap, renderTable, context, renderAI }
+const namesByPage = { region:'地方详情', layers:'图层管理', edit:'项目库', resources:'资源库', scenes:'场景库', query:'智能问数' }
+const details = document.createElement('div')
+details.className='detail-grid'
+details.hidden=true
+details.innerHTML=`<aside class="detail-rail" aria-label="页面导航"></aside>
+  <section class="detail-main" aria-label="当前工作视口"><header class="detail-main-head"></header><div class="detail-main-content"></div></section>
+  <aside class="detail-right" aria-label="基本概况和智能分析"><section class="detail-summary"></section><div class="detail-analysis"></div></aside>`
+dashRoot.prepend(details)
+const part = selector => details.querySelector(selector)
+const pageId = () => ui.mode==='overview' ? (detail.regional?'region':'overview') : ui.mode
+const mapPage = () => ['region','layers','edit'].includes(pageId())
+const detailNav = $('inspector')
+const bodyPage = $('module-page')
+const infoBox = () => part('.detail-summary')
+const panel = (title,body) => `<section class="detail-block"><h2>${title}</h2>${body}</section>`
+const tip = text => `<p class="data-note">${escape(text)}</p>`
+const one = (title,cmd,value='') => arrowLink(title,cmd,value)
+
+function restoreDash() {
+  details.hidden=true
+  frame.classList.remove('detail-map')
+  if(detailNav.parentNode!==dashRoot)dashRoot.insertBefore(detailNav,$('module-page').parentNode===dashRoot?$('module-page'):details)
+  if(bodyPage.parentNode!==dashRoot)dashRoot.append(bodyPage)
+}
+function savePage() {
+  if(ui.mode==='overview')ui.memory=saveWhere()
+  if(ui.mode==='edit')ui.workspace=saveWhere()
+  if(ui.mode==='layers')detail.layers=saveWhere()
+  state.table=state.tableMax=state.layersOpen=false
+  ui.toolbox=null
+}
+function movePage(next) {
+  if(pageId()===next)return
+  const selectedContext=context()
+  savePage()
+  if(next==='overview'||next==='region'){
+    ui.mode='overview'
+    detail.regional=next==='region'
+    if(ui.memory)Object.assign(state,ui.memory)
+    else {state.level='province';state.district='all';resetNavigation()}
+    if(next==='overview'&&state.level!=='province')navigate('province')
+    return
+  }
+  if(next==='edit'){goEdit();return}
+  ui.mode=next
+  if(next==='layers'){
+    if(detail.layers)Object.assign(state,detail.layers)
+    else{
+      toArea()
+      state.district=districtId
+      state.source='planning'
+      state.visible=Object.fromEntries(layerKeys.map(k=>[k,true]))
+    }
+    if(!state.selected)selectFeature('project','DEMO-P-001')
+  }
+  if(next==='query')detail.queryContext=selectedContext
+}
+
+drawNav = () => {
+  const active = pageId()
+  navBoard.innerHTML=`<div class="left-nav">
+    ${tab('省级统览','detail-page','overview',active==='overview')}
+    ${tab('地方详情','detail-page','region',active==='region')}
+    ${tab('图层管理','detail-page','layers',active==='layers')}
+    </div><div class="right-nav">
+    ${tab('项目库','detail-page','edit',active==='edit',!canEdit())}
+    ${tab('资源库','detail-page','resources',active==='resources')}
+    ${tab('场景库','detail-page','scenes',active==='scenes')}
+    ${tab('智能问数','detail-page','query',active==='query')}
+    </div>`
+}
+const outlineRoot = () => frame.querySelector('.area-outline')
+renderMap = () => {
+  priorPage.renderMap()
+  if(ui.mode==='overview'){
+    const metaBar=frame.querySelector('.screen-meta')
+    if(pageId()==='region')metaBar?.querySelector('[data-action=board-region]')?.remove()
+    metaBar?.insertAdjacentHTML('beforeend',tab('项目来源','layers','',state.layersOpen))
+  }
+  if(!details.hidden&&state.level==='area'){
+    const outline=outlineRoot()
+    if(outline)outline.style.display=detail.outline?'':'none'
+  }
+}
+
+function layerMenu() {
+  const row = k => `<div class="detail-layer-row">
+    <label><input type="checkbox" data-visible="${k}" ${state.visible[k]?'checked':''}>${swatch(k)}<span>${meta[k].label}</span></label>
+    <button type="button" class="detail-count" data-action="detail-target-layer" data-value="${k}" aria-pressed="${state.active===k}" aria-label="设${meta[k].label}为点选图层" title="设为点选图层">${number(data.layers[k].filter(located).length)}</button>
+    </div>`
+  return `<div class="detail-rail-title"><h1>图层管理</h1><p>示例甲市 · 示例西区 · 演示片区</p></div>
+    ${panel('规划层',row('project')+row('plan')+`<div class="detail-layer-row"><label><input type="checkbox" data-outline ${detail.outline?'checked':''}>${swatch('extent')}<span>片区工作范围</span></label></div>`)}
+    ${panel('现状层',row('parcel')+row('building'))}
+    ${panel('点选图层',`<select id="detail-active" class="compact-select" aria-label="点选图层">
+        ${layerKeys.map(k=>`<option value="${k}" ${state.active===k?'selected':''}>${meta[k].label}</option>`).join('')}
+        </select>${tip('图斑重叠时，地图只点选当前图层。')}${one('打开当前层属性表','detail-layer-table',state.active)}`)}
+    ${panel('数据情况',tip('四层为虚构示意。虚线为样例工作范围，正式片区界线待核实。')+tip('经济数据与影像待接入。'))}`
+}
+function regionMenu() {
+  const cities = data.cities.map(c=>`<option value="${c.id}" ${state.level!=='province'&&state.city===c.id?'selected':''}>${c.name}</option>`).join('')
+  const ds=districtsFor(state.city).map(d=>`<option value="${d.id}" ${state.level==='county'&&state.district===d.id?'selected':''}>${d.name}</option>`).join('')
+  return `<div class="detail-rail-title"><h1>地方详情</h1><p>${escape(aRegion())}</p></div>
+    ${panel('行政区划',`<label>设区市<select id="detail-city" class="compact-select"><option value="">示例全省</option>${cities}</select></label>
+     ${state.level==='province'?'':`<label>区县<select id="detail-district" class="compact-select"><option value="">全市</option>${ds}</select></label>${one('返回上一级','board-above')}`}`)}
+    ${state.level==='county'?panel('片区与项目',aCoverage()&&isPlanningShown()?
+      `<strong>演示片区</strong>${tip('先点图斑查看摘要，或打开片区工作区。')}
+      ${canEdit()?one('打开演示片区 →','enter-area','area'):''}${aRows().map(f=>`<button class="list-item ${ui.focus===f.id?'active':''}" data-action="peek-project" data-value="${f.id}"><span>${escape(name('project',f))}</span><small>${located(f)?f.id:'待落位'}</small></button>`).join('')}`:
+      tip('当前范围与来源尚无已载入的片区资料。')):panel('浏览路径',tip('选择城市，再选区县以查看片区和项目分布。'))}`
+}
+function editMenu() {
+  return `<div class="detail-rail-title"><h1>项目库</h1><p>演示片区 · ${escape(layerStatus())}</p></div>
+    ${panel('片区与项目',`<label for="project-find">搜索项目、位置、编号或产权方</label>
+    <input id="project-find" class="search-input" type="search" value="${escape(ui.lastSearch)}" placeholder="例如 DEMO-P-001">
+    <div id="search-results"></div><div class="actions">${action('项目录入','intake',' primary')}${action('工具箱','tools')}</div>`)}
+    ${panel('片区项目',aRows().length?mainList(false):tip('全量可谋划资料待导入。'))}`
+}
+const resourceDesc = {'政策文件':'政策条款及规划依据','案例与项目集':'更新案例、建设经验与项目样本','伙伴资料':'合作资源与伙伴材料'}
+function resourceMenu() {
+  return `<div class="detail-rail-title"><h1>资源库</h1><p>按资料类型查看</p></div>
+    ${panel('资源分类',Object.keys(resources).map(key=>choice(key,'resource',key,ui.resource===key)).join(''))}`
+}
+function sceneMenu() {
+  return `<div class="detail-rail-title"><h1>场景库</h1><p>从更新场景进入所需工具</p></div>
+    ${panel('业务场景',Object.keys(scenes).map(key=>choice(key,'scene',key,ui.scene===key)).join(''))}
+    ${panel('分析工具',methods.map(key=>choice(key,'method',key,ui.toolbox===key)).join(''))}`
+}
+function queryMenu() {
+  return `<div class="detail-rail-title"><h1>智能问数</h1><p>按当前提问范围工作</p></div>
+    ${panel('常用查询',['当前范围有哪些项目？','这个对象是什么？','周边研判需要什么依据？','样例的数据覆盖怎样？']
+      .map(q=>one(q,'ask',q)).join(''))}
+    ${panel('切换范围',one('地方详情','detail-page','region')+one('图层管理','detail-page','layers'))}`
+}
+
+const valueText = v => v===undefined||v===null||v===''?'待补':label(v)
+function indicators(values) {
+  return `<div class="detail-indicators">${values.map(([caption,val])=>`<div><strong title="${escape(valueText(val))}">${escape(valueText(val))}</strong><span aria-hidden="true"></span><small>${caption}</small></div>`).join('')}</div>`
+}
+function objectSummary(f,k) {
+  const p=fieldProps(k,f)
+  const rows=k==='project' ?
+    [['涉及用地面积',Number.isFinite(p['用地面积'])?label(p['用地面积'])+' ha':null],['拟更新建筑面积',p['拟更新建筑面积']],['投资规模',p['投资规模']],
+      ['项目类型',p['项目类型']],['更新方式',p['更新方式']],['实施主体',p['实施主体']]] :
+    meta[k].show.slice(0,6).map(field=>[field,p[field]])
+  const pos=k==='project'&&!located(f)?'待落位':k==='project'&&f.id.startsWith('DEMO-P-DEMO')?'面图斑待核实':'虚构示意'
+  const summary=[p['位置'],p['建设内容']].filter(Boolean).join('。')
+  const tables=layerKeys.map(layer=>one(meta[layer].label+'表','detail-layer-table',layer)).join('')
+  const study=k!=='plan'&&located(f)&&canEdit()?one('周边研判',ui.mode==='layers'?'detail-study':'study'):''
+  const edit=ui.mode==='layers'&&k==='project'&&canEdit()?one('在项目库打开','enter-area',f.id):''
+  return `<h3>${escape(name(k,f))}</h3><p class="detail-context">${escape(f.id)} · ${meta[k].label} · ${pos}</p>
+  ${!state.visible[k]?tip('该对象所在图层已隐藏。'):''}
+  ${indicators(rows)}${summary?tip(summary):''}
+  <div class="detail-table-links">${tables}</div>
+  <div class="actions">${located(f)&&ui.mode==='edit'?one('定位图斑','a-locate'):''}${study}${edit}</div>`
+}
+function summaryMarkup() {
+  if(pageId()==='region'){
+    const selected=ui.focus&&index.project.get(ui.focus)
+    return selected&&hasSample()&&isPlanningShown()?
+      `<h3>${escape(name('project',selected))}</h3><p class="detail-context">${escape(selected.id)} · 只读摘要</p>
+      ${indicators([['项目类型',typeKey(selected)],['预计实施时间',fieldProps('project',selected)['预计实施时间']]])}
+      ${canEdit()?one('打开项目 →','enter-area',selected.id):''}` :
+      `<h3>${escape(aRegion())}</h3>${indicators([['已载入片区',aRows().length?1:null],['已载入项目',aRows().length||null],['待落位',aRows().length?pendingCount(aRows()):null]])}
+      ${tip(aRows().length?'统计使用演示片区的已载入样例。':'当前行政范围暂无已载入的片区资料。')}`
+  }
+  if(pageId()==='layers'||pageId()==='edit'){
+    if(state.study)return studyPanel()
+    if(ui.toolbox)return toolsPanel()
+    const f=activeFeature()
+    return f?objectSummary(f,state.selected.key):`<h3>演示片区</h3><p class="detail-context">示例甲市 · 示例西区</p>
+      ${indicators(layerKeys.map(k=>[meta[k].label+'图斑',k==='project'&&!isPlanningShown()?null:data.layers[k].filter(located).length]))}
+      ${tip('点选地图或项目清单中的记录可查看详情。')}`
+  }
+  if(pageId()==='resources')return `<h3>${ui.resource}</h3>${tip(resourceDesc[ui.resource])}${tip('当前为资料目录，正文与引用来源待入库。')}`
+  if(pageId()==='scenes')return `<h3>${ui.scene??'业务场景'}</h3>${tip(ui.scene?scenes[ui.scene]:'选择场景可查看可用工具及资料要求。')}`
+  return `<h3>提问范围</h3>${tip(context().label)}${tip('问数基于样例记录和已载入的覆盖信息。')}`
+}
+function centerMarkup() {
+  if(pageId()==='resources'){
+    return `<h2>${ui.resource}</h2><div class="module-cards">${resources[ui.resource].map(([title,desc])=>
+      `<article class="entry-card"><h3>${title}</h3><p>${desc}</p>${tip('资料待入库')}</article>`).join('')}</div>`
+  }
+  if(pageId()==='scenes'){
+    const scenario=ui.scene??'城市更新场景'
+    return `<h2>${scenario}</h2><p>${scenes[scenario]}</p>
+      ${panel('作业流程','<ol><li>在地图上确认项目或资产。</li><li>核对空间条件并收集周边证据。</li><li>在项目下选择工具并比较方案。</li></ol>')}
+      ${ui.toolbox?panel(ui.toolbox,toolBody()):panel('可用工具',toolButtons())}
+      ${canEdit()?one('打开项目库','detail-page','edit'):''}`
+  }
+  const answer=ui.messages.filter(row=>row.who==='assistant').at(-1)
+  const question=ui.messages.filter(row=>row.who==='user').at(-1)
+  return `<h2>查询结果</h2>${question?panel('本次问题','<p>'+escape(question.text)+'</p>'+tip(question.scope)) : tip('在右侧输入问题，或选左侧常用查询。')}
+    ${answer?panel('答复','<p>'+escape(answer.text)+'</p>'+
+      (answer.ref?tip('依据 · '+answer.ref):'')+(answer.link?one(escape(answer.link.title),answer.link.cmd,answer.link.id):'')):''}`
+}
+function mountDetails() {
+  document.body.dataset.mode=ui.mode
+  document.body.dataset.page=pageId()
+  navBoard.hidden=false
+  dashEl.hidden=true
+  details.hidden=false
+  drawNav()
+  const rail=part('.detail-rail')
+  if(detailNav.parentNode!==rail)rail.append(detailNav)
+  detailNav.hidden=false
+  const menus={region:regionMenu,layers:layerMenu,edit:editMenu,resources:resourceMenu,scenes:sceneMenu,query:queryMenu}
+  detailNav.innerHTML=menus[pageId()]()
+  const center=part('.detail-main-content')
+  const crumb=pageId()==='region'?aRegion():mapPage()?'示例甲市 / 示例西区 / 演示片区':namesByPage[pageId()]
+  part('.detail-main-head').innerHTML=`<span>${escape(crumb)}</span>${mapPage()?'<small>地图视口</small>':''}`
+  if(mapPage()){
+    bodyPage.hidden=true
+    if(frame.parentNode!==center)center.append(frame)
+    frame.hidden=false
+    frame.classList.add('detail-map')
+    renderMap()
+    if(ui.mode==='edit')updateSearch()
+  }else{
+    frame.hidden=true
+    if(bodyPage.parentNode!==center)center.append(bodyPage)
+    bodyPage.hidden=false
+    bodyPage.innerHTML=centerMarkup()
+  }
+  infoBox().innerHTML=`<div class="panel-title">基本概况</div>${summaryMarkup()}`
+  const analysis=part('.detail-analysis')
+  if(aiPane.parentNode!==analysis)analysis.append(aiPane)
+  $('ai-panel').querySelector('.ai-head h2').textContent='项目智能分析'
+  $('status-text').textContent=pageId()==='region'?aRegion()+' · '+layerStatus():
+    mapPage()?'演示片区样例 · 虚构示意':'样例工作台 · '+namesByPage[pageId()]
+  renderTable()
+  renderAI()
+}
+render = () => {
+  if(pageId()==='overview'){
+    document.body.dataset.page='overview'
+    restoreDash()
+    $('ai-panel').querySelector('.ai-head h2').textContent='AI 问答'
+    priorPage.render()
+  } else mountDetails()
+}
+context = () => {
+  if(pageId()==='query'&&detail.queryContext)return detail.queryContext
+  if(pageId()==='layers'){
+    const f=activeFeature()
+    return {label:'图层管理 / 演示片区'+(f?' / '+f.id:''),id:f?.id,layer:state.selected?.key,
+      rows:data.layers.project.length,area:true}
+  }
+  return priorPage.context()
+}
+renderAI = () => {
+  priorPage.renderAI()
+  if(pageId()==='query'&&!bodyPage.hidden)bodyPage.innerHTML=centerMarkup()
+}
+renderTable = () => {
+  priorPage.renderTable()
+  if(pageId()==='layers'&&!$('drawer').hidden)$('drawer').querySelector('[data-action=edit-row]')?.remove()
+}
+
+handle = (cmd,value,key) => {
+  if(cmd==='detail-page'||cmd==='module'||cmd==='board-ai'||cmd==='board-region'){
+    const next=cmd==='board-ai'?'query':cmd==='board-region'?'region':value
+    if(next==='edit'&&!canEdit())return
+    if(next==='edit'&&!ui.workspace&&ui.mode!=='edit'){
+      priorPage.handle('module','edit')
+      return
+    }
+    if(Object.hasOwn(namesByPage,next)||next==='overview'){
+      go(()=>movePage(next))
+      if(next==='query')$('ai-input').focus()
+      return
+    }
+  }
+  if(cmd==='city'||cmd==='district'||cmd==='peek-area'||cmd==='peek-project'){
+    if(ui.mode==='overview')detail.regional=true
+  }
+  if(cmd==='province'&&ui.mode==='overview')detail.regional=false
+  if(cmd==='switch-role'){
+    detail.regional=false
+    detail.layers=null
+    detail.queryContext=null
+  }
+  if(cmd==='scene')ui.toolbox=null
+  if(cmd==='detail-target-layer'){
+    go(()=>{state.active=value;state.visible[value]=true})
+    return
+  }
+  if(cmd==='detail-layer-table'||(ui.mode==='layers'&&(cmd==='table-open'||cmd==='table-layer'))){
+    go(()=>showTable(value||state.active))
+    return
+  }
+  if(ui.mode==='layers'&&cmd==='edit-row')return
+  if(cmd==='detail-study'&&activeFeature()&&canEdit()){
+    const target={...state.selected}
+    go(()=>{
+      savePage()
+      goEdit('area')
+      selectFeature(target.key,target.id)
+      openStudy()
+    })
+    return
+  }
+  if(cmd==='a-answer-target'&&ui.mode==='layers'){
+    const [purpose,layer,id]=value.split('|')
+    if(purpose==='table'&&index[layer]?.has(id)){
+      go(()=>{selectFeature(layer,id);showTable(layer)})
+      return
+    }
+  }
+  if(cmd==='a-answer-target'&&ui.mode!=='edit')savePage()
+  if(cmd==='enter-area'&&ui.mode==='layers')savePage()
+  priorPage.handle(cmd,value,key)
+}
+document.addEventListener('input',event=>{
+  if(event.target.matches('[data-outline]')){
+    detail.outline=event.target.checked
+    renderMap()
+  }
+  if(ui.mode==='layers'&&event.target.matches('[data-visible]')){
+    state.visible[event.target.dataset.visible]=event.target.checked
+    render()
+  }
+})
+document.addEventListener('change',event=>{
+  const t=event.target
+  if(t.id==='detail-city')handle(t.value?'city':'province',t.value)
+  if(t.id==='detail-district')handle(t.value?'district':'board-above',t.value)
+  if(t.id==='detail-active')handle('detail-target-layer',t.value)
+})
+
+</script>
+</body>
+</html>

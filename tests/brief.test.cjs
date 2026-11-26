@@ -1,0 +1,12 @@
+const assert=require('node:assert/strict');
+const {summarize,sheet}=require('../lib/brief-sheet');
+const input={project:{name:'更新资源1 <script>',type:'老旧厂区',pts:[[121.46,31.23],[121.461,31.23],[121.461,31.231]],currentUse:'工业',plannedUse:'混合用途'},center:[121.46,31.23],areaHa:2,radius:1000,poiLoaded:true,pois:[{name:'第一中学',type:'教育',point:[121.461,31.23]},{name:'远处商店',type:'购物',point:[121.6,31.23]}]};
+const result=summarize(input);
+assert.equal(result.pois.length,1,'Only loaded POIs within the selected radius may be counted');
+assert.equal(result.groups.教育,1);
+assert.equal(result.groups.商业服务,0);
+const svg=sheet(input);
+assert.match(svg,/房价、商业租金、人口：尚未接入可靠数据/);
+assert.doesNotMatch(svg,/<script>/,'Project names must be escaped in downloadable SVG');
+assert.match(svg,/更新资源1 &lt;script&gt;/);
+console.log('PASS one-page brief radius, missing-data labels, SVG escaping');

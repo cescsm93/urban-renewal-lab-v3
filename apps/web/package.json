@@ -1,0 +1,27 @@
+{
+  "name": "@renewal/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 4174",
+    "build": "vue-tsc --noEmit && vite build",
+    "check": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@renewal/contracts": "0.1.0",
+    "@vue/devtools-api": "^8.0.0",
+    "element-plus": "^2.11.0",
+    "maplibre-gl": "^6.19.0",
+    "pinia": "^4.0.0",
+    "vue": "^3.5.0",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.0",
+    "@vue/tsconfig": "^0.8.0",
+    "typescript": "^5.9.0",
+    "vite": "^7.0.0",
+    "vue-tsc": "^3.1.0"
+  }
+}

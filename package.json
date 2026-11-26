@@ -1,0 +1,27 @@
+{
+  "name": "urban-renewal-lab",
+  "version": "0.3.0",
+  "private": true,
+  "type": "commonjs",
+  "workspaces": ["apps/*", "packages/*"],
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "start": "node server.cjs",
+    "test": "node tests/core.test.cjs && node tests/walk.test.cjs && node tests/usage-guard.test.cjs && node tests/copilot.test.cjs && node tests/copilot-demo.test.cjs && node tests/brief.test.cjs && node tests/project-assessment.test.cjs && node tests/poi.test.cjs && node tests/local-store.test.cjs && node tests/private-libraries.test.cjs && node tests/local-knowledge.test.cjs && node tests/shared-lan.test.cjs",
+    "test:gis": "python -m unittest discover -s tests -p test_gis.py -v",
+    "sync:vendor": "node scripts/sync-vendor.cjs",
+    "build:contracts": "npm run build -w @renewal/contracts",
+    "check:contracts": "npm run check -w @renewal/contracts",
+    "dev:api": "npm run dev -w @renewal/api",
+    "dev:web": "npm run dev -w @renewal/web",
+    "build:web": "npm run build -w @renewal/web",
+    "check:web": "npm run check -w @renewal/web"
+  },
+  "dependencies": {
+    "pg": "^8.23.1",
+    "terra-draw": "1.38.0",
+    "terra-draw-maplibre-gl-adapter": "1.5.0"
+  }
+}
